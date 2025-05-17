@@ -1,8 +1,8 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import SideNav from '../component/Dashboard/SideNav'
-import TopNav from '../component/Dashboard/TopNav'
-import GlobalContainer from '../component/Global/GlobalContainer'
+import SideNav from '../components/Dashboard/SideNav'
+import TopNav from '../components/Dashboard/TopNav'
+import GlobalContainer from '../components/Global/GlobalContainer'
 import { useGetAllProducts } from '../API/Query/query'
 
 function Dashboard() {
@@ -13,7 +13,9 @@ function Dashboard() {
 
     return (
         <GlobalContainer>
+            <div className='w-64 mr-10'>
             <SideNav />
+            </div>
 
             <div className='flex flex-col w-full h-full '>
                 <TopNav />
@@ -22,7 +24,6 @@ function Dashboard() {
                     <div className='bg-gray-100 h-96 '>
                         Sainssh
                     </div>
-
                     <div className=' flex  justify-between items-center w-full h-full gap-5'>
                         <div className='w-full bg-blue-300 h-full'>
 
@@ -34,7 +35,6 @@ function Dashboard() {
                     </div>
 
                 </div>
-
             </div >
         </GlobalContainer>
     )
