@@ -9,14 +9,14 @@ import Performance from "../components/Dashboard/Performance";import TopAnalyisi
 
 function Dashboard() {
 
-  return (
-    <GlobalContainer>
-      <div className="w-64 mr-10">
-        <SideNav />
-      </div>
+    return (
+        <GlobalContainer>
+            <div className='w-64 mr-12'>
+            <SideNav />
+            </div>
 
-      <div className="flex flex-col w-full h-full ">
-        <TopNav />
+            <div className='flex flex-col w-full h-full '>
+                <div className='mb-35'><TopNav /></div>
 
         <div className="p-5 flex flex-col gap-5 h-full overflow-y-auto">
           <div className="bg-gray-100 h-96 "><TopAnalyisis/></div>
