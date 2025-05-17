@@ -7,7 +7,7 @@ import { useGetAllProducts } from '../API/Query/query'
 
 function Home() {
 
-    const data=useGetAllProducts("/products")
+    const data = useGetAllProducts("/products")
 
     console.log(data.isLoading)
 
@@ -24,10 +24,15 @@ function Home() {
                     </div>
 
                     <div className=' flex  justify-between items-center w-full h-full gap-5'>
-                        <div className='w-full bg-blue-300 h-full'>Sai Kiram</div>
+                        <div className='w-full bg-blue-300 h-full'>
+
+                            <div class=" p-4 bg-accent-green">Card Background</div>
+
+
+                        </div>
                         <div className='w-96 bg-pink-300 h-full'>Prasad Bhai</div>
                     </div>
-                    
+
                 </div>
 
             </div >
