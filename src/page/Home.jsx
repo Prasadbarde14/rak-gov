@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import SideNav from '../component/Home/SideNav'
-import TopNav from '../component/Home/TopNav'
+import SideNav from '../component/Dashboard/SideNav'
+import TopNav from '../component/Dashboard/TopNav'
 import GlobalContainer from '../component/Global/GlobalContainer'
 import { useGetAllProducts } from '../API/Query/query'
 
