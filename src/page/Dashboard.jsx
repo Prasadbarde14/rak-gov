@@ -11,7 +11,7 @@ function Dashboard() {
 
     return (
         <GlobalContainer>
-            <div className='w-64 mr-12'>
+            <div className='w-64'>
             <SideNav />
             </div>
             <div className='flex flex-col w-full h-full '>
