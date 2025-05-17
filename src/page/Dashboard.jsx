@@ -1,12 +1,11 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import SideNav from "../component/Dashboard/SideNav";
-import TopNav from "../component/Dashboard/TopNav";
-import GlobalContainer from "../component/Global/GlobalContainer";
+import GlobalContainer from "../components/Global/GlobalContainer";
+import SideNav from "../components/Dashboard/SideNav";
+import TopNav from "../components/Dashboard/TopNav";
 import { useGetAllProducts } from "../API/Query/query";
-import AIrecommendations from "../component/Dashboard/AIrecommendations";
-import Performance  from '../component/Dashboard/Performance'
-
+import AIrecommendations from "../components/Dashboard/AIrecommendations";
+import Performance from "../components/Dashboard/Performance";
 
 function Dashboard() {
   const data = useGetAllProducts("/products");
@@ -15,7 +14,9 @@ function Dashboard() {
 
   return (
     <GlobalContainer>
-      <SideNav />
+      <div className="w-64 mr-10">
+        <SideNav />
+      </div>
 
       <div className="flex flex-col w-full h-full ">
         <TopNav />
@@ -25,7 +26,7 @@ function Dashboard() {
 
           <div className=" flex  justify-between w-full h-auto gap-5">
             <div className="w-full bg-white h-full rounded-md">
-            <Performance/>
+              <Performance />
             </div>
             <div className="w-96  bg-white  rounded-md ">
               <AIrecommendations />
