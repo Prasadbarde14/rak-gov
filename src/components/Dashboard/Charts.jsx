@@ -70,9 +70,8 @@ const TransparentLineChart = ({ data, color }) => {
         };
     }, [data]);
 
-    console.log(data)
 
-    return <div ref={chartRef} style={{ width: '100%', height: '50px', background: 'transparent',overflow:'hidden' }} />;
+    return <div ref={chartRef} style={{ width: '100%', height: '30px', background: 'transparent',overflow:'hidden' }} />;
 };
 
 const ProgressBar = ({ currentValue, totalValue }) => {
@@ -133,8 +132,6 @@ function Charts({ graphData }) {
 
     const { data, isLoading, isError } = graphData;
 
-    console.log(data, isLoading, isError)
-
     return (
         <div className='h-full'>
 
@@ -151,7 +148,7 @@ function Charts({ graphData }) {
 
             </div>}
 
-            <div className='flex w-full h-full justify-between items-center gap-2'>
+            <div className='flex w-full h-full justify-start items-center gap-2'>
                 {
                     !isLoading && !isError && data.map((i, indx) =>
                         <Card data={i} key={indx} />)
