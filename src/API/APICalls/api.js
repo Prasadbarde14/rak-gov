@@ -8,9 +8,10 @@ const instance = axios.create({
   }, 
 });
 
-export async function getGraphData(){
+export async function getGraphData(selected){
     // return await instance.get(url).then(response=>response.data)
-    return Promise.all(graphData)
+    console.log(selected)
+    return Promise.all(graphData[selected])
 }
 
 export default instance;
