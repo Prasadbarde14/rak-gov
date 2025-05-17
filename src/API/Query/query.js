@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import {  getGraphData } from "../APICalls/api"
+import {  getGraphData,getAIrecommendationsData } from "../APICalls/api"
 
 export const useGetGraphData=()=>{
     return useQuery({
@@ -7,3 +7,11 @@ export const useGetGraphData=()=>{
         queryFn:()=>getGraphData(),
     })
 }
+
+export const useGetAIrecommendationsData=()=>{
+    return useQuery({
+        queryKey:['AIrecommendations'],
+        queryFn:()=>getAIrecommendationsData(),
+    })
+}
+
