@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query"
-import { getAllProducts } from "../APICalls/api"
+import {  getGraphData } from "../APICalls/api"
 
-export const useGetAllProducts=(url)=>{
+export const useGetGraphData=()=>{
     return useQuery({
-        queryKey:['products'],
-        queryFn:(url)=>getAllProducts(url),
+        queryKey:['graphAnalysis'],
+        queryFn:()=>getGraphData(),
     })
 }
