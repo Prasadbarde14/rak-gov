@@ -78,3 +78,27 @@ export const graphData=[
     //   }
     // }
   ]
+
+ export const AIrecommendations = [
+    {
+      type: "objective",
+      title: "Implement predictive maintenance system for critical infrastructure",
+      description:
+        "Based on your increasing maintenance costs and emergency repair frequency",
+      confidence: 92,
+    },
+    {
+      type: "keyResult",
+      title: "Reduce contractor onboarding time by 50%",
+      description:
+        "Would help address project delays caused by contractor availability issues",
+      confidence: 85,
+    },
+    {
+      type: "action",
+      title:
+        "Create cross-functional rapid response teams for high-priority projects",
+      description: "To address the 15% increase in critical path delays this quarter",
+      confidence: 88,
+    },
+  ];
