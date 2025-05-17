@@ -164,7 +164,7 @@ export const graphData = {
       "unit": "hours",
       "progress": 142,
       "target": 6,
-      "total":200,
+      "total": 200,
       "status": "Needs attention",
       "trendData": {
         "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
@@ -196,11 +196,11 @@ export const performanceMatrics = [
     predicted: "12.35",
     delta: "-0.4%",
     recommendations: [],
-    impactAnalysis: 
-      {
-        performance: "0.4% improvement in performance",
-        utilization: "Resource utilization optimized",
-      }
+    impactAnalysis:
+    {
+      performance: "0.4% improvement in performance",
+      utilization: "Resource utilization optimized",
+    }
   },
   {
     title: "Milestones met on time",
@@ -217,11 +217,11 @@ export const performanceMatrics = [
         desc: "Increased automation and digital tools could improve performance",
       },
     ],
-    impactAnalysis: 
-      {
-        performance: "0.4% improvement in performance",
-        utilization: "Resource utilization optimized",
-      }
+    impactAnalysis:
+    {
+      performance: "0.4% improvement in performance",
+      utilization: "Resource utilization optimized",
+    }
   },
   {
     title: "Contractor response time",
@@ -229,11 +229,11 @@ export const performanceMatrics = [
     predicted: "8.54",
     delta: "-0.5%",
     recommendations: [],
-    impactAnalysis: 
-      {
-        performance: "0.4% improvement in performance",
-        utilization: "Resource utilization optimized",
-      }
+    impactAnalysis:
+    {
+      performance: "0.4% improvement in performance",
+      utilization: "Resource utilization optimized",
+    }
   },
   {
     title: "High-risk defects identified",
@@ -252,13 +252,14 @@ export const performanceMatrics = [
       },
     ],
     impactAnalysis: {
-        performance: "0.4% improvement in performance",
-        utilization: "Resource utilization optimized",
-      }
+      performance: "0.4% improvement in performance",
+      utilization: "Resource utilization optimized",
+    }
   },
 ];
 
- export const AIrecommendations = [
+export const AIrecommendations = {
+  "Director of Infrastructure": [
     {
       type: "objective",
       title: "Implement predictive maintenance system for critical infrastructure",
@@ -280,4 +281,100 @@ export const performanceMatrics = [
       description: "To address the 15% increase in critical path delays this quarter",
       confidence: 88,
     },
-  ];
+  ],
+  "Planning Analyst": [
+    {
+      "type": "action",
+      "title": "Create cross-functional rapid response teams for high-priority projects",
+      "description": "To address the 15% increase in critical path delays this quarter",
+      "confidence": 88
+    },
+    {
+      "type": "objective",
+      "title": "Increase project timeline accuracy by implementing risk assessment tools",
+      "description": "Address discrepancies between projected and actual completion times",
+      "confidence": 90
+    },
+    {
+      "type": "keyResult",
+      "title": "Achieve a 20% reduction in average project delays",
+      "description": "Leverage AI-driven predictive models to forecast potential delays",
+      "confidence": 87
+    },
+    {
+      "type": "action",
+      "title": "Conduct weekly project performance reviews",
+      "description": "Identify areas of improvement and address issues proactively",
+      "confidence": 85
+    },
+    {
+      "type": "objective",
+      "title": "Enhance contractor collaboration for faster issue resolution",
+      "description": "Reduce the response time for high-priority issues by 30%",
+      "confidence": 91
+    },
+    {
+      "type": "keyResult",
+      "title": "Increase milestone adherence by 10%",
+      "description": "Implement a tracking system with real-time progress updates",
+      "confidence": 89
+    },
+    {
+      "type": "action",
+      "title": "Develop automated risk monitoring dashboards",
+      "description": "Proactively detect potential risks before they impact timelines",
+      "confidence": 86
+    },
+    {
+      "type": "objective",
+      "title": "Optimize resource allocation during peak periods",
+      "description": "Reduce workload imbalances across teams by 20%",
+      "confidence": 93
+    },
+    {
+      "type": "keyResult",
+      "title": "Improve client satisfaction score to 90%",
+      "description": "Address feedback related to delayed project milestones",
+      "confidence": 88
+    }
+  ],
+  "Maintenance Head": [
+    {
+      "type": "objective",
+      "title": "Implement predictive maintenance system for critical infrastructure",
+      "description": "Based on your increasing maintenance costs and emergency repair frequency",
+      "confidence": 92
+    },
+    {
+      "type": "objective",
+      "title": "Enhance data-driven decision-making in project management",
+      "description": "Utilize AI analytics to predict project bottlenecks and optimize resource allocation",
+      "confidence": 91
+    },
+    {
+      "type": "objective",
+      "title": "Reduce maintenance downtime by 20% through proactive monitoring",
+      "description": "Leverage predictive analytics to identify equipment at risk of failure",
+      "confidence": 90
+    },
+    {
+      "type": "objective",
+      "title": "Achieve a 15% decrease in emergency repair incidents",
+      "description": "Implement automated maintenance alerts based on historical data trends",
+      "confidence": 88
+    },
+    {
+      "type": "objective",
+      "title": "Improve cost efficiency by implementing resource usage tracking",
+      "description": "Identify areas with excessive resource consumption and optimize processes",
+      "confidence": 89
+    },
+    {
+      "type": "objective",
+      "title": "Increase system reliability by implementing automated fault detection",
+      "description": "Proactively address issues before they escalate into major disruptions",
+      "confidence": 93
+    }
+  ]
+
+};

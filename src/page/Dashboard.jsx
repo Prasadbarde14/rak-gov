@@ -6,7 +6,6 @@ import TopNav from "../components/Dashboard/TopNav";
 import AIrecommendations from "../components/Dashboard/AIrecommendations";
 import Performance from "../components/Dashboard/Performance/Performance";
  import TopAnalyisis from "../components/Dashboard/TopAnalyisis";
-import { useGetGraphData } from "../API/Query/query";
 
 
 function Dashboard() {
@@ -29,13 +28,13 @@ function Dashboard() {
               <Performance />
             </div>
             <div className="w-96  bg-white  rounded-md ">
-              <AIrecommendations />
+              <AIrecommendations selected={selected}/>
             </div>
           </div>
         </div>}
 
         {
-          selected == "Planning Analyst" && <div className="p-3 flex flex-col gap-5 h-full overflow-y-auto">
+          selected == "Planning Analyst" && <div className="p-5 flex flex-col gap-5 h-full overflow-y-auto">
           <div className=" h-96 ">
             <TopAnalyisis selected={selected}/>
           </div>
@@ -45,7 +44,7 @@ function Dashboard() {
               <Performance />
             </div>
             <div className="w-96  bg-white  rounded-md ">
-              <AIrecommendations />
+              <AIrecommendations selected={selected}/>
             </div>
           </div>
         </div>
@@ -62,7 +61,7 @@ function Dashboard() {
               <Performance />
             </div>
             <div className="w-96  bg-white  rounded-md ">
-              <AIrecommendations />
+              <AIrecommendations selected={selected}/>
             </div>
           </div>
         </div>
