@@ -19,7 +19,7 @@ function Dashboard() {
                 <div className='mb-35'><TopNav /></div>
 
         <div className="p-5 flex flex-col gap-5 h-full overflow-y-auto">
-          <div className="bg-gray-100 h-96 "><TopAnalyisis/></div>
+          <div className=" h-96 "><TopAnalyisis/></div>
 
           <div className=" flex  justify-between w-full h-auto gap-5">
             <div className="w-full bg-white h-full rounded-md">
