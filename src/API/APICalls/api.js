@@ -1,5 +1,5 @@
 import axios from "axios"
-import { graphData } from "./mockCallApi";
+import { graphData,performanceMatrics,AIrecommendations } from "./mockCallApi";
 
 const instance = axios.create({
   baseURL : 'https://fakestoreapi.com',
@@ -12,6 +12,16 @@ export async function getGraphData(selected){
     // return await instance.get(url).then(response=>response.data)
     console.log(selected)
     return Promise.all(graphData[selected])
+}
+
+export async function getPerformanceMatrics(){
+    // return await instance.get(url).then(response=>response.data)
+    return Promise.all(performanceMatrics)
+}
+
+export async function getAIrecommendationsData(){
+  // return await instance.get(url).then(response=>response.data)
+  return Promise.all(AIrecommendations)
 }
 
 export default instance;

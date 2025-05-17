@@ -1,5 +1,5 @@
 import { useQuery,useQueryClient } from "@tanstack/react-query"
-import {  getGraphData } from "../APICalls/api"
+import {  getGraphData,getAIrecommendationsData, getPerformanceMatrics} from "../APICalls/api"
 
 export const useGetFetchQuery = (key) => {
     const queryClient = useQueryClient();
@@ -17,3 +17,18 @@ export const useGetGraphData = (selected) => {
         enabled: Boolean(selected),  
     });
 };
+
+export const useGetPerformanceMatrics=()=>{
+    return useQuery({
+        queryKey:['performanceMatrics'],
+        queryFn:()=>getPerformanceMatrics(),
+    })
+}
+
+export const useGetAIrecommendationsData=()=>{
+    return useQuery({
+        queryKey:['AIrecommendations'],
+        queryFn:()=>getAIrecommendationsData(),
+    })
+}
+
