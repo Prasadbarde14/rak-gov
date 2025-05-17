@@ -2,8 +2,7 @@ import React from "react";
 import Input from "../UI/Input";
 import Select from "../UI/Select";
 import { Bell, Search, Settings2, Users } from "lucide-react";
-function TopNav() {
-  const [selected, setSelected] = React.useState("Director of Infrastructure");
+function TopNav({selected,setSelected}) {
   const handleSelect = (value) => {
     setSelected(value);
   };
@@ -57,7 +56,7 @@ function TopNav() {
         </div>
       </div>
       <hr className="border-gray-300" />
-      <div className="flex flex-row items-center gap-4 p-2 cursor-pointer">
+      <div className="flex flex-row items-center gap-4 cursor-pointer">
         {selectOptions.map((option, index) => (
           <div key={index}>
             <p
@@ -65,7 +64,7 @@ function TopNav() {
                 selected == option
                   ? "border-blue-500 border-b-2 text-blue-500"
                   : " "
-              }`}
+              } p-2`}
               onClick={() => handleSelect(option)}
             >
               {option}

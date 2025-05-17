@@ -8,7 +8,6 @@ import Performance from "../components/Dashboard/Performance/Performance";
 import TopAnalyisis from "../components/Dashboard/TopAnalyisis";
 import AIAssistantWidget from "../components/AIAssistantWidget/AIAssistantWidget";
 import MaintenanceOverview from "../components/Dashboard/Performance/MaintenanceOverview";
-import MaintenanceMetrics from "../components/Dashboard/Performance/MaintenanceMetrics";
 
 function Dashboard() {
   return (
