@@ -6,6 +6,7 @@ export const graphData=[
       "progress": 137,
       "target": 9,
       "status": "Needs attention",
+      "total":200,
       "trendData": {
         "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
         "values": [15.0, 14.2, 13.8, 13.4, 13.0, 12.8, 12.7, 12.6, 12.4, 12.3]
@@ -16,6 +17,7 @@ export const graphData=[
       "value": 78,
       "unit": "%",
       "progress": 87,
+      "total":200,
       "target": 90,
       "status": "Needs attention",
       "trendData": {
@@ -28,6 +30,7 @@ export const graphData=[
       "value": 8.5,
       "unit": "hours",
       "progress": 142,
+      "total":200,
       "target": 6,
       "status": "Needs attention",
       "trendData": {
@@ -40,6 +43,7 @@ export const graphData=[
       "value": 24,
       "unit": "count",
       "progress": 80,
+      "total":200,
       "target": 30,
       "status": "OK",
       "trendData": {
@@ -53,6 +57,7 @@ export const graphData=[
     //   "unit": "%",
     //   "progress": 103,
     //   "target": 90,
+    // "total":200,
     //   "status": "OK",
     //   "trendData": {
     //     "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
@@ -63,6 +68,7 @@ export const graphData=[
     //   "name": "Task Completion Rate",
     //   "value": 75,
     //   "unit": "%",
+    // "total":200,
     //   "progress": 95,
     //   "target": 80,
     //   "status": "OK",
@@ -72,3 +78,27 @@ export const graphData=[
     //   }
     // }
   ]
+
+ export const AIrecommendations = [
+    {
+      type: "objective",
+      title: "Implement predictive maintenance system for critical infrastructure",
+      description:
+        "Based on your increasing maintenance costs and emergency repair frequency",
+      confidence: 92,
+    },
+    {
+      type: "keyResult",
+      title: "Reduce contractor onboarding time by 50%",
+      description:
+        "Would help address project delays caused by contractor availability issues",
+      confidence: 85,
+    },
+    {
+      type: "action",
+      title:
+        "Create cross-functional rapid response teams for high-priority projects",
+      description: "To address the 15% increase in critical path delays this quarter",
+      confidence: 88,
+    },
+  ];
