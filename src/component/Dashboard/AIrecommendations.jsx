@@ -74,7 +74,7 @@ const RecommendationCard = ({ type, title, description, confidence }) => {
 
 function AIrecommendations() {
   return (
-    <div>
+    <>
       <div className="border-b p-2 flex items-center gap-2 font-semibold text-gray-800">
         <TrendingUp color="#f2c10d" />
         AI Recommendations
@@ -85,7 +85,7 @@ function AIrecommendations() {
           <RecommendationCard key={index} {...rec} />
         ))}
       </div>
-    </div>
+    </>
   );
 }
 
