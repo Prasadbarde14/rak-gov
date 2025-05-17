@@ -1,11 +1,10 @@
-import React from 'react'
 
-const Select = ({options}) => {
+const Select = ({options,className}) => {
   return (
-    <select>
-        {options.map((item,idx)=>{
-            <option key={idx}>item</option>
-        })}
+    <select className={className}>
+        {options.map((item, idx) => (
+            <option key={idx} value={item}>{item}</option>
+        ))}
     </select>
   )
 }
