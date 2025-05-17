@@ -3,21 +3,24 @@ import { Outlet } from "react-router-dom";
 import GlobalContainer from "../components/Global/GlobalContainer";
 import SideNav from "../components/Dashboard/SideNav";
 import TopNav from "../components/Dashboard/TopNav";
-import AIrecommendations from "../components/Dashboard/AIrecommendations";
-import Performance from "../components/Dashboard/Performance";import TopAnalyisis from "../components/Dashboard/TopAnalyisis";
-
+import AIrecommendations from "../components/Dashboard/AIrecommendations/AIrecommendations";
+import Performance from "../components/Dashboard/Performance";
+import TopAnalyisis from "../components/Dashboard/TopAnalyisis";
 
 function Dashboard() {
-
-    return (
-        <GlobalContainer>
-            <div className='w-64 mr-12'>
-            <SideNav />
-            </div>
-            <div className='flex flex-col w-full h-full '>
-                <div><TopNav /></div>
+  return (
+    <GlobalContainer>
+      <div className="w-64 mr-12">
+        <SideNav />
+      </div>
+      <div className="flex flex-col w-full h-full ">
+        <div>
+          <TopNav />
+        </div>
         <div className="p-5 flex flex-col gap-5 h-full overflow-y-auto">
-          <div className=" h-96 "><TopAnalyisis/></div>
+          <div className=" h-96 ">
+            <TopAnalyisis />
+          </div>
 
           <div className=" flex  justify-between w-full h-auto gap-5">
             <div className="w-full bg-white h-full rounded-md">
