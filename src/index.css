@@ -10,12 +10,12 @@
   --color-primary-dark: #111827;
 
   /* Accent Colors */
-  --color-accent-yellow: #FBBF24;
+  --color-accent-bg: #f1f5f9;
   --color-accent-green: #10B981;
   --color-accent-red: #EF4444;
 
   /* Background Colors */
-  --color-background-light: #F3F4F6;
+  --color-background-light: #FBBF24;
   --color-background-dark: #10172A;
   --color-background-white: #FFFFFF;
 

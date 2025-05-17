@@ -3,14 +3,11 @@ import { Outlet } from "react-router-dom";
 import GlobalContainer from "../components/Global/GlobalContainer";
 import SideNav from "../components/Dashboard/SideNav";
 import TopNav from "../components/Dashboard/TopNav";
-import { useGetAllProducts } from "../API/Query/query";
 import AIrecommendations from "../components/Dashboard/AIrecommendations";
-import Performance from "../components/Dashboard/Performance";
+import Performance from "../components/Dashboard/Performance";import TopAnalyisis from "../components/Dashboard/TopAnalyisis";
+
 
 function Dashboard() {
-  const data = useGetAllProducts("/products");
-
-  console.log(data.isLoading);
 
   return (
     <GlobalContainer>
@@ -22,7 +19,7 @@ function Dashboard() {
         <TopNav />
 
         <div className="p-5 flex flex-col gap-5 h-full overflow-y-auto">
-          <div className="bg-gray-100 h-96 ">Sainssh</div>
+          <div className="bg-gray-100 h-96 "><TopAnalyisis/></div>
 
           <div className=" flex  justify-between w-full h-auto gap-5">
             <div className="w-full bg-white h-full rounded-md">
