@@ -13,7 +13,7 @@ const BreadCrumb = ({ breadCrumbArray }) => {
             {
                 breadCrumbArray.map((i, indx) =>
                     <>
-                        <p key={indx} className={`${breadCrumbArray.length - 1 != indx ? ' text-[#64748b] font-thin cursor-pointer hover:text-black' : 'text-black font-[500] '} text-sm`}>{i}</p>
+                        <p key={indx} className={`${breadCrumbArray.length - 1 != indx ? ' text-[#64748b] font-light cursor-pointer hover:text-black' : 'text-black font-[500] '} text-sm`}>{i}</p>
                         {breadCrumbArray.length - 1 != indx && <ChevronRight color='#64748b' key={i} className='text-sm' size={iconSize} />}
                     </>
                 )
@@ -36,7 +36,7 @@ function TopAnalyisis() {
 
 
     return (
-        <div className='flex flex-col gap-4 w-full h-full'>
+        <div className='flex flex-col gap-4 w-full h-full bg-transparent'>
             <BreadCrumb breadCrumbArray={breadCrumbArray} />
             <Charts graphData={data} />
         </div>
