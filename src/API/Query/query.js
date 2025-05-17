@@ -25,10 +25,12 @@ export const useGetPerformanceMatrics=()=>{
     })
 }
 
-export const useGetAIrecommendationsData=()=>{
+export const useGetAIrecommendationsData=(selected)=>{
     return useQuery({
-        queryKey:['AIrecommendations'],
-        queryFn:()=>getAIrecommendationsData(),
+        queryKey:['AIrecommendations',selected??'default'],
+        queryFn:({queryKey})=>getAIrecommendationsData(queryKey[1]),
+        enabled:Boolean(selected)
     })
+
 }
 

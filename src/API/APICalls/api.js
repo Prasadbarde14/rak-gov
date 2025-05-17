@@ -8,6 +8,11 @@ const instance = axios.create({
   }, 
 });
 
+instance.interceptors.request.use(async (config) => {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+  return config;
+});
+
 export async function getGraphData(selected){
     // return await instance.get(url).then(response=>response.data)
     console.log(selected)
@@ -19,9 +24,9 @@ export async function getPerformanceMatrics(){
     return Promise.all(performanceMatrics)
 }
 
-export async function getAIrecommendationsData(){
+export async function getAIrecommendationsData(selected){
   // return await instance.get(url).then(response=>response.data)
-  return Promise.all(AIrecommendations)
+  return Promise.all(AIrecommendations[selected])
 }
 
 export default instance;
