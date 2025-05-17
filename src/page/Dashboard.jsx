@@ -4,7 +4,8 @@ import GlobalContainer from "../components/Global/GlobalContainer";
 import SideNav from "../components/Dashboard/SideNav";
 import TopNav from "../components/Dashboard/TopNav";
 import AIrecommendations from "../components/Dashboard/AIrecommendations";
-import Performance from "../components/Dashboard/Performance";import TopAnalyisis from "../components/Dashboard/TopAnalyisis";
+import Performance from "../components/Dashboard/Performance/Performance";
+import TopAnalyisis from "../components/Dashboard/TopAnalyisis";
 
 
 function Dashboard() {
