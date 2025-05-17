@@ -1,4 +1,4 @@
-import { CheckCircle, TrendingUp, CirclePlay, Settings } from "lucide-react";
+import { CirclePlay, Settings2, Brain, TriangleAlert } from "lucide-react";
 
 const metrics = [
   {
@@ -7,6 +7,11 @@ const metrics = [
     predicted: "12.35",
     delta: "-0.4%",
     recommendations: [],
+    impactAnalysis: 
+      {
+        performance: "0.4% improvement in performance",
+        utilization: "Resource utilization optimized",
+      }
   },
   {
     title: "Milestones met on time",
@@ -23,6 +28,11 @@ const metrics = [
         desc: "Increased automation and digital tools could improve performance",
       },
     ],
+    impactAnalysis: 
+      {
+        performance: "0.4% improvement in performance",
+        utilization: "Resource utilization optimized",
+      }
   },
   {
     title: "Contractor response time",
@@ -30,6 +40,11 @@ const metrics = [
     predicted: "8.54",
     delta: "-0.5%",
     recommendations: [],
+    impactAnalysis: 
+      {
+        performance: "0.4% improvement in performance",
+        utilization: "Resource utilization optimized",
+      }
   },
   {
     title: "High-risk defects identified",
@@ -47,11 +62,15 @@ const metrics = [
         desc: "Increased automation and digital tools could improve performance",
       },
     ],
+    impactAnalysis: {
+        performance: "0.4% improvement in performance",
+        utilization: "Resource utilization optimized",
+      }
   },
 ];
 
-const MetricCard = ({ title, current, predicted, delta, recommendations }) => (
-  <div className=" p-4 rounded-xl shadow-sm bg-[#fcfbfb] space-y-1">
+const MetricCard = ({ title, current, predicted, delta, recommendations, impactAnalysis }) => (
+  <div className=" p-4 rounded-xl shadow-sm bg-gray-50 space-y-1">
     <div className="flex justify-between items-center text-sm ">
       <div className="flex flex-col gap-1">
         <span>{title}</span>
@@ -65,19 +84,24 @@ const MetricCard = ({ title, current, predicted, delta, recommendations }) => (
     <hr className="border border-gray-100" />
 
     <div className="mt-2 space-y-1 text-sm">
+    <div className="text-purple-600 font-semibold text-sm flex gap-1 items-center">
+      <Brain className="w-4 h-4"/>
+          Impact Analysis
+        </div>
       <div className="flex items-center text-green-600">
-        <TrendingUp size={14} className="mr-1" />
-        0.4% improvement in performance
+        <TriangleAlert size={14} className="mr-1" />
+        {impactAnalysis?.performance}
       </div>
       <div className="flex items-center text-green-600">
-        <CheckCircle size={14} className="mr-1" />
-        Resource utilization optimized
+        <TriangleAlert size={14} className="mr-1" />
+        {impactAnalysis?.utilization}
       </div>
     </div>
 
     {recommendations.length > 0 && (
       <div className="mt-3 space-y-2">
-        <div className="text-purple-600 font-semibold text-sm">
+        <div className="text-purple-600 font-semibold text-sm flex gap-1 items-center">
+          <Brain className="w-4 h-4"/>
           AI Recommendations
         </div>
         {recommendations.map((rec, idx) => (
@@ -92,7 +116,7 @@ const MetricCard = ({ title, current, predicted, delta, recommendations }) => (
 );
 
 const Performance = () => (
-  <div className="p-6 space-y-6">
+  <div className="p-4 space-y-6">
     <div className="flex justify-between items-center">
       <h2 className="text-lg font-bold flex gap-2 items-center">
         <span>
@@ -102,16 +126,16 @@ const Performance = () => (
       </h2>
       <div className="flex gap-2">
         <div className="flex border border-gray-200 rounded-md overflow-hidden p-1">
-          <button className="flex items-center gap-1 px-2 py-1 text-sm bg-white hover:bg-gray-100 text-gray-700 rounded">
-            <CirclePlay className="w-4 h-4" />
+          <button className="flex items-center gap-1 px-2 py-1 text-sm bg-white hover:bg-gray-100 text-gray-700 rounded cursor-pointer">
+            <Brain className="w-4 h-4" />
             Auto
           </button>
-          <button className="flex items-center gap-1 px-2 py-1 text-sm bg-white hover:bg-gray-100 text-gray-700 rounded">
-            <Settings className="w-4 h-4" />
+          <button className="flex items-center gap-1 px-2 py-1 text-sm bg-white hover:bg-gray-100 text-gray-700 rounded cursor-pointer">
+            <Settings2  className="w-4 h-4" />
             Manual
           </button>
         </div>
-        <button className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-1.5 rounded flex gap-1 items-center">
+        <button className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-1.5 rounded flex gap-1 items-center cursor-pointer">
           <CirclePlay className="w-4 h-4" />
           Run Simulation
         </button>

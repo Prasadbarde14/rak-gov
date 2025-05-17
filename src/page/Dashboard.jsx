@@ -20,7 +20,7 @@ function Dashboard() {
             <div className='flex flex-col w-full h-full '>
                 <TopNav />
 
-                <div className='p-5 flex flex-col gap-5 h-full overflow-y-auto'>
+                <div className='p-3 flex flex-col gap-5 h-full overflow-y-auto'>
                     <div className='bg-gray-100 h-96 '>
                         Sainssh
                     </div>
