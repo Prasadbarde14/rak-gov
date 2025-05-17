@@ -79,6 +79,76 @@ export const graphData=[
     // }
   ]
 
+
+export const performanceMatrics = [
+  {
+    title: "Average project delay",
+    current: "12.3",
+    predicted: "12.35",
+    delta: "-0.4%",
+    recommendations: [],
+    impactAnalysis: 
+      {
+        performance: "0.4% improvement in performance",
+        utilization: "Resource utilization optimized",
+      }
+  },
+  {
+    title: "Milestones met on time",
+    current: "78",
+    predicted: "78.32",
+    delta: "-0.4%",
+    recommendations: [
+      {
+        title: "Optimize processes for milestones met on time",
+        desc: "Process efficiency improvements could help close the performance gap",
+      },
+      {
+        title: "Accelerate technology adoption for milestones met on time",
+        desc: "Increased automation and digital tools could improve performance",
+      },
+    ],
+    impactAnalysis: 
+      {
+        performance: "0.4% improvement in performance",
+        utilization: "Resource utilization optimized",
+      }
+  },
+  {
+    title: "Contractor response time",
+    current: "8.5",
+    predicted: "8.54",
+    delta: "-0.5%",
+    recommendations: [],
+    impactAnalysis: 
+      {
+        performance: "0.4% improvement in performance",
+        utilization: "Resource utilization optimized",
+      }
+  },
+  {
+    title: "High-risk defects identified",
+    current: "24",
+    predicted: "24.1",
+    delta: "-0.4%",
+    recommendations: [
+      {
+        title: "Optimize processes for high-risk defects identified",
+        desc: "Process efficiency improvements could help close the performance gap",
+      },
+      {
+        title:
+          "Accelerate technology adoption for high-risk defects identified",
+        desc: "Increased automation and digital tools could improve performance",
+      },
+    ],
+    impactAnalysis: {
+        performance: "0.4% improvement in performance",
+        utilization: "Resource utilization optimized",
+      }
+  },
+];
+
  export const AIrecommendations = [
     {
       type: "objective",
