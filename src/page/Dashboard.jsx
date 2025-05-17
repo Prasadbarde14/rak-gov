@@ -4,6 +4,7 @@ import SideNav from '../component/Dashboard/SideNav'
 import TopNav from '../component/Dashboard/TopNav'
 import GlobalContainer from '../component/Global/GlobalContainer'
 import { useGetAllProducts } from '../API/Query/query'
+import AIrecommendations from '../component/Dashboard/AIrecommendations'
 
 function Dashboard() {
 
@@ -23,14 +24,14 @@ function Dashboard() {
                         Sainssh
                     </div>
 
-                    <div className=' flex  justify-between items-center w-full h-full gap-5'>
+                    <div className=' flex  justify-between items-center w-full h-auto gap-5'>
                         <div className='w-full bg-blue-300 h-full'>
 
                             <div class=" p-4 bg-accent-green">Card Background</div>
 
 
                         </div>
-                        <div className='w-96 bg-pink-300 h-full'>Prasad Bhai</div>
+                        <div className='w-96 border rounded-r-sm  h-full'><AIrecommendations/></div>
                     </div>
 
                 </div>
