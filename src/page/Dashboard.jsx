@@ -5,53 +5,80 @@ import SideNav from "../components/Dashboard/SideNav";
 import TopNav from "../components/Dashboard/TopNav";
 import AIrecommendations from "../components/Dashboard/AIrecommendations";
 import Performance from "../components/Dashboard/Performance/Performance";
-import TopAnalyisis from "../components/Dashboard/TopAnalyisis";
-import AIAssistantWidget from "../components/AIAssistantWidget/AIAssistantWidget";
+ import TopAnalyisis from "../components/Dashboard/TopAnalyisis";
 import MaintenanceOverview from "../components/Dashboard/Performance/MaintenanceOverview";
+import AIAssistantWidget from "../components/AIAssistantWidget/AIAssistantWidget";
+import MaintenanceMetric from "../components/Dashboard/Performance/MaintenanceMetrics";
+ 
+
 
 function Dashboard() {
+  const [selected, setSelected] = React.useState("Director of Infrastructure");
+
   return (
     <GlobalContainer>
-      <div className="flex h-screen overflow-hidden"> {/* Flex row container */}
-        
-        {/* Sidebar */}
-        <div className="w-64 flex-shrink-0">
-          <SideNav />
+      <div className='w-64 flex-shrink-0'>
+        <SideNav />
+      </div>
+      <div className='flex flex-col w-full h-full flex-1 overflow-hidden'>
+        <div>
+          <TopNav selected={selected} setSelected={setSelected} />
         </div>
+        {selected == "Director of Infrastructure" && <div className="p-5 flex flex-col gap-5 h-full overflow-y-auto">
+          <div className=" h-96 "><TopAnalyisis selected={selected}/></div>
 
-        {/* Main Content */}
-        <div className="flex flex-col flex-1 overflow-hidden">
-          <TopNav />
-
-          <div className="p-3 flex flex-col gap-5 h-full overflow-y-auto">
-            <div className="h-96">
-              <TopAnalyisis />
+          <div className=" flex  justify-between w-full h-auto gap-5">
+            <div className="w-full bg-white h-full rounded-md">
+              <Performance />
             </div>
+            <div className="w-96  bg-white  rounded-md ">
+              <AIrecommendations selected={selected}/>
+            </div>
+          </div>
+        </div>}
 
-            <div className="flex justify-between w-full h-auto gap-5">
-              {/* Left: Performance Panels */}
-              <div className="w-full flex flex-col gap-4">
-                <Performance />
-                <MaintenanceOverview />
-                <MaintenanceMetrics />
-              </div>
+        {
+          selected == "Planning Analyst" && <div className="p-5 flex flex-col gap-5 h-full overflow-y-auto">
+          <div className=" h-96 ">
+            <TopAnalyisis selected={selected}/>
+          </div>
 
-              {/* Right: AI Recommendations */}
-              <div className="w-96 bg-white rounded-md">
-                <AIrecommendations />
-              </div>
+          <div className=" flex  justify-between w-full h-auto gap-5">
+            <div className="w-full bg-white h-full rounded-md">
+              <Performance />
+            </div>
+            <div className="w-96  bg-white  rounded-md ">
+              <AIrecommendations selected={selected}/>
             </div>
           </div>
         </div>
-      </div>
+        }
 
-      {/* AI Assistant Widget - place outside of flex or inside absolute */}
+        {
+          selected == "Maintenance Head" && <div className="p-5 flex flex-col gap-5 h-full overflow-y-auto">
+          <div className=" h-96 ">
+            <TopAnalyisis selected={selected}/>
+          </div>
+
+          <div className=" flex  justify-between w-full h-auto gap-5">
+            {/* Left: Performance Panels */}
+              <div className="w-full flex flex-col gap-4">
+                <Performance />
+                <MaintenanceOverview />
+                <MaintenanceMetric />
+              </div>
+            <div className="w-96  bg-white  rounded-md ">
+              <AIrecommendations selected={selected}/>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
       <div className="relative">
         <AIAssistantWidget />
       </div>
     </GlobalContainer>
   );
 }
-
 
 export default Dashboard;
