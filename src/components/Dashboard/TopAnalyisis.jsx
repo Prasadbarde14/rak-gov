@@ -1,6 +1,6 @@
 import { ChevronRight, House } from 'lucide-react'
 import React from 'react'
-import { useGetGraphData } from '../../API/Query/query';
+import {  useGetGraphData } from '../../API/Query/query';
 import Charts from './Charts';
 
 const BreadCrumb = ({ breadCrumbArray }) => {
@@ -24,9 +24,11 @@ const BreadCrumb = ({ breadCrumbArray }) => {
 
 }
 
-function TopAnalyisis() {
+function TopAnalyisis({selected}) {
+    console.log(selected)
+    
+    const data=useGetGraphData(selected)
 
-    const data = useGetGraphData()
     const breadCrumbArray = [
         "Department",
         "Ministry of Public",
@@ -36,7 +38,7 @@ function TopAnalyisis() {
 
 
     return (
-        <div className='flex flex-col gap-4 w-full h-full'>
+        <div className='flex flex-col gap-4 w-full h-full bg-transparent'>
             <BreadCrumb breadCrumbArray={breadCrumbArray} />
             <Charts graphData={data} />
         </div>

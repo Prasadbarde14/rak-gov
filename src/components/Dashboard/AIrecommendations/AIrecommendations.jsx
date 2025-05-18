@@ -1,6 +1,9 @@
 import React from "react";
-import { Target, CheckCircle, Zap, TrendingUp } from "lucide-react";
+import { Target, CheckCircle, Zap, TrendingUp, BadgeInfo } from "lucide-react";
+import { useGetAIrecommendationsData } from "../../../API/Query/query";
+import SkeletonRecommendationCard from "./SkeletonRecommendationCard";
 
+// Card style definitions
 const cardStyles = {
   objective: {
     border: "border-blue-500",
@@ -19,33 +22,9 @@ const cardStyles = {
   },
 };
 
-const recommendations = [
-  {
-    type: "objective",
-    title: "Implement predictive maintenance system for critical infrastructure",
-    description:
-      "Based on your increasing maintenance costs and emergency repair frequency",
-    confidence: 92,
-  },
-  {
-    type: "keyResult",
-    title: "Reduce contractor onboarding time by 50%",
-    description:
-      "Would help address project delays caused by contractor availability issues",
-    confidence: 85,
-  },
-  {
-    type: "action",
-    title:
-      "Create cross-functional rapid response teams for high-priority projects",
-    description: "To address the 15% increase in critical path delays this quarter",
-    confidence: 88,
-  },
-];
-
+// Main Recommendation Card
 const RecommendationCard = ({ type, title, description, confidence }) => {
   const style = cardStyles[type];
-
   return (
     <div
       className={`border-l-4 ${style.border} bg-white shadow-md p-4 rounded-md space-y-2 w-full`}
@@ -59,8 +38,11 @@ const RecommendationCard = ({ type, title, description, confidence }) => {
           {confidence}% confidence
         </span>
       </div>
-      <div className="text-gray-900 font-semibold">{title}</div>
-      <div className="bg-gray-100 text-sm text-gray-700 p-2 rounded-md">
+      <div className="text-gray-900 font-semibold text-justify">{title}</div>
+      <div className="bg-gray-100 text-sm text-gray-700 p-2 rounded-md text-justify flex gap-2">
+        <span>
+          <BadgeInfo size={20} color="#bebbbb" strokeWidth={1} />
+        </span>
         {description}
       </div>
       <button
@@ -72,7 +54,10 @@ const RecommendationCard = ({ type, title, description, confidence }) => {
   );
 };
 
-function AIrecommendations() {
+// Main Wrapper Component
+function AIrecommendations({selected}) {
+  const { data, isLoading, isError } = useGetAIrecommendationsData(selected);
+
   return (
     <>
       <div className="border-b p-2 flex items-center gap-2 font-semibold text-gray-800">
@@ -81,9 +66,14 @@ function AIrecommendations() {
       </div>
 
       <div className="w-full max-w-2xl mx-auto p-4 space-y-4">
-        {recommendations.map((rec, index) => (
-          <RecommendationCard key={index} {...rec} />
-        ))}
+        {isLoading &&
+          Array.from({ length: 3 }).map((_, i) => (
+            <SkeletonRecommendationCard key={i} />
+          ))}
+
+        {!isLoading &&
+          !isError &&
+          data.map((rec, index) => <RecommendationCard key={index} {...rec} />)}
       </div>
     </>
   );
