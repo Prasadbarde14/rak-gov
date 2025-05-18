@@ -46,7 +46,7 @@ function SideNav() {
   ];
 
   return (
-    <div className="w-64 h-full bg-background-dark stickey top-0 hidden md:block">
+    <div className="w-64 h-full bg-background-dark ">
       <div className="flex flex-row items-center pl-4 pt-4 gap-2">
         <LayoutDashboard color="#5FA5F9" absoluteStrokeWidth size={30} />
         <h1 className="text-white font-semibold text-xl">GovPerform</h1>

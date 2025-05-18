@@ -13,8 +13,8 @@ function TopNav() {
     "Maintenance Head",
   ];
   return (
-    <div className="bg-background-white w-full shadow-xs shadow-gray-300 sticky top-0 z-10">
-      <div className="flex flex-row items-center justify-between">
+    <div className="bg-background-white w-full  shadow-xs shadow-gray-300 ">
+      <div className="flex flex-row xl:flex-nowrap flex-wrap items-center justify-between">
         <div>
           <h2 className="text-[19px] font-bold px-7 pt-3">
             Ministry of Public Works
@@ -23,7 +23,7 @@ function TopNav() {
             Dashboard • Smart Infrastructure & Sustainability
           </p>
         </div>
-        <div className="flex flex-row gap-6 items-center justify-between">
+        <div className="flex flex-row gap-6 items-center justify-around flex-wrap xl:justify-around xl:p-2 p-4">
           <div className="flex border-1 border-gray-200 bg-gray-100 p-2 items-center rounded-md">
             <Search size={16} color="#3f3f3f" />
             <Input
@@ -48,7 +48,7 @@ function TopNav() {
             </div>
             <Bell size={18} />
           </div>
-          <div className="flex flex-row items-center justify-center pr-4">
+          <div className="flex flex-row items-center justify-center">
             <p className="bg-blue-600 px-3 py-1 text-white mr-2 rounded-full">
               A
             </p>
