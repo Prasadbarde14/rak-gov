@@ -2,7 +2,7 @@ import React from "react";
 import Input from "../UI/Input";
 import Select from "../UI/Select";
 import { Bell, Search, Settings2, Users } from "lucide-react";
-function TopNav({selected,setSelected}) {
+function TopNav({ selected, setSelected }) {
   const handleSelect = (value) => {
     setSelected(value);
   };
@@ -12,8 +12,8 @@ function TopNav({selected,setSelected}) {
     "Maintenance Head",
   ];
   return (
-    <div className="bg-background-white w-full shadow-xs shadow-gray-300 sticky top-0 z-10">
-      <div className="flex flex-row items-center justify-between">
+    <div className="bg-background-white w-full  shadow-xs shadow-gray-300 ">
+      <div className="flex flex-row xl:flex-nowrap flex-wrap items-center justify-between">
         <div>
           <h2 className="text-[19px] font-bold px-7 pt-3">
             Ministry of Public Works
@@ -22,9 +22,9 @@ function TopNav({selected,setSelected}) {
             Dashboard • Smart Infrastructure & Sustainability
           </p>
         </div>
-        <div className="flex flex-row gap-6 items-center justify-between">
-          <div className="flex border-1 border-gray-200 bg-gray-100 p-2 items-center rounded-md">
-            <Search size={16} color="#3f3f3f" />
+        <div className="flex flex-row gap-6 items-center justify-around flex-wrap xl:justify-around xl:p-2 p-4">
+          <div className="flex border-1 border-slate-200 bg-slate-100 p-2 items-center rounded-md">
+            <Search size={16} color="#7D8082" />
             <Input
               placeholder={"Search..."}
               type={"text"}
@@ -47,7 +47,7 @@ function TopNav({selected,setSelected}) {
             </div>
             <Bell size={18} />
           </div>
-          <div className="flex flex-row items-center justify-center pr-4">
+          <div className="flex flex-row items-center justify-center">
             <p className="bg-blue-600 px-3 py-1 text-white mr-2 rounded-full">
               A
             </p>
