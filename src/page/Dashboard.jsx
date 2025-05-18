@@ -20,7 +20,7 @@ function Dashboard() {
       </div>
       <div className="flex flex-col w-full h-full ">
         <div>
-          <TopNav selected={selected} setSelected={setSelected}/>
+          <TopNav selected={selected} setSelected={setSelected} />
         </div>
         {selected == "Director of Infrastructure" && (
           <div className="p-5 flex flex-col gap-5 h-full overflow-y-auto">
@@ -46,9 +46,9 @@ function Dashboard() {
             </div>
 
             <div className=" flex  justify-between w-full h-auto gap-5">
-              <div className="w-full bg-white h-full rounded-md">
-              <Performance />
-              <ProjectPlanningOverview />
+              <div className="w-full flex flex-col gap-4">
+                <Performance />
+                <ProjectPlanningOverview />
               </div>
               <div className="w-96  bg-white  rounded-md ">
                 <AIrecommendations selected={selected} />

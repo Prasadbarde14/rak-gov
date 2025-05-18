@@ -2,7 +2,7 @@ import React from "react";
 import Input from "../UI/Input";
 import Select from "../UI/Select";
 import { Bell, Search, Settings2, Users } from "lucide-react";
-function TopNav({selected,setSelected}) {
+function TopNav({ selected, setSelected }) {
   const handleSelect = (value) => {
     setSelected(value);
   };
