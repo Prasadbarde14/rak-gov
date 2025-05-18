@@ -18,12 +18,12 @@ function Dashboard() {
       <div className="w-64 flex-shrink-0">
         <SideNav />
       </div>
-      <div className="flex flex-col w-full h-full ">
+      <div className="flex flex-col w-full h-full flex-1 overflow-hidden">
         <div>
           <TopNav selected={selected} setSelected={setSelected}/>
         </div>
         {selected == "Director of Infrastructure" && (
-          <div className="p-5 flex flex-col gap-5 h-full overflow-y-auto">
+          <div className="p-5 flex flex-col gap-5 h-full overflow-y-auto scrollbar-custom">
             <div className=" h-96 ">
               <TopAnalyisis selected={selected} />
             </div>
