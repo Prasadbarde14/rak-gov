@@ -95,7 +95,7 @@ function SideNavItem({ icon, text, isOpen, onClick }) {
     >
       <div className="flex flex-row gap-2">
         {icon}
-        <p className="text-white text-sm font-semibold">{text}</p>
+        <p className="text-white text-sm font-medium">{text}</p>
       </div>
       <ChevronRight
         color="#94A3B8"

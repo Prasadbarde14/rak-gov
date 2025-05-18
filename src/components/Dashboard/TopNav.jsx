@@ -23,8 +23,8 @@ function TopNav({selected,setSelected}) {
           </p>
         </div>
         <div className="flex flex-row gap-6 items-center justify-around flex-wrap xl:justify-around xl:p-2 p-4">
-          <div className="flex border-1 border-gray-200 bg-gray-100 p-2 items-center rounded-md">
-            <Search size={16} color="#3f3f3f" />
+          <div className="flex border-1 border-slate-200 bg-slate-100 p-2 items-center rounded-md">
+            <Search size={16} color="#7D8082" />
             <Input
               placeholder={"Search..."}
               type={"text"}
