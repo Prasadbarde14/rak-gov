@@ -4,10 +4,12 @@ import { PlusCircle, MoreHorizontal } from "lucide-react";
 const KeyResult = ({ title, current, target, percentage, color }) => {
   return (
     <div className="space-y-1">
-      <div className="flex items-start gap-2">
-        <input type="radio" className="mt-1" />
-        <div className="w-full">
-          <div className="text-sm font-medium text-gray-800">{title}</div>
+      <div className="flex flex-col items-start gap-2">
+        <div className="flex gap-2">
+          <input type="radio" className="mt-1" />
+          <div className="text-sm  font-semibold text-gray-800">{title}</div>
+        </div>
+        <div className="w-full flex gap-2.5">
           <div className="text-xs text-gray-500">
             {current} of {target}
           </div>
@@ -17,8 +19,8 @@ const KeyResult = ({ title, current, target, percentage, color }) => {
               style={{ width: `${percentage}%` }}
             />
           </div>
+          <div className="text-sm text-gray-700 font-light">{percentage}%</div>
         </div>
-        <div className="text-sm text-gray-700 font-semibold">{percentage}%</div>
       </div>
     </div>
   );
@@ -28,8 +30,9 @@ const ProjectPlanningOverview = () => {
   return (
     <div className="w-full mx-auto bg-white rounded-md shadow-sm border mt-5">
       {/* Header */}
-      <div className="flex justify-between items-center border-b px-4 py-2">
+      <div className="flex justify-between items-center border-b px-4 py-5">
         <h2 className="text-sm font-semibold text-gray-800">
+          
           Project Planning Overview
         </h2>
         <button className="text-blue-600 text-sm hover:underline flex items-center gap-1">
@@ -57,38 +60,44 @@ const ProjectPlanningOverview = () => {
               <MoreHorizontal className="w-5 h-5 text-gray-500" />
             </div>
           </div>
+          <div className="p-4">
+            {/* Progress Summary */}
+            <div className="flex">
+              <div className="text-sm text-gray-700 font-semibold">
+                Key Results
+              </div>
+              <div className="text-right text-xs text-gray-500 font-medium mt-1">
+                65% Complete
+              </div>
+            </div>
+            <div className="w-full h-1.5 bg-gray-200 rounded-full">
+              <div className="h-full bg-yellow-400 rounded-full w-[65%]"></div>
+            </div>
 
-          {/* Progress Summary */}
-          <div className="text-right text-xs text-gray-500 font-medium mt-1">
-            65% Complete
-          </div>
-          <div className="w-full h-1.5 bg-gray-200 rounded-full">
-            <div className="h-full bg-yellow-400 rounded-full w-[65%]"></div>
-          </div>
+            {/* Key Results */}
+            <div className="space-y-4 mt-3">
+              <KeyResult
+                title="Achieve ≥ 90% on-time milestone completions"
+                current="78%"
+                target="90%"
+                percentage={87}
+                color="bg-green-500"
+              />
+              <KeyResult
+                title="Cut contractor response time from 12h to 6h"
+                current="8.5 hours"
+                target="6 hours"
+                percentage={58}
+                color="bg-yellow-400"
+              />
+            </div>
 
-          {/* Key Results */}
-          <div className="space-y-4 mt-3">
-            <KeyResult
-              title="Achieve ≥ 90% on-time milestone completions"
-              current="78%"
-              target="90%"
-              percentage={87}
-              color="bg-green-500"
-            />
-            <KeyResult
-              title="Cut contractor response time from 12h to 6h"
-              current="8.5 hours"
-              target="6 hours"
-              percentage={58}
-              color="bg-yellow-400"
-            />
+            {/* Add Key Result */}
+            <button className="mt-4 flex items-center text-sm text-blue-600 hover:underline">
+              <PlusCircle className="w-4 h-4 mr-1" />
+              Add Key Result
+            </button>
           </div>
-
-          {/* Add Key Result */}
-          <button className="mt-4 flex items-center text-sm text-blue-600 hover:underline">
-            <PlusCircle className="w-4 h-4 mr-1" />
-            Add Key Result
-          </button>
         </div>
       </div>
     </div>
