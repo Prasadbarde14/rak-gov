@@ -55,8 +55,8 @@ const RecommendationCard = ({ type, title, description, confidence }) => {
 };
 
 // Main Wrapper Component
-function AIrecommendations() {
-  const { data, isLoading, isError } = useGetAIrecommendationsData();
+function AIrecommendations({selected}) {
+  const { data, isLoading, isError } = useGetAIrecommendationsData(selected);
 
   return (
     <>
