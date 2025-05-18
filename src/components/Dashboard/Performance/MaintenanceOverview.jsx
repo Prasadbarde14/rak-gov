@@ -27,8 +27,8 @@ const maintenanceData = {
 
 const MaintenanceOverview = () => {
   return (
-    <div className="bg-white space-y-6 rounded">
-      <div className=" shadow-md rounded-xl p-4">
+    <div className="bg-white space-y-6 rounded shadow">
+      <div className="  rounded p-4">
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center gap-2">
             <PenTool className="text-blue-600" />

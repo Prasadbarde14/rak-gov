@@ -45,7 +45,7 @@ function Dashboard() {
 
           <div className=" flex  justify-between w-full h-auto gap-5">
             <div className="w-full bg-white h-full rounded-md">
-              <Performance />
+              <MaintenanceOverview />
             </div>
             <div className="w-96  bg-white  rounded-md ">
               <AIrecommendations selected={selected}/>
