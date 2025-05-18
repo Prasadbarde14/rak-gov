@@ -83,7 +83,7 @@ const MaintenanceMetrics = () => {
       {graphData.isLoading ? (
         <div className="animate-pulse bg-gray-200 h-80 rounded w-full"></div>
       ) : (
-        <div className="w-full">
+        <div className="w-5/6 mx-auto">
           <ReactECharts
             option={option}
             style={{ height: "350px", width: "100%", padding: "1rem" }}
