@@ -378,3 +378,46 @@ export const AIrecommendations = {
   ]
 
 };
+
+export const maintenanceData = {
+  highPriorityDefects: 12,
+  completedRepairs: 45,
+  defects: [
+    {
+      id: 1,
+      title: "Infrastructure Defect #1",
+      description: "Structural integrity issue detected in Bridge Section A-1",
+      reportedAgo: "2 hours ago",
+    },
+    {
+      id: 2,
+      title: "Infrastructure Defect #2",
+      description: "Structural integrity issue detected in Bridge Section A-2",
+      reportedAgo: "2 hours ago",
+    },
+    {
+      id: 3,
+      title: "Infrastructure Defect #3",
+      description: "Structural integrity issue detected in Bridge Section A-3",
+      reportedAgo: "2 hours ago",
+    },
+  ],
+};
+
+export const graphsData={
+    data :[
+    { date: "Jul 13, 2024", value: 24 },
+    { date: "Aug 13, 2024", value: 22 },
+    { date: "Sep 13, 2024", value: 20 },
+    { date: "Oct 13, 2024", value: 16 },
+    { date: "Nov 13, 2024", value: 18 },
+    { date: "Dec 13, 2024", value: 19 },
+    { date: "Jan 13, 2025", value: 15 },
+    { date: "Feb 13, 2025", value: 20 },
+    { date: "Mar 13, 2025", value: 26 },
+    { date: "Apr 13, 2025", value: 20 },
+    { date: "May 13, 2025", value: 14 },
+  ],
+  
+   contractorResponseData : [28, 27, 25, 22, 20, 21, 19, 23, 29, 25, 21] 
+}

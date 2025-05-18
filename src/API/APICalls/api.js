@@ -1,5 +1,5 @@
 import axios from "axios"
-import { graphData,performanceMatrics,AIrecommendations } from "./mockCallApi";
+import { graphData,performanceMatrics,AIrecommendations, maintenanceData ,graphsData} from "./mockCallApi";
 
 const instance = axios.create({
   baseURL : 'https://fakestoreapi.com',
@@ -15,18 +15,25 @@ instance.interceptors.request.use(async (config) => {
 
 export async function getGraphData(selected){
     // return await instance.get(url).then(response=>response.data)
-    console.log(selected)
-    return Promise.all(graphData[selected])
+    return await Promise.all(graphData[selected])
 }
 
 export async function getPerformanceMatrics(){
     // return await instance.get(url).then(response=>response.data)
-    return Promise.all(performanceMatrics)
+    return await Promise.all(performanceMatrics)
 }
 
 export async function getAIrecommendationsData(selected){
   // return await instance.get(url).then(response=>response.data)
-  return Promise.all(AIrecommendations[selected])
+  return await Promise.all(AIrecommendations[selected])
+}
+
+export async function getMaintainceData(){
+  return maintenanceData
+}
+
+export async function getGraphsData(){
+  return graphsData
 }
 
 export default instance;
