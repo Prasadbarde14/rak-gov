@@ -10,9 +10,6 @@ import ProjectPlanningOverview from "../components/Dashboard/ProjectPlanningOver
 import MaintenanceOverview from "../components/Dashboard/Performance/MaintenanceOverview";
 import AIAssistantWidget from "../components/AIAssistantWidget/AIAssistantWidget";
 import MaintenanceMetric from "../components/Dashboard/Performance/MaintenanceMetrics";
-// import AIrecommendations from "../components/Dashboard/AIrecommendations";
-// import Performance from "../components/Dashboard/Performance";
-// import TopAnalyisis from "../components/Dashboard/TopAnalyisis";
 import { Plus, MenuSquare } from "lucide-react";
 
 function Dashboard() {
@@ -37,15 +34,16 @@ function Dashboard() {
       >
         <SideNav />
       </div>
-      
+
       <div className="flex flex-col w-full h-full ">
         <div className="w-full">
-          <TopNav setSelected={setSelected} selected={selected}/>
+          <TopNav setSelected={setSelected} selected={selected} />
         </div>
-        {selected == "Director of Infrastructure" && <div className="p-5 flex flex-col gap-5 h-full overflow-y-auto">
-          <div className=" h-96 ">
-            <TopAnalyisis />
-          </div>
+        {selected == "Director of Infrastructure" && (
+          <div className="p-5 flex flex-col gap-5 h-full overflow-y-auto">
+            <div className=" h-96 ">
+              <TopAnalyisis />
+            </div>
 
             <div className=" flex  justify-between w-full h-auto gap-5">
               <div className="w-full bg-white h-full rounded-md">
@@ -55,8 +53,8 @@ function Dashboard() {
                 <AIrecommendations selected={selected} />
               </div>
             </div>
-          </div>}
-      
+          </div>
+        )}
 
         {selected == "Planning Analyst" && (
           <div className="p-5 flex flex-col gap-5 h-full overflow-y-auto">
@@ -66,8 +64,8 @@ function Dashboard() {
 
             <div className=" flex  justify-between w-full h-auto gap-5">
               <div className="w-full bg-white h-full rounded-md">
-              <Performance />
-              <ProjectPlanningOverview />
+                <Performance />
+                <ProjectPlanningOverview />
               </div>
               <div className="w-96  bg-white  rounded-md ">
                 <AIrecommendations selected={selected} />
