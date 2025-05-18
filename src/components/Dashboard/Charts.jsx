@@ -8,7 +8,7 @@ const Skeleton = () => {
       <div className="flex animate-pulse w-full h-full flex-col items-start gap-2 ">
         <div className="flex w-full  items-center gap-2">
           <div className="h-2 rounded w-full bg-gray-300"></div>
-          <div class="size-10 rounded-full bg-gray-300"></div>
+          <div className="size-10 rounded-full bg-gray-300"></div>
         </div>
         <div className="h-5 rounded w-1/4 bg-gray-300"></div>
         <div className="h-2 rounded w-full bg-gray-300"></div>

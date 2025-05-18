@@ -14,7 +14,7 @@ const BreadCrumb = ({ breadCrumbArray }) => {
         size={iconSize}
       />
       {breadCrumbArray.map((i, indx) => (
-        <>
+        <div key={indx} className="flex justify-center items-center gap-2">
           <p
             key={indx}
             className={`${
@@ -33,14 +33,13 @@ const BreadCrumb = ({ breadCrumbArray }) => {
               size={iconSize}
             />
           )}
-        </>
+        </div>
       ))}
     </div>
   );
 };
 
 function TopAnalyisis({ selected }) {
-  console.log(selected);
 
   const data = useGetGraphData(selected);
 

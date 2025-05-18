@@ -1,25 +1,10 @@
 import React from "react";
 import ReactECharts from "echarts-for-react";
 import { ClipboardList } from "lucide-react";
+import { useGetGraphsData } from "../../../API/Query/query";
 
 const MaintenanceMetrics = () => {
-  // Sample data points
-  const data = [
-    { date: "Jul 13, 2024", value: 24 },
-    { date: "Aug 13, 2024", value: 22 },
-    { date: "Sep 13, 2024", value: 20 },
-    { date: "Oct 13, 2024", value: 16 },
-    { date: "Nov 13, 2024", value: 18 },
-    { date: "Dec 13, 2024", value: 19 },
-    { date: "Jan 13, 2025", value: 15 },
-    { date: "Feb 13, 2025", value: 20 },
-    { date: "Mar 13, 2025", value: 26 },
-    { date: "Apr 13, 2025", value: 20 },
-    { date: "May 13, 2025", value: 14 },
-  ];
-  
-
-  const contractorResponseData = [28, 27, 25, 22, 20, 21, 19, 23, 29, 25, 21]; // <-- Add your actual values here
+  const graphData = useGetGraphsData();
 
   const option = {
     tooltip: {
@@ -39,9 +24,8 @@ const MaintenanceMetrics = () => {
     xAxis: {
       type: "category",
       boundaryGap: false,
-      data: data.map((item) => item.date),
+      data: graphData.data?.data?.map((item) => item.date) || [],
       axisLabel: {
-        rotate: 20,
         fontSize: 11,
       },
     },
@@ -54,12 +38,12 @@ const MaintenanceMetrics = () => {
       {
         name: "Contractor response time",
         type: "line",
-        data: contractorResponseData,
+        data: graphData.data?.contractorResponseData || [],
         smooth: true,
         symbol: "circle",
         symbolSize: 6,
         lineStyle: {
-          color: "#9FF486", // black
+          color: "#9FF486",
           width: 3,
         },
         itemStyle: {
@@ -72,12 +56,12 @@ const MaintenanceMetrics = () => {
       {
         name: "High-risk defects identified",
         type: "line",
-        data: data.map((item) => item.value),
+        data: graphData.data?.data?.map((item) => item.value) || [],
         smooth: true,
         symbol: "circle",
         symbolSize: 6,
         lineStyle: {
-          color: "#c7d2fe", // light indigo
+          color: "#c7d2fe",
           width: 3,
         },
         itemStyle: {
@@ -91,20 +75,21 @@ const MaintenanceMetrics = () => {
   };
 
   return (
-    <div className="bg-white space-y-6 p-4 mt-5 rounded shadow">
-      {/* Header */}
+    <div className="bg-white space-y-6 p-4 mt-5 rounded w-full shadow">
       <div className="flex items-center mb-4">
         <ClipboardList className="text-purple-600 mr-2" size={20} />
-        <h2 className="text-lg font-semibold text-gray-800">
-          Maintenance Metrics
-        </h2>
+        <h2 className="text-lg font-semibold text-gray-800">Maintenance Metrics</h2>
       </div>
-      <div className="w-5/6 mx-auto ">
-        <ReactECharts
-          option={option}
-          style={{ height: "350px", width: "100%", padding: "1rem" }}
-        />
-      </div>
+      {graphData.isLoading ? (
+        <div className="animate-pulse bg-gray-200 h-80 rounded w-full"></div>
+      ) : (
+        <div className="w-5/6 mx-auto">
+          <ReactECharts
+            option={option}
+            style={{ height: "350px", width: "100%", padding: "1rem" }}
+          />
+        </div>
+      )}
     </div>
   );
 };
