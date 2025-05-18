@@ -1,5 +1,5 @@
 import axios from "axios"
-import { graphData,performanceMatrics,AIrecommendations, maintenanceData ,graphsData} from "./mockCallApi";
+import { graphData,performanceMatrics,AIrecommendations, maintenanceData ,graphsData, projectData} from "./mockCallApi";
 
 const instance = axios.create({
   baseURL : 'https://fakestoreapi.com',
@@ -34,6 +34,10 @@ export async function getMaintainceData(){
 
 export async function getGraphsData(){
   return graphsData
+}
+
+export async function getProjectData(){
+  return projectData
 }
 
 export default instance;

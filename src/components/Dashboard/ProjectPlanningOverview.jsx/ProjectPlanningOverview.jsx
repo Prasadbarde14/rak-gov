@@ -1,29 +1,6 @@
 import React from "react";
 import { PlusCircle, MoreHorizontal } from "lucide-react";
-
-// JSON Data Source
-const projectData = {
-  objectiveTitle: "Reduce average project delay by 25% in Q3",
-  description: "Focus on improving project timelines through better monitoring and management",
-  quarter: "Q3 2025",
-  completionPercent: 65,
-  keyResults: [
-    {
-      title: "Achieve ≥ 90% on-time milestone completions",
-      current: "78%",
-      target: "90%",
-      percentage: 87,
-      color: "bg-green-500",
-    },
-    {
-      title: "Cut contractor response time from 12h to 6h",
-      current: "8.5 hours",
-      target: "6 hours",
-      percentage: 58,
-      color: "bg-yellow-400",
-    },
-  ],
-};
+import { useGetProjectData } from "../../../API/Query/query";
 
 // Key Result Card
 const KeyResult = ({ title, current, target, percentage, color }) => (
@@ -51,20 +28,12 @@ const KeyResult = ({ title, current, target, percentage, color }) => (
 
 // Main Overview Component
 const ProjectPlanningOverview = () => {
-  const {
-    objectiveTitle,
-    description,
-    quarter,
-    completionPercent,
-    keyResults,
-  } = projectData;
+  const data = useGetProjectData();
 
   return (
     <div className="w-full mx-auto bg-white rounded-md shadow-sm border mt-5">
-      {/* Header */}
       <div className="flex justify-between items-center border-b px-4 py-5">
         <h2 className="text-sm font-semibold text-gray-800">
-          
           Project Planning Overview
         </h2>
         <button className="text-blue-600 text-sm hover:underline flex items-center gap-1">
@@ -72,52 +41,54 @@ const ProjectPlanningOverview = () => {
         </button>
       </div>
 
-      {/* Objective Block */}
-      <div className="p-5">
-        <div className="space-y-2 border rounded-md">
-          <div className="flex justify-between items-start flex-wrap gap-2 border-b p-4">
-            <div className="space-y-1">
-              <h3 className="text-base font-semibold text-gray-900">{objectiveTitle}</h3>
-              <p className="text-sm text-gray-500">{description}</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs px-2 py-1 rounded bg-blue-100 text-blue-700 font-medium">
-                {quarter}
-              </span>
-              <MoreHorizontal className="w-5 h-5 text-gray-500" />
-            </div>
-          </div>
-
-          <div className="p-4">
-            {/* Progress Summary */}
-            <div className="flex justify-between mb-3">
-              <div className="text-sm text-gray-700 font-semibold">Key Results</div>
-              <div className="text-right text-xs text-gray-500 font-medium mt-1">
-                {completionPercent}% Complete
+      {data.isLoading ? (
+        <div className="p-5 space-y-4 animate-pulse">
+          <div className="h-6 bg-gray-200 rounded w-1/3 mb-3"></div>
+          <div className="h-4 bg-gray-200 rounded w-2/3 mb-2"></div>
+          <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
+          <div className="h-3 bg-gray-200 rounded w-full"></div>
+          <div className="h-3 bg-gray-200 rounded w-4/5"></div>
+          <div className="h-3 bg-gray-200 rounded w-3/4"></div>
+        </div>
+      ) : (
+        !data.isError && (
+          <div className="p-5">
+            <div className="space-y-2 border rounded-md">
+              <div className="flex justify-between items-start flex-wrap gap-2 border-b p-4">
+                <div className="space-y-1">
+                  <h3 className="text-base font-semibold text-gray-900">{data.data.objectiveTitle}</h3>
+                  <p className="text-sm text-gray-500">{data.data.description}</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs px-2 py-1 rounded bg-blue-100 text-blue-700 font-medium">
+                    {data.data.quarter}
+                  </span>
+                  <MoreHorizontal className="w-5 h-5 text-gray-500" />
+                </div>
+              </div>
+              <div className="p-4">
+                <div className="flex justify-between mb-3">
+                  <div className="text-sm text-gray-700 font-semibold">Key Results</div>
+                  <div className="text-right text-xs text-gray-500 font-medium mt-1">
+                    {data.data.completionPercent}% Complete
+                  </div>
+                </div>
+                <div className="w-full h-1.5 bg-gray-200 rounded-full mb-5">
+                  <div className="h-full bg-yellow-400 rounded-full" style={{ width: `${data.data.completionPercent}%` }}></div>
+                </div>
+                <div className="space-y-4 mt-3">
+                  {data.data.keyResults.map((kr, index) => (
+                    <KeyResult key={index} {...kr} />
+                  ))}
+                </div>
+                <button className="mt-4 flex items-center text-sm text-blue-600 hover:underline">
+                  <PlusCircle className="w-4 h-4 mr-1" /> Add Key Result
+                </button>
               </div>
             </div>
-            <div className="w-full h-1.5 bg-gray-200 rounded-full mb-5">
-              <div
-                className="h-full bg-yellow-400 rounded-full"
-                style={{ width: `${completionPercent}%` }}
-              ></div>
-            </div>
-
-            {/* Key Results (Dynamic) */}
-            <div className="space-y-4 mt-3">
-              {keyResults.map((kr, index) => (
-                <KeyResult key={index} {...kr} />
-              ))}
-            </div>
-
-            {/* Add Key Result */}
-            <button className="mt-4 flex items-center text-sm text-blue-600 hover:underline">
-              <PlusCircle className="w-4 h-4 mr-1" />
-              Add Key Result
-            </button>
           </div>
-        </div>
-      </div>
+        )
+      )}
     </div>
   );
 };

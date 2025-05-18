@@ -421,3 +421,27 @@ export const graphsData={
   
    contractorResponseData : [28, 27, 25, 22, 20, 21, 19, 23, 29, 25, 21] 
 }
+
+
+export const projectData = {
+  objectiveTitle: "Reduce average project delay by 25% in Q3",
+  description: "Focus on improving project timelines through better monitoring and management",
+  quarter: "Q3 2025",
+  completionPercent: 65,
+  keyResults: [
+    {
+      title: "Achieve ≥ 90% on-time milestone completions",
+      current: "78%",
+      target: "90%",
+      percentage: 87,
+      color: "bg-green-500",
+    },
+    {
+      title: "Cut contractor response time from 12h to 6h",
+      current: "8.5 hours",
+      target: "6 hours",
+      percentage: 58,
+      color: "bg-yellow-400",
+    },
+  ],
+};
