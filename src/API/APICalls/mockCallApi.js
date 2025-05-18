@@ -268,7 +268,7 @@ export const AIrecommendations = {
       confidence: 92,
     },
     {
-      type: "keyResult",
+      type: "key Result",
       title: "Reduce contractor onboarding time by 50%",
       description:
         "Would help address project delays caused by contractor availability issues",
@@ -296,7 +296,7 @@ export const AIrecommendations = {
       "confidence": 90
     },
     {
-      "type": "keyResult",
+      "type": "key Result",
       "title": "Achieve a 20% reduction in average project delays",
       "description": "Leverage AI-driven predictive models to forecast potential delays",
       "confidence": 87
@@ -314,7 +314,7 @@ export const AIrecommendations = {
       "confidence": 91
     },
     {
-      "type": "keyResult",
+      "type": "key Result",
       "title": "Increase milestone adherence by 10%",
       "description": "Implement a tracking system with real-time progress updates",
       "confidence": 89
@@ -332,7 +332,7 @@ export const AIrecommendations = {
       "confidence": 93
     },
     {
-      "type": "keyResult",
+      "type": "key Result",
       "title": "Improve client satisfaction score to 90%",
       "description": "Address feedback related to delayed project milestones",
       "confidence": 88
