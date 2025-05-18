@@ -1,4 +1,4 @@
-import { OctagonAlert, TrendingDown, TrendingUp } from "lucide-react";
+import { CircleAlert, OctagonAlert, TrendingDown, TrendingUp } from "lucide-react";
 import React, { useRef, useEffect } from "react";
 import * as echarts from "echarts";
 
@@ -138,8 +138,8 @@ const Card = (data) => {
             {data.data.unit}
           </div>
           {data.data.status == "Needs attention" && (
-            <div className="flex text-sm justify-center items-center gap-1 text-[#eab308]">
-              <OctagonAlert size={14} color="#eab308" /> {data.data.status}
+            <div className="flex text-xs justify-center items-center gap-1 text-orange-700/75">
+              <CircleAlert size={14} color="#D97707" /> {data.data.status}
             </div>
           )}
         </div>

@@ -80,7 +80,7 @@ function Dashboard() {
               variants={staggerContainer}
             >
               <motion.div 
-                className="w-full bg-white h-full rounded-md p-5"
+                className="w-full h-full rounded-md "
                 variants={fadeInZoom}
               >
                 <Performance />

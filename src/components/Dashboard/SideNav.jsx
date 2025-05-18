@@ -10,8 +10,8 @@ import {
 import { useState } from "react";
 
 function SideNav() {
-  const [selected, setSelected] = useState(null);
-  const [openIndex, setOpenIndex] = useState(null);
+  const [selected, setSelected] = useState("0-0");
+  const [openIndex, setOpenIndex] = useState(0);
 
   const handleItemClick = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -54,7 +54,7 @@ function SideNav() {
       <p className="text-gray-400 text-xs pl-4 pt-2 pb-5">
         Performance Management Platform
       </p>
-      <hr className="border-gray-700" />
+      <hr className="border-gray-700 mb-5" />
       <div className="flex flex-col ">
         
         {sideNavItems.map((item, index) => (
@@ -88,8 +88,8 @@ function SideNav() {
 function SideNavItem({ icon, text, isOpen, onClick }) {
   return (
     <div
-      className={`flex flex-row items-center p-3 gap-2 hover:bg-gray-700 cursor-pointer justify-between ${
-        isOpen ? "bg-gray-700" : ""
+      className={`flex flex-row items-center p-2 m-1 gap-2 hover:bg-gray-800 cursor-pointer justify-between ${
+        isOpen ? "bg-gray-800" : ""
       }`}
       onClick={onClick}
     >
