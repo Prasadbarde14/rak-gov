@@ -60,10 +60,11 @@ const ProjectPlanningOverview = () => {
   } = projectData;
 
   return (
-    <div className="w-full mx-auto bg-white rounded-sm shadow-sm border mt-5">
+    <div className="w-full mx-auto bg-white rounded-md shadow-sm border mt-5">
       {/* Header */}
       <div className="flex justify-between items-center border-b px-4 py-5">
         <h2 className="text-sm font-semibold text-gray-800">
+          
           Project Planning Overview
         </h2>
         <button className="text-blue-600 text-sm hover:underline flex items-center gap-1">

@@ -90,7 +90,7 @@ const MaintenanceMetrics = () => {
   };
 
   return (
-    <div className="bg-white space-y-6 p-4 mt-5 rounded w-full shadow">
+    <div className="bg-white space-y-6 p-4 mt-5 rounded shadow">
       {/* Header */}
       <div className="flex items-center mb-4">
         <ClipboardList className="text-purple-600 mr-2" size={20} />
@@ -98,7 +98,7 @@ const MaintenanceMetrics = () => {
           Maintenance Metrics
         </h2>
       </div>
-      <div className="w-full ">
+      <div className="w-5/6 mx-auto ">
         <ReactECharts
           option={option}
           style={{ height: "350px", width: "100%", padding: "1rem" }}

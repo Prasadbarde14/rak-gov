@@ -63,7 +63,7 @@ const Performance = () => {
   const { data, isError, isLoading } = performanceData;
 
   return (
-    <div className="space-y-6 bg-white rounded">
+    <div className="space-y-6 bg-white p-5 rounded-md shadow-sm">
       <div className="flex justify-between items-center">
         <h2 className="text-lg font-bold flex gap-2 items-center">
           <span>
