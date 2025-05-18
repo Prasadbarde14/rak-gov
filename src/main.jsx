@@ -13,10 +13,10 @@ createRoot(document.getElementById('root')).render(
     <QueryClientProvider client={queryClient}>
       <App />
       
-      {/* {
+      {
         process.env.NODE_ENV === 'development' &&
         <ReactQueryDevtools initialIsOpen={false} />
-      } */}
+      }
 
     </QueryClientProvider>
   </StrictMode>,

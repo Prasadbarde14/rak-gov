@@ -6,10 +6,6 @@ import TopNav from "../components/Dashboard/TopNav";
 import AIrecommendations from "../components/Dashboard/AIrecommendations";
 import Performance from "../components/Dashboard/Performance/Performance";
  import TopAnalyisis from "../components/Dashboard/TopAnalyisis";
-import MaintenanceOverview from "../components/Dashboard/Performance/MaintenanceOverview";
-import AIAssistantWidget from "../components/AIAssistantWidget/AIAssistantWidget";
-import MaintenanceMetric from "../components/Dashboard/Performance/MaintenanceMetrics";
- 
 
 
 function Dashboard() {
@@ -17,10 +13,10 @@ function Dashboard() {
 
   return (
     <GlobalContainer>
-      <div className='w-64 flex-shrink-0'>
+      <div className='w-64 mr-9'>
         <SideNav />
       </div>
-      <div className='flex flex-col w-full h-full flex-1 overflow-hidden'>
+      <div className='flex flex-col w-full h-full '>
         <div>
           <TopNav selected={selected} setSelected={setSelected} />
         </div>
@@ -61,21 +57,15 @@ function Dashboard() {
           </div>
 
           <div className=" flex  justify-between w-full h-auto gap-5">
-            {/* Left: Performance Panels */}
-              <div className="w-full flex flex-col gap-4">
-                <Performance />
-                <MaintenanceOverview />
-                <MaintenanceMetric />
-              </div>
+            <div className="w-full bg-white h-full rounded-md">
+              <Performance />
+            </div>
             <div className="w-96  bg-white  rounded-md ">
               <AIrecommendations selected={selected}/>
             </div>
           </div>
         </div>
         }
-      </div>
-      <div className="relative">
-        <AIAssistantWidget />
       </div>
     </GlobalContainer>
   );

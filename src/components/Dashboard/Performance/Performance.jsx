@@ -2,7 +2,6 @@ import { CirclePlay, Settings2, Brain, TriangleAlert } from "lucide-react";
 import { useGetPerformanceMatrics } from "../../../API/Query/query";
 import MetricCardSkeleton from "./MetricCardSkeleton";
 
-
 const MetricCard = ({
   title,
   current,
@@ -61,7 +60,7 @@ const Performance = () => {
   const { data, isError, isLoading } = performanceData;
 
   return (
-    <div className="p-4 space-y-6 bg-white rounded">
+    <div className="p-4 space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-lg font-bold flex gap-2 items-center">
           <span>
