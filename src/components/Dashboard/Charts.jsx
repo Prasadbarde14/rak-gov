@@ -1,4 +1,4 @@
-import { OctagonAlert, TrendingDown, TrendingUp } from "lucide-react";
+import { CircleAlert, OctagonAlert, TrendingDown, TrendingUp } from "lucide-react";
 import React, { useRef, useEffect } from "react";
 import * as echarts from "echarts";
 
@@ -103,7 +103,7 @@ const Card = (data) => {
   return (
     <div className="w-1/4 h-full max-w-sm rounded-md border border-gray-300 p-4 overflow-x-auto bg-white shadow-sm">
       <div className="flex w-full h-full flex-col items-start">
-        <div className="flex w-full  items-center gap-2 items-center justify-center">
+        <div className="flex w-full gap-2 items-center justify-center">
           <div className="w-full text-[#64748b] text-sm">{data.data.name}</div>
           {data.data.status === "Needs attention" ? (
             <TrendingDown color="#ef4444" />
@@ -131,15 +131,15 @@ const Card = (data) => {
           data={data.data.trendData}
           color={data.data.status === "Needs attention" ? "#ef4444" : "#22c55e"}
         />
-        <div className="flex w-full  items-center gap-2 items-center justify-between">
+        <div className="flex w-full gap-2 items-center justify-between">
           <div className="text-sm text-[#64748b]">
             Target:
             {data.data.value + " "}
             {data.data.unit}
           </div>
           {data.data.status == "Needs attention" && (
-            <div className="flex text-sm justify-center items-center gap-1 text-[#eab308]">
-              <OctagonAlert size={14} color="#eab308" /> {data.data.status}
+            <div className="flex text-xs justify-center items-center gap-1 text-orange-700/75">
+              <CircleAlert size={14} color="#D97707" /> {data.data.status}
             </div>
           )}
         </div>
@@ -167,7 +167,7 @@ function Charts({ graphData }) {
       <div className="flex w-full h-full justify-start items-center gap-2">
         {!isLoading &&
           !isError &&
-          data.map((i, indx) => <Card data={i} key={indx} />)}
+          data?.map((i, indx) => <Card data={i} key={indx} />)}
       </div>
     </div>
   );

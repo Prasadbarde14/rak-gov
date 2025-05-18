@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import GlobalContainer from "../components/Global/GlobalContainer";
 import SideNav from "../components/Dashboard/SideNav";
@@ -10,8 +10,10 @@ import ProjectPlanningOverview from "../components/Dashboard/ProjectPlanningOver
 import MaintenanceOverview from "../components/Dashboard/Performance/MaintenanceOverview";
 import AIAssistantWidget from "../components/AIAssistantWidget/AIAssistantWidget";
 import MaintenanceMetric from "../components/Dashboard/Performance/MaintenanceMetrics";
+import { Plus, MenuSquare } from "lucide-react";
 
 function Dashboard() {
+  const [sideNavVisibility, setSideNavVisibility] = useState(false);
   const [selected, setSelected] = React.useState("Director of Infrastructure");
 
   // Animation variants
@@ -32,8 +34,20 @@ function Dashboard() {
 
   return (
     <GlobalContainer>
+       <div
+        className="lg:hidden top-5 right-5 rounded-xl fixed bg-black z-99 p-2"
+        onClick={() => setSideNavVisibility(!sideNavVisibility)}
+      >
+        {!sideNavVisibility ? (
+          <MenuSquare color="#ffffff" />
+        ) : (
+          <Plus color="#ffffff" className="rotate-45" />
+        )}
+      </div>
       <motion.div 
-        className="w-64 flex-shrink-0"
+         className={`w-64 top-0 h-full ${
+          !sideNavVisibility ? "hidden" : "fixed"
+        } lg:sticky lg:block z-90`}
         initial="hidden"
         animate="visible"
         variants={slideInLeft}
@@ -45,6 +59,7 @@ function Dashboard() {
           initial="hidden"
           animate="visible"
           variants={fadeInZoom}
+          className="w-full"
         >
           <TopNav selected={selected} setSelected={setSelected} />
         </motion.div>
@@ -65,7 +80,7 @@ function Dashboard() {
               variants={staggerContainer}
             >
               <motion.div 
-                className="w-full bg-white h-full rounded-md p-5"
+                className="w-full h-full rounded-md "
                 variants={fadeInZoom}
               >
                 {selected=="Director of Infrastructure" && <Performance />}

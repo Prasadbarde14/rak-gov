@@ -138,7 +138,7 @@ export default function AIAssistantWidget() {
                   {msg.text.length > 300 && (
                     <button
                       onClick={() => toggleExpanded(index)}
-                      className="text-blue-600 text-xs mt-1 underline focus:outline-none"
+                      className="text-blue-600 text-xs mt-1 underline focus:outline-none cursor-pointer"
                     >
                       {expandedMessages[index] ? "Show less" : "Read more"}
                     </button>
