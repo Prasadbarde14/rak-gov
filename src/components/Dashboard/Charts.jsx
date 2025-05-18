@@ -148,7 +148,7 @@ function Charts({ graphData }) {
 
             </div>}
 
-            <div className='flex w-full h-full justify-start items-center gap-2'>
+            <div className='flex w-full h-full justify-start items-center gap-5 overflow-x-auto'>
                 {
                     !isLoading && !isError && data.map((i, indx) =>
                         <Card data={i} key={indx} />)
