@@ -83,7 +83,7 @@ function Dashboard() {
                 className="w-full h-full rounded-md "
                 variants={fadeInZoom}
               >
-                {selected=="Director of Infrastructure" && <Performance />}
+                <Performance />
                 {selected == "Planning Analyst" && <ProjectPlanningOverview/>}
                 {selected == "Maintenance Head" && <MaintenanceOverview/>}
                 {selected == "Maintenance Head" && <MaintenanceMetric/>}
