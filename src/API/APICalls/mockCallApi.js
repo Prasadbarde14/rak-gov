@@ -52,32 +52,6 @@ export const graphData = {
         "values": [28, 27, 26, 25, 25, 24, 24, 23, 22, 24]
       }
     },
-    // {
-    //   "name": "Budget Utilization",
-    //   "value": 92,
-    //   "unit": "%",
-    //   "progress": 103,
-    //   "target": 90,
-    // "total":200,
-    //   "status": "OK",
-    //   "trendData": {
-    //     "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
-    //     "values": [88, 90, 91, 93, 92, 91, 92, 92, 91, 92]
-    //   }
-    // },
-    // {
-    //   "name": "Task Completion Rate",
-    //   "value": 75,
-    //   "unit": "%",
-    // "total":200,
-    //   "progress": 95,
-    //   "target": 80,
-    //   "status": "OK",
-    //   "trendData": {
-    //     "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
-    //     "values": [72, 73, 74, 74, 75, 76, 75, 75, 76, 75]
-    //   }
-    // }
   ],
   "Planning Analyst": [
     {

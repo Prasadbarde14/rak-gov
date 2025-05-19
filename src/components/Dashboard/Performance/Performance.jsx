@@ -1,15 +1,14 @@
 import { CirclePlay, Settings2, Brain, TriangleAlert } from "lucide-react";
 import { useGetPerformanceMatrics } from "../../../API/Query/query";
 import MetricCardSkeleton from "./MetricCardSkeleton";
+import { usePostGetSimmulationResult } from "../../../API/Mutation/mutation";
+import { useEffect, useState } from "react";
 
-const MetricCard = ({
-  title,
-  current,
-  predicted,
-  delta,
-  recommendations,
-  impactAnalysis,
-}) => (
+const MetricCard = ({data}) => {
+
+  const {title,current,predicted,delta,recommendations,impactAnalysis}=data?.performanceMetrics
+
+  return(
   <div className=" p-4 rounded-xl shadow-sm bg-[#f8fafc] space-y-1">
     <div className="flex justify-between items-center text-sm ">
       <div className="flex flex-col gap-1">
@@ -56,18 +55,26 @@ const MetricCard = ({
       </div>
     )}
   </div>
-);
+  )
+};
 
-const Performance = () => {
-  const performanceData = useGetPerformanceMatrics();
-  const { data, isError, isLoading } = performanceData;
+const Performance = ({ selected }) => {
+
+  const [enabled,setEnabled]=useState(false)
+
+  const mutatePerformaceData = usePostGetSimmulationResult("giving performance matrix for ", selected,enabled)
+
+  useEffect(()=>{
+    if(mutatePerformaceData.isSuccess)
+        setEnabled(false)
+  },[mutatePerformaceData])
 
   return (
     <div className="space-y-6 bg-white p-5 rounded-md shadow-sm">
       <div className="flex justify-between items-center">
         <h2 className="text-lg font-bold flex gap-2 items-center">
           <span>
-            <CirclePlay className="text-green-600"/>
+            <CirclePlay className="text-green-600" />
           </span>
           Performance Simulation
         </h2>
@@ -82,21 +89,34 @@ const Performance = () => {
               Manual
             </button>
           </div>
-          <button className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-1.5 rounded flex gap-1 items-center cursor-pointer">
-            <CirclePlay className="w-4 h-4" />
-            Run Simulation
+          <button disabled={mutatePerformaceData.isLoading} className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-1.5 rounded flex gap-1 items-center cursor-pointer" onClick={() => setEnabled(true)}>
+            {
+              !mutatePerformaceData.isLoading ?
+                <>
+                  <CirclePlay className="w-4 h-4" />
+                  Run Simulation
+                </>
+                :
+                <>
+                  Loading...
+                </>
+            }
           </button>
         </div>
       </div>
       <hr className="border border-gray-100" />
       <h3 className=" font-semibold">Simulation Results</h3>
       <div className="grid md:grid-cols-2 lg:grid-cols-1 gap-4">
+
+        {mutatePerformaceData?.data && mutatePerformaceData.data.map((i,indx)=><MetricCard key={indx} data={JSON.parse(i.data.text)}/>)}
+      </div>
+      {/* <div className="grid md:grid-cols-2 lg:grid-cols-1 gap-4">
         {isLoading
           ? Array(4)
-              .fill(0)
-              .map((_, idx) => <MetricCardSkeleton key={idx} />)
+            .fill(0)
+            .map((_, idx) => <MetricCardSkeleton key={idx} />)
           : data?.map((metric, idx) => <MetricCard key={idx} {...metric} />)}
-      </div>
+      </div> */}
     </div>
   );
 };
