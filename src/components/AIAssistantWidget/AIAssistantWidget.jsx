@@ -1,10 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
-import { BotIcon, Maximize2, MessageSquare, Brain, X } from "lucide-react";
-import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
+import {
+  BotIcon,
+  Maximize2,
+  X,
+  Mic,
+  SendHorizontal,
+} from "lucide-react";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import {useChatBotMutation } from '../../API/Query/query'
+import { useChatBotMutation } from "../../API/Query/query";
 
 export default function AIAssistantWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,11 +24,7 @@ export default function AIAssistantWidget() {
   const [expandedMessages, setExpandedMessages] = useState({});
   const [uuid, setUuid] = useState(Math.random().toString(36).substring(2, 15));
 
-    const { mutateAsync, isPending, isError } = useChatBotMutation();
-
-
-
-
+  const { mutateAsync, isPending, isError } = useChatBotMutation();
 
   const toggleExpanded = (index) => {
     setExpandedMessages((prev) => ({
@@ -35,12 +38,12 @@ export default function AIAssistantWidget() {
 
     try {
       const botResponse = await mutateAsync({
-        query: input,
-        agent: "prompt",
+        query,
+        agent,
         chartData,
         uuid,
       });
-      console.log("data: ",botResponse);
+      console.log("data: ", botResponse);
       // const message = await getChatBotResponse();
 
       const botMessage = {
@@ -90,6 +93,38 @@ export default function AIAssistantWidget() {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages]);
+  // -----------------
+  // Speech Recognition
+  // -----------------
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+  const handleMicClick = () => {
+  if (!browserSupportsSpeechRecognition) {
+    alert("Browser does not support speech recognition.");
+    return;
+  }
+
+  if (listening) {
+    SpeechRecognition.stopListening();
+  } else {
+    resetTranscript();
+    SpeechRecognition.startListening({
+      continuous: false,
+      language: "en-IN",
+    });
+  }
+};
+
+useEffect(() => {
+  if (listening) {
+    setInput(transcript);
+  }
+}, [transcript, listening]);
+
 
   return (
     <div className="fixed bottom-4 right-4 z-50 font-sans">
@@ -127,8 +162,9 @@ export default function AIAssistantWidget() {
                     : "bg-gray-100 text-left mr-auto"
                 }`}
               >
-                <div>
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+
+                <div >
+                  <ReactMarkdown remarkPlugins={[remarkGfm]} >
                     {expandedMessages[index] || msg.text.length <= 300
                       ? msg.text
                       : msg.text.slice(0, 300) + "..."}
@@ -172,18 +208,19 @@ export default function AIAssistantWidget() {
               className="flex-grow px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
             <button
-              className="p-2 rounded bg-blue-100 hover:bg-blue-200"
+              className="p-2 rounded bg-blue-100 hover:bg-blue-200 cursor-pointer"
               aria-label="Brain icon"
+              onClick={handleMicClick}
             >
-              <Brain className="w-5 h-5 text-blue-700" />
+              <Mic className="w-5 h-5 text-blue-700" />
             </button>
             <button
               onClick={handleSend}
               disabled={loading}
-              className="p-2 rounded bg-blue-700 hover:bg-blue-800 text-white disabled:opacity-50"
+              className="p-2 rounded bg-blue-700 hover:bg-blue-800 text-white disabled:opacity-50 cursor-pointer"
               aria-label="Send message"
             >
-              <MessageSquare className="w-5 h-5" />
+              <SendHorizontal className="w-5 h-5" />
             </button>
           </div>
         </div>

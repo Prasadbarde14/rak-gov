@@ -11,6 +11,7 @@ import MaintenanceOverview from "../components/Dashboard/Performance/Maintenance
 import AIAssistantWidget from "../components/AIAssistantWidget/AIAssistantWidget";
 import MaintenanceMetric from "../components/Dashboard/Performance/MaintenanceMetrics";
 import { Plus, MenuSquare } from "lucide-react";
+import SimulationSliders from "../components/Dashboard/Performance/SimulationSliders";
 
 function Dashboard() {
   const [sideNavVisibility, setSideNavVisibility] = useState(false);
@@ -83,10 +84,11 @@ function Dashboard() {
                 className="w-full h-full rounded-md "
                 variants={fadeInZoom}
               >
-                <Performance />
-                {selected == "Planning Analyst" && <ProjectPlanningOverview/>}
+                <Performance selected={selected}/>
+                {/* {selected == "Planning Analyst" && <ProjectPlanningOverview/>}
                 {selected == "Maintenance Head" && <MaintenanceOverview/>}
                 {selected == "Maintenance Head" && <MaintenanceMetric/>}
+                {selected == "Maintenance Head" && <SimulationSliders/>} */}
               </motion.div>
               <motion.div 
                 className="w-96 bg-white rounded-md"
