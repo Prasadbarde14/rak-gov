@@ -1,6 +1,8 @@
+import React, { useEffect, useState } from "react";
 import { CirclePlay, Settings2, Brain, TriangleAlert } from "lucide-react";
 import { useGetPerformanceMatrics } from "../../../API/Query/query";
 import MetricCardSkeleton from "./MetricCardSkeleton";
+import SimulationSliders from "./SimulationSliders";
 
 const MetricCard = ({
   title,
@@ -58,45 +60,89 @@ const MetricCard = ({
   </div>
 );
 
-const Performance = () => {
+const Performance = ({ selected }) => {
+  const [activeTab, setActiveTab] = useState("");
+  const [selectedTabs, setSelectedTabs] = useState("");
+
   const performanceData = useGetPerformanceMatrics();
   const { data, isError, isLoading } = performanceData;
+  useEffect(() => {
+    if (selected !== selectedTabs) {
+      setActiveTab("");
+      setSelectedTabs(selected);
+    }
+  }, [selected]);
 
   return (
-    <div className="space-y-6 bg-white p-5 rounded-md shadow-sm">
+    <div className="space-y-6 bg-white p-4 rounded-md shadow-sm">
+      {/* Header */}
       <div className="flex justify-between items-center">
         <h2 className="text-lg font-bold flex gap-2 items-center">
           <span>
-            <CirclePlay className="text-green-600"/>
+            <CirclePlay className="text-green-600" />
           </span>
           Performance Simulation
         </h2>
+
+        {/* Tab & Run Button */}
         <div className="flex gap-2">
+          {/* Tabs */}
           <div className="flex border border-gray-200 rounded-md overflow-hidden p-1">
-            <button className="flex items-center gap-1 px-2 py-1 text-sm bg-white hover:bg-gray-100 text-gray-700 rounded cursor-pointer">
+            <button
+              className={`flex items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer ${
+                activeTab === "auto"
+                  ? "bg-gray-100 text-gray-700"
+                  : "bg-white hover:bg-gray-100 text-gray-700"
+              }`}
+              onClick={() => setActiveTab("auto")}
+            >
               <Brain className="w-4 h-4" />
               Auto
             </button>
-            <button className="flex items-center gap-1 px-2 py-1 text-sm bg-white hover:bg-gray-100 text-gray-700 rounded cursor-pointer">
+            <button
+              className={`flex items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer ${
+                activeTab === "manual"
+                  ? "bg-gray-100 text-gray-700"
+                  : "bg-white hover:bg-gray-100 text-gray-700"
+              }`}
+              onClick={() => setActiveTab("manual")}
+            >
               <Settings2 className="w-4 h-4" />
               Manual
             </button>
           </div>
+
+          {/* Run Simulation */}
           <button className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-1.5 rounded flex gap-1 items-center cursor-pointer">
             <CirclePlay className="w-4 h-4" />
             Run Simulation
           </button>
         </div>
       </div>
+
       <hr className="border border-gray-100" />
-      <h3 className=" font-semibold">Simulation Results</h3>
-      <div className="grid md:grid-cols-2 lg:grid-cols-1 gap-4">
-        {isLoading
-          ? Array(4)
-              .fill(0)
-              .map((_, idx) => <MetricCardSkeleton key={idx} />)
-          : data?.map((metric, idx) => <MetricCard key={idx} {...metric} />)}
-      </div>
+
+      {/* Conditional Content */}
+      {activeTab === "auto" && (
+        <div>
+          <h3 className="font-semibold">Simulation Results</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-1 gap-4">
+            {isLoading
+              ? Array(4)
+                  .fill(0)
+                  .map((_, idx) => <MetricCardSkeleton key={idx} />)
+              : data?.map((metric, idx) => (
+                  <MetricCard key={idx} {...metric} />
+                ))}
+          </div>
+        </div>
+      )}
+      {activeTab === "manual" && (
+        <div className=" space-y-6 p-4 mt-2 rounded w-full">
+          <h2 className="font-semibold mb-4">Simulation Parameters</h2>
+          <SimulationSliders />
+        </div>
+      )}
     </div>
   );
 };
