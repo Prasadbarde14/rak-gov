@@ -5,7 +5,6 @@ export const useGetFetchQuery = (key) => {
     const queryClient = useQueryClient();
 
     const data= queryClient.getQueryData(key);
-    console.log(data)
     return data;
 };
 
@@ -53,6 +52,13 @@ export const useGetProjectData=()=>{
     return useQuery({
         queryKey:['projectData'],
         queryFn:()=>getProjectData()
+    })
+}
+
+export const usePostAgentResponse=(selected)=>{
+    return useQuery({
+        queryKey:['agentQuery',selected],
+        queryFn:({queryKey})=>postAgentData(queryKey[1])
     })
 }
 
