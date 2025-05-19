@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Target, CheckCircle, Zap, TrendingUp, Plus, CircleAlert } from "lucide-react";
-import { useGetAIrecommendationsData } from "../../../API/Query/query";
+import { useGetAIrecommendationsData, useGetFetchQuery, useGetFetchQueryState } from "../../../API/Query/query";
 import SkeletonRecommendationCard from "./SkeletonRecommendationCard";
+import { usePostGetSimmulationResult } from "../../../API/Mutation/mutation";
 
 // Card style definitions
 const cardStyles = {
@@ -45,15 +46,33 @@ const RecommendationCard = ({ type, title, description, confidence }) => {
       <button
         className={`w-full mt-1 text-sm font-semilight rounded-md py-1 hover:bg-opacity-10 flex text-slate-600 items-center justify-center gap-2 bg-slate-100`}
       >
-        <Plus size={18}/> Add to plan
+        <Plus size={18} /> Add to plan
       </button>
     </div>
   );
 };
 
 // Main Wrapper Component
-function AIrecommendations({selected}) {
+function AIrecommendations({ selected }) {
+
+  const simState = useGetFetchQueryState(['Simmulation', selected])
+  const [prevCount,setPrevCount]=useState(0)
+  const [enabled, setEnabled] = useState(false)
+
   const { data, isLoading, isError } = useGetAIrecommendationsData(selected);
+
+  // const mutatePerformaceData = usePostGetSimmulationResult("give me performance matrix for ", selected, enabled)
+  useEffect(()=>{
+    console.log(simState)
+    console.log(enabled)
+
+    if(simState?.dataUpdateCount>prevCount){
+        setEnabled(true)
+    }
+    else {
+      setEnabled(false)
+    }
+  },[simState?.dataUpdateCount])
 
   return (
     <>
