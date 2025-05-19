@@ -6,8 +6,6 @@ import TopNav from "../components/Dashboard/TopNav";
 import AIrecommendations from "../components/Dashboard/AIrecommendations/AIrecommendations";
 import Performance from "../components/Dashboard/Performance/Performance";
 import TopAnalyisis from "../components/Dashboard/TopAnalyisis";
-import ProjectPlanningOverview from "../components/Dashboard/ProjectPlanningOverview.jsx/ProjectPlanningOverview";
-import MaintenanceOverview from "../components/Dashboard/Performance/MaintenanceOverview";
 import AIAssistantWidget from "../components/AIAssistantWidget/AIAssistantWidget";
 import MaintenanceMetric from "../components/Dashboard/Performance/MaintenanceMetrics";
 import { Plus, MenuSquare } from "lucide-react";
