@@ -1,4 +1,3 @@
-
 const MetricCardSkeleton = () => {
   return (
     <div className="p-4 rounded-xl shadow-sm bg-gray-50 space-y-2 animate-pulse">

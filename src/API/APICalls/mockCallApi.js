@@ -268,7 +268,7 @@ export const AIrecommendations = {
       confidence: 92,
     },
     {
-      type: "keyResult",
+      type: "key Result",
       title: "Reduce contractor onboarding time by 50%",
       description:
         "Would help address project delays caused by contractor availability issues",
@@ -296,7 +296,7 @@ export const AIrecommendations = {
       "confidence": 90
     },
     {
-      "type": "keyResult",
+      "type": "key Result",
       "title": "Achieve a 20% reduction in average project delays",
       "description": "Leverage AI-driven predictive models to forecast potential delays",
       "confidence": 87
@@ -314,7 +314,7 @@ export const AIrecommendations = {
       "confidence": 91
     },
     {
-      "type": "keyResult",
+      "type": "key Result",
       "title": "Increase milestone adherence by 10%",
       "description": "Implement a tracking system with real-time progress updates",
       "confidence": 89
@@ -332,7 +332,7 @@ export const AIrecommendations = {
       "confidence": 93
     },
     {
-      "type": "keyResult",
+      "type": "key Result",
       "title": "Improve client satisfaction score to 90%",
       "description": "Address feedback related to delayed project milestones",
       "confidence": 88
@@ -377,4 +377,71 @@ export const AIrecommendations = {
     }
   ]
 
+};
+
+export const maintenanceData = {
+  highPriorityDefects: 12,
+  completedRepairs: 45,
+  defects: [
+    {
+      id: 1,
+      title: "Infrastructure Defect #1",
+      description: "Structural integrity issue detected in Bridge Section A-1",
+      reportedAgo: "2 hours ago",
+    },
+    {
+      id: 2,
+      title: "Infrastructure Defect #2",
+      description: "Structural integrity issue detected in Bridge Section A-2",
+      reportedAgo: "2 hours ago",
+    },
+    {
+      id: 3,
+      title: "Infrastructure Defect #3",
+      description: "Structural integrity issue detected in Bridge Section A-3",
+      reportedAgo: "2 hours ago",
+    },
+  ],
+};
+
+export const graphsData={
+    data :[
+    { date: "Jul 13, 2024", value: 24 },
+    { date: "Aug 13, 2024", value: 22 },
+    { date: "Sep 13, 2024", value: 20 },
+    { date: "Oct 13, 2024", value: 16 },
+    { date: "Nov 13, 2024", value: 18 },
+    { date: "Dec 13, 2024", value: 19 },
+    { date: "Jan 13, 2025", value: 15 },
+    { date: "Feb 13, 2025", value: 20 },
+    { date: "Mar 13, 2025", value: 26 },
+    { date: "Apr 13, 2025", value: 20 },
+    { date: "May 13, 2025", value: 14 },
+  ],
+  
+   contractorResponseData : [28, 27, 25, 22, 20, 21, 19, 23, 29, 25, 21] 
+}
+
+
+export const projectData = {
+  objectiveTitle: "Reduce average project delay by 25% in Q3",
+  description: "Focus on improving project timelines through better monitoring and management",
+  quarter: "Q3 2025",
+  completionPercent: 65,
+  keyResults: [
+    {
+      title: "Achieve ≥ 90% on-time milestone completions",
+      current: "78%",
+      target: "90%",
+      percentage: 87,
+      color: "bg-green-500",
+    },
+    {
+      title: "Cut contractor response time from 12h to 6h",
+      current: "8.5 hours",
+      target: "6 hours",
+      percentage: 58,
+      color: "bg-yellow-400",
+    },
+  ],
 };

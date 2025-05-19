@@ -1,5 +1,5 @@
 import { useQuery,useQueryClient } from "@tanstack/react-query"
-import {  getGraphData,getAIrecommendationsData, getPerformanceMatrics} from "../APICalls/api"
+import {  getGraphData,getAIrecommendationsData, getPerformanceMatrics, getMaintainceData, getGraphsData, getProjectData} from "../APICalls/api"
 
 export const useGetFetchQuery = (key) => {
     const queryClient = useQueryClient();
@@ -34,3 +34,24 @@ export const useGetAIrecommendationsData=(selected)=>{
 
 }
 
+export const useGetMaintenanceData=()=>{
+    return useQuery({
+        queryKey:['maintenanceData'],
+        queryFn:()=>getMaintainceData(),
+    })
+}
+
+
+export const useGetGraphsData=()=>{
+    return useQuery({
+        queryKey:['graphData'],
+        queryFn:()=>getGraphsData()
+    })
+}
+
+export const useGetProjectData=()=>{
+    return useQuery({
+        queryKey:['projectData'],
+        queryFn:()=>getProjectData()
+    })
+}

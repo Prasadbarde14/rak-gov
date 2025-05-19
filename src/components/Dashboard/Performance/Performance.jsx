@@ -2,7 +2,6 @@ import { CirclePlay, Settings2, Brain, TriangleAlert } from "lucide-react";
 import { useGetPerformanceMatrics } from "../../../API/Query/query";
 import MetricCardSkeleton from "./MetricCardSkeleton";
 
-
 const MetricCard = ({
   title,
   current,
@@ -47,7 +46,10 @@ const MetricCard = ({
         </div>
         {recommendations.map((rec, idx) => (
           <div key={idx}>
-            <div className="font-medium text-sm flex gap-1 item-center" ><TriangleAlert className="w-4 h-4 text-orange-400"/>{rec.title}</div>
+            <div className="font-medium text-sm flex gap-1 item-center">
+              <TriangleAlert className="w-4 h-4 text-orange-400" />
+              {rec.title}
+            </div>
             <div className="text-gray-500 text-xs pl-5">{rec.desc}</div>
           </div>
         ))}
@@ -61,11 +63,11 @@ const Performance = () => {
   const { data, isError, isLoading } = performanceData;
 
   return (
-    <div className="p-4 space-y-6 bg-white rounded">
+    <div className="space-y-6 bg-white p-5 rounded-md shadow-sm">
       <div className="flex justify-between items-center">
         <h2 className="text-lg font-bold flex gap-2 items-center">
           <span>
-            <CirclePlay className="text-green-600" />
+            <CirclePlay className="text-green-600"/>
           </span>
           Performance Simulation
         </h2>
