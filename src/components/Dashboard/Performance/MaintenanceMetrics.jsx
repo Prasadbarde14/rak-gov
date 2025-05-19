@@ -35,43 +35,48 @@ const MaintenanceMetrics = () => {
       max: 32,
     },
     series: [
-      {
-        name: "Contractor response time",
-        type: "line",
-        data: graphData.data?.contractorResponseData || [],
-        smooth: true,
-        symbol: "circle",
-        symbolSize: 6,
-        lineStyle: {
-          color: "#9FF486",
-          width: 3,
-        },
-        itemStyle: {
-          color: "#9FF486",
-        },
-        areaStyle: {
-          color: "rgba(0, 0, 0, 0.05)",
-        },
-      },
-      {
-        name: "High-risk defects identified",
-        type: "line",
-        data: graphData.data?.data?.map((item) => item.value) || [],
-        smooth: true,
-        symbol: "circle",
-        symbolSize: 6,
-        lineStyle: {
-          color: "#c7d2fe",
-          width: 3,
-        },
-        itemStyle: {
-          color: "#c7d2fe",
-        },
-        areaStyle: {
-          color: "rgba(199, 210, 254, 0.1)",
-        },
-      },
-    ],
+  {
+    name: "Contractor response time",
+    type: "line",
+    data: graphData.data?.contractorResponseData || [],
+    smooth: true,
+    symbol: "circle",
+    symbolSize: 6,
+    lineStyle: {
+      color: "#9FF486",
+      width: 3,
+    },
+    itemStyle: {
+      color: "#9FF486",
+    },
+    areaStyle: {
+      color: "rgba(0, 0, 0, 0.05)",
+    },
+    animationDuration: Math.random()*10000, 
+    animationEasing: "cubicOut", 
+  },
+  {
+    name: "High-risk defects identified",
+    type: "line",
+    data: graphData.data?.data?.map((item) => item.value) || [],
+    smooth: true,
+    symbol: "circle",
+    symbolSize: 6,
+    lineStyle: {
+      color: "#c7d2fe",
+      width: 3,
+    },
+    itemStyle: {
+      color: "#c7d2fe",
+    },
+    areaStyle: {
+      color: "rgba(199, 210, 254, 0.1)",
+    },
+    animationDuration: Math.random()*10000, 
+    animationEasing: "cubicOut", 
+  },
+],
+
   };
 
   return (
