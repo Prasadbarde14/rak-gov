@@ -11,7 +11,42 @@ export const graphData = {
       "trendData": {
         "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
         "values": [15.0, 14.2, 13.8, 13.4, 13.0, 12.8, 12.7, 12.6, 12.4, 12.3]
-      }
+      },
+      "data":[
+  {
+    "ProjectID": "INFRA001",
+    "PlannedCompletionDate": "2024-06-15",
+    "ActualCompletionDate": "2024-07-02",
+    "TotalDaysDelayed": 17,
+    "AverageTaskDelay": 2.3,
+    "ScheduleAdherenceRate": 78.5
+  },
+      {
+        "milestoneCompletionRate": 86.25,
+        "numberOfOverdueTasks": 13,
+        "criticalPathImpact": 2.49,
+        "changeRequestsCount": 0,
+        "reworkInstances": 3,
+        "lastUpdated": "2025-05-02"
+    },
+      {
+    "averageContractorResponseTime": 6.2,
+    "laborAvailability": 91.4,
+    "contractorEfficiencyScore": 8.7,
+    "equipmentDowntimeHours": 12,
+    "lastUpdated": "2025-06-18"
+  },
+  {
+  "weatherImpactScore": 7.5,
+  "regulatoryApprovalPendingPercent": 12.8,
+  "bottleneckProbability": 0.64,
+  "resourceAvailabilityIndex": 83.2,
+  "aiDelayPredictionScore": 0.72,
+  "lastUpdated": "2025-06-18"
+},
+
+]
+
     },
     {
       "name": "Milestones Met On Time",
@@ -24,7 +59,34 @@ export const graphData = {
       "trendData": {
         "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
         "values": [85, 84, 82, 81, 80, 79, 78, 78, 77, 78]
-      }
+      },
+      "data":[
+{
+  "milestoneCompletionMetrics": {
+    "totalMilestones": 120,
+    "milestonesCompleted": 85,
+    "milestonesOnTime": 67,
+    "onTimeCompletionRate": 55.83
+  },
+  "scheduleAdherenceMetrics": {
+    "scheduledMilestonesDue": 90,
+    "scheduledVsActualDeviation": 3.4
+  },
+  "progressTracking": {
+    "progressToTarget": 43.5,
+    "predictedOnTimeRate": 78.32
+  },
+  "aiRecommendationInputs": {
+    "processInefficiencyScore": 62.4,
+    "techAdoptionLevel": "medium"
+  },
+  "alertStatusIndicators": {
+    "statusLabel": "Needs Attention",
+    "performanceTrend": "Decreasing"
+  },
+  "lastUpdated": "2025-06-18"
+}
+]
     },
     {
       "name": "Contractor Response Time",
@@ -37,7 +99,37 @@ export const graphData = {
       "trendData": {
         "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
         "values": [10.5, 9.8, 9.0, 8.7, 8.5, 8.3, 8.4, 8.6, 8.5, 8.5]
-      }
+      },
+      data:[
+        {
+  "contractorResponseTimeMetrics": {
+    "averageResponseTimeHours": 8.5,
+    "targetResponseTimeHours": 8.5,
+    "predictedResponseTime": 8.54,
+    "responseRateProgressPercent": 71.0,
+    "responseTrend": "Decreasing"
+  },
+  "impactAnalysis": {
+    "performanceImprovementPercent": 0.4,
+    "resourceUtilizationStatus": "Optimized"
+  },
+  "contractorBehavior": {
+    "numberOfIssuesAssigned": 128,
+    "issuesRespondedWithinSLA": 91,
+    "slaAdherenceRate": 71.0
+  },
+  "delayBreakdown": {
+    "avgInitialAcknowledgmentTime": 2.1,
+    "avgAssignmentTime": 3.0,
+    "avgResolutionTime": 3.4
+  },
+  "alertStatus": {
+    "statusLabel": "Needs Attention",
+    "alertTriggered": true,
+    "deviationFromTargetPercent": -0.5
+  }
+}
+      ]
     },
     {
       "name": "High-Risk Defects Identified",
@@ -50,7 +142,32 @@ export const graphData = {
       "trendData": {
         "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
         "values": [28, 27, 26, 25, 25, 24, 24, 23, 22, 24]
-      }
+      },
+      "data":[{
+    "parameter": "totalInspectionsConducted",
+    "value": 60,
+    "description": "Total number of inspections or QA checks conducted for infrastructure projects."
+  },
+  {
+    "parameter": "highRiskDefectCount",
+    "value": 24,
+    "description": "Number of defects flagged as critical or high-risk requiring immediate remediation."
+  },
+  {
+    "parameter": "defectSeverityScore",
+    "value": 8.4,
+    "description": "Average severity rating (on scale of 1 to 10) for all high-risk defects logged."
+  },
+  {
+    "parameter": "recurrenceRate",
+    "value": "12%",
+    "description": "Percentage of defects that have reoccurred in the same zones, indicating systemic issues."
+  },
+  {
+    "parameter": "predictiveDefectRate",
+    "value": "24.1",
+    "description": "AI-predicted defect count based on historical trends and material usage patterns."
+  }]
     },
     // {
     //   "name": "Budget Utilization",
