@@ -4,61 +4,8 @@ import { useGetPerformanceMatrics } from "../../../API/Query/query";
 import MetricCardSkeleton from "./MetricCardSkeleton";
 import SimulationSliders from "./SimulationSliders";
 import { usePostGetSimmulationResult } from "../../../API/Mutation/mutation";
+import MetricCard from "./MetricCard";
 import { QueryClient } from "@tanstack/react-query";
-
-const MetricCard = ({ data }) => {
-
-  const { title, current, predicted, delta, recommendations, impactAnalysis } = data?.performanceMetrics
-
-  return (
-    <div className=" p-4 rounded-xl shadow-sm bg-[#f8fafc] space-y-1">
-      <div className="flex justify-between items-center text-sm ">
-        <div className="flex flex-col gap-1">
-          <h3 className="font-semibold">{title}</h3>
-          <div className="text-sm text-gray-600">Current: {current}</div>
-        </div>
-        <div className="flex flex-col items-end gap-1">
-          <span className="text-red-500 font-semibold">{delta}</span>
-          <div className="text-sm text-gray-600">Predicted: {predicted}</div>
-        </div>
-      </div>
-      <hr className="border border-gray-100" />
-
-      <div className="mt-2 space-y-1 text-sm">
-        <div className=" font-semibold text-sm flex gap-1 items-center">
-          <Brain className="w-4 h-4 text-purple-600" />
-          Impact Analysis
-        </div>
-        <div className="flex items-center text-green-600">
-          <TriangleAlert size={14} className="mr-1" />
-          {impactAnalysis?.performance}
-        </div>
-        <div className="flex items-center text-green-600">
-          <TriangleAlert size={14} className="mr-1" />
-          {impactAnalysis?.utilization}
-        </div>
-      </div>
-
-      {recommendations.length > 0 && (
-        <div className="mt-3 space-y-2">
-          <div className=" font-semibold text-sm flex gap-1 items-center">
-            <Brain className="w-4 h-4 text-purple-600" />
-            AI Recommendations
-          </div>
-          {recommendations.map((rec, idx) => (
-            <div key={idx}>
-              <div className="font-medium text-sm flex gap-1 item-center">
-                <TriangleAlert className="w-4 h-4 text-orange-400" />
-                {rec.title}
-              </div>
-              <div className="text-gray-500 text-xs pl-5">{rec.desc}</div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  )
-};
 
 const Performance = ({ selected }) => {
 
