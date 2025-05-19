@@ -120,7 +120,7 @@ const Performance = ({ selected }) => {
         </div>
       </div>
 
-      <hr className="border border-gray-100" />
+      {activeTab !=="" && <hr className="border border-gray-100" />}
 
       {/* Conditional Content */}
       {activeTab === "auto" && (
