@@ -2,15 +2,11 @@ import React from "react";
 import Input from "../UI/Input";
 import Select from "../UI/Select";
 import { Bell, Search, Settings2, Users } from "lucide-react";
-function TopNav({ selected, setSelected }) {
+function TopNav({ selected, setSelected,tabs }) {
   const handleSelect = (value) => {
     setSelected(value);
   };
-  const selectOptions = [
-    "Director of Infrastructure",
-    "Planning Analyst",
-    "Maintenance Head",
-  ];
+
   return (
     <div className="bg-background-white w-full  shadow-xs shadow-gray-300 ">
       <div className="flex flex-row xl:flex-nowrap flex-wrap items-center justify-between">
@@ -34,7 +30,7 @@ function TopNav({ selected, setSelected }) {
           <div className="flex">
             <Users size={18} color="#6b7280" />
             <Select
-              options={selectOptions}
+              options={tabs}
               className={"text-sm px-4"}
               selected={selected}
               handleSelect={handleSelect}
@@ -57,7 +53,7 @@ function TopNav({ selected, setSelected }) {
       </div>
       <hr className="border-gray-300" />
       <div className="flex flex-row items-center gap-4 cursor-pointer">
-        {selectOptions.map((option, index) => (
+        {tabs.map((option, index) => (
           <div key={index}>
             <p
               className={`text-sm  ${
