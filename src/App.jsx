@@ -1,27 +1,29 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom"
 import Dashboard from "./page/Dashboard"
+import GlobalPage from "./page/GlobalPage"
+import AgentDashboard from "./page/AgentDashboard"
 
 function App() {
 
-  const router=createBrowserRouter([
+  const router = createBrowserRouter([
     {
-      path:"/",
-      element:<Dashboard/>,
-      children:[
+      path: "/",
+      element: <GlobalPage />,
+      children: [
         {
-          path:"child",
-          element:<div>child</div>
+          path: "/",
+          element: <Dashboard />
         },
+        {
+          path: "/agent",
+          element: <AgentDashboard/>
+        }
       ]
     },
-    {
-      path:"anshu",
-      element:<div>anshu</div>
-    }
   ])
 
   return (
-    <RouterProvider router={router}/>
+    <RouterProvider router={router} />
 
   )
 }
