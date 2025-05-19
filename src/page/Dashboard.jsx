@@ -7,9 +7,8 @@ import AIrecommendations from "../components/Dashboard/AIrecommendations/AIrecom
 import Performance from "../components/Dashboard/Performance/Performance";
 import TopAnalyisis from "../components/Dashboard/TopAnalyisis";
 import AIAssistantWidget from "../components/AIAssistantWidget/AIAssistantWidget";
-import MaintenanceMetric from "../components/Dashboard/Performance/MaintenanceMetrics";
 import { Plus, MenuSquare } from "lucide-react";
-import SimulationSliders from "../components/Dashboard/Performance/SimulationSliders";
+import AgentPerformance from "../components/AgentPerformance/AgentPerformance";
 
 function Dashboard() {
   const [sideNavVisibility, setSideNavVisibility] = useState(false);
