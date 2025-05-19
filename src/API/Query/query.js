@@ -1,5 +1,5 @@
-import { useQuery,useQueryClient } from "@tanstack/react-query"
-import {  getGraphData,getAIrecommendationsData, getPerformanceMatrics, getMaintainceData, getGraphsData, getProjectData, postAgentData} from "../APICalls/api"
+import { useQuery,useQueryClient,useMutation } from "@tanstack/react-query"
+import {  getGraphData,getAIrecommendationsData, getPerformanceMatrics, getMaintainceData, getGraphsData, getProjectData, getChatBotResponse} from "../APICalls/api"
 
 export const useGetFetchQuery = (key) => {
     const queryClient = useQueryClient();
@@ -61,3 +61,10 @@ export const usePostAgentResponse=(selected)=>{
         queryFn:({queryKey})=>postAgentData(queryKey[1])
     })
 }
+
+
+export const useChatBotMutation = () => {
+  return useMutation({
+    mutationFn: getChatBotResponse,
+  });
+};

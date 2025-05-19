@@ -1,8 +1,9 @@
+import React, { useEffect, useState } from "react";
 import { CirclePlay, Settings2, Brain, TriangleAlert } from "lucide-react";
 import { useGetPerformanceMatrics } from "../../../API/Query/query";
 import MetricCardSkeleton from "./MetricCardSkeleton";
+import SimulationSliders from "./SimulationSliders";
 import { usePostGetSimmulationResult } from "../../../API/Mutation/mutation";
-import { useEffect, useState } from "react";
 
 const MetricCard = ({data}) => {
 
@@ -61,6 +62,7 @@ const MetricCard = ({data}) => {
 const Performance = ({ selected }) => {
 
   const [enabled,setEnabled]=useState(false)
+  const [activeTab,setActiveTab]=useState(false)
 
   const mutatePerformaceData = usePostGetSimmulationResult("giving performance matrix for ", selected,enabled)
 
@@ -70,7 +72,8 @@ const Performance = ({ selected }) => {
   },[mutatePerformaceData])
 
   return (
-    <div className="space-y-6 bg-white p-5 rounded-md shadow-sm">
+    <div className="space-y-6 bg-white p-4 rounded-md shadow-sm">
+      {/* Header */}
       <div className="flex justify-between items-center">
         <h2 className="text-lg font-bold flex gap-2 items-center">
           <span>
@@ -78,13 +81,30 @@ const Performance = ({ selected }) => {
           </span>
           Performance Simulation
         </h2>
+
+        {/* Tab & Run Button */}
         <div className="flex gap-2">
+          {/* Tabs */}
           <div className="flex border border-gray-200 rounded-md overflow-hidden p-1">
-            <button className="flex items-center gap-1 px-2 py-1 text-sm bg-white hover:bg-gray-100 text-gray-700 rounded cursor-pointer">
+            <button
+              className={`flex items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer ${
+                activeTab === "auto"
+                  ? "bg-gray-100 text-gray-700"
+                  : "bg-white hover:bg-gray-100 text-gray-700"
+              }`}
+              onClick={() => setActiveTab("auto")}
+            >
               <Brain className="w-4 h-4" />
               Auto
             </button>
-            <button className="flex items-center gap-1 px-2 py-1 text-sm bg-white hover:bg-gray-100 text-gray-700 rounded cursor-pointer">
+            <button
+              className={`flex items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer ${
+                activeTab === "manual"
+                  ? "bg-gray-100 text-gray-700"
+                  : "bg-white hover:bg-gray-100 text-gray-700"
+              }`}
+              onClick={() => setActiveTab(prev=>!prev)}
+            >
               <Settings2 className="w-4 h-4" />
               Manual
             </button>
@@ -104,9 +124,12 @@ const Performance = ({ selected }) => {
           </button>
         </div>
       </div>
+      {activeTab && <SimulationSliders/>}
+
       <hr className="border border-gray-100" />
       <h3 className=" font-semibold">Simulation Results</h3>
       <div className="grid md:grid-cols-2 lg:grid-cols-1 gap-4">
+        
 
         {mutatePerformaceData?.data && mutatePerformaceData.data.map((i,indx)=><MetricCard key={indx} data={JSON.parse(i.data.text)}/>)}
       </div>

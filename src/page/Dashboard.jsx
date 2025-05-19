@@ -11,6 +11,7 @@ import MaintenanceOverview from "../components/Dashboard/Performance/Maintenance
 import AIAssistantWidget from "../components/AIAssistantWidget/AIAssistantWidget";
 import MaintenanceMetric from "../components/Dashboard/Performance/MaintenanceMetrics";
 import { Plus, MenuSquare } from "lucide-react";
+import SimulationSliders from "../components/Dashboard/Performance/SimulationSliders";
 
 function Dashboard() {
   const [sideNavVisibility, setSideNavVisibility] = useState(false);
@@ -34,7 +35,7 @@ function Dashboard() {
 
   return (
     <GlobalContainer>
-       <div
+      <div
         className="lg:hidden top-5 right-5 rounded-xl fixed bg-black z-99 p-2"
         onClick={() => setSideNavVisibility(!sideNavVisibility)}
       >
@@ -44,10 +45,9 @@ function Dashboard() {
           <Plus color="#ffffff" className="rotate-45" />
         )}
       </div>
-      <motion.div 
-         className={`w-64 top-0 h-full ${
-          !sideNavVisibility ? "hidden" : "fixed"
-        } lg:sticky lg:block z-90`}
+      <motion.div
+        className={`w-64 top-0 h-full ${!sideNavVisibility ? "hidden" : "fixed"
+          } lg:sticky lg:block z-90`}
         initial="hidden"
         animate="visible"
         variants={slideInLeft}
@@ -55,7 +55,7 @@ function Dashboard() {
         <SideNav />
       </motion.div>
       <div className="flex flex-col w-full h-full">
-        <motion.div 
+        <motion.div
           initial="hidden"
           animate="visible"
           variants={fadeInZoom}
@@ -64,44 +64,40 @@ function Dashboard() {
           <TopNav selected={selected} setSelected={setSelected} />
         </motion.div>
 
-        
-          <motion.div 
-            className="p-5 flex flex-col gap-5 h-full overflow-y-auto"
-            initial="hidden"
-            animate="visible"
+
+        <motion.div
+          className="p-5 flex flex-col gap-5 h-full overflow-y-auto scroll-smooth scrollbar-custom"
+          initial="hidden"
+          animate="visible"
+          variants={staggerContainer}
+        >
+          <motion.div className="h-96 " variants={fadeInZoom}>
+            <TopAnalyisis selected={selected} />
+          </motion.div>
+
+          <motion.div
+            className="flex justify-between w-full h-auto gap-5"
             variants={staggerContainer}
           >
-            <motion.div className="h-96 " variants={fadeInZoom}>
-              <TopAnalyisis selected={selected} />
-            </motion.div>
-
-            <motion.div 
-              className="flex justify-between w-full h-auto gap-5"
-              variants={staggerContainer}
+            <motion.div
+              className="w-full h-full rounded-md "
+              variants={fadeInZoom}
             >
-              <motion.div 
-                className="w-full h-full rounded-md "
-                variants={fadeInZoom}
-              >
-                                {selected == "Director of Infrastructure" && <Performance selected={selected}/>}
+              {selected == "Director of Infrastructure" && <Performance selected={selected} />}
 
-                {selected == "Planning Analyst" && <Performance selected={selected}/>}
-                {selected == "Maintenance Head" && <Performance selected={selected}/>}
-                
-                {selected == "Planning Analyst" && <ProjectPlanningOverview/>}
-                {selected == "Maintenance Head" && <MaintenanceOverview/>}
-                {selected == "Maintenance Head" && <MaintenanceMetric/>}
-              </motion.div>
-              <motion.div 
-                className="w-96 bg-white rounded-md"
-                variants={fadeInZoom}
-              >
-                <AIrecommendations selected={selected} />
+              {selected == "Planning Analyst" && <Performance selected={selected} />}
+              {selected == "Maintenance Head" && <Performance selected={selected} />}
+            </motion.div>
+            <motion.div
+              className="w-96 bg-white rounded-md"
+              variants={fadeInZoom}
+            >
+              <AIrecommendations selected={selected} />
 
-              </motion.div>
             </motion.div>
           </motion.div>
-        
+        </motion.div>
+
       </div>
       <div className="relative">
         <AIAssistantWidget />
