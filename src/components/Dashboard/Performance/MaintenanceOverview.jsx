@@ -5,7 +5,7 @@ import { usePostGetMaintanenceOverview } from "../../../API/Mutation/mutation";
 
 const MaintenanceOverview = ({selected,index,parentData}) => {
 
-  const data=usePostGetMaintanenceOverview("Give me maintanence data",selected,index,parentData,true)
+  const data=usePostGetMaintanenceOverview("Give me Overview data",selected,index,parentData,true)
   
   return (
     <div className="bg-white space-y-6 rounded-md shadow-sm border mt-5">
@@ -63,8 +63,8 @@ const MaintenanceOverview = ({selected,index,parentData}) => {
                 </p>
               </div>
               <div className="flex flex-col items-end">
-                <span className="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2 py-1 rounded mb-2">
-                  High Priority
+                <span className={`${defect?.priority==="Critical"? "bg-red-100 text-red-800":""} ${defect?.priority==="High"? "bg-orange-100 text-orange-800":""} ${defect?.priority==="Medium"? "bg-yellow-100 text-yellow-800":""} ${defect?.priority==="Low"? "bg-green-100 text-green-800":""}  text-xs font-semibold px-2 py-1 rounded mb-2`}>
+                 {defect?.priority} Priority {console.log(defect?.priority)}
                 </span>
                 <button className="text-blue-600 text-sm hover:underline">
                   View Details

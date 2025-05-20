@@ -29,10 +29,11 @@ export const usePostGetSimmulationResult = (query, selected,enabled=false) => {
 };
 
 export const usePostGetProjectPlanning = (query,selected,index,data,enabled=false) => {
-
+    const simData  = useGetFetchQuery(['graphAnalysis', selected]); 
     return useQuery({
         queryKey:['projectPlanning',selected,index],
         queryFn: async () => {
+            const newQuery=`${query} ${JSON.stringify(simData[index])}`
             return postGetSimmulationResult({ query, data})
         },
         select:(res)=>{

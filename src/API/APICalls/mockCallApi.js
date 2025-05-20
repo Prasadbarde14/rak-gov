@@ -479,18 +479,21 @@ export const maintenanceData = {
       title: "Infrastructure Defect #1",
       description: "Structural integrity issue detected in Bridge Section A-1",
       reportedAgo: "2 hours ago",
+      priority:"High Priority"
     },
     {
       id: 2,
       title: "Infrastructure Defect #2",
       description: "Structural integrity issue detected in Bridge Section A-2",
       reportedAgo: "2 hours ago",
+      priority:"High Priority"
     },
     {
       id: 3,
       title: "Infrastructure Defect #3",
       description: "Structural integrity issue detected in Bridge Section A-3",
       reportedAgo: "2 hours ago",
+      priority:"High Priority"
     },
   ],
 };
