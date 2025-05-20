@@ -111,14 +111,6 @@ const AgentOverview = () => {
         errorRate: 0.0,
         capabilityKey: "objective-generation",
         capabilityDesc: "Generates strategic objectives based on KPI trends and gaps",
-      },  {
-        name: "Goal Recommendation Agent",
-        description: "Analyzes performance data and suggests strategic objectives",
-        successRate: 0.0,
-        executionTime: "0ms",
-        errorRate: 0.0,
-        capabilityKey: "objective-generation",
-        capabilityDesc: "Generates strategic objectives based on KPI trends and gaps",
       }
   ];
 
