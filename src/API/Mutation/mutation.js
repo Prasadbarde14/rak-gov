@@ -4,7 +4,7 @@ import { postGetSimmulationResult } from '../APICalls/api';
 
 export const usePostGetSimmulationResult = (query, selected,enabled=false) => {
     const data  = useGetFetchQuery(['graphAnalysis', selected]); 
-    
+
     return useQuery({
         queryKey:['Simmulation',selected],
         queryFn: async () => {
@@ -18,12 +18,53 @@ export const usePostGetSimmulationResult = (query, selected,enabled=false) => {
             }
         },
         onSuccess: (res) => {
-            console.log('All responses:', res);
+            // console.log('All responses:', res);
         },
         onError: (err) => {
 
-            console.error('Error in mutation:', err.message);
+            // console.error('Error in mutation:', err.message);
         },
         enabled:enabled
+    });
+};
+
+export const usePostGetProjectPlanning = (query,selected,index,data,enabled=false) => {
+
+    return useQuery({
+        queryKey:['projectPlanning',selected,index],
+        queryFn: async () => {
+            return postGetSimmulationResult({ query, data})
+        },
+        select:(res)=>{
+            return JSON.parse(res.data.text)
+        }       
+    });
+};
+
+export const usePostGetMaintanenceOverview = (query,selected,index,data,enabled=false) => {
+
+    return useQuery({
+        queryKey:['maintanenceOverview',selected,index],
+        queryFn: async () => {
+            return postGetSimmulationResult({ query, data})
+        },
+        select:(res)=>{
+            return JSON.parse(res.data.text)
+        }       
+    });
+};
+
+
+export const usePostGraphsData = (query,selected,index,data,enabled=false) => {
+
+    return useQuery({
+        queryKey:['graphsData',selected,index],
+        queryFn: async () => {
+            return postGetSimmulationResult({ query, data})
+        },
+        select:(res)=>{
+            
+            return JSON.parse(res.data.text)
+        }       
     });
 };

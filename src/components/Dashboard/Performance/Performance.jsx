@@ -90,15 +90,10 @@ const Performance = ({ selected }) => {
 
         </>}
 
-        {mutatePerformaceData.fetchStatus == "idle" && mutatePerformaceData?.data && mutatePerformaceData.data.map((i, indx) => <MetricCard key={indx} data={JSON.parse(i.data.text)} />)}
+        {mutatePerformaceData.fetchStatus == "idle" 
+          && mutatePerformaceData?.data 
+            && mutatePerformaceData.data.map((i, indx) => <MetricCard key={indx} data={JSON.parse(i.data.text)} index={indx} selected={selected}/> )}
       </div>
-      {/* <div className="grid md:grid-cols-2 lg:grid-cols-1 gap-4">
-        {isLoading
-          ? Array(4)
-            .fill(0)
-            .map((_, idx) => <MetricCardSkeleton key={idx} />)
-          : data?.map((metric, idx) => <MetricCard key={idx} {...metric} />)}
-      </div> */}
     </div >
   );
 };
