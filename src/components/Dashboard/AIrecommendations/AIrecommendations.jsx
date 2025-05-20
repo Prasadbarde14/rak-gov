@@ -3,6 +3,7 @@ import { Target, CheckCircle, Zap, TrendingUp, Plus, CircleAlert } from "lucide-
 import { useGetAIrecommendationsData, useGetFetchQuery, useGetFetchQueryState } from "../../../API/Query/query";
 import SkeletonRecommendationCard from "./SkeletonRecommendationCard";
 import { usePostGetSimmulationResult } from "../../../API/Mutation/mutation";
+import { useQueryClient } from "@tanstack/react-query";
 
 // Card style definitions
 const cardStyles = {
@@ -54,6 +55,9 @@ const RecommendationCard = ({ type, title, description, confidence }) => {
 
 // Main Wrapper Component
 function AIrecommendations({ selected }) {
+
+  const queryClient=useQueryClient()
+
 
   const simState = useGetFetchQueryState(['Simmulation', selected])
   const [prevCount,setPrevCount]=useState(0)

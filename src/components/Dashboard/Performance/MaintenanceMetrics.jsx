@@ -93,7 +93,8 @@ const MaintenanceMetrics = ({selected,index,parentData}) => {
       )
       } 
       
-      {!graphData.isError && !graphData.isLoading && !graphData.isFetching &&(
+      {!graphData.isError && !graphData.isLoading && !graphData.isFetching &&
+      (
         <div className="w-5/6 mx-auto">
           <ReactECharts
             option={option}
