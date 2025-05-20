@@ -1,8 +1,11 @@
 import React from 'react'
+import AgentOverview from '../components/AgentManagement/AgentOverview'
 
 function AgentDashboard() {
   return (
-    <div>AgentDashboard</div>
+    <div className='overflow-y-auto h-[85vh]'>
+    <AgentOverview/>
+    </div>
   )
 }
 
