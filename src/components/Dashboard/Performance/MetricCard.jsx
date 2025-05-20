@@ -31,14 +31,13 @@ const [isOpen, setIsOpen] = useState(false)
         : [...prev, value] 
     );
   };
-
+  
   const renderSelectedComponent = (field) => {
-
     switch (field) {
       case "project":
-        return <ProjectPlanningOverview key="project"  index={index} selected={selected} parentData={data}/>;
+        return <ProjectPlanningOverview key="project"  index={index} selected={selected} parentData={data} />;
       case "maintenanceOverview":
-        return <MaintenanceOverview key="maintenanceOverview" index={index} selected={selected} parentData={data}/>;
+        return <MaintenanceOverview key="maintenanceOverview" index={index} selected={selected} parentData={data} />;
       case "maintenanceMetric":
         return <MaintenanceMetric key="maintenanceMetric"  index={index} selected={selected} parentData={data}/>;
       default:
