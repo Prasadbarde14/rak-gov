@@ -23,14 +23,14 @@ const MaintenanceOverview = ({selected,index,parentData}) => {
           </button>
         </div>
 
-        {data?.isLoading || data.isRefetching && (
+        {data?.isLoading || data.isFetching && (
           <div className="grid grid-cols-2 gap-4 mb-6 animate-pulse">
             <div className="bg-gray-200 h-20 rounded-lg"></div>
             <div className="bg-gray-200 h-20 rounded-lg"></div>
           </div>
         )}
 
-        {!data?.isLoading && !data?.isError && !data.isRefetching && <div className="grid grid-cols-2 gap-4 mb-6">
+        {!data?.isLoading && !data?.isError && !data.isFetching && <div className="grid grid-cols-2 gap-4 mb-6">
           <div className="bg-[#fffbeb] text-yellow-800 rounded-lg p-4">
             <p className="text-sm font-semibold">High Priority Defects</p>
             <p className="text-2xl font-bold">
