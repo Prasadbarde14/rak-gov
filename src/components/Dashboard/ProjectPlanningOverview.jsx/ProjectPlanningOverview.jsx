@@ -1,6 +1,7 @@
 import React from "react";
 import { PlusCircle, MoreHorizontal } from "lucide-react";
 import { useGetProjectData } from "../../../API/Query/query";
+import { usePostGetProjectPlanning } from "../../../API/Mutation/mutation";
 import { transform } from "framer-motion";
 import { motion } from "framer-motion";
 
@@ -29,15 +30,21 @@ const KeyResult = ({ title, current, target, percentage, color }) => (
             transition={{ duration: 0.7, ease: "easeOut" }}
           />
         </div>
-        <div className="text-sm text-gray-700 font-light">{percentage}%</div>
+        <div className="text-sm text-gray-700 font-light">{percentage}</div>
       </div>
     </div>
   </motion.div>
 );
 
 // Main Overview Component
-const ProjectPlanningOverview = () => {
-  const data = useGetProjectData();
+const ProjectPlanningOverview = ({selected,index,parentData}) => {
+
+  const data=usePostGetProjectPlanning("Give me Project Data",selected,index,parentData,true)
+
+  console.log(data)
+
+  console.log(data.isLoading)
+  
 
   return (
     <div className="w-full mx-auto bg-white rounded-md shadow-sm border mt-5">
@@ -50,7 +57,7 @@ const ProjectPlanningOverview = () => {
         </button>
       </div>
 
-      {data.isLoading ? (
+      {(data.isLoading || data.isFetching)&& (
         <div className="p-5 space-y-4 animate-pulse">
           <div className="h-6 bg-gray-200 rounded w-1/3 mb-3"></div>
           <div className="h-4 bg-gray-200 rounded w-2/3 mb-2"></div>
@@ -59,8 +66,9 @@ const ProjectPlanningOverview = () => {
           <div className="h-3 bg-gray-200 rounded w-4/5"></div>
           <div className="h-3 bg-gray-200 rounded w-3/4"></div>
         </div>
-      ) : (
-        !data.isError && (
+      ) }
+      {
+        !data.isError && !data.isLoading && !data.isFetching && (
           <div className="p-5">
             <div className="space-y-2 border rounded-md">
               <div className="flex justify-between items-start flex-wrap gap-2 border-b p-4">
@@ -86,7 +94,7 @@ const ProjectPlanningOverview = () => {
                   <div className="h-full bg-yellow-400 rounded-full" style={{ width: `${data.data.completionPercent}%` }}></div>
                 </div>
                 <div className="space-y-4 mt-3">
-                  {data.data.keyResults.map((kr, index) => (
+                  {data?.data?.keyResults?.map((kr, index) => (
                     <KeyResult key={index} {...kr} />
                   ))}
                 </div>
@@ -97,7 +105,7 @@ const ProjectPlanningOverview = () => {
             </div>
           </div>
         )
-      )}
+      }
     </div>
   );
 };

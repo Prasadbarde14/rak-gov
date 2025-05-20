@@ -5,7 +5,7 @@ import MaintenanceOverview from "./MaintenanceOverview";
 import MaintenanceMetric from "./MaintenanceMetrics";
 import { motion, AnimatePresence } from 'framer-motion'
 
-const MetricCard = ({ data }) => {
+const MetricCard = ({ data,index,selected }) => {
   const {
     title,
     current,
@@ -27,19 +27,20 @@ const [isOpen, setIsOpen] = useState(false)
   const handleFieldChange = (value) => {
     setSelectedFields((prev) =>
       prev.includes(value)
-        ? prev.filter((item) => item !== value) // Deselect
-        : [...prev, value] // Select and preserve order
+        ? prev.filter((item) => item !== value)
+        : [...prev, value] 
     );
   };
 
   const renderSelectedComponent = (field) => {
+
     switch (field) {
       case "project":
-        return <ProjectPlanningOverview key="project" />;
+        return <ProjectPlanningOverview key="project"  index={index} selected={selected} parentData={data}/>;
       case "maintenanceOverview":
-        return <MaintenanceOverview key="maintenanceOverview" />;
+        return <MaintenanceOverview key="maintenanceOverview" index={index} selected={selected} parentData={data}/>;
       case "maintenanceMetric":
-        return <MaintenanceMetric key="maintenanceMetric" />;
+        return <MaintenanceMetric key="maintenanceMetric"  index={index} selected={selected} parentData={data}/>;
       default:
         return null;
     }

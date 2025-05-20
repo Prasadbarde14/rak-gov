@@ -2,12 +2,16 @@ import { useQuery,useQueryClient,useMutation } from "@tanstack/react-query"
 import {  getGraphData,getAIrecommendationsData, getPerformanceMatrics, getMaintainceData, getGraphsData, getProjectData, getChatBotResponse} from "../APICalls/api"
 
 export const useGetFetchQuery = (key) => {
-    const queryClient = useQueryClient();
-
+    const queryClient = useQueryClient();   
     const data= queryClient.getQueryData(key);
     return data;
 };
 
+export const useGetFetchQueryState=(key)=>{
+    const queryClient=useQueryClient()
+    const data=queryClient.getQueryState(key)
+    return data
+}
 
 export const useGetGraphData = (selected) => {
     return useQuery({

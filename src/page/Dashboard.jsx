@@ -1,21 +1,13 @@
-import React, { useState } from "react";
 import { motion } from "framer-motion";
-import GlobalContainer from "../components/Global/GlobalContainer";
-import SideNav from "../components/Dashboard/SideNav";
-import TopNav from "../components/Dashboard/TopNav";
+import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import AIrecommendations from "../components/Dashboard/AIrecommendations/AIrecommendations";
 import Performance from "../components/Dashboard/Performance/Performance";
 import TopAnalyisis from "../components/Dashboard/TopAnalyisis";
-import AIAssistantWidget from "../components/AIAssistantWidget/AIAssistantWidget";
-import MaintenanceMetric from "../components/Dashboard/Performance/MaintenanceMetrics";
-import { Plus, MenuSquare } from "lucide-react";
-import SimulationSliders from "../components/Dashboard/Performance/SimulationSliders";
 
 function Dashboard() {
-  const [sideNavVisibility, setSideNavVisibility] = useState(false);
-  const [selected, setSelected] = React.useState("Director of Infrastructure");
+  const [selected]=useOutletContext()
 
-  // Animation variants
   const fadeInZoom = {
     hidden: { opacity: 0, scale: 0.95 },
     visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: "easeOut" } },
@@ -32,36 +24,7 @@ function Dashboard() {
   };
 
   return (
-    <GlobalContainer>
-      <div
-        className="lg:hidden top-5 right-5 rounded-xl fixed bg-black z-99 p-2"
-        onClick={() => setSideNavVisibility(!sideNavVisibility)}
-      >
-        {!sideNavVisibility ? (
-          <MenuSquare color="#ffffff" />
-        ) : (
-          <Plus color="#ffffff" className="rotate-45" />
-        )}
-      </div>
-      <motion.div
-        className={`w-64 top-0 h-full ${!sideNavVisibility ? "hidden" : "fixed"
-          } lg:sticky lg:block z-90`}
-        initial="hidden"
-        animate="visible"
-        variants={slideInLeft}
-      >
-        <SideNav />
-      </motion.div>
-      <div className="flex flex-col w-full h-full">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeInZoom}
-          className="w-full"
-        >
-          <TopNav selected={selected} setSelected={setSelected} />
-        </motion.div>
-
+    <div className="w-full h-full">
 
         <motion.div
           className="p-5 flex flex-col gap-5 h-full overflow-y-auto scroll-smooth scrollbar-custom"
@@ -83,7 +46,6 @@ function Dashboard() {
               variants={fadeInZoom}
             >
               {selected == "Director of Infrastructure" && <Performance selected={selected} />}
-
               {selected == "Planning Analyst" && <Performance selected={selected} />}
               {selected == "Maintenance Head" && <Performance selected={selected} />}
             </motion.div>
@@ -96,12 +58,8 @@ function Dashboard() {
             </motion.div>
           </motion.div>
         </motion.div>
-
-      </div>
-      <div className="relative">
-        <AIAssistantWidget />
-      </div>
-    </GlobalContainer>
+      
+    </div>
   );
 }
 

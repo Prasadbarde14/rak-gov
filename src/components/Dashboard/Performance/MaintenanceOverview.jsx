@@ -1,10 +1,11 @@
 import { CirclePlus, PenTool, Wrench } from "lucide-react";
 import { useGetMaintenanceData } from "../../../API/Query/query";
+import { usePostGetMaintanenceOverview } from "../../../API/Mutation/mutation";
 
 
-const MaintenanceOverview = () => {
+const MaintenanceOverview = ({selected,index,parentData}) => {
 
-  const data=useGetMaintenanceData()
+  const data=usePostGetMaintanenceOverview("Give me maintanence data",selected,index,parentData,true)
   
   return (
     <div className="bg-white space-y-6 rounded-md shadow-sm border mt-5">
@@ -13,7 +14,7 @@ const MaintenanceOverview = () => {
           <div className="flex items-center gap-2">
             <PenTool className="text-blue-600" />
             <h2 className="text-lg font-semibold text-gray-800">
-              Maintenance Overview
+              Overview
             </h2>
           </div>
           <button className="text-blue-600 hover:underline text-sm font-medium flex gap-1 items-center cursor-pointer">
@@ -22,14 +23,14 @@ const MaintenanceOverview = () => {
           </button>
         </div>
 
-        {data?.isLoading && (
+        {data?.isLoading || data.isRefetching && (
           <div className="grid grid-cols-2 gap-4 mb-6 animate-pulse">
             <div className="bg-gray-200 h-20 rounded-lg"></div>
             <div className="bg-gray-200 h-20 rounded-lg"></div>
           </div>
         )}
 
-        {!data?.isLoading && !data?.isError && <div className="grid grid-cols-2 gap-4 mb-6">
+        {!data?.isLoading && !data?.isError && !data.isRefetching && <div className="grid grid-cols-2 gap-4 mb-6">
           <div className="bg-[#fffbeb] text-yellow-800 rounded-lg p-4">
             <p className="text-sm font-semibold">High Priority Defects</p>
             <p className="text-2xl font-bold">
@@ -46,7 +47,7 @@ const MaintenanceOverview = () => {
           </div>
         </div>}
 
-        {!data.isLoading && !data.isError && <div className="space-y-4">
+        {!data.isLoading && !data.isError && !data.isRefetching && <div className="space-y-4">
           {data?.data?.defects?.map((defect) => (
             <div
               key={defect?.id}

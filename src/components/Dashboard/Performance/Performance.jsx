@@ -5,6 +5,7 @@ import MetricCardSkeleton from "./MetricCardSkeleton";
 import SimulationSliders from "./SimulationSliders";
 import { usePostGetSimmulationResult } from "../../../API/Mutation/mutation";
 import MetricCard from "./MetricCard";
+import { QueryClient } from "@tanstack/react-query";
 
 const Performance = ({ selected }) => {
 
@@ -17,16 +18,18 @@ const Performance = ({ selected }) => {
     technologyAdoption: 0,
     marketConditions: 0,
   });
+  const queryClient = new QueryClient();
   const AutoClickHandler = ()=>{
     setActiveTab("auto")
     
   }
   const mutatePerformaceData = usePostGetSimmulationResult("Here are some simulation parameters"+JSON.stringify(parameters)+"Now give performance matrix for ", selected,enabled)
 
-  useEffect(()=>{
-    if(mutatePerformaceData.isSuccess)
-        setEnabled(false)
-  },[mutatePerformaceData])
+  useEffect(() => {
+    if (!mutatePerformaceData.isLoading)
+      setEnabled(false)
+  }, [mutatePerformaceData])
+
 
   return (
     <div className="space-y-6 bg-white p-4 rounded-md shadow-sm">
@@ -66,11 +69,13 @@ const Performance = ({ selected }) => {
               Manual
             </button>
           </div>
-          <button disabled={mutatePerformaceData.isLoading} className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-1.5 rounded flex gap-1 items-center cursor-pointer" onClick={() => 
-            
-            setEnabled(true)}>
+          <button disabled={mutatePerformaceData.isLoading} className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-1.5 rounded flex gap-1 items-center cursor-pointer" onClick={() => {
+            setEnabled(true);
+            queryClient.setQueryData(['Simmulation', selected], () => []);
+            queryClient.removeQueries(['Simmulation', selected], { exact: true });
+          }}>
             {
-              !mutatePerformaceData.isLoading ?
+              !mutatePerformaceData.isLoading || mutatePerformaceData.fetchStatus == "idle" ?
                 <>
                   <CirclePlay className="w-4 h-4" />
                   Run Simulation
@@ -88,9 +93,19 @@ const Performance = ({ selected }) => {
       <hr className="border border-gray-100" />
       <h3 className=" font-semibold">Simulation Results</h3>
       <div className="grid md:grid-cols-2 lg:grid-cols-1 gap-4">
-        {mutatePerformaceData?.data && mutatePerformaceData.data.map((i,indx)=><MetricCard key={indx} data={JSON.parse(i.data.text)}/>)}
+        {(mutatePerformaceData.isLoading || mutatePerformaceData.fetchStatus == "fetching") && <>
+          <MetricCardSkeleton />
+          <MetricCardSkeleton />
+          <MetricCardSkeleton />
+          <MetricCardSkeleton />
+
+        </>}
+
+        {mutatePerformaceData.fetchStatus == "idle" 
+          && mutatePerformaceData?.data 
+            && mutatePerformaceData.data.map((i, indx) => <MetricCard key={indx} data={JSON.parse(i.data.text)} index={indx} selected={selected}/> )}
       </div>
-    </div>
+    </div >
   );
 };
 
