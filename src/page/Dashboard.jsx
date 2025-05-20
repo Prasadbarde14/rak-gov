@@ -40,6 +40,7 @@ function Dashboard() {
             className="flex justify-between w-full h-auto gap-5"
             variants={staggerContainer}
           >
+            {/* <div><Accordian/></div> */}
             <motion.div
               className="w-full h-full rounded-md "
               variants={fadeInZoom}

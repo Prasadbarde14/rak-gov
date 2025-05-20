@@ -9,12 +9,21 @@ import { QueryClient } from "@tanstack/react-query";
 
 const Performance = ({ selected }) => {
 
-  const [enabled, setEnabled] = useState(false)
-  const [activeTab, setActiveTab] = useState(false)
-  const queryClient = new QueryClient()
-
-
-  const mutatePerformaceData = usePostGetSimmulationResult("give me performance matrix for ", selected, enabled)
+  const [enabled,setEnabled]=useState(false)
+  const [activeTab,setActiveTab]=useState("auto")
+   const [parameters, setParameters] = useState({
+    resourceAllocation: 0,
+    processEfficiency: 0,
+    staffingLevels: 0,
+    technologyAdoption: 0,
+    marketConditions: 0,
+  });
+  const queryClient = new QueryClient();
+  const AutoClickHandler = ()=>{
+    setActiveTab("auto")
+    
+  }
+  const mutatePerformaceData = usePostGetSimmulationResult("Here are some simulation parameters"+JSON.stringify(parameters)+"Now give performance matrix for ", selected,enabled)
 
   useEffect(() => {
     if (!mutatePerformaceData.isLoading)
@@ -38,21 +47,23 @@ const Performance = ({ selected }) => {
           {/* Tabs */}
           <div className="flex border border-gray-200 rounded-md overflow-hidden p-1">
             <button
-              className={`flex items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer ${activeTab === "auto"
-                ? "bg-gray-100 text-gray-700"
-                : "bg-white hover:bg-gray-100 text-gray-700"
-                }`}
-              onClick={() => setActiveTab("auto")}
+              className={`flex items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer ${
+                activeTab === "auto"
+                  ? "bg-gray-100 text-gray-700"
+                  : "bg-white hover:bg-gray-100 text-gray-700"
+              }`}
+              onClick={AutoClickHandler}
             >
               <Brain className="w-4 h-4" />
               Auto
             </button>
             <button
-              className={`flex items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer ${activeTab === "manual"
-                ? "bg-gray-100 text-gray-700"
-                : "bg-white hover:bg-gray-100 text-gray-700"
-                }`}
-              onClick={() => setActiveTab(prev => !prev)}
+              className={`flex items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer ${
+                (activeTab === "manual")
+                  ? "bg-gray-100 text-gray-700"
+                  : "bg-white hover:bg-gray-100 text-gray-700"
+              }`}
+              onClick={() => setActiveTab("manual")}
             >
               <Settings2 className="w-4 h-4" />
               Manual
@@ -77,7 +88,7 @@ const Performance = ({ selected }) => {
           </button>
         </div>
       </div>
-      {activeTab && <SimulationSliders />}
+      {activeTab=="manual" && <SimulationSliders parameters={parameters} setParameters={setParameters}/>}
 
       <hr className="border border-gray-100" />
       <h3 className=" font-semibold">Simulation Results</h3>
