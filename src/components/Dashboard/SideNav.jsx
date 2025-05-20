@@ -6,44 +6,80 @@ import {
   LayoutDashboard,
   Truck,
   ChevronRight,
+  Settings2,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SideNav() {
   const [selected, setSelected] = useState("0-0");
   const [openIndex, setOpenIndex] = useState(0);
+  const navigate = useNavigate();
 
   const handleItemClick = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   const sideNavItems = [
-    {
-      icon: <Factory color="#1D40AF" size={20} />,
-      text: "Ministry of Public Works",
-      children: ["Dashboard", "OKR Canvas", "KPI Board", "Action Plan"],
-    },
-    {
-      icon: <Book color="#0D7490" size={20} />,
-      text: "RAK Customs Department",
-      children: ["Dashboard", "OKR Canvas", "KPI Board", "Action Plan"],
-    },
-    {
-      icon: <Calculator color="#047857" size={20} />,
-      text: "Department of Economic Development",
-      children: ["Dashboard", "OKR Canvas", "KPI Board", "Action Plan"],
-    },
-    {
-      icon: <BadgeCheck color="#7C3AED" size={20} />,
-      text: "Public Services Department",
-      children: ["Dashboard", "OKR Canvas", "KPI Board", "Action Plan"],
-    },
-    {
-      icon: <Truck color="#B91C1B" size={20} />,
-      text: "RAK Transport Authority",
-      children: ["Dashboard", "OKR Canvas", "KPI Board", "Action Plan"],
-    },
-  ];
+  {
+    icon: <Factory color="#1D40AF" size={20} />,
+    text: "Ministry of Public Works",
+    children: [
+      { title: "Dashboard", link: "/" },
+      { title: "OKR Canvas", link: "/public-works/okr-canvas" },
+      { title: "KPI Board", link: "/public-works/kpi-board" },
+      { title: "Action Plan", link: "/public-works/action-plan" },
+    ],
+  },
+  {
+    icon: <Book color="#0D7490" size={20} />,
+    text: "RAK Customs Department",
+    children: [
+      { title: "Dashboard", link: "/customs/dashboard" },
+      { title: "OKR Canvas", link: "/customs/okr-canvas" },
+      { title: "KPI Board", link: "/customs/kpi-board" },
+      { title: "Action Plan", link: "/customs/action-plan" },
+    ],
+  },
+  {
+    icon: <Calculator color="#047857" size={20} />,
+    text: "Department of Economic Development",
+    children: [
+      { title: "Dashboard", link: "/economic/dashboard" },
+      { title: "OKR Canvas", link: "/economic/okr-canvas" },
+      { title: "KPI Board", link: "/economic/kpi-board" },
+      { title: "Action Plan", link: "/economic/action-plan" },
+    ],
+  },
+  {
+    icon: <BadgeCheck color="#7C3AED" size={20} />,
+    text: "Public Services Department",
+    children: [
+      { title: "Dashboard", link: "/public-services/dashboard" },
+      { title: "OKR Canvas", link: "/public-services/okr-canvas" },
+      { title: "KPI Board", link: "/public-services/kpi-board" },
+      { title: "Action Plan", link: "/public-services/action-plan" },
+    ],
+  },
+  {
+    icon: <Truck color="#B91C1B" size={20} />,
+    text: "RAK Transport Authority",
+    children: [
+      { title: "Dashboard", link: "/transport/dashboard" },
+      { title: "OKR Canvas", link: "/transport/okr-canvas" },
+      { title: "KPI Board", link: "/transport/kpi-board" },
+      { title: "Action Plan", link: "/transport/action-plan" },
+    ],
+  },
+  {
+    icon: <Settings2 color="#94A3B8" size={20} />,
+    text: "Settings",
+    children: [
+      { title: "Agent Interaction", link: "/agent" },
+    ],
+  },
+];
+
 
   return (
     <div className="w-64 h-full bg-background-dark ">
@@ -59,6 +95,7 @@ function SideNav() {
         
         {sideNavItems.map((item, index) => (
           <div key={index}>
+            {item.text === "Settings" && <hr className="my-4 border-gray-700"/>}
             <SideNavItem
               icon={item.icon}
               text={item.text}
@@ -71,9 +108,14 @@ function SideNav() {
                   <div
                     key={idx}
                     className={`py-2 px-4 text-gray-400 hover:text-white cursor-pointer text-sm  rounded-md ${selected === `${index}-${idx}` ? "bg-[#1F3A8A] text-white":"hover:bg-[#1E293B]"}`}
-                    onClick={() => setSelected(`${index}-${idx}`)}
+                    onClick={() =>{
+                       setSelected(`${index}-${idx}`)
+                       navigate(child.link)
+
+                    }
+                    }
                   >
-                    {child}
+                    {child.title}
                   </div>
                 ))}
               </div>
@@ -93,9 +135,9 @@ function SideNavItem({ icon, text, isOpen, onClick }) {
       }`}
       onClick={onClick}
     >
-      <div className="flex flex-row gap-2">
+      <div className={`flex flex-row gap-2 ${text==="Settings"?"pl-5":""}`}>
         {icon}
-        <p className="text-white text-sm font-medium">{text}</p>
+        <p className={`${text==="Settings"?"text-gray-400 ":"text-white"} text-sm font-medium`}>{text}</p>
       </div>
       <ChevronRight
         color="#94A3B8"

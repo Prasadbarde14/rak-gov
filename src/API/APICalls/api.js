@@ -80,6 +80,8 @@ export async function postAgentData(selected){
 }
 
 export async function postGetSimmulationResult({query,body}){
+  
+  console.log(query,body)
   return await agentInstance.post('/interact',{
     
         "agentId": "51312e76-f198-419e-86d6-a464bfc08a6a",
