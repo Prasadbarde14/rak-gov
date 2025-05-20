@@ -2,15 +2,11 @@ import { CirclePlus, PenTool, Wrench } from "lucide-react";
 import { useGetMaintenanceData } from "../../../API/Query/query";
 import { usePostGetMaintanenceOverview } from "../../../API/Mutation/mutation";
 
-const MaintenanceOverview = ({ selected, index, parentData }) => {
-  const data = usePostGetMaintanenceOverview(
-    "Give me maintanence data",
-    selected,
-    index,
-    parentData,
-    true
-  );
 
+const MaintenanceOverview = ({selected,index,parentData}) => {
+
+  const data=usePostGetMaintanenceOverview("Give me Overview data",selected,index,parentData,true)
+  
   return (
     <div className="bg-white space-y-6 rounded-md shadow-sm border mt-5">
       <div className="  rounded p-4">
@@ -52,34 +48,32 @@ const MaintenanceOverview = ({ selected, index, parentData }) => {
           </div>
         )}
 
-        {!data.isLoading && !data.isError && !data.isRefetching && (
-          <div className="space-y-4">
-            {data?.data?.defects?.map((defect) => (
-              <div
-                key={defect?.id}
-                className="bg-gray-50 border border-gray-200 rounded-lg p-4 flex justify-between items-start hover:shadow"
-              >
-                <div>
-                  <h3 className="text-sm font-semibold text-gray-800">
-                    {defect?.title}
-                  </h3>
-                  <p className="text-sm text-gray-600">{defect?.description}</p>
-                  <p className="text-xs text-gray-400 mt-1">
-                    Reported: {defect?.reportedAgo}
-                  </p>
-                </div>
-                <div className="flex flex-col items-end">
-                  <span className="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2 py-1 rounded mb-2">
-                    High Priority
-                  </span>
-                  <button className="text-blue-600 text-sm hover:underline">
-                    View Details
-                  </button>
-                </div>
+        {!data.isLoading && !data.isError && !data.isRefetching && <div className="space-y-4">
+          {data?.data?.defects?.map((defect) => (
+            <div
+              key={defect?.id}
+              className="bg-gray-50 border border-gray-200 rounded-lg p-4 flex justify-between items-start hover:shadow"
+            >
+              <div>
+                <h3 className="text-sm font-semibold text-gray-800">
+                  {defect?.title}
+                </h3>
+                <p className="text-sm text-gray-600">{defect?.description}</p>
+                <p className="text-xs text-gray-400 mt-1">
+                  Reported: {defect?.reportedAgo}
+                </p>
               </div>
-            ))}
-          </div>
-        )}
+              <div className="flex flex-col items-end">
+                <span className={`${defect?.priority==="Critical"? "bg-red-100 text-red-800":""} ${defect?.priority==="High"? "bg-orange-100 text-orange-800":""} ${defect?.priority==="Medium"? "bg-yellow-100 text-yellow-800":""} ${defect?.priority==="Low"? "bg-green-100 text-green-800":""}  text-xs font-semibold px-2 py-1 rounded mb-2`}>
+                 {defect?.priority} Priority {console.log(defect?.priority)}
+                </span>
+                <button className="text-blue-600 text-sm hover:underline">
+                  View Details
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>}
       </div>
     </div>
   );
