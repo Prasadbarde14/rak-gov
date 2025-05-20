@@ -37,7 +37,8 @@ export const usePostGetProjectPlanning = (query,selected,index,data,enabled=fals
         },
         select:(res)=>{
             return JSON.parse(res.data.text)
-        }       
+        },       
+        enabled:enabled
     });
 };
 
@@ -50,7 +51,8 @@ export const usePostGetMaintanenceOverview = (query,selected,index,data,enabled=
         },
         select:(res)=>{
             return JSON.parse(res.data.text)
-        }       
+        },       
+        enabled:enabled
     });
 };
 
@@ -65,6 +67,7 @@ export const usePostGraphsData = (query,selected,index,data,enabled=false) => {
         select:(res)=>{
             
             return JSON.parse(res.data.text)
-        }       
+        }, 
+        enabled:enabled      
     });
 };

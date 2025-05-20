@@ -68,7 +68,7 @@ const PIAgentCard = () => {
     <div className="p-6">
       <div className="mb-6">
         <h2 className="text-xl font-bold text-slate-900">PI Agent</h2>
-        <p className="text-slate-600">Monitor real-time Flow</p>
+        <p className="text-slate-600 text-xs">Canonical Schemas</p>
       </div>
 
       <div className="bg-white rounded flex flex-col md:flex-row gap-2 w-full">

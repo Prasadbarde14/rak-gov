@@ -17,7 +17,7 @@ function GlobalPage() {
       setTabs(["Director of Infrastructure", "Planning Analyst", "Maintenance Head"]);
       setSelected("Director of Infrastructure");
     } else if (location.pathname === "/agent") {
-      setTabs(["Agent Overview", "PI Agent", "Performance", "Interaction"]);
+      setTabs(["Agent Overview", "PI-BOB Agent", "Performance", "Interaction"]);
       setSelected("Agent Overview");
     }
   }, [location]);
