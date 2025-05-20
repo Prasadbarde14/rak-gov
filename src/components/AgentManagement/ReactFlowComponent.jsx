@@ -77,8 +77,12 @@ const edges = [
 
 function ReactFlowComponent() {
   return (
-    <div>
-      <div style={{ width: "100%", height: "300px" }}>
+    <div className="p-4">
+      <div className="mb-6">
+        <h2 className="text-xl font-bold text-slate-900">BoB Agent</h2>
+        <p className="text-slate-600 text-xs">Real time work-flow</p>
+      </div>
+      <div style={{ width: "100%", height: "400px" }}>
         <ReactFlow nodes={nodes} edges={edges} fitView>
           <Background />
           <Controls />

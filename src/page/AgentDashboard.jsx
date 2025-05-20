@@ -1,7 +1,7 @@
 import React from 'react'
 import { useOutletContext } from "react-router-dom";
 import AgentPerformance from '../components/AgentManagement/AgentPerformance'
-import AgentOverview from '../components/AgentManagement/AgentOverview';
+import AgentOverview from '../components/AgentManagement/AgentOverview'
 import PiBobAgent from '../components/AgentManagement/PiBobAgent';
 import AgentInteractionSection from '../components/AgentManagement/AgentInteractionSection';
 

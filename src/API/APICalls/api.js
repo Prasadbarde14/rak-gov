@@ -21,6 +21,7 @@ instance.interceptors.request.use(async (config) => {
   return config;
 });
 
+
 export async function getGraphData(selected){
     // return await instance.get(url).then(response=>response.data)
     return await Promise.all(graphData[selected])
@@ -86,6 +87,7 @@ export async function postGetSimmulationResult({query,body}){
         "query": JSON.stringify(query+" ")+JSON.stringify(body)
     
   })
+  
 }
 
 export async function getAutoSimulation({selected,body}){
