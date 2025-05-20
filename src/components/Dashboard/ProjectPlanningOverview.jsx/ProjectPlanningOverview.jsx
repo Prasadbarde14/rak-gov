@@ -2,7 +2,6 @@ import React from "react";
 import { PlusCircle, MoreHorizontal } from "lucide-react";
 import { useGetProjectData } from "../../../API/Query/query";
 import { usePostGetProjectPlanning } from "../../../API/Mutation/mutation";
-import { transform } from "framer-motion";
 import { motion } from "framer-motion";
 
 // Key Result Card
@@ -87,7 +86,7 @@ const ProjectPlanningOverview = ({selected,index,parentData}) => {
                 <div className="flex justify-between mb-3">
                   <div className="text-sm text-gray-700 font-semibold">Key Results</div>
                   <div className="text-right text-xs text-gray-500 font-medium mt-1">
-                    {data.data.completionPercent}% Complete
+                    {data.data.completionPercent} Complete
                   </div>
                 </div>
                 <div className="w-full h-2 bg-gray-200 rounded-full mb-5">
