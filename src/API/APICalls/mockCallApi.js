@@ -15,6 +15,7 @@ export const graphData = {
       "data":[
   {
     "ProjectID": "INFRA001",
+    "Project Title" : "Director of Infrastructure",
     "PlannedCompletionDate": "2024-06-15",
     "ActualCompletionDate": "2024-07-02",
     "TotalDaysDelayed": 17,
@@ -50,6 +51,7 @@ export const graphData = {
     },
     {
       "name": "Milestones Met On Time",
+      "Project Title" : "Director of Infrastructure",
       "value": 78,
       "unit": "%",
       "progress": 87,
