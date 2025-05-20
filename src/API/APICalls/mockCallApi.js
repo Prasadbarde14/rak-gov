@@ -15,6 +15,7 @@ export const graphData = {
       "data":[
   {
     "ProjectID": "INFRA001",
+    "Project Title" : "Director of Infrastructure",
     "PlannedCompletionDate": "2024-06-15",
     "ActualCompletionDate": "2024-07-02",
     "TotalDaysDelayed": 17,
@@ -50,6 +51,7 @@ export const graphData = {
     },
     {
       "name": "Milestones Met On Time",
+      "Project Title" : "Director of Infrastructure",
       "value": 78,
       "unit": "%",
       "progress": 87,
@@ -479,18 +481,21 @@ export const maintenanceData = {
       title: "Infrastructure Defect #1",
       description: "Structural integrity issue detected in Bridge Section A-1",
       reportedAgo: "2 hours ago",
+      priority:"High Priority"
     },
     {
       id: 2,
       title: "Infrastructure Defect #2",
       description: "Structural integrity issue detected in Bridge Section A-2",
       reportedAgo: "2 hours ago",
+      priority:"High Priority"
     },
     {
       id: 3,
       title: "Infrastructure Defect #3",
       description: "Structural integrity issue detected in Bridge Section A-3",
       reportedAgo: "2 hours ago",
+      priority:"High Priority"
     },
   ],
 };

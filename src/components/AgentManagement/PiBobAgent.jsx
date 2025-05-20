@@ -1,10 +1,12 @@
 import React from "react";
 import ReactFlowComponent from "./ReactFlowComponent";
+import PIAgentCard from "./PIAgentCard";
 
 function PiBobAgent() {
   return (
     <div>
       <ReactFlowComponent />
+      <PIAgentCard/>
     </div>
   );
 }

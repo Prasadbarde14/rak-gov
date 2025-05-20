@@ -29,25 +29,29 @@ export const usePostGetSimmulationResult = (query, selected,enabled=false) => {
 };
 
 export const usePostGetProjectPlanning = (query,selected,index,data,enabled=false) => {
-
+    const simData  = useGetFetchQuery(['graphAnalysis', selected]); 
     return useQuery({
         queryKey:['projectPlanning',selected,index],
         queryFn: async () => {
-            return postGetSimmulationResult({ query, data})
+            const newBody={...simData[index],...data,"project title:":selected}
+            return postGetSimmulationResult({ query, body:newBody})
         },
         select:(res)=>{
-            return JSON.parse(res.data.text)
+            return JSON.parse(res.data.text).projectData
         },       
         enabled:enabled
     });
 };
 
 export const usePostGetMaintanenceOverview = (query,selected,index,data,enabled=false) => {
+    const simData  = useGetFetchQuery(['graphAnalysis', selected]); 
 
     return useQuery({
         queryKey:['maintanenceOverview',selected,index],
         queryFn: async () => {
-            return postGetSimmulationResult({ query, data})
+            const newBody={...simData[index],...data,"project title:":selected}
+
+            return postGetSimmulationResult({ query, body:newBody})
         },
         select:(res)=>{
             return JSON.parse(res.data.text)
@@ -58,11 +62,13 @@ export const usePostGetMaintanenceOverview = (query,selected,index,data,enabled=
 
 
 export const usePostGraphsData = (query,selected,index,data,enabled=false) => {
+    const simData  = useGetFetchQuery(['graphAnalysis', selected]); 
 
     return useQuery({
         queryKey:['graphsData',selected,index],
         queryFn: async () => {
-            return postGetSimmulationResult({ query, data})
+            const newBody={...simData[index],...data,"project title:":selected}
+            return postGetSimmulationResult({ query, body:newBody})
         },
         select:(res)=>{
             
