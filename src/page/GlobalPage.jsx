@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { MenuSquare, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Outlet, useLocation, useParams } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import AIAssistantWidget from "../components/AIAssistantWidget/AIAssistantWidget";
 import SideNav from "../components/Dashboard/SideNav";
 import TopNav from "../components/Dashboard/TopNav";
@@ -9,20 +9,18 @@ import GlobalContainer from "../components/Global/GlobalContainer";
 
 function GlobalPage() {
   const [sideNavVisibility, setSideNavVisibility] = useState(false);
+  const [tabs, setTabs] = useState([]);
+  const location = useLocation();
 
-  const [tabs,setTabs]=useState([])
-  const location=useLocation()
-
-  useEffect(()=>{
-    if(location.pathname=="/"){
-        setTabs(["Director of Infrastructure","Planning Analyst","Maintenance Head"])
-        setSelected("Director of Infrastructure")
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setTabs(["Director of Infrastructure", "Planning Analyst", "Maintenance Head"]);
+      setSelected("Director of Infrastructure");
+    } else if (location.pathname === "/agent") {
+      setTabs(["Agent Overview", "Training & Learning", "Performance", "Interaction"]);
+      setSelected("Agent Overview");
     }
-    else if(location.pathname=="/agent"){
-        setTabs(["Agent Overview","Training & Learning","Performance","Interaction"])
-        setSelected("Agent Overview")
-    }
-  },[location])
+  }, [location]);
 
   const [selected, setSelected] = useState("Director of Infrastructure");
 
@@ -53,6 +51,7 @@ function GlobalPage() {
           <Plus color="#ffffff" className="rotate-45" />
         )}
       </div>
+
       <motion.div
         className={`w-64 top-0 h-full ${!sideNavVisibility ? "hidden" : "fixed"
           } lg:sticky lg:block z-90`}
@@ -62,19 +61,22 @@ function GlobalPage() {
       >
         <SideNav />
       </motion.div>
-      <div className="flex flex-col w-full h-full">
+
+      <div className="flex flex-col w-full h-screen">
         <motion.div
           initial="hidden"
           animate="visible"
           variants={fadeInZoom}
           className="w-full"
         >
-          <TopNav selected={selected} setSelected={setSelected} tabs={tabs}/>
+          <TopNav selected={selected} setSelected={setSelected} tabs={tabs} />
         </motion.div>
-          <div className="w-full h-full">
-                <Outlet context={[selected,setSelected,tabs]}/>
-          </div>
+
+        <div className="w-full flex-1 min-h-0 overflow-auto">
+          <Outlet context={[selected, setSelected, tabs]} />
+        </div>
       </div>
+
       <div className="relative">
         <AIAssistantWidget />
       </div>
