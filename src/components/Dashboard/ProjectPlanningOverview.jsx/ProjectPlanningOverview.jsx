@@ -1,10 +1,17 @@
 import React from "react";
 import { PlusCircle, MoreHorizontal } from "lucide-react";
 import { useGetProjectData } from "../../../API/Query/query";
+import { transform } from "framer-motion";
+import { motion } from "framer-motion";
 
 // Key Result Card
 const KeyResult = ({ title, current, target, percentage, color }) => (
-  <div className="space-y-1">
+  <motion.div
+    className="space-y-1"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.4 }}
+  >
     <div className="flex flex-col items-start gap-2">
       <div className="flex gap-2">
         <input type="radio" className="mt-1" />
@@ -15,15 +22,17 @@ const KeyResult = ({ title, current, target, percentage, color }) => (
           {current} of {target}
         </div>
         <div className="relative w-[85%] h-2 mt-1 bg-gray-200 rounded-full overflow-hidden">
-          <div
+          <motion.div
             className={`absolute top-0 left-0 h-full ${color} rounded-full`}
-            style={{ width: `${percentage}%` }}
+            initial={{ width: 0 }}
+            animate={{ width: `${percentage}%` }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
           />
         </div>
         <div className="text-sm text-gray-700 font-light">{percentage}%</div>
       </div>
     </div>
-  </div>
+  </motion.div>
 );
 
 // Main Overview Component
@@ -73,7 +82,7 @@ const ProjectPlanningOverview = () => {
                     {data.data.completionPercent}% Complete
                   </div>
                 </div>
-                <div className="w-full h-1.5 bg-gray-200 rounded-full mb-5">
+                <div className="w-full h-2 bg-gray-200 rounded-full mb-5">
                   <div className="h-full bg-yellow-400 rounded-full" style={{ width: `${data.data.completionPercent}%` }}></div>
                 </div>
                 <div className="space-y-4 mt-3">

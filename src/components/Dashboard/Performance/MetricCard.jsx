@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Brain, TriangleAlert,CheckSquare, Square } from "lucide-react"; // or your icon library
+import { Brain, TriangleAlert,CheckSquare, Square, ChevronRight, Filter } from "lucide-react"; // or your icon library
 import ProjectPlanningOverview from "../ProjectPlanningOverview.jsx/ProjectPlanningOverview";
 import MaintenanceOverview from "./MaintenanceOverview";
 import MaintenanceMetric from "./MaintenanceMetrics";
@@ -51,9 +51,13 @@ const [isOpen, setIsOpen] = useState(false)
         className="flex justify-between items-center text-sm cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="flex flex-col gap-1">
-          <h3 className="font-semibold">{title}</h3>
+        
+        <div className=" flex flex-row gap-2">
+          <div className="flex flex-col gap-1">
+            <h3 className="font-semibold">{title}</h3>
           <div className="text-sm text-gray-600">Current: {current}</div>
+          </div>
+          {/* <Filter className="w-4 h-4 text-gray-400" /> */}
         </div>
         <div className="flex flex-col items-end gap-1">
           <span className="text-red-500 font-semibold">{delta}</span>

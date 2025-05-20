@@ -4,15 +4,24 @@ import { useGetPerformanceMatrics } from "../../../API/Query/query";
 import MetricCardSkeleton from "./MetricCardSkeleton";
 import SimulationSliders from "./SimulationSliders";
 import { usePostGetSimmulationResult } from "../../../API/Mutation/mutation";
-
 import MetricCard from "./MetricCard";
 
 const Performance = ({ selected }) => {
 
   const [enabled,setEnabled]=useState(false)
-  const [activeTab,setActiveTab]=useState(false)
-
-  const mutatePerformaceData = usePostGetSimmulationResult("giving performance matrix for ", selected,enabled)
+  const [activeTab,setActiveTab]=useState("auto")
+   const [parameters, setParameters] = useState({
+    resourceAllocation: 0,
+    processEfficiency: 0,
+    staffingLevels: 0,
+    technologyAdoption: 0,
+    marketConditions: 0,
+  });
+  const AutoClickHandler = ()=>{
+    setActiveTab("auto")
+    
+  }
+  const mutatePerformaceData = usePostGetSimmulationResult("Here are some simulation parameters"+JSON.stringify(parameters)+"Now give performance matrix for ", selected,enabled)
 
   useEffect(()=>{
     if(mutatePerformaceData.isSuccess)
@@ -40,24 +49,26 @@ const Performance = ({ selected }) => {
                   ? "bg-gray-100 text-gray-700"
                   : "bg-white hover:bg-gray-100 text-gray-700"
               }`}
-              onClick={() => setActiveTab("auto")}
+              onClick={AutoClickHandler}
             >
               <Brain className="w-4 h-4" />
               Auto
             </button>
             <button
               className={`flex items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer ${
-                activeTab === "manual"
+                (activeTab === "manual")
                   ? "bg-gray-100 text-gray-700"
                   : "bg-white hover:bg-gray-100 text-gray-700"
               }`}
-              onClick={() => setActiveTab(prev=>!prev)}
+              onClick={() => setActiveTab("manual")}
             >
               <Settings2 className="w-4 h-4" />
               Manual
             </button>
           </div>
-          <button disabled={mutatePerformaceData.isLoading} className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-1.5 rounded flex gap-1 items-center cursor-pointer" onClick={() => setEnabled(true)}>
+          <button disabled={mutatePerformaceData.isLoading} className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-1.5 rounded flex gap-1 items-center cursor-pointer" onClick={() => 
+            
+            setEnabled(true)}>
             {
               !mutatePerformaceData.isLoading ?
                 <>
@@ -72,22 +83,13 @@ const Performance = ({ selected }) => {
           </button>
         </div>
       </div>
-      {activeTab && <SimulationSliders/>}
+      {activeTab=="manual" && <SimulationSliders parameters={parameters} setParameters={setParameters}/>}
 
       <hr className="border border-gray-100" />
       <h3 className=" font-semibold">Simulation Results</h3>
       <div className="grid md:grid-cols-2 lg:grid-cols-1 gap-4">
-        
-
         {mutatePerformaceData?.data && mutatePerformaceData.data.map((i,indx)=><MetricCard key={indx} data={JSON.parse(i.data.text)}/>)}
       </div>
-      {/* <div className="grid md:grid-cols-2 lg:grid-cols-1 gap-4">
-        {isLoading
-          ? Array(4)
-            .fill(0)
-            .map((_, idx) => <MetricCardSkeleton key={idx} />)
-          : data?.map((metric, idx) => <MetricCard key={idx} {...metric} />)}
-      </div> */}
     </div>
   );
 };

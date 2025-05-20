@@ -7,7 +7,7 @@ const MaintenanceOverview = () => {
   const data=useGetMaintenanceData()
   
   return (
-    <div className="bg-white space-y-6 rounded shadow mt-5">
+    <div className="bg-white space-y-6 rounded-md shadow-sm border mt-5">
       <div className="  rounded p-4">
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center gap-2">
