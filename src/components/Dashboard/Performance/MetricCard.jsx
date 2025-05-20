@@ -1,19 +1,20 @@
 import React, { useState } from "react";
-import { Brain, TriangleAlert,CheckSquare, Square, ChevronRight, Filter } from "lucide-react"; // or your icon library
+import {
+  Brain,
+  TriangleAlert,
+  CheckSquare,
+  Square,
+  ChevronRight,
+  Filter,
+} from "lucide-react"; // or your icon library
 import ProjectPlanningOverview from "../ProjectPlanningOverview.jsx/ProjectPlanningOverview";
 import MaintenanceOverview from "./MaintenanceOverview";
 import MaintenanceMetric from "./MaintenanceMetrics";
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from "framer-motion";
 
-const MetricCard = ({ data,index,selected }) => {
-  const {
-    title,
-    current,
-    predicted,
-    delta,
-    recommendations,
-    impactAnalysis,
-  } = data?.performanceMetrics || {};
+const MetricCard = ({ data, index, selected }) => {
+  const { title, current, predicted, delta, recommendations, impactAnalysis } =
+    data?.performanceMetrics || {};
 
   const [selectedFields, setSelectedFields] = useState([]);
 
@@ -22,41 +23,60 @@ const MetricCard = ({ data,index,selected }) => {
     { label: "Maintenance Overview", value: "maintenanceOverview" },
     { label: "Maintenance Metric", value: "maintenanceMetric" },
   ];
-const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleFieldChange = (value) => {
     setSelectedFields((prev) =>
       prev.includes(value)
         ? prev.filter((item) => item !== value)
-        : [...prev, value] 
+        : [...prev, value]
     );
   };
 
   const renderSelectedComponent = (field) => {
-
     switch (field) {
       case "project":
-        return <ProjectPlanningOverview key="project"  index={index} selected={selected} parentData={data}/>;
+        return (
+          <ProjectPlanningOverview
+            key="project"
+            index={index}
+            selected={selected}
+            parentData={data}
+          />
+        );
       case "maintenanceOverview":
-        return <MaintenanceOverview key="maintenanceOverview" index={index} selected={selected} parentData={data}/>;
+        return (
+          <MaintenanceOverview
+            key="maintenanceOverview"
+            index={index}
+            selected={selected}
+            parentData={data}
+          />
+        );
       case "maintenanceMetric":
-        return <MaintenanceMetric key="maintenanceMetric"  index={index} selected={selected} parentData={data}/>;
+        return (
+          <MaintenanceMetric
+            key="maintenanceMetric"
+            index={index}
+            selected={selected}
+            parentData={data}
+          />
+        );
       default:
         return null;
     }
   };
-   return (
+  return (
     <div className="p-4 rounded-xl shadow-sm bg-[#f8fafc] space-y-2">
       {/* Header Section - Always Visible */}
       <div
         className="flex justify-between items-center text-sm cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
-        
         <div className=" flex flex-row gap-2">
           <div className="flex flex-col gap-1">
             <h3 className="font-semibold">{title}</h3>
-          <div className="text-sm text-gray-600">Current: {current}</div>
+            <div className="text-sm text-gray-600">Current: {current}</div>
           </div>
           {/* <Filter className="w-4 h-4 text-gray-400" /> */}
         </div>
@@ -73,17 +93,13 @@ const [isOpen, setIsOpen] = useState(false)
         </div>
       </div>
 
-     
-
       {/* Collapsible Content */}
       <AnimatePresence initial={false}>
-         
         {isOpen && (
-          
           <motion.div
             key="expanded"
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
             className="overflow-hidden space-y-3 text-sm"
@@ -123,32 +139,37 @@ const [isOpen, setIsOpen] = useState(false)
                 ))}
               </div>
             )}
-                 {/* Multi-Select Checkboxes */}
-      <div className="space-y-1">
-        <label className="text-sm font-semibold">Select Fields to View:</label>
-        <div className="flex flex-col gap-1">
-          {options.map((option) => (
-            <label key={option.value} className="flex items-center gap-2 text-sm">
-              <input
-                type="checkbox"
-                checked={selectedFields.includes(option.value)}
-                onChange={() => handleFieldChange(option.value)}
-              />
-              {option.label}
-            </label>
-          ))}
-        </div>
-      </div>
+            {/* Multi-Select Checkboxes */}
+            <div className="space-y-1">
+              <label className="text-sm font-semibold">
+                Select Fields to View:
+              </label>
+              <div className="flex flex-col gap-1">
+                {options.map((option) => (
+                  <label
+                    key={option.value}
+                    className="flex items-center gap-2 text-sm"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedFields.includes(option.value)}
+                      onChange={() => handleFieldChange(option.value)}
+                    />
+                    {option.label}
+                  </label>
+                ))}
+              </div>
+            </div>
 
-      {/* Render selected components in the order selected */}
-      <div className="mt-2 space-y-2">
-        {selectedFields.map((field) => renderSelectedComponent(field))}
-      </div>
+            {/* Render selected components in the order selected */}
+            <div className="mt-2 space-y-2">
+              {selectedFields.map((field) => renderSelectedComponent(field))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
     </div>
-  )
+  );
 };
 
 export default MetricCard;

@@ -4,10 +4,15 @@ import { ClipboardList } from "lucide-react";
 import { useGetGraphsData } from "../../../API/Query/query";
 import { usePostGraphsData } from "../../../API/Mutation/mutation";
 
-const MaintenanceMetrics = ({selected,index,parentData}) => {
+const MaintenanceMetrics = ({ selected, index, parentData }) => {
   // const graphData = useGetGraphsData();
-  const graphData=usePostGraphsData("Give me graphs data",selected,index,parentData,true)
-  console.log(graphData)
+  const graphData = usePostGraphsData(
+    "Give me graphs data",
+    selected,
+    index,
+    parentData,
+    true
+  );
 
   const option = {
     tooltip: {
@@ -38,50 +43,48 @@ const MaintenanceMetrics = ({selected,index,parentData}) => {
       max: 32,
     },
     series: [
-  {
-    name: "Contractor response time",
-    type: "line",
-    data: graphData.data?.contractorResponseData || [],
-    smooth: true,
-    symbol: "circle",
-    symbolSize: 6,
-    lineStyle: {
-      color: "#9FF486",
-      width: 3,
-    },
-    itemStyle: {
-      color: "#9FF486",
-    },
-    areaStyle: {
-      color: "rgba(0, 0, 0, 0.05)",
-    },
-    animationDuration: Math.random()*10000, 
-    animationEasing: "cubicOut", 
-  },
-  {
-    name: "High-risk defects identified",
-    type: "line",
-    data: graphData.data?.data?.map((item) => item.value) || [],
-    smooth: true,
-    symbol: "circle",
-    symbolSize: 6,
-    lineStyle: {
-      color: "#c7d2fe",
-      width: 3,
-    },
-    itemStyle: {
-      color: "#c7d2fe",
-    },
-    areaStyle: {
-      color: "rgba(199, 210, 254, 0.1)",
-    },
-    animationDuration: Math.random()*10000, 
-    animationEasing: "cubicOut", 
-  },
-],
-
+      {
+        name: "Contractor response time",
+        type: "line",
+        data: graphData.data?.contractorResponseData || [],
+        smooth: true,
+        symbol: "circle",
+        symbolSize: 6,
+        lineStyle: {
+          color: "#9FF486",
+          width: 3,
+        },
+        itemStyle: {
+          color: "#9FF486",
+        },
+        areaStyle: {
+          color: "rgba(0, 0, 0, 0.05)",
+        },
+        animationDuration: 15000,
+        animationEasing: "cubicOut",
+      },
+      {
+        name: "High-risk defects identified",
+        type: "line",
+        data: graphData.data?.data?.map((item) => item.value) || [],
+        smooth: true,
+        symbol: "circle",
+        symbolSize: 6,
+        lineStyle: {
+          color: "#c7d2fe",
+          width: 3,
+        },
+        itemStyle: {
+          color: "#c7d2fe",
+        },
+        areaStyle: {
+          color: "rgba(199, 210, 254, 0.1)",
+        },
+        animationDuration: 15000,
+        animationEasing: "cubicOut",
+      },
+    ],
   };
-
 
   return (
     <div className="bg-white space-y-6 p-4 mt-5 rounded w-full shadow">
@@ -89,12 +92,12 @@ const MaintenanceMetrics = ({selected,index,parentData}) => {
         <ClipboardList className="text-purple-600 mr-2" size={20} />
         <h2 className="text-lg font-semibold text-gray-800">Metrics</h2>
       </div>
-      {graphData.isLoading || graphData.isFetching && (
-        <div className="animate-pulse bg-gray-200 h-80 rounded w-full"></div>
-      )
-      } 
-      
-      {!graphData.isError && !graphData.isLoading && !graphData.isFetching &&(
+      {graphData.isLoading ||
+        (graphData.isFetching && (
+          <div className="animate-pulse bg-gray-200 h-80 rounded w-full"></div>
+        ))}
+
+      {!graphData.isError && !graphData.isLoading && !graphData.isFetching && (
         <div className="w-5/6 mx-auto">
           <ReactECharts
             option={option}

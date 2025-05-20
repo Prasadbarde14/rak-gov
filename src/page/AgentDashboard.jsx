@@ -2,6 +2,7 @@ import React from 'react'
 import { useOutletContext } from "react-router-dom";
 import AgentPerformance from '../components/AgentManagement/AgentPerformance'
 import AgentOverview from '../components/AgentManagement/AgentOverview';
+import PiBobAgent from '../components/AgentManagement/PiBobAgent';
 import AgentInteractionSection from '../components/AgentManagement/AgentInteractionSection';
 
 const AgentDashboard = () => {
@@ -11,6 +12,7 @@ const AgentDashboard = () => {
       {selected == "Performance" && <AgentPerformance />}
       {selected == "Agent Overview" && <AgentOverview />}
       {selected == "Interaction" && <AgentInteractionSection />}
+      {selected== "PI-BOB Agent" && <PiBobAgent/>}
 
     </div>
   )
