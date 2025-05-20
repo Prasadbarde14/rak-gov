@@ -87,7 +87,7 @@ const AgentCard = ({
 const AgentOverview = () => {
   const agents = [
     {
-      name: "Goal Recommendation Agent",
+      name: "Marco Agent",
       description: "Analyzes performance data and suggests strategic objectives",
       successRate: 0.0,
       executionTime: "0ms",
@@ -96,29 +96,21 @@ const AgentOverview = () => {
       capabilityDesc: "Generates strategic objectives based on KPI trends and gaps",
     },
     {
-      name: "KPI Anomaly Detection Agent",
-      description: "Monitors KPIs for anomalies and unusual patterns",
+      name: "BOB Agent",
+      description: " Transferring data through the Open API to the PI artifacts.",
       successRate: 0.0,
       executionTime: "0ms",
       errorRate: 0.0,
       capabilityKey: "anomaly-detection",
-      capabilityDesc: "Detects statistical anomalies in KPI values",
+      capabilityDesc: "Transferring data through the Open API to the PI artifacts.",
     },  {
-        name: "Goal Recommendation Agent",
-        description: "Analyzes performance data and suggests strategic objectives",
+        name: "PI Agent",
+        description: "Analyzes performance data and create PI artifacts",
         successRate: 0.0,
         executionTime: "0ms",
         errorRate: 0.0,
         capabilityKey: "objective-generation",
-        capabilityDesc: "Generates strategic objectives based on KPI trends and gaps",
-      },  {
-        name: "Goal Recommendation Agent",
-        description: "Analyzes performance data and suggests strategic objectives",
-        successRate: 0.0,
-        executionTime: "0ms",
-        errorRate: 0.0,
-        capabilityKey: "objective-generation",
-        capabilityDesc: "Generates strategic objectives based on KPI trends and gaps",
+        capabilityDesc: "Generates all possible schemas, BQ, adhoc, etc. (PI artifacts)",
       }
   ];
 
