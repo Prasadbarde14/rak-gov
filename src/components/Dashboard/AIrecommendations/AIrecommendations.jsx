@@ -13,7 +13,7 @@ import {
   useGetFetchQueryState,
 } from "../../../API/Query/query";
 import SkeletonRecommendationCard from "./SkeletonRecommendationCard";
-import { usePostGetSimmulationResult } from "../../../API/Mutation/mutation";
+import { usePostAIRecommendation, usePostGetSimmulationResult } from "../../../API/Mutation/mutation";
 import { useQueryClient } from "@tanstack/react-query";
 
 // Card style definitions
@@ -33,7 +33,11 @@ const cardStyles = {
 };
 
 // Main Recommendation Card
-const RecommendationCard = ({ type, title, description, confidence }) => {
+const RecommendationCard = ({data }) => {
+
+  console.log(data)
+
+  const {type, title, description, confidence }=data
   const style = cardStyles[type];
   return (
     <div
@@ -66,25 +70,11 @@ const RecommendationCard = ({ type, title, description, confidence }) => {
 
 // Main Wrapper Component
 function AIrecommendations({ selected }) {
-  const queryClient = useQueryClient();
 
-  const simState = useGetFetchQueryState(["Simmulation", selected]);
-  const [prevCount, setPrevCount] = useState(0);
-  const [enabled, setEnabled] = useState(false);
+  const mutatePerformaceData = usePostAIRecommendation("give me AIRecommendations ", selected)
+  console.log(mutatePerformaceData)
+  mutatePerformaceData?.data?.map(i=>console.log(i))
 
-  const { data, isLoading, isError } = useGetAIrecommendationsData(selected);
-
-  // const mutatePerformaceData = usePostGetSimmulationResult("give me performance matrix for ", selected, enabled)
-  useEffect(() => {
-    console.log(simState);
-    console.log(enabled);
-
-    if (simState?.dataUpdateCount > prevCount) {
-      setEnabled(true);
-    } else {
-      setEnabled(false);
-    }
-  }, [simState?.dataUpdateCount]);
 
   return (
     <>
@@ -94,14 +84,14 @@ function AIrecommendations({ selected }) {
       </div>
 
       <div className="w-full max-w-2xl mx-auto p-4 space-y-4">
-        {isLoading &&
+        {mutatePerformaceData.isLoading &&
           Array.from({ length: 3 }).map((_, i) => (
             <SkeletonRecommendationCard key={i} />
           ))}
 
-        {!isLoading &&
-          !isError &&
-          data.map((rec, index) => <RecommendationCard key={index} {...rec} />)}
+        {!mutatePerformaceData.isLoading &&
+          !mutatePerformaceData.isError &&
+          mutatePerformaceData?.data?.map((rec, index) => <RecommendationCard key={index} data={rec}/>)}
       </div>
     </>
   );
