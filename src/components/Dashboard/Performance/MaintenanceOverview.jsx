@@ -13,9 +13,7 @@ const MaintenanceOverview = ({selected,index,parentData}) => {
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center gap-2">
             <PenTool className="text-blue-600" />
-            <h2 className="text-lg font-semibold text-gray-800">
-              Overview
-            </h2>
+            <h2 className="text-lg font-semibold text-gray-800">Overview</h2>
           </div>
           <button className="text-blue-600 hover:underline text-sm font-medium flex gap-1 items-center cursor-pointer">
             <CirclePlus className="w-4 h-4" />
@@ -23,29 +21,32 @@ const MaintenanceOverview = ({selected,index,parentData}) => {
           </button>
         </div>
 
-        {data?.isLoading || data.isFetching && (
-          <div className="grid grid-cols-2 gap-4 mb-6 animate-pulse">
-            <div className="bg-gray-200 h-20 rounded-lg"></div>
-            <div className="bg-gray-200 h-20 rounded-lg"></div>
+        {data?.isLoading ||
+          (data.isFetching && (
+            <div className="grid grid-cols-2 gap-4 mb-6 animate-pulse">
+              <div className="bg-gray-200 h-20 rounded-lg"></div>
+              <div className="bg-gray-200 h-20 rounded-lg"></div>
+            </div>
+          ))}
+
+        {!data?.isLoading && !data?.isError && !data.isFetching && (
+          <div className="grid grid-cols-2 gap-4 mb-6">
+            <div className="bg-[#fffbeb] text-yellow-800 rounded-lg p-4">
+              <p className="text-sm font-semibold">High Priority Defects</p>
+              <p className="text-2xl font-bold">
+                {data?.data?.highPriorityDefects}
+              </p>
+              <p className="text-xs">Requires immediate attention</p>
+            </div>
+            <div className="bg-[#f0fdf4] text-green-800 rounded-lg p-4">
+              <p className="text-sm font-semibold">Completed Repairs</p>
+              <p className="text-2xl font-bold">
+                {data?.data?.completedRepairs}
+              </p>
+              <p className="text-xs">This week</p>
+            </div>
           </div>
         )}
-
-        {!data?.isLoading && !data?.isError && !data.isFetching && <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="bg-[#fffbeb] text-yellow-800 rounded-lg p-4">
-            <p className="text-sm font-semibold">High Priority Defects</p>
-            <p className="text-2xl font-bold">
-              {data?.data?.highPriorityDefects}
-            </p>
-            <p className="text-xs">Requires immediate attention</p>
-          </div>
-          <div className="bg-[#f0fdf4] text-green-800 rounded-lg p-4">
-            <p className="text-sm font-semibold">Completed Repairs</p>
-            <p className="text-2xl font-bold">
-              {data?.data?.completedRepairs}
-            </p>
-            <p className="text-xs">This week</p>
-          </div>
-        </div>}
 
         {!data.isLoading && !data.isError && !data.isRefetching && <div className="space-y-4">
           {data?.data?.defects?.map((defect) => (
