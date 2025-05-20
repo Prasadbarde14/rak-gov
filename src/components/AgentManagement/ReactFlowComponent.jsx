@@ -1,14 +1,15 @@
-import { Box, Boxes, Timer } from "lucide-react";
 import React from "react";
 import ReactFlow, { Background, Controls } from "reactflow";
 import "reactflow/dist/style.css";
+import { Timer, Box, Database, UploadCloud, FileBarChart, Table2, FileText, CheckCircle } from "lucide-react";
+
 const nodes = [
   {
     id: "start",
     type: "input",
     data: {
       label: (
-        <div className="flex justify-between items-center  ">
+        <div className="flex justify-between items-center">
           <p>Start Timer</p>
           <Timer />
         </div>
@@ -17,63 +18,116 @@ const nodes = [
     position: { x: 0, y: 100 },
   },
   {
-    id: "task1",
+    id: "clientSource",
     data: {
       label: (
-        <div className="flex justify-between items-center  ">
-          <p>Get Client data</p>
-          <Box />
+        <div className="flex justify-between items-center">
+          <p>Ingest Client Data</p>
+          <UploadCloud />
         </div>
       ),
     },
     position: { x: 200, y: 100 },
   },
   {
-    id: "gateway1",
-    type: "default",
-    data: { label: "Is Request Valid?" },
+    id: "validateIngestion",
+    data: {
+      label: (
+        <div className="flex justify-between items-center">
+          <p>Validate Data</p>
+          <Database />
+        </div>
+      ),
+    },
     position: { x: 400, y: 100 },
   },
   {
-    id: "task2",
-    data: { label: "Approve Request" },
-    position: { x: 600, y: 50 },
+    id: "generateSchema",
+    data: {
+      label: (
+        <div className="flex justify-between items-center">
+          <p>Generate Schema</p>
+          <FileText />
+        </div>
+      ),
+    },
+    position: { x: 600, y: 20 },
   },
   {
-    id: "task3",
-    data: { label: "Reject Request" },
-    position: { x: 600, y: 150 },
+    id: "generateBQ",
+    data: {
+      label: (
+        <div className="flex justify-between items-center">
+          <p>Create BQ Table</p>
+          <Table2 />
+        </div>
+      ),
+    },
+    position: { x: 600, y: 100 },
   },
   {
-    id: "gateway2",
-    type: "default",
-    data: { label: "More Review Needed?" },
+    id: "generateAdhoc",
+    data: {
+      label: (
+        <div className="flex justify-between items-center">
+          <p>Build Adhoc Report</p>
+          <FileBarChart />
+        </div>
+      ),
+    },
+    position: { x: 600, y: 180 },
+  },
+  {
+    id: "reviewArtifacts",
+    data: {
+      label: (
+        <div className="flex justify-between items-center">
+          <p>Review Artifacts</p>
+          <Box />
+        </div>
+      ),
+    },
     position: { x: 800, y: 100 },
   },
   {
-    id: "task4",
-    data: { label: "Final Approval" },
+    id: "finalApproval",
+    data: {
+      label: (
+        <div className="flex justify-between items-center">
+          <p>Final Approval</p>
+          <CheckCircle />
+        </div>
+      ),
+    },
     position: { x: 1000, y: 100 },
   },
   {
     id: "end",
     type: "output",
-    data: { label: "End Event" },
+    data: {
+      label: (
+        <div className="text-green-700 font-semibold">
+          End Event
+        </div>
+      ),
+    },
     position: { x: 1200, y: 100 },
   },
 ];
 
+
 const edges = [
-  { id: "e1-2", source: "start", target: "task1" },
-  { id: "e2-3", source: "task1", target: "gateway1" },
-  { id: "e3-4", source: "gateway1", target: "task2", label: "Yes" },
-  { id: "e3-5", source: "gateway1", target: "task3", label: "No" },
-  { id: "e4-6", source: "task2", target: "gateway2" },
-  { id: "e6-7", source: "gateway2", target: "task4", label: "Yes" },
-  { id: "e6-8", source: "gateway2", target: "end", label: "No" },
-  { id: "e5-8", source: "task3", target: "end" },
-  { id: "e7-8", source: "task4", target: "end" },
-];
+    { id: 'e1', source: 'start', target: 'clientSource' },
+    { id: 'e2', source: 'clientSource', target: 'validateIngestion' },
+    { id: 'e3', source: 'validateIngestion', target: 'generateSchema' },
+    { id: 'e4', source: 'validateIngestion', target: 'generateBQ' },
+    { id: 'e5', source: 'validateIngestion', target: 'generateAdhoc' },
+    { id: 'e6', source: 'generateSchema', target: 'reviewArtifacts' },
+    { id: 'e7', source: 'generateBQ', target: 'reviewArtifacts' },
+    { id: 'e8', source: 'generateAdhoc', target: 'reviewArtifacts' },
+    { id: 'e9', source: 'reviewArtifacts', target: 'finalApproval' },
+    { id: 'e10', source: 'finalApproval', target: 'end' },
+  ];
 
 function ReactFlowComponent() {
   return (
