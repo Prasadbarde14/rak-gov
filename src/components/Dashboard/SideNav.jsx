@@ -6,13 +6,19 @@ import {
   LayoutDashboard,
   Truck,
   ChevronRight,
+  Settings2,
 } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SideNav() {
   const [selected, setSelected] = useState("0-0");
   const [openIndex, setOpenIndex] = useState(0);
-
+  const navigate = useNavigate();
+  if(selected==="5-0")
+  {
+    navigate("/agents");
+  }
   const handleItemClick = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
@@ -43,6 +49,12 @@ function SideNav() {
       text: "RAK Transport Authority",
       children: ["Dashboard", "OKR Canvas", "KPI Board", "Action Plan"],
     },
+    {
+      icon: <Settings2 color="#94A3B8" size={20} />,
+      text: "Settings",
+      children: ["Agent Interaction"]
+    }
+
   ];
 
   return (
@@ -59,6 +71,7 @@ function SideNav() {
         
         {sideNavItems.map((item, index) => (
           <div key={index}>
+            {item.text === "Settings" && <hr className="my-4 border-gray-700"/>}
             <SideNavItem
               icon={item.icon}
               text={item.text}
@@ -71,7 +84,10 @@ function SideNav() {
                   <div
                     key={idx}
                     className={`py-2 px-4 text-gray-400 hover:text-white cursor-pointer text-sm  rounded-md ${selected === `${index}-${idx}` ? "bg-[#1F3A8A] text-white":"hover:bg-[#1E293B]"}`}
-                    onClick={() => setSelected(`${index}-${idx}`)}
+                    onClick={() =>{
+                       setSelected(`${index}-${idx}`)
+                    }
+                    }
                   >
                     {child}
                   </div>
@@ -93,9 +109,9 @@ function SideNavItem({ icon, text, isOpen, onClick }) {
       }`}
       onClick={onClick}
     >
-      <div className="flex flex-row gap-2">
+      <div className={`flex flex-row gap-2 ${text==="Settings"?"pl-5":""}`}>
         {icon}
-        <p className="text-white text-sm font-medium">{text}</p>
+        <p className={`${text==="Settings"?"text-gray-400 ":"text-white"} text-sm font-medium`}>{text}</p>
       </div>
       <ChevronRight
         color="#94A3B8"

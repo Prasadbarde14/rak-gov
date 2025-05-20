@@ -1,4 +1,3 @@
-import React from "react";
 import ReactECharts from "echarts-for-react";
 import { ClipboardList } from "lucide-react";
 import { useGetGraphsData } from "../../../API/Query/query";
