@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Target, CheckCircle, Zap, TrendingUp, Plus, CircleAlert } from "lucide-react";
-import { useGetAIrecommendationsData, useGetFetchQuery, useGetFetchQueryState } from "../../../API/Query/query";
+import {
+  Target,
+  CheckCircle,
+  Zap,
+  TrendingUp,
+  Plus,
+  CircleAlert,
+} from "lucide-react";
+import {
+  useGetAIrecommendationsData,
+  useGetFetchQuery,
+  useGetFetchQueryState,
+} from "../../../API/Query/query";
 import SkeletonRecommendationCard from "./SkeletonRecommendationCard";
 import { usePostGetSimmulationResult } from "../../../API/Mutation/mutation";
 import { useQueryClient } from "@tanstack/react-query";
 
 // Card style definitions
 const cardStyles = {
-  "objective": {
+  objective: {
     border: "border-blue-500",
     icon: <Target className="w-4 h-4 text-blue-500" />,
   },
@@ -15,7 +26,7 @@ const cardStyles = {
     border: "border-green-500",
     icon: <CheckCircle className="w-4 h-4 text-green-500" />,
   },
-  "action": {
+  action: {
     border: "border-yellow-500",
     icon: <Zap className="w-4 h-4 text-yellow-500" />,
   },
@@ -55,28 +66,25 @@ const RecommendationCard = ({ type, title, description, confidence }) => {
 
 // Main Wrapper Component
 function AIrecommendations({ selected }) {
+  const queryClient = useQueryClient();
 
-  const queryClient=useQueryClient()
-
-
-  const simState = useGetFetchQueryState(['Simmulation', selected])
-  const [prevCount,setPrevCount]=useState(0)
-  const [enabled, setEnabled] = useState(false)
+  const simState = useGetFetchQueryState(["Simmulation", selected]);
+  const [prevCount, setPrevCount] = useState(0);
+  const [enabled, setEnabled] = useState(false);
 
   const { data, isLoading, isError } = useGetAIrecommendationsData(selected);
 
   // const mutatePerformaceData = usePostGetSimmulationResult("give me performance matrix for ", selected, enabled)
-  useEffect(()=>{
-    console.log(simState)
-    console.log(enabled)
+  useEffect(() => {
+    console.log(simState);
+    console.log(enabled);
 
-    if(simState?.dataUpdateCount>prevCount){
-        setEnabled(true)
+    if (simState?.dataUpdateCount > prevCount) {
+      setEnabled(true);
+    } else {
+      setEnabled(false);
     }
-    else {
-      setEnabled(false)
-    }
-  },[simState?.dataUpdateCount])
+  }, [simState?.dataUpdateCount]);
 
   return (
     <>
