@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 
-const SimulationSliders = () => {
-  const [parameters, setParameters] = useState({
-    resourceAllocation: 0,
-    processEfficiency: 0,
-    staffingLevels: 0,
-    technologyAdoption: 0,
-    marketConditions: 0,
-  });
+const SimulationSliders = ({parameters,setParameters}) => {
+
 
   const handleChange = (key, value) => {
     setParameters((prev) => ({ ...prev, [key]: value }));
