@@ -3,6 +3,7 @@ import { PlusCircle, MoreHorizontal } from "lucide-react";
 import { useGetProjectData } from "../../../API/Query/query";
 import { usePostGetProjectPlanning } from "../../../API/Mutation/mutation";
 import { motion } from "framer-motion";
+import { useQueryClient } from "@tanstack/react-query";
 
 // Key Result Card
 const KeyResult = ({ title, current, target, percentage, color }) => (
@@ -38,12 +39,10 @@ const KeyResult = ({ title, current, target, percentage, color }) => (
 // Main Overview Component
 const ProjectPlanningOverview = ({selected,index,parentData}) => {
 
-  const data=usePostGetProjectPlanning("Give me Project Data",selected,index,parentData,true)
+  const queryClient=useQueryClient()
 
-  console.log(data)
+  const data=usePostGetProjectPlanning("Give me Project Data",selected,index,parentData,queryClient.getQueriesData(['projectPlanning',selected,index])==undefined)
 
-  console.log(data.isLoading)
-  
 
   return (
     <div className="w-full mx-auto bg-white rounded-md shadow-sm border mt-5">

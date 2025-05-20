@@ -7,7 +7,6 @@ import { usePostGraphsData } from "../../../API/Mutation/mutation";
 const MaintenanceMetrics = ({selected,index,parentData}) => {
   // const graphData = useGetGraphsData();
   const graphData=usePostGraphsData("Give me graphs data",selected,index,parentData,true)
-  console.log(graphData)
 
   const option = {
     tooltip: {
@@ -55,7 +54,7 @@ const MaintenanceMetrics = ({selected,index,parentData}) => {
     areaStyle: {
       color: "rgba(0, 0, 0, 0.05)",
     },
-    animationDuration: Math.random()*10000, 
+    animationDuration: 15000, 
     animationEasing: "cubicOut", 
   },
   {
@@ -75,7 +74,7 @@ const MaintenanceMetrics = ({selected,index,parentData}) => {
     areaStyle: {
       color: "rgba(199, 210, 254, 0.1)",
     },
-    animationDuration: Math.random()*10000, 
+    animationDuration: 15000,
     animationEasing: "cubicOut", 
   },
 ],
