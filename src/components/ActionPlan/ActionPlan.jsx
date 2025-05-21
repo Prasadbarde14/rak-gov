@@ -57,18 +57,7 @@ const ActionPlan = ({ department, departmentId='public-works',selected }) => {
             <h2 className="text-xl font-medium text-slate-800">Action Plan</h2>
           </div>
           <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <Users className="h-4 w-4 text-slate-400" />
-              <select
-                value={activePersona}
-                onChange={(e) => setActivePersona(e.target.value)}
-                className="text-sm text-slate-600 bg-transparent border-none focus:ring-0 cursor-pointer"
-              >
-                {department.personas.map(persona => (
-                  <option key={persona} value={persona}>{persona}</option>
-                ))}
-              </select>
-            </div>
+           
             <button 
               onClick={handleNewAction}
               className="flex items-center cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors"
@@ -107,10 +96,10 @@ const ActionPlan = ({ department, departmentId='public-works',selected }) => {
             </div>
           </div>
           
-          <button className="flex items-center text-slate-600 hover:text-slate-800">
+          {/* <button className="flex items-center text-slate-600 hover:text-slate-800">
             <Filter className="h-4 w-4 mr-1.5" />
             <span className="text-sm">Filter</span>
-          </button>
+          </button> */}
         </div>
       </div>
       
