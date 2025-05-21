@@ -7,6 +7,7 @@ import {
   Bot,
   CircleDot,
 } from "lucide-react";
+import useNetworkStore from "../../store/store";
 
 // Agent Card
 const AgentCard = ({
@@ -19,6 +20,12 @@ const AgentCard = ({
   capabilityDesc,
   status = "idle",
 }) => {
+
+  const getMetrics = useNetworkStore(state => state.getMetrics);
+  const metrics = getMetrics();
+
+  console.log(metrics)
+
   return (
     <div className="border rounded-lg bg-white px-6 py-5 space-y-5 shadow-sm w-full">
       {/* Top Row */}
@@ -44,7 +51,7 @@ const AgentCard = ({
             <CheckCircle className="w-4 h-4" />
             Success Rate
           </div>
-          <div className="text-lg font-semibold text-black">{successRate}%</div>
+          <div className="text-lg font-semibold text-black">{metrics.successRate}</div>
         </div>
 
         <div className="bg-gray-50 rounded-md border px-4 py-3 w-full md:w-52">
@@ -52,7 +59,7 @@ const AgentCard = ({
             <Timer className="w-4 h-4" />
             Execution Time
           </div>
-          <div className="text-lg font-semibold text-black">{executionTime}</div>
+          <div className="text-lg font-semibold text-black">{metrics.avgLatency}</div>
         </div>
 
         <div className="bg-gray-50 rounded-md border px-4 py-3 w-full md:w-52">
@@ -60,7 +67,7 @@ const AgentCard = ({
             <AlertTriangle className="w-4 h-4" />
             Error Rate
           </div>
-          <div className="text-lg font-semibold text-black">{errorRate}%</div>
+          <div className="text-lg font-semibold text-black">{metrics.errorRate}</div>
         </div>
       </div>
 
