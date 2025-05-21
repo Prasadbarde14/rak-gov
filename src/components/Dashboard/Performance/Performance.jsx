@@ -11,7 +11,7 @@ const Performance = ({ selected }) => {
 
   const [enabled, setEnabled] = useState(false)
   const [activeTab, setActiveTab] = useState("auto")
-  const [autoEnable,setAutoEnable]= useState(false);
+  const [autoEnable, setAutoEnable] = useState(false);
   const [parameters, setParameters] = useState({
     resourceAllocation: 0,
     processEfficiency: 0,
@@ -21,9 +21,9 @@ const Performance = ({ selected }) => {
   });
   const queryClient = new QueryClient();
 
-  const AutoSimulation =  useGetAutoSimulation(selected,autoEnable);
+  const AutoSimulation = useGetAutoSimulation(selected, autoEnable);
   // setAutoEnable(false);
-// console.log(autoEnable)
+  // console.log(autoEnable)
   const AutoClickHandler = () => {
     setActiveTab("auto")
     setAutoEnable(true);
@@ -38,10 +38,10 @@ const Performance = ({ selected }) => {
       setEnabled(false)
   }, [mutatePerformaceData])
 
-  useEffect(()=>{
-    if(!AutoSimulation.isLoading)
+  useEffect(() => {
+    if (!AutoSimulation.isLoading)
       setAutoEnable(false)
-  },[AutoSimulation])
+  }, [AutoSimulation])
 
   console.log(mutatePerformaceData.data)
   return (
@@ -61,8 +61,8 @@ const Performance = ({ selected }) => {
           <div className="flex border border-gray-200 rounded-md overflow-hidden p-1">
             <button
               className={`flex items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer ${activeTab === "auto"
-                  ? "bg-gray-100 text-gray-700"
-                  : "bg-white hover:bg-gray-100 text-gray-700"
+                ? "bg-gray-100 text-gray-700"
+                : "bg-white hover:bg-gray-100 text-gray-700"
                 }`}
               onClick={AutoClickHandler}
             >
@@ -71,8 +71,8 @@ const Performance = ({ selected }) => {
             </button>
             <button
               className={`flex items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer ${(activeTab === "manual")
-                  ? "bg-gray-100 text-gray-700"
-                  : "bg-white hover:bg-gray-100 text-gray-700"
+                ? "bg-gray-100 text-gray-700"
+                : "bg-white hover:bg-gray-100 text-gray-700"
                 }`}
               onClick={() => setActiveTab("manual")}
             >
@@ -80,7 +80,11 @@ const Performance = ({ selected }) => {
               Manual
             </button>
           </div>
-          <button disabled={mutatePerformaceData.isLoading} className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-1.5 rounded flex gap-1 items-center cursor-pointer" onClick={onSimulateClick}>
+          <button disabled={mutatePerformaceData.isLoading} className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-1.5 rounded flex gap-1 items-center cursor-pointer" onClick={() => {
+            setEnabled(true);
+            queryClient.setQueryData(['Simmulation', selected], () => []);
+            queryClient.removeQueries(['Simmulation', selected], { exact: true });
+          }}>
             {
               !mutatePerformaceData.isLoading || mutatePerformaceData.fetchStatus == "idle" ?
                 <>
@@ -95,7 +99,7 @@ const Performance = ({ selected }) => {
           </button>
         </div>
       </div>
-      {activeTab=="manual" && activeTab && <SimulationSliders parameters={parameters} setParameters={setParameters}/>}
+      {activeTab == "manual" && activeTab && <SimulationSliders parameters={parameters} setParameters={setParameters} />}
 
       <hr className="border border-gray-100" />
       <h3 className=" font-semibold">Simulation Results</h3>
