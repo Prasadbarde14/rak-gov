@@ -18,7 +18,7 @@ const CrossDepartmentAnalysis = () => {
       axisPointer: { type: 'shadow' },
     },
     legend: {
-      data: ['Current Value', 'Target'],
+      data: ['Current Value', 'Target' ],
       bottom: 0,
     },
     grid: {
