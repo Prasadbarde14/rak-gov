@@ -48,6 +48,7 @@ const CrossDepartmentAnalysis = () => {
         data: currentValues,
         itemStyle: { color: '#6366f1' }, // indigo-500
         barWidth: '30%',
+        
       },
       {
         name: 'Target',
