@@ -6,6 +6,7 @@ function PiBobAgent() {
   return (
     <div>
       <ReactFlowComponent />
+      <hr />
       <PIAgentCard/>
     </div>
   );

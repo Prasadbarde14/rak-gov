@@ -12,6 +12,7 @@ import SpeechRecognition, {
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useChatBotMutation } from "../../API/Query/query";
+// import {useGetFetchQuery} from "../../../src/API/Query";
 
 export default function AIAssistantWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,6 +26,7 @@ export default function AIAssistantWidget() {
   const [uuid, setUuid] = useState(Math.random().toString(36).substring(2, 15));
 
   const { mutateAsync, isPending, isError } = useChatBotMutation();
+  
 
   const toggleExpanded = (index) => {
     setExpandedMessages((prev) => ({
@@ -43,7 +45,7 @@ export default function AIAssistantWidget() {
         chartData,
         uuid,
       });
-      console.log("data: ", botResponse);
+      // console.log("data: ", botResponse);
       // const message = await getChatBotResponse();
 
       const botMessage = {

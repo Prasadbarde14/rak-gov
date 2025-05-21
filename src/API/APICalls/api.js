@@ -55,7 +55,7 @@ export const getChatBotResponse = async ({ query, agent = "prompt", chartData, u
   };
 
   const payload = {
-    agentId: "03dba2df-93b0-4c28-b57f-7d15c69a3abf",
+    agentId: "0ce2d3f5-144b-4b35-8876-bd763fab804b",
     query: `${agent} - ${query} ${agent === "data" ? JSON.stringify(chartData) : ""}`,
     sessionId: uuid,
   };
