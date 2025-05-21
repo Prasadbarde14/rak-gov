@@ -19,14 +19,14 @@ function TopNav({ selected, setSelected,tabs }) {
           </p>
         </div>
         <div className="flex flex-row gap-6 items-center justify-around flex-wrap xl:justify-around xl:p-2 p-4">
-          {/* <div className="flex border-1 border-slate-200 bg-slate-100 p-2 items-center rounded-md">
+          <div className="flex border-1 border-slate-200 bg-slate-100 p-2 items-center rounded-md">
             <Search size={16} color="#7D8082" />
             <Input
               placeholder={"Search..."}
               type={"text"}
               className={" pl-2 rounded-md text-sm outline:none"}
             />
-          </div> */}
+          </div>
           <div className="flex">
             <Users size={18} color="#6b7280" />
             <Select
@@ -36,7 +36,7 @@ function TopNav({ selected, setSelected,tabs }) {
               handleSelect={handleSelect}
             />
           </div>
-          {/* <Settings2 size={20} color="#475569" /> */}
+          <Settings2 size={20} color="#475569" />
           <div className="relative hover:bg-gray-200 rounded-full p-2">
             <div className="px-1 items-center justify-center rounded-2xl bg-red-500 absolute top-0 right-0 text-xs text-white">
               <p>3</p>
