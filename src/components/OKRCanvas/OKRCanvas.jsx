@@ -106,7 +106,20 @@ const OKRCanvas = ({selected,department}) => {
             <h2 className="text-xl font-medium text-slate-800">OKR Canvas</h2>
           </div>
           <div className="flex items-center space-x-4">
-           
+            <div className="flex items-center space-x-2">
+              <Users className="h-4 w-4 text-slate-400" />
+              <select
+                value={activePersona}
+                onChange={(e) => setActivePersona(e.target.value)}
+                className="text-sm text-slate-600 bg-transparent border-none focus:ring-0 cursor-pointer"
+              >
+                {department.personas.map((persona) => (
+                  <option key={persona} value={persona}>
+                    {persona}
+                  </option>
+                ))}
+              </select>
+            </div>
             <button className="flex items-center bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors">
               <PlusCircle className="h-4 w-4 mr-2" />
               New Objective
