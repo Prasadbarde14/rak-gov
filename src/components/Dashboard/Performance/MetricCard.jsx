@@ -13,8 +13,9 @@ import MaintenanceMetric from "./MaintenanceMetrics";
 import { motion, AnimatePresence } from "framer-motion";
 
 const MetricCard = ({ data, index, selected }) => {
+  console.log(data)
   const { title, current, predicted, delta, recommendations, impactAnalysis } =
-    data?.performanceMetrics || {};
+    data || {};
 
   const [selectedFields, setSelectedFields] = useState([]);
 

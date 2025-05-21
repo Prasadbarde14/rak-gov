@@ -18,7 +18,23 @@ export const usePostGetSimmulationResult = (query, selected,enabled=false) => {
                 throw new Error('No data available to post');
             }
         },
-        enabled:enabled
+        select: (res) => {
+            return res.map((i) => {
+                try {
+                    const parsed = JSON.parse(i.data.text);
+                    if (parsed["performanceMetrics"]) {
+                        return parsed["performanceMetrics"];
+                    }
+
+                    return parsed;
+                } catch (e) {
+                    console.error("Failed to parse response", e);
+                    return null;
+                }
+            }).filter(Boolean); // remove any null values if JSON parsing fails
+        },
+
+        enabled: enabled
     });
 };
 
@@ -77,6 +93,7 @@ export const usePostGraphsData = (query, selected, index, data, enabled = false)
 
 export const usePostAIRecommendation = (query, selected, enabled = false) => {
     const data = useGetFetchQuery(['graphAnalysis', selected]);
+
 
     return useQuery({
         queryKey: ['AIRecommend', selected],

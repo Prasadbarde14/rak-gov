@@ -98,7 +98,7 @@ const ProjectPlanningOverview = ({ selected, index, parentData }) => {
               <div className="w-full h-2 bg-gray-200 rounded-full mb-5">
                 <div
                   className="h-full bg-yellow-400 rounded-full"
-                  style={{ width: `${data.data.completionPercent}%` }}
+                  style={{ width: `${parent(data.data.completionPercent)}` }}
                 ></div>
               </div>
               <div className="space-y-4 mt-3">

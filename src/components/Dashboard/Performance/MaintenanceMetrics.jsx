@@ -92,9 +92,9 @@ const MaintenanceMetrics = ({ selected, index, parentData }) => {
         <h2 className="text-lg font-semibold text-gray-800">Metrics</h2>
       </div>
       {graphData.isLoading ||
-        (graphData.isFetching && (
+        graphData.isFetching && (
           <div className="animate-pulse bg-gray-200 h-80 rounded w-full"></div>
-        ))}
+        )}
 
       {!graphData.isError && !graphData.isLoading && !graphData.isFetching && (
         <div className="w-5/6 mx-auto">
