@@ -24,8 +24,6 @@ const AgentCard = ({
   const getMetrics = useNetworkStore(state => state.getMetrics);
   const metrics = getMetrics();
 
-  console.log(metrics)
-
   return (
     <div className="border rounded-lg bg-white px-6 py-5 space-y-5 shadow-sm w-full">
       {/* Top Row */}

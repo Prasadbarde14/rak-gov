@@ -6,13 +6,14 @@ import Canvas from "./page/Canvas"
 import ActionPlanDashboard from "./page/ActionPlanDashboard"
 
 import KPIBoard from "./page/KPIboard"
+import NotFound from "./page/404/NotFound"
 
 function App() {
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <GlobalPage />,      
+      element: <GlobalPage />,
       children: [
         {
           path: "/",
@@ -21,10 +22,15 @@ function App() {
         ,
         {
           path: "/public-works/kpi-board",
-          element: <KPIBoard/>
+          element: <KPIBoard />
         },
         {
           path: "/agent",
+<<<<<<< HEAD
+          element: <AgentDashboard />
+        },
+
+=======
           element: <AgentDashboard/>
         },
         {
@@ -34,7 +40,12 @@ function App() {
           path:"/public-works/action-plan",
           element:<ActionPlanDashboard/>
         }
+>>>>>>> aa791e9ed1af6733dc2124cb234ec35a376a44ee
       ]
+    },
+    {
+      path: "*",
+      element: <NotFound/>
     },
   ])
 

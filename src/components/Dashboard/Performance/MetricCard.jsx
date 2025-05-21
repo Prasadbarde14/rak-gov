@@ -13,7 +13,6 @@ import MaintenanceMetric from "./MaintenanceMetrics";
 import { motion, AnimatePresence } from "framer-motion";
 
 const MetricCard = ({ data, index, selected }) => {
-  console.log(data)
   const { title, current, predicted, delta, recommendations, impactAnalysis } =
     data || {};
 
@@ -141,24 +140,37 @@ const MetricCard = ({ data, index, selected }) => {
               </div>
             )}
             {/* Multi-Select Checkboxes */}
-            <div className="space-y-1">
+            <div className="space-y-2">
               <label className="text-sm font-semibold">
                 Select Fields to View:
               </label>
-              <div className="flex flex-col gap-1">
-                {options.map((option) => (
-                  <label
-                    key={option.value}
-                    className="flex items-center gap-2 text-sm"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={selectedFields.includes(option.value)}
-                      onChange={() => handleFieldChange(option.value)}
-                    />
-                    {option.label}
-                  </label>
-                ))}
+              <div className="flex flex-col gap-2 pt-2">
+                <div className="space-y-2 flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2">
+                    {options.map((option) => {
+                      const isChecked = selectedFields.includes(option.value);
+                      return (
+                        <label
+                          key={option.value}
+                          className={`cursor-pointer px-4 py-1 rounded-md border text-sm font-medium transition 
+          ${isChecked
+                              ? "bg-slate-600 text-white border-slate-600 shadow"
+                              : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                            }`}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={() => handleFieldChange(option.value)}
+                            className="hidden"
+                          />
+                          {option.label}
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+
               </div>
             </div>
 
