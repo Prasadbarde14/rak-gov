@@ -3,7 +3,7 @@ import { CirclePlay, Settings2, Brain, TriangleAlert } from "lucide-react";
 import { useGetAutoSimulation, useGetPerformanceMatrics } from "../../../API/Query/query";
 import MetricCardSkeleton from "./MetricCardSkeleton";
 import SimulationSliders from "./SimulationSliders";
-import { usePostGetSimmulationResult } from "../../../API/Mutation/mutation";
+import { usePostGetSimmulationResult } from "../../../API/Query/query";
 import MetricCard from "./MetricCard";
 import { QueryClient } from "@tanstack/react-query";
 

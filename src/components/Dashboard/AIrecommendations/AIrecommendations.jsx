@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from "react";
 import {
-  Target,
   CheckCircle,
-  Zap,
-  TrendingUp,
-  Plus,
   CircleAlert,
+  Plus,
+  Target,
+  TrendingUp,
+  Zap,
 } from "lucide-react";
 import {
-  useGetAIrecommendationsData,
-  useGetFetchQuery,
-  useGetFetchQueryState,
+  useGetFetchQueryState,usePostAIRecommendation
 } from "../../../API/Query/query";
 import SkeletonRecommendationCard from "./SkeletonRecommendationCard";
-import { usePostAIRecommendation, usePostGetSimmulationResult } from "../../../API/Mutation/mutation";
-import { useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
 // Card style definitions
 const cardStyles = {
@@ -69,11 +65,21 @@ const RecommendationCard = ({data }) => {
 
 // Main Wrapper Component
 function AIrecommendations({ selected }) {
+  const [enabled,setEnabled]=useState(false)
 
   const data = useGetFetchQueryState(['graphAnalysis', selected]);
-  const mutatePerformaceData = usePostAIRecommendation("give me AIRecommendations ", selected,!!data)
+  
+  useEffect(()=>{
+    console.log(Array.isArray(data.data))
+    if(Array.isArray(data.data) && data.data.length>0){
+      setEnabled(data.data.length>0)
+    }
 
+  },[data?.data])
 
+  console.log("Enabled ",enabled)
+
+  const mutatePerformaceData = usePostAIRecommendation("give me AIRecommendations ", selected,enabled,data?.data)
   return (
     <>
       <div className="border-b p-4 flex items-center gap-2 font-semibold text-gray-800">
