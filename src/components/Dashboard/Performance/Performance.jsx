@@ -50,8 +50,9 @@ const Performance = ({ selected }) => {
   }, [mutatePerformaceData]);
 
   useEffect(() => {
-    if (!AutoSimulation.isLoading) setAutoEnable(false);
-  }, [AutoSimulation]);
+    if (!AutoSimulation.isLoading)
+      setAutoEnable(false)
+  }, [AutoSimulation])
 
   // console.log(mutatePerformaceData.data);
   return (
