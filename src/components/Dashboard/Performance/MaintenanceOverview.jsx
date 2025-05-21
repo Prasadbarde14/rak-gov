@@ -22,12 +22,12 @@ const MaintenanceOverview = ({selected,index,parentData}) => {
         </div>
 
         {data?.isLoading ||
-          (data.isFetching && (
+          data.isFetching && (
             <div className="grid grid-cols-2 gap-4 mb-6 animate-pulse">
               <div className="bg-gray-200 h-20 rounded-lg"></div>
               <div className="bg-gray-200 h-20 rounded-lg"></div>
             </div>
-          ))}
+          )}
 
         {!data?.isLoading && !data?.isError && !data.isFetching && (
           <div className="grid grid-cols-2 gap-4 mb-6">
@@ -65,7 +65,7 @@ const MaintenanceOverview = ({selected,index,parentData}) => {
               </div>
               <div className="flex flex-col items-end">
                 <span className={`${defect?.priority==="Critical"? "bg-red-100 text-red-800":""} ${defect?.priority==="High"? "bg-orange-100 text-orange-800":""} ${defect?.priority==="Medium"? "bg-yellow-100 text-yellow-800":""} ${defect?.priority==="Low"? "bg-green-100 text-green-800":""}  text-xs font-semibold px-2 py-1 rounded mb-2`}>
-                 {defect?.priority} Priority {console.log(defect?.priority)}
+                 {defect?.priority} Priority
                 </span>
                 <button className="text-blue-600 text-sm hover:underline">
                   View Details

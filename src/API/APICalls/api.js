@@ -1,5 +1,6 @@
 import axios from "axios"
 import { graphData,performanceMatrics,AIrecommendations, maintenanceData ,graphsData, projectData} from "./mockCallApi";
+import useNetworkStore from "../../store/store";
 
 const instance = axios.create({
   baseURL : 'https://fakestoreapi.com',
@@ -16,9 +17,43 @@ const agentInstance=axios.create({
   }
 })
 
-instance.interceptors.request.use(async (config) => {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+
+agentInstance.interceptors.request.use(config => {
+  config.meta = { startTime: new Date().getTime() };
   return config;
+}, error => Promise.reject(error));
+
+
+agentInstance.interceptors.response.use(response => {
+  const endTime = new Date().getTime();
+  const startTime = response.config.meta.startTime;
+  const executionTime = endTime - startTime;
+
+  useNetworkStore.getState().addRequestLog({
+    method: response.config.method.toUpperCase(),
+    url: response.config.url,
+    status: response.status,
+    success: true,
+    executionTime,
+    time: new Date().toISOString()
+  });
+
+  return response;
+}, error => {
+  const endTime = new Date().getTime();
+  const startTime = error.config?.meta?.startTime || endTime;
+  const executionTime = endTime - startTime;
+
+  useNetworkStore.getState().addRequestLog({
+    method: error.config?.method?.toUpperCase() || 'UNKNOWN',
+    url: error.config?.url || 'UNKNOWN',
+    status: error.response?.status || 500,
+    success: false,
+    executionTime,
+    time: new Date().toISOString()
+  });
+
+  return Promise.reject(error);
 });
 
 
@@ -73,15 +108,14 @@ export const getChatBotResponse = async ({ query, agent = "prompt", chartData, u
 
 export async function postAgentData(selected){
   return await agentInstance.post('/interact',{
-    body:{
+    
       "agentId": "51312e76-f198-419e-86d6-a464bfc08a6a",
       "query": JSON.stringify(graphData[selected])
-    }
+    
   })
 }
 
 export async function postGetSimmulationResult({query,body}){
-  
   return await agentInstance.post('/interact',{
     
         "agentId": "51312e76-f198-419e-86d6-a464bfc08a6a",
@@ -91,5 +125,12 @@ export async function postGetSimmulationResult({query,body}){
   
 }
 
+export async function getAutoSimulation({selected,body}){
+
+  return await agentInstance.post('/interact',{
+      "agentId": "3d166420-9517-4057-b5f0-2603077246ae",
+      "query": JSON.stringify(body)
+  })
+}
 
 export default instance;

@@ -2,8 +2,9 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useGetFetchQuery } from '../Query/query';
 import { postGetSimmulationResult } from '../APICalls/api';
 
-export const usePostGetSimmulationResult = (query, selected, enabled = false) => {
-    const data = useGetFetchQuery(['graphAnalysis', selected]);
+export const usePostGetSimmulationResult = (query, selected,enabled=false) => {
+
+    const data  = useGetFetchQuery(['graphAnalysis', selected]); 
 
     return useQuery({
         queryKey: ['Simmulation', selected],
@@ -16,6 +17,21 @@ export const usePostGetSimmulationResult = (query, selected, enabled = false) =>
             } else {
                 throw new Error('No data available to post');
             }
+        },
+        select: (res) => {
+            return res.map((i) => {
+                try {
+                    const parsed = JSON.parse(i.data.text);
+                    if (parsed["performanceMetrics"]) {
+                        return parsed["performanceMetrics"];
+                    }
+
+                    return parsed;
+                } catch (e) {
+                    console.error("Failed to parse response", e);
+                    return null;
+                }
+            }).filter(Boolean); // remove any null values if JSON parsing fails
         },
 
         enabled: enabled
@@ -77,6 +93,7 @@ export const usePostGraphsData = (query, selected, index, data, enabled = false)
 
 export const usePostAIRecommendation = (query, selected, enabled = false) => {
     const data = useGetFetchQuery(['graphAnalysis', selected]);
+
 
     return useQuery({
         queryKey: ['AIRecommend', selected],

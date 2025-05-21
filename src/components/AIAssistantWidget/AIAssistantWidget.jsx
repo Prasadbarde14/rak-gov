@@ -43,7 +43,6 @@ export default function AIAssistantWidget() {
         chartData,
         uuid,
       });
-      console.log("data: ", botResponse);
       // const message = await getChatBotResponse();
 
       const botMessage = {
