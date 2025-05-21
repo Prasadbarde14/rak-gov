@@ -1,7 +1,7 @@
 import React from 'react'
 import { useOutletContext } from "react-router-dom";
 import ActionPlan from '../components/ActionPlan/ActionPlan';
-import { departments } from '../utils/department';
+import { departments } from '../API/APICalls/department';
 
 
 const ActionPlanDashboard = () => {

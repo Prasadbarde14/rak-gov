@@ -1,7 +1,7 @@
 import React from 'react'
 import { useOutletContext } from "react-router-dom";
 import OKRCanvas from '../components/OKRCanvas/OKRCanvas';
-import { departments } from '../utils/department';
+import { departments } from '../API/APICalls/department';
 
 
 const AgentDashboard = () => {
