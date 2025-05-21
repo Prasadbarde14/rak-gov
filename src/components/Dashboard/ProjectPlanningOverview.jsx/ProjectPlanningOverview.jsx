@@ -7,33 +7,61 @@ import { useQueryClient } from "@tanstack/react-query";
 
 // Key Result Card
 const KeyResult = ({ title, current, target, percentage, color }) => (
+  // <motion.div
+  //   className="space-y-1"
+  //   initial={{ opacity: 0, y: 20 }}
+  //   animate={{ opacity: 1, y: 0 }}
+  //   transition={{ duration: 0.4 }}
+  // >
+  //   <div className="flex flex-col items-start gap-2">
+  //     <div className="flex gap-2">
+  //       <input type="radio" className="mt-1" />
+  //       <div className="text-sm font-semibold text-gray-800">{title}</div>
+  //     </div>
+  //     <div className="w-full flex gap-2.5">
+  //       <div className="text-xs text-gray-500 w-[10%]">
+  //         {current} of {target}
+  //       </div>
+  //       <div className="relative w-[85%] h-2 mt-1 bg-gray-200 rounded-full overflow-hidden">
+  //         <motion.div
+  //           className={`absolute top-0 left-0 h-full ${color} rounded-full`}
+  //           initial={{ width: 0 }}
+  //           animate={{ width: `${percentage}%` }}
+  //           transition={{ duration: 0.7, ease: "easeOut" }}
+  //         />
+  //       </div>
+  //       <div className="text-sm text-gray-700 font-light">{percentage}</div>
+  //     </div>
+  //   </div>
+  // </motion.div>
   <motion.div
-    className="space-y-1"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.4 }}
-  >
-    <div className="flex flex-col items-start gap-2">
-      <div className="flex gap-2">
-        <input type="radio" className="mt-1" />
-        <div className="text-sm font-semibold text-gray-800">{title}</div>
-      </div>
-      <div className="w-full flex gap-2.5">
-        <div className="text-xs text-gray-500 w-[10%]">
-          {current} of {target}
-        </div>
-        <div className="relative w-[85%] h-2 mt-1 bg-gray-200 rounded-full overflow-hidden">
-          <motion.div
-            className={`absolute top-0 left-0 h-full ${color} rounded-full`}
-            initial={{ width: 0 }}
-            animate={{ width: `${percentage}%` }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-          />
-        </div>
-        <div className="text-sm text-gray-700 font-light">{percentage}</div>
-      </div>
+  className="space-y-1"
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.4 }}
+>
+  <div className="flex flex-col items-start gap-2">
+    <div className="flex gap-2">
+      <input type="radio" className="mt-1" />
+      <div className="text-sm font-semibold text-gray-800">{title}</div>
     </div>
-  </motion.div>
+    <div className="w-full flex gap-2.5 items-center">
+      <div className="text-xs text-gray-500 w-[10%]">
+        {current} of {target}
+      </div>
+      <div className="relative flex-1 h-2 mt-1 bg-gray-200 rounded-full overflow-hidden">
+        <motion.div
+          className={`absolute top-0 left-0 h-full rounded-full`}
+          initial={{ width: 0 }}
+          style={{ backgroundColor: color }}
+          animate={{ width: `${percentage}` }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        />
+      </div>
+      <div className="text-sm text-gray-700 font-light">{percentage}</div>
+    </div>
+  </div>
+</motion.div>
 );
 
 // Main Overview Component
@@ -47,16 +75,16 @@ const ProjectPlanningOverview = ({ selected, index, parentData }) => {
     parentData,
     true
   );
-
+console.log("data",data.data)
   return (
     <div className="w-full mx-auto bg-white rounded-md shadow-sm border mt-5">
       <div className="flex justify-between items-center border-b px-4 py-5">
         <h2 className="text-sm font-semibold text-gray-800">
           Project Planning Overview
         </h2>
-        <button className="text-blue-600 text-sm hover:underline flex items-center gap-1">
+        {/* <button className="text-blue-600 text-sm hover:underline flex items-center gap-1">
           <PlusCircle className="w-4 h-4" /> New Objective
-        </button>
+        </button> */}
       </div>
 
       {(data.isLoading || data.isFetching) && (
@@ -83,7 +111,7 @@ const ProjectPlanningOverview = ({ selected, index, parentData }) => {
                 <span className="text-xs px-2 py-1 rounded bg-blue-100 text-blue-700 font-medium">
                   {data.data.quarter}
                 </span>
-                <MoreHorizontal className="w-5 h-5 text-gray-500" />
+                {/* <MoreHorizontal className="w-5 h-5 text-gray-500" /> */}
               </div>
             </div>
             <div className="p-4">
@@ -98,7 +126,7 @@ const ProjectPlanningOverview = ({ selected, index, parentData }) => {
               <div className="w-full h-2 bg-gray-200 rounded-full mb-5">
                 <div
                   className="h-full bg-yellow-400 rounded-full"
-                  style={{ width: `${data.data.completionPercent}%` }}
+                  style={{ width: `${parent(data.data.completionPercent)}` }}
                 ></div>
               </div>
               <div className="space-y-4 mt-3">
@@ -106,9 +134,9 @@ const ProjectPlanningOverview = ({ selected, index, parentData }) => {
                   <KeyResult key={index} {...kr} />
                 ))}
               </div>
-              <button className="mt-4 flex items-center text-sm text-blue-600 hover:underline">
+              {/* <button className="mt-4 flex items-center text-sm text-blue-600 hover:underline">
                 <PlusCircle className="w-4 h-4 mr-1" /> Add Key Result
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

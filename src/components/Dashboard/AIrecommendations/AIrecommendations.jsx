@@ -35,7 +35,6 @@ const cardStyles = {
 // Main Recommendation Card
 const RecommendationCard = ({data }) => {
 
-  console.log(data)
 
   const {type, title, description, confidence }=data
   const style = cardStyles[type];
@@ -72,8 +71,6 @@ const RecommendationCard = ({data }) => {
 function AIrecommendations({ selected }) {
 
   const mutatePerformaceData = usePostAIRecommendation("give me AIRecommendations ", selected)
-  console.log(mutatePerformaceData)
-  mutatePerformaceData?.data?.map(i=>console.log(i))
 
 
   return (

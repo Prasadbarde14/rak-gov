@@ -5,17 +5,23 @@ import AgentDashboard from "./page/AgentDashboard"
 import Canvas from "./page/Canvas"
 import ActionPlanDashboard from "./page/ActionPlanDashboard"
 
+import KPIBoard from "./page/KPIboard"
 
 function App() {
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <GlobalPage />,
+      element: <GlobalPage />,      
       children: [
         {
           path: "/",
           element: <Dashboard />
+        }
+        ,
+        {
+          path: "/public-works/kpi-board",
+          element: <KPIBoard/>
         },
         {
           path: "/agent",
