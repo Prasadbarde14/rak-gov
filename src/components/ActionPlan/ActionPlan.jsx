@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { actions } from './actions';
 import ActionItem from './ActionItem';
 import RecommendationCard from './RecommendationCard';
@@ -7,7 +7,7 @@ import { ClipboardList, PlusCircle, Filter, CheckCircle2, AlertCircle, Clock, Us
 import Breadcrumbs from '../OKRCanvas/Breadcrumbs';
 import CreateActionCard from './CreateActionCard';
 
-const ActionPlan = ({ department, departmentId='public-works' }) => {
+const ActionPlan = ({ department, departmentId='public-works',selected }) => {
   const [activePersona, setActivePersona] = useState(department.personas[0]);
   const [showNewActionModal, setShowNewActionModal] = useState(false);
   const departmentActions = actions[departmentId];
@@ -33,6 +33,10 @@ const ActionPlan = ({ department, departmentId='public-works' }) => {
   const pendingActions = filteredActions.filter(a => a.status === 'pending');
   const inProgressActions = filteredActions.filter(a => a.status === 'in-progress');
   const completedActions = filteredActions.filter(a => a.status === 'completed');
+
+  useEffect(()=>{
+    setActivePersona(selected)
+  },[selected]);
 
   return (
     <div className="h-full p-2">

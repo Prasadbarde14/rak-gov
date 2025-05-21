@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   PlusCircle,
   Edit3,
@@ -54,13 +54,9 @@ const objectives = {
 };
 
 
-const OKRCanvas = () => {
+const OKRCanvas = ({selected,department}) => {
   const departmentId = "maintenance_dept";
-  const department = {
-    name: "Maintenance Department",
-    personas: ["Planning Analyst", "Maintenance Head"],
-    theme: "#3b82f6", // Tailwind blue-500
-  };
+  
 
   const [activePersona, setActivePersona] = useState(department.personas[0]);
   const [showNewKRModal, setShowNewKRModal] = useState(false);
@@ -86,6 +82,10 @@ const OKRCanvas = () => {
     }
     return true;
   });
+
+  useEffect(()=>{
+    setActivePersona(selected);
+  },[selected])
 
   return (
     <div className="h-full">
@@ -158,8 +158,7 @@ const OKRCanvas = () => {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center">
                 <div
-                  className="h-8 w-8 rounded-full flex items-center justify-center text-white font-bold mr-3"
-                  style={{ backgroundColor: department.theme }}
+                  className="h-8 w-8 rounded-full flex items-center justify-center text-white font-bold mr-3 bg-blue-500"
                 >
                   {index + 1}
                 </div>

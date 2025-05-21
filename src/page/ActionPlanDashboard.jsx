@@ -4,14 +4,14 @@ import ActionPlan from '../components/ActionPlan/ActionPlan';
 import { departments } from '../utils/department';
 
 
-const AgentDashboard = () => {
+const ActionPlanDashboard = () => {
   const [selected]=useOutletContext();
   return (
     <div className='p-3 flex flex-col flex-1 gap-5 h-full overflow-y-auto scroll-smooth scrollbar-custom'>
-      {selected ==<ActionPlan department={departments[0]}/>}
+      <ActionPlan selected={selected} department={departments[0]}/>
 
     </div>
   )
 }
 
-export default AgentDashboard
+export default ActionPlanDashboard
