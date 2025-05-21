@@ -26,11 +26,6 @@ function App() {
         },
         {
           path: "/agent",
-<<<<<<< HEAD
-          element: <AgentDashboard />
-        },
-
-=======
           element: <AgentDashboard/>
         },
         {
@@ -40,7 +35,6 @@ function App() {
           path:"/public-works/action-plan",
           element:<ActionPlanDashboard/>
         }
->>>>>>> aa791e9ed1af6733dc2124cb234ec35a376a44ee
       ]
     },
     {

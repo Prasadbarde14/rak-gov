@@ -3,7 +3,7 @@ import { MessageSquare } from "lucide-react";
 
 const AgentInteractionSection = () => {
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 py-6 space-y-4">
+    <div className="w-full mx-auto px-4 py-6 space-y-4">
       {/* Section Header */}
       <div>
         <h2 className="text-lg font-semibold text-gray-900">Agent Interactions</h2>
