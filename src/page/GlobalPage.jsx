@@ -13,7 +13,7 @@ function GlobalPage() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === "/") {
+    if (location.pathname === "/" || location.pathname === "/public-works/kpi-board" ) {
       setTabs(["Director of Infrastructure", "Planning Analyst", "Maintenance Head"]);
       setSelected("Director of Infrastructure");
     } else if (location.pathname === "/agent") {
