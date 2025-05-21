@@ -2,8 +2,9 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useGetFetchQuery } from '../Query/query';
 import { postGetSimmulationResult } from '../APICalls/api';
 
-export const usePostGetSimmulationResult = (query, selected, enabled = false) => {
-    const data = useGetFetchQuery(['graphAnalysis', selected]);
+export const usePostGetSimmulationResult = (query, selected,enabled=false) => {
+
+    const data  = useGetFetchQuery(['graphAnalysis', selected]); 
 
     return useQuery({
         queryKey: ['Simmulation', selected],
