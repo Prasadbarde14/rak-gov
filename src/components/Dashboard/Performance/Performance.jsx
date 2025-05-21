@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CirclePlay, Settings2, Brain, TriangleAlert } from "lucide-react";
-import { useGetPerformanceMatrics } from "../../../API/Query/query";
+import { useGetAutoSimulation, useGetPerformanceMatrics } from "../../../API/Query/query";
 import MetricCardSkeleton from "./MetricCardSkeleton";
 import SimulationSliders from "./SimulationSliders";
 import { usePostGetSimmulationResult } from "../../../API/Mutation/mutation";
@@ -11,6 +11,7 @@ const Performance = ({ selected }) => {
 
   const [enabled,setEnabled]=useState(false)
   const [activeTab,setActiveTab]=useState("auto")
+  const [autoEnable,setAutoEnable]= useState(false);
    const [parameters, setParameters] = useState({
     resourceAllocation: 0,
     processEfficiency: 0,
@@ -19,9 +20,16 @@ const Performance = ({ selected }) => {
     marketConditions: 0,
   });
   const queryClient = new QueryClient();
+
+  const AutoSimulation =  useGetAutoSimulation(selected,autoEnable);
+  // setAutoEnable(false);
+// console.log(autoEnable)
   const AutoClickHandler = ()=>{
     setActiveTab("auto")
-    
+    setAutoEnable(true);
+    queryClient.setQueryData(['autoSimulate', selected], () => []);
+    queryClient.removeQueries(['autoSimulate', selected], { exact: true });
+    // setParameters(autoSimulation)
   }
   const mutatePerformaceData = usePostGetSimmulationResult("Here are some simulation parameters"+JSON.stringify(parameters)+"Now give performance matrix for ", selected,enabled)
 
@@ -30,6 +38,10 @@ const Performance = ({ selected }) => {
       setEnabled(false)
   }, [mutatePerformaceData])
 
+  useEffect(()=>{
+    if(!AutoSimulation.isLoading)
+      setAutoEnable(false)
+  },[AutoSimulation])
 
   return (
     <div className="space-y-6 bg-white p-4 rounded-md shadow-sm">
@@ -88,7 +100,7 @@ const Performance = ({ selected }) => {
           </button>
         </div>
       </div>
-      {activeTab=="manual" && <SimulationSliders parameters={parameters} setParameters={setParameters}/>}
+      {activeTab=="manual" && activeTab && <SimulationSliders parameters={parameters} setParameters={setParameters}/>}
 
       <hr className="border border-gray-100" />
       <h3 className=" font-semibold">Simulation Results</h3>

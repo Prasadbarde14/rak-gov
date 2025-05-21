@@ -21,6 +21,7 @@ instance.interceptors.request.use(async (config) => {
   return config;
 });
 
+
 export async function getGraphData(selected){
     // return await instance.get(url).then(response=>response.data)
     return await Promise.all(graphData[selected])
@@ -72,23 +73,29 @@ export const getChatBotResponse = async ({ query, agent = "prompt", chartData, u
 
 export async function postAgentData(selected){
   return await agentInstance.post('/interact',{
-    body:{
+    
       "agentId": "51312e76-f198-419e-86d6-a464bfc08a6a",
       "query": JSON.stringify(graphData[selected])
-    }
+    
   })
 }
 
 export async function postGetSimmulationResult({query,body}){
-  
-  console.log(query,body)
   return await agentInstance.post('/interact',{
     
         "agentId": "51312e76-f198-419e-86d6-a464bfc08a6a",
         "query": JSON.stringify(query+" ")+JSON.stringify(body)
     
   })
+  
 }
 
+export async function getAutoSimulation({selected,body}){
+
+  return await agentInstance.post('/interact',{
+      "agentId": "3d166420-9517-4057-b5f0-2603077246ae",
+      "query": JSON.stringify(body)
+  })
+}
 
 export default instance;

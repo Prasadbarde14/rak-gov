@@ -1,5 +1,5 @@
 import { useQuery,useQueryClient,useMutation } from "@tanstack/react-query"
-import {  getGraphData,getAIrecommendationsData, getPerformanceMatrics, getMaintainceData, getGraphsData, getProjectData, getChatBotResponse} from "../APICalls/api"
+import {  getGraphData,getAIrecommendationsData, getPerformanceMatrics, getMaintainceData, getGraphsData, getProjectData, getChatBotResponse, getAutoSimulation} from "../APICalls/api"
 
 export const useGetFetchQuery = (key) => {
     const queryClient = useQueryClient();   
@@ -66,9 +66,23 @@ export const usePostAgentResponse=(selected)=>{
     })
 }
 
-
 export const useChatBotMutation = () => {
   return useMutation({
     mutationFn: getChatBotResponse,
   });
 };
+
+export const useGetAutoSimulation=(selected,enabled)=>{
+
+    const data  = useGetFetchQuery(['graphAnalysis', selected]); 
+
+    return useQuery({
+        queryKey:['autoSimulate',selected],
+        queryFn:()=>getAutoSimulation({body:data}),
+        select:(res)=>{
+            console.log(res)
+            return JSON.parse(res.data.text)
+        },  
+        enabled:enabled
+    })
+}
