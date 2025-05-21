@@ -9,9 +9,9 @@ import { QueryClient } from "@tanstack/react-query";
 
 const Performance = ({ selected }) => {
 
-  const [enabled,setEnabled]=useState(false)
-  const [activeTab,setActiveTab]=useState("auto")
-   const [parameters, setParameters] = useState({
+  const [enabled, setEnabled] = useState(false)
+  const [activeTab, setActiveTab] = useState("auto")
+  const [parameters, setParameters] = useState({
     resourceAllocation: 0,
     processEfficiency: 0,
     staffingLevels: 0,
@@ -19,18 +19,23 @@ const Performance = ({ selected }) => {
     marketConditions: 0,
   });
   const queryClient = new QueryClient();
-  const AutoClickHandler = ()=>{
+  const AutoClickHandler = () => {
     setActiveTab("auto")
-    
   }
-  const mutatePerformaceData = usePostGetSimmulationResult("Here are some simulation parameters"+JSON.stringify(parameters)+"Now give performance matrix for ", selected,enabled)
+  const mutatePerformaceData = usePostGetSimmulationResult("Here are some simulation parameters" + JSON.stringify(parameters) + "Now give performance matrix for ", selected, enabled)
 
   useEffect(() => {
     if (!mutatePerformaceData.isLoading)
       setEnabled(false)
   }, [mutatePerformaceData])
 
+  function onSimulateClick() {
+    setEnabled(true);
+    queryClient.setQueryData(['Simmulation', selected], () => []);
+    queryClient.removeQueries(['Simmulation', selected], { exact: true });
+  }
 
+  console.log(mutatePerformaceData.data)
   return (
     <div className="space-y-6 bg-white p-4 rounded-md shadow-sm">
       {/* Header */}
@@ -47,33 +52,27 @@ const Performance = ({ selected }) => {
           {/* Tabs */}
           <div className="flex border border-gray-200 rounded-md overflow-hidden p-1">
             <button
-              className={`flex items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer ${
-                activeTab === "auto"
+              className={`flex items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer ${activeTab === "auto"
                   ? "bg-gray-100 text-gray-700"
                   : "bg-white hover:bg-gray-100 text-gray-700"
-              }`}
+                }`}
               onClick={AutoClickHandler}
             >
               <Brain className="w-4 h-4" />
               Auto
             </button>
             <button
-              className={`flex items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer ${
-                (activeTab === "manual")
+              className={`flex items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer ${(activeTab === "manual")
                   ? "bg-gray-100 text-gray-700"
                   : "bg-white hover:bg-gray-100 text-gray-700"
-              }`}
+                }`}
               onClick={() => setActiveTab("manual")}
             >
               <Settings2 className="w-4 h-4" />
               Manual
             </button>
           </div>
-          <button disabled={mutatePerformaceData.isLoading} className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-1.5 rounded flex gap-1 items-center cursor-pointer" onClick={() => {
-            setEnabled(true);
-            queryClient.setQueryData(['Simmulation', selected], () => []);
-            queryClient.removeQueries(['Simmulation', selected], { exact: true });
-          }}>
+          <button disabled={mutatePerformaceData.isLoading} className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-1.5 rounded flex gap-1 items-center cursor-pointer" onClick={onSimulateClick}>
             {
               !mutatePerformaceData.isLoading || mutatePerformaceData.fetchStatus == "idle" ?
                 <>
@@ -88,7 +87,7 @@ const Performance = ({ selected }) => {
           </button>
         </div>
       </div>
-      {activeTab=="manual" && <SimulationSliders parameters={parameters} setParameters={setParameters}/>}
+      {activeTab == "manual" && <SimulationSliders parameters={parameters} setParameters={setParameters} />}
 
       <hr className="border border-gray-100" />
       <h3 className=" font-semibold">Simulation Results</h3>
@@ -101,9 +100,9 @@ const Performance = ({ selected }) => {
 
         </>}
 
-        {mutatePerformaceData.fetchStatus == "idle" 
-          && mutatePerformaceData?.data 
-            && mutatePerformaceData.data.map((i, indx) => <MetricCard key={indx} data={JSON.parse(i.data.text)} index={indx} selected={selected}/> )}
+        {mutatePerformaceData.fetchStatus == "idle"
+          && mutatePerformaceData?.data
+          && mutatePerformaceData.data.map((i, indx) => <MetricCard key={indx} data={i} index={indx} selected={selected} />)}
       </div>
     </div >
   );
