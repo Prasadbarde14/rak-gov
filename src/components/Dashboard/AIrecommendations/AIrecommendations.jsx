@@ -70,7 +70,8 @@ const RecommendationCard = ({data }) => {
 // Main Wrapper Component
 function AIrecommendations({ selected }) {
 
-  const mutatePerformaceData = usePostAIRecommendation("give me AIRecommendations ", selected)
+  const data = useGetFetchQueryState(['graphAnalysis', selected]);
+  const mutatePerformaceData = usePostAIRecommendation("give me AIRecommendations ", selected,!!data)
 
 
   return (

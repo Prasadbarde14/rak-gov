@@ -31,7 +31,7 @@ export const usePostGetSimmulationResult = (query, selected,enabled=false) => {
                     console.error("Failed to parse response", e);
                     return null;
                 }
-            }).filter(Boolean); // remove any null values if JSON parsing fails
+            }).filter(Boolean); 
         },
 
         enabled: enabled
@@ -48,8 +48,8 @@ export const usePostGetProjectPlanning = (query, selected, index, data, enabled 
         },
         select: (res) => {
             const newData = JSON.parse(res.data.text)
-            if (newData.projectData)
-                return newData.projectData
+            if (newData['projectData'])
+                return newData['projectData']
             else
                 return newData
         },
@@ -94,7 +94,6 @@ export const usePostGraphsData = (query, selected, index, data, enabled = false)
 export const usePostAIRecommendation = (query, selected, enabled = false) => {
     const data = useGetFetchQuery(['graphAnalysis', selected]);
 
-
     return useQuery({
         queryKey: ['AIRecommend', selected],
         queryFn: async () => {
@@ -111,7 +110,6 @@ export const usePostAIRecommendation = (query, selected, enabled = false) => {
             return res.map((i) => {
                 try {
                     const parsed = JSON.parse(i.data.text);
-
                     if (parsed["AI recommendations"]) {
                         return parsed["AI recommendations"];
                     }
@@ -121,8 +119,8 @@ export const usePostAIRecommendation = (query, selected, enabled = false) => {
                     console.error("Failed to parse response", e);
                     return null;
                 }
-            }).filter(Boolean); // remove any null values if JSON parsing fails
+            }).filter(Boolean); 
         },
-        enabled: Array.isArray(data)
+        enabled: enabled
     });
 };

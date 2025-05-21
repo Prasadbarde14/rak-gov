@@ -1,19 +1,20 @@
-import React from "react";
-import { PlusCircle, MoreHorizontal } from "lucide-react";
-import { useGetProjectData } from "../../../API/Query/query";
-import { usePostGetProjectPlanning } from "../../../API/Mutation/mutation";
-import { motion } from "framer-motion";
 import { useQueryClient } from "@tanstack/react-query";
+import { motion } from "framer-motion";
+import { MoreHorizontal, PlusCircle } from "lucide-react";
+import { usePostGetProjectPlanning } from "../../../API/Mutation/mutation";
 
 // Key Result Card
 const KeyResult = ({ title, current, target, percentage, color }) => (
+
+  
   <motion.div
-    className="space-y-1"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.4 }}
+  className="space-y-1"
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.4 }}
   >
     <div className="flex flex-col items-start gap-2">
+      {console.log(color)}
       <div className="flex gap-2">
         <input type="radio" className="mt-1" />
         <div className="text-sm font-semibold text-gray-800">{title}</div>
@@ -24,9 +25,11 @@ const KeyResult = ({ title, current, target, percentage, color }) => (
         </div>
         <div className="relative w-[85%] h-2 mt-1 bg-gray-200 rounded-full overflow-hidden">
           <motion.div
+            style={{ width: `${(percentage)}`,background:color }}
+
             className={`absolute top-0 left-0 h-full ${color} rounded-full`}
             initial={{ width: 0 }}
-            animate={{ width: `${percentage}%` }}
+            animate={{ width: `${percentage}` }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           />
         </div>
@@ -96,10 +99,13 @@ const ProjectPlanningOverview = ({ selected, index, parentData }) => {
                 </div>
               </div>
               <div className="w-full h-2 bg-gray-200 rounded-full mb-5">
-                <div
+                <motion.div
                   className="h-full bg-yellow-400 rounded-full"
-                  style={{ width: `${parent(data.data.completionPercent)}` }}
-                ></div>
+                  initial={{ width: 0 }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  animate={{ width: `${data.data.completionPercent}` }}
+                  style={{ width: `${(data.data.completionPercent)}` }}
+                ></motion.div>
               </div>
               <div className="space-y-4 mt-3">
                 {data?.data?.keyResults?.map((kr, index) => (
