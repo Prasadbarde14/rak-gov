@@ -1,7 +1,7 @@
 import ReactECharts from "echarts-for-react";
 import { ClipboardList } from "lucide-react";
 import { useGetGraphsData } from "../../../API/Query/query";
-import { usePostGraphsData } from "../../../API/Mutation/mutation";
+import { usePostGraphsData } from "../../../API/Query/query";
 
 const MaintenanceMetrics = ({ selected, index, parentData }) => {
   // const graphData = useGetGraphsData();
@@ -10,7 +10,6 @@ const MaintenanceMetrics = ({ selected, index, parentData }) => {
     selected,
     index,
     parentData,
-    true
   );
 
   const option = {
