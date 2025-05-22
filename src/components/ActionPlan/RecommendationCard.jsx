@@ -1,55 +1,57 @@
 import React from 'react';
-import { Lightbulb, Plus, Info } from 'lucide-react';
+import {
+  CheckCircle,
+  CircleAlert,
+  Plus,
+  Target,
+  TrendingUp,
+  Zap,
+} from "lucide-react";
 
-const RecommendationCard = ({ recommendation }) => {
-  const getTypeColor = () => {
-    switch (recommendation.type) {
-      case 'objective':
-        return 'border-l-4 border-blue-500';
-      case 'key-result':
-        return 'border-l-4 border-green-500';
-      case 'action':
-        return 'border-l-4 border-amber-500';
-      default:
-        return '';
-    }
+const RecommendationCard = ({data,index }) => {
+
+  // Card style definitions
+  const cardStyles = {
+    objective: {
+      border: "border-blue-500",
+      icon: <Target className="w-4 h-4 text-blue-500" />,
+    },
+    "key Result": {
+      border: "border-green-500",
+      icon: <CheckCircle className="w-4 h-4 text-green-500" />,
+    },
+    action: {
+      border: "border-yellow-500",
+      icon: <Zap className="w-4 h-4 text-yellow-500" />,
+    },
   };
 
-  const getTypeLabel = () => {
-    switch (recommendation.type) {
-      case 'objective':
-        return 'Suggested Objective';
-      case 'key-result':
-        return 'Suggested Key Result';
-      case 'action':
-        return 'Suggested Action';
-      default:
-        return '';
-    }
-  };
-
+  const {type, title, description, confidence }=data;
+  const style = cardStyles[type];
   return (
-    <div className={`bg-white rounded-lg shadow-sm p-4 mb-4 ${getTypeColor()}`}>
-      <div className="flex items-center mb-2">
-        <Lightbulb className="h-4 w-4 text-amber-500 mr-2" />
-        <span className="text-xs uppercase font-medium text-slate-500">{getTypeLabel()}</span>
-        <span className="ml-auto text-xs text-slate-400">
-          {Math.round(recommendation.confidence * 100)}% confidence
+    <div key={index}
+      className={`border-l-4 ${style.border} bg-white shadow-sm p-4 rounded-md space-y-2 w-full`}
+    >
+      <div className="flex items-center justify-between text-xs text-slate-500 font-semibold">
+        <span className="flex items-center font-medium gap-2 text-slate-500 uppercase">
+          {style.icon}
+          Suggested {type.charAt(0).toUpperCase() + type.slice(1)}
+        </span>
+        <span className="text-gray-400 font-normal">
+          {confidence}% confidence
         </span>
       </div>
-
-      <h3 className="font-medium text-slate-800 mb-2">{recommendation.content}</h3>
-
-      <div className="bg-slate-50 p-2 rounded-md mb-3">
-        <div className="flex items-start">
-          <Info className="h-4 w-4 text-slate-400 mt-0.5 mr-2 flex-shrink-0" />
-          <p className="text-xs text-slate-600">{recommendation.context}</p>
-        </div>
+      <div className="text-gray-900 font-medium">{title}</div>
+      <div className="bg-gray-50 text-xs text-gray-700 p-2 rounded-md flex gap-2">
+        <span>
+          <CircleAlert size={20} color="#bebbbb" strokeWidth={1} />
+        </span>
+        {description}
       </div>
-
-      <button className="w-full text-sm bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-md py-1.5 flex items-center justify-center">
-        <Plus className="h-4 w-4 mr-1" />
-        Add to plan
+      <button
+        className={`w-full mt-1 text-sm font-semilight rounded-md py-1 hover:bg-opacity-10 flex text-slate-600 items-center justify-center gap-2 bg-slate-100`}
+      >
+        <Plus size={18} /> Add to plan
       </button>
     </div>
   );
