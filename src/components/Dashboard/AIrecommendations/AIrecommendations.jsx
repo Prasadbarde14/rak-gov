@@ -5,7 +5,6 @@ import {
   useGetFetchQueryState,usePostAIRecommendation
 } from "../../../API/Query/query";
 import SkeletonRecommendationCard from "./SkeletonRecommendationCard";
-import { useEffect, useState } from "react";
 import RecommendationCard from "../../ActionPlan/RecommendationCard";
 
 
