@@ -20,7 +20,7 @@ const agentInstance=axios.create({
   
 
 agentInstance.interceptors.request.use(async(config)=>{
-  console.log(config)
+  // console.log(config)
   return config
 })
 

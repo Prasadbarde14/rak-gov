@@ -6,6 +6,10 @@ export const useActionPlanStore = create((set, get) => ({
   actionPlans: actionPlans,
 
   getPlansByRole: (role) => get().actionPlans[role],
+  getPlansByRoleAndStatus: (role, status) => {
+    const plans = get().actionPlans[role] || []
+    return status === "" ? plans : plans.filter((plan) => plan.status === status)
+  },
 
   updateStatus: (role, id, newStatus) => {
     set((state) => ({

@@ -227,7 +227,7 @@ export const usePostAIRecommendation = (query, selected) => {
 
 export const usePostAIActionPlan = (query, selected, enabled,data) => {
 
-    console.log("data: ",data);
+    // console.log("data: ",data);
     return useQuery({
         queryKey: ['AIRecommendAction', selected],
         queryFn: async () => {
