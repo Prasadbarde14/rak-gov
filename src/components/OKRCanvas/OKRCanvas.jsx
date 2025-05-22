@@ -89,11 +89,11 @@ const OKRCanvas = ({selected,department}) => {
 
   return (
     <div className="h-full">
-      <div className="mb-6">
+      <div className="pt-2 pb-4">
         <Breadcrumbs
           items={[
             { label: "Departments", href: "/" },
-            { label: department.name, href: `/${departmentId}` },
+            { label: department.name, href: `/` },
             { label: "OKR Canvas" },
           ]}
         />
@@ -106,7 +106,7 @@ const OKRCanvas = ({selected,department}) => {
             <h2 className="text-xl font-medium text-slate-800">OKR Canvas</h2>
           </div>
           <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
+            {/* <div className="flex items-center space-x-2">
               <Users className="h-4 w-4 text-slate-400" />
               <select
                 value={activePersona}
@@ -119,7 +119,7 @@ const OKRCanvas = ({selected,department}) => {
                   </option>
                 ))}
               </select>
-            </div>
+            </div> */}
             <button className="flex items-center bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors">
               <PlusCircle className="h-4 w-4 mr-2" />
               New Objective

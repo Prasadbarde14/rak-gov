@@ -84,7 +84,7 @@ const KPImonitoringBoard = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="flex items-center text-slate-600 text-sm gap-2">
+            {/* <div className="flex items-center text-slate-600 text-sm gap-2">
               <Users className="w-4 h-4" />
               <select
                 className="bg-transparent border-none focus:ring-0 cursor-pointer"
@@ -97,7 +97,7 @@ const KPImonitoringBoard = () => {
                   </option>
                 ))}
               </select>
-            </div>
+            </div> */}
 
             <div className="bg-slate-100 text-slate-600 rounded-md px-3 py-1.5 text-sm flex items-center">
               <RefreshCw className="w-4 h-4 mr-1" />

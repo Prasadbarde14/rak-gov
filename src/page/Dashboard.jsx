@@ -32,7 +32,7 @@ function Dashboard() {
           animate="visible"
           variants={staggerContainer}
         >
-          <motion.div className="h-96 " variants={fadeInZoom}>
+          <motion.div className="" variants={fadeInZoom}>
             <TopAnalyisis selected={selected} />
           </motion.div>
 
