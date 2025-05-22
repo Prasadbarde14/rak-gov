@@ -1,6 +1,7 @@
 import axios from "axios"
-import { graphData,performanceMatrics,AIrecommendations, maintenanceData ,graphsData, projectData} from "./mockCallApi";
+import { graphData,performanceMatrics,AIrecommendations, maintenanceData ,graphsData, projectData, actionPlans} from "./mockCallApi";
 import useNetworkStore from "../../store/store";
+import { ArrowsUpFromLine } from "lucide-react";
 
 const instance = axios.create({
   baseURL : 'https://fakestoreapi.com',
@@ -16,7 +17,12 @@ const agentInstance=axios.create({
     'Content-Type':'application/json'
   }
 })
+  
 
+agentInstance.interceptors.request.use(async(config)=>{
+  console.log(config)
+  return config
+})
 
 agentInstance.interceptors.request.use(config => {
   config.meta = { startTime: new Date().getTime() };
@@ -70,6 +76,10 @@ export async function getPerformanceMatrics(){
 export async function getAIrecommendationsData(selected){
   // return await instance.get(url).then(response=>response.data)
   return await Promise.all(AIrecommendations[selected])
+}
+
+export async function getActionPlans(selected){
+  return await Promise.all(actionPlans[selected])
 }
 
 export async function getMaintainceData(){
