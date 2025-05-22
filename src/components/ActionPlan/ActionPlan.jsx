@@ -44,7 +44,7 @@ const ActionPlan = ({ department, departmentId='public-works',selected }) => {
         <Breadcrumbs
           items={[
             { label: 'Departments', href: '/' },
-            { label: department.name, href: `/${departmentId}` },
+            { label: department.name, href: `/` },
             { label: 'Action Plan' }
           ]}
         />
@@ -57,7 +57,7 @@ const ActionPlan = ({ department, departmentId='public-works',selected }) => {
             <h2 className="text-xl font-medium text-slate-800">Action Plan</h2>
           </div>
           <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
+            {/* <div className="flex items-center space-x-2">
               <Users className="h-4 w-4 text-slate-400" />
               <select
                 value={activePersona}
@@ -68,7 +68,7 @@ const ActionPlan = ({ department, departmentId='public-works',selected }) => {
                   <option key={persona} value={persona}>{persona}</option>
                 ))}
               </select>
-            </div>
+            </div> */}
             <button 
               onClick={handleNewAction}
               className="flex items-center cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors"
@@ -81,24 +81,24 @@ const ActionPlan = ({ department, departmentId='public-works',selected }) => {
         
         <div className="flex items-center justify-between">
           <div className="flex flex-wrap gap-4">
-            <div className="flex items-center bg-indigo-50 text-indigo-700 rounded-full px-3 py-1 text-sm">
+            <div className="flex items-center bg-indigo-50 text-indigo-700 rounded-full px-3 py-1 text-sm cursor-pointer">
               <span className="font-medium">All Actions</span>
             </div>
-            <div className="flex items-center bg-slate-100 text-slate-600 rounded-full px-3 py-1 text-sm">
+            <div className="flex items-center bg-slate-100 text-slate-600 rounded-full px-3 py-1 text-sm cursor-pointer">
               <Clock className="h-3.5 w-3.5 mr-1.5" />
               <span>Pending</span>
               <span className="ml-1.5 bg-slate-200 text-slate-800 h-5 w-5 rounded-full flex items-center justify-center text-xs">
                 {pendingActions.length}
               </span>
             </div>
-            <div className="flex items-center bg-slate-100 text-slate-600 rounded-full px-3 py-1 text-sm">
+            <div className="flex items-center bg-slate-100 text-slate-600 rounded-full px-3 py-1 text-sm cursor-pointer">
               <AlertCircle className="h-3.5 w-3.5 mr-1.5" />
               <span>In Progress</span>
               <span className="ml-1.5 bg-blue-500 text-white h-5 w-5 rounded-full flex items-center justify-center text-xs">
                 {inProgressActions.length}
               </span>
             </div>
-            <div className="flex items-center bg-slate-100 text-slate-600 rounded-full px-3 py-1 text-sm">
+            <div className="flex items-center bg-slate-100 text-slate-600 rounded-full px-3 py-1 text-sm cursor-pointer">
               <CheckCircle2 className="h-3.5 w-3.5 mr-1.5" />
               <span>Completed</span>
               <span className="ml-1.5 bg-green-500 text-white h-5 w-5 rounded-full flex items-center justify-center text-xs">
@@ -107,10 +107,10 @@ const ActionPlan = ({ department, departmentId='public-works',selected }) => {
             </div>
           </div>
           
-          <button className="flex items-center text-slate-600 hover:text-slate-800">
+          {/* <button className="flex items-center text-slate-600 hover:text-slate-800">
             <Filter className="h-4 w-4 mr-1.5" />
             <span className="text-sm">Filter</span>
-          </button>
+          </button> */}
         </div>
       </div>
       
