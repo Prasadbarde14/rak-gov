@@ -33,7 +33,7 @@ function AIrecommendations({ selected }) {
 
         {!mutatePerformaceData.isLoading &&
           !mutatePerformaceData.isError &&
-          mutatePerformaceData?.data?.map((rec, index) => <RecommendationCard key={index} data={rec}/>)}
+          mutatePerformaceData?.data?.map((rec, index) => <RecommendationCard key={index} data={rec} selected={selected}/>)}
       </div>
     </>
   );
