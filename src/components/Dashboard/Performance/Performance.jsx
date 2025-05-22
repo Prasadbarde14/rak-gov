@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CirclePlay, Settings2, Brain, TriangleAlert } from "lucide-react";
+import { CirclePlay, Settings2, Brain, TriangleAlert, CirclePause } from "lucide-react";
 import { useGetAutoSimulation, useGetPerformanceMatrics } from "../../../API/Query/query";
 import MetricCardSkeleton from "./MetricCardSkeleton";
 import SimulationSliders from "./SimulationSliders";
@@ -10,10 +10,9 @@ import { QueryClient } from "@tanstack/react-query";
 const Performance = ({ selected }) => {
 
   const [enabled, setEnabled] = useState(false)
-  const [activeTab, setActiveTab] = useState("auto")
   const [autoEnable, setAutoEnable] = useState(false);
 
-  const [manual,setManual]=useState(false)
+  const [manual, setManual] = useState(false)
 
   const [parameters, setParameters] = useState({
     resourceAllocation: 0,
@@ -25,11 +24,10 @@ const Performance = ({ selected }) => {
   const queryClient = new QueryClient();
 
   const AutoSimulation = useGetAutoSimulation(selected, autoEnable);
- 
+
   const AutoClickHandler = () => {
-    setAutoEnable(true);
-    queryClient.setQueryData(['autoSimulate', selected], () => []);
-    queryClient.removeQueries(['autoSimulate', selected], { exact: true });
+    AutoSimulation.mutate()
+    setManual(true)
   }
   const mutatePerformaceData = usePostGetSimmulationResult("Here are some simulation parameters" + JSON.stringify(parameters) + "Now give performance matrix for ", selected, enabled)
 
@@ -39,9 +37,12 @@ const Performance = ({ selected }) => {
   }, [mutatePerformaceData])
 
   useEffect(() => {
-    if (!AutoSimulation.isLoading)
-      setAutoEnable(false)
-  }, [AutoSimulation])
+    if (AutoSimulation.isSuccess) {
+      setParameters(JSON.parse(AutoSimulation.data.data.text)['simulation parameters'])
+    }
+  }, [AutoSimulation.isSuccess])
+
+
 
   return (
     <div className="space-y-6 bg-white p-4 rounded-md shadow-sm">
@@ -59,19 +60,25 @@ const Performance = ({ selected }) => {
           {/* Tabs */}
           <div className="flex border border-gray-200 rounded-md overflow-hidden p-1">
             <button
-              className={`flex items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer ${activeTab === ""
-                ? "bg-gray-100 text-gray-700"
-                : "bg-white hover:bg-gray-100 text-gray-700"
+              className={`flex items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer 
+                bg-white hover:bg-gray-100 text-gray-700
                 }`}
               onClick={AutoClickHandler}
             >
-              <Brain className="w-4 h-4" />
-              Auto
+              {
+                !AutoSimulation.isPending?<>
+                  <Brain className="w-4 h-4" />
+                  Auto
+                </>:
+                <>
+                <Brain className="w-4 h-4" />
+                  Thinking
+                </>
+              }
             </button>
             <button
-              className={`flex items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer ${(activeTab === "manual")
-                ? "bg-gray-100 text-gray-700"
-                : "bg-white hover:bg-gray-100 text-gray-700"
+              className={`flex items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer
+                bg-white hover:bg-gray-100 text-gray-700
                 }`}
               onClick={() => setManual(!manual)}
             >
@@ -81,18 +88,20 @@ const Performance = ({ selected }) => {
           </div>
           <button disabled={mutatePerformaceData.isLoading} className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-1.5 rounded flex gap-1 items-center cursor-pointer" onClick={() => {
             setEnabled(true);
+            setManual(false)
             queryClient.setQueryData(['Simmulation', selected], () => []);
             queryClient.removeQueries(['Simmulation', selected], { exact: true });
           }}>
             {
-              !mutatePerformaceData.isLoading || mutatePerformaceData.fetchStatus == "idle" ?
+              !mutatePerformaceData.isLoading && mutatePerformaceData.fetchStatus == "idle" ?
                 <>
                   <CirclePlay className="w-4 h-4" />
                   Run Simulation
                 </>
                 :
                 <>
-                  Loading...
+                  <CirclePause className="w-4 h-4" />
+                  Thinking
                 </>
             }
           </button>
