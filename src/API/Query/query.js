@@ -161,10 +161,11 @@ export const usePostGetMaintanenceOverview = (query, selected, index, data, enab
 
 export const usePostGraphsData = (query, selected, index, data, enabled = false) => {
     const simData = useGetFetchQuery(['graphAnalysis', selected]);
+    
 
     return useQuery({
         queryKey: ['graphsData', selected, index],
-        queryFn: async () => {
+        queryFn: () => {
             const newBody = { ...simData[index], ...data, "project title:": selected }
             return postGetSimmulationResult({ query, body: newBody })
         },
@@ -172,7 +173,6 @@ export const usePostGraphsData = (query, selected, index, data, enabled = false)
             try {
                 const parsed = JSON.parse(res.data.text);
 
-                console.log(parsed.data)
                 if (parsed["data"]) {
                     return parsed["data"];
                 }
@@ -183,7 +183,6 @@ export const usePostGraphsData = (query, selected, index, data, enabled = false)
                 return null;
             }
         },
-        enabled: enabled
     });
 };
 
