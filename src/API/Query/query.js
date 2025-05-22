@@ -1,6 +1,7 @@
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query"
-import { getGraphData, getAIrecommendationsData, getPerformanceMatrics, getMaintainceData, getGraphsData, getProjectData, getChatBotResponse, getAutoSimulation } from "../APICalls/api"
+import { getGraphData, getAIrecommendationsData, getPerformanceMatrics, getMaintainceData, getGraphsData, getProjectData, getChatBotResponse, getAutoSimulation, getActionPlans } from "../APICalls/api"
 import { postGetSimmulationResult } from '../APICalls/api';
+import { actionPlans } from "../APICalls/mockCallApi";
 import { graphData } from "../APICalls/mockCallApi";
 
 export const useGetFetchQuery = (key) => {
@@ -37,6 +38,14 @@ export const useGetAIrecommendationsData = (selected) => {
         enabled: Boolean(selected)
     })
 
+}
+
+export const useGetActionPlan = (selected) => {
+    return useQuery({
+        queryKey: ['ActionPlans', selected ?? "default"],
+        queryFn: ({queryKey}) => getActionPlans(queryKey[1]),
+        enabled: Boolean(selected)
+    })
 }
 
 export const useGetMaintenanceData = () => {
@@ -214,3 +223,34 @@ export const usePostAIRecommendation = (query, selected) => {
         },
     });
 };
+
+
+export const usePostAIActionPlan = (query, selected, enabled,data) => {
+
+    console.log("data: ",data);
+    return useQuery({
+        queryKey: ['AIRecommendAction', selected],
+        queryFn: async () => {
+                const responses = await Promise.all(
+                    actionPlans[selected].map((body) => postGetSimmulationResult({ query, body }))
+                );
+                return responses;
+        },
+        select: (res) => {
+            return res.map((i) => {
+                try {
+                    const parsed = JSON.parse(i.data.text);
+                    if (parsed["data"]) {
+                        return parsed["data"];
+                    }
+                    return parsed;
+                } catch (e) {
+
+                    console.error("Failed to parse response", e, i.data.text);
+                    return null;
+                }
+            }).filter(Boolean);
+        },
+        enabled: enabled
+    });
+}
