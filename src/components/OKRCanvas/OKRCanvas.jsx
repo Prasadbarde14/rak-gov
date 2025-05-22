@@ -302,8 +302,8 @@ const OKRCanvas = ({ selected, department }) => {
 
       {/* KR Modal */}
       {showKRModal && (
-       <div className="fixed inset-0 bg-white/30 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-md w-[500px] border">
+       <div className="fixed inset-0 bg-black/10 backdrop-blur-sm flex items-center justify-center z-50 border">
+          <div className="bg-white p-8 rounded-md w-[600px] border-black-200 shadow-sm">
             <h3 className="text-lg font-semibold text-slate-800 mb-4">
               {editKR ? "Edit" : "Add"} Key Result
             </h3>
@@ -358,8 +358,8 @@ const OKRCanvas = ({ selected, department }) => {
 
       {/* Objective Modal */}
       {showObjModal && (
-        <div className="fixed inset-0 bg-white/30 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-md w-[500px]">
+        <div className="fixed inset-0 bg-black/10 backdrop-blur-sm flex items-center justify-center z-50 ">
+          <div className="bg-white p-6 rounded-md w-[650px]  border-black-200 shadow-sm">
             <h3 className="text-lg font-semibold text-slate-800 mb-4">Add New Objective</h3>
             <input
               placeholder="Title"
