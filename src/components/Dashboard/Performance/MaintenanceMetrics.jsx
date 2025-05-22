@@ -1,16 +1,16 @@
 import ReactECharts from "echarts-for-react";
 import { ClipboardList } from "lucide-react";
-import { useGetGraphsData } from "../../../API/Query/query";
 import { usePostGraphsData } from "../../../API/Query/query";
 
 const MaintenanceMetrics = ({ selected, index, parentData }) => {
   // const graphData = useGetGraphsData();
   const graphData = usePostGraphsData(
-    "Give me graphs data",
+    "Give me graphs data ",
     selected,
     index,
     parentData,
   );
+  console.log(graphData)
 
   const option = {
     tooltip: {
