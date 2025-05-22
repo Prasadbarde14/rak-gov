@@ -31,7 +31,7 @@ function TopNav({ selected, setSelected,tabs }) {
             <Users size={18} color="#6b7280" />
             <Select
               options={tabs}
-              className={"text-sm px-4"}
+              className={"text-sm  px-4"}
               selected={selected}
               handleSelect={handleSelect}
             />
