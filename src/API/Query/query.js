@@ -2,6 +2,7 @@ import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query"
 import { getGraphData, getAIrecommendationsData, getPerformanceMatrics, getMaintainceData, getGraphsData, getProjectData, getChatBotResponse, getAutoSimulation, getActionPlans } from "../APICalls/api"
 import { postGetSimmulationResult } from '../APICalls/api';
 import { actionPlans } from "../APICalls/mockCallApi";
+import { graphData } from "../APICalls/mockCallApi";
 
 export const useGetFetchQuery = (key) => {
     const queryClient = useQueryClient();
@@ -84,16 +85,13 @@ export const useChatBotMutation = () => {
 
 export const useGetAutoSimulation = (selected, enabled) => {
 
-    const data = useGetFetchQuery(['graphAnalysis', selected]);
-
-    return useQuery({
-        queryKey: ['autoSimulate', selected],
-        queryFn: () => getAutoSimulation({ body: data }),
-        select: (res) => {
-            console.log(res)
-            return JSON.parse(res.data.text)
+    return useMutation({
+        mutationKey: ['autoSimulate', selected],
+        mutationFn: () => getAutoSimulation({ body: graphData[selected] }),
+        onSuccess: (res) => {
+            const parsed = JSON.parse(res.data.text);
+            return parsed;
         },
-        enabled: enabled
     })
 }
 
@@ -172,10 +170,11 @@ export const usePostGetMaintanenceOverview = (query, selected, index, data, enab
 
 export const usePostGraphsData = (query, selected, index, data, enabled = false) => {
     const simData = useGetFetchQuery(['graphAnalysis', selected]);
+    
 
     return useQuery({
         queryKey: ['graphsData', selected, index],
-        queryFn: async () => {
+        queryFn: () => {
             const newBody = { ...simData[index], ...data, "project title:": selected }
             return postGetSimmulationResult({ query, body: newBody })
         },
@@ -183,7 +182,6 @@ export const usePostGraphsData = (query, selected, index, data, enabled = false)
             try {
                 const parsed = JSON.parse(res.data.text);
 
-                console.log(parsed.data)
                 if (parsed["data"]) {
                     return parsed["data"];
                 }
@@ -194,18 +192,17 @@ export const usePostGraphsData = (query, selected, index, data, enabled = false)
                 return null;
             }
         },
-        enabled: enabled
     });
 };
 
-export const usePostAIRecommendation = (query, selected, enabled,data) => {
+export const usePostAIRecommendation = (query, selected) => {
 
 
     return useQuery({
         queryKey: ['AIRecommend', selected],
         queryFn: async () => {
                 const responses = await Promise.all(
-                    data.map((body) => postGetSimmulationResult({ query, body }))
+                    graphData[selected].map((body) => postGetSimmulationResult({ query, body }))
                 );
                 return responses;
         },
@@ -224,7 +221,6 @@ export const usePostAIRecommendation = (query, selected, enabled,data) => {
                 }
             }).filter(Boolean);
         },
-        enabled: enabled
     });
 };
 

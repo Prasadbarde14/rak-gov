@@ -28,8 +28,8 @@ const ActionPlan = ({
   const [showNewActionModal, setShowNewActionModal] = useState(false);
   const departmentActions = actions[departmentId];
   const actionPlans = useActionPlanStore((state) => state.actionPlans);
-  const data= actionPlans[selected]
-  
+  const data = actionPlans[selected];
+
   const handleNewAction = () => {
     setShowNewActionModal(true);
   };
@@ -38,8 +38,7 @@ const ActionPlan = ({
     selected,
     true,
     data
-  );  
-
+  );
 
   const departmentRecommendations = actionAI?.data;
   // console.log(actionAI?.data);
@@ -58,7 +57,7 @@ const ActionPlan = ({
         <Breadcrumbs
           items={[
             { label: "Departments", href: "/" },
-            { label: department.name, href: `/${departmentId}` },
+            { label: department.name, href: `/` },
             { label: "Action Plan" },
           ]}
         />
@@ -71,7 +70,7 @@ const ActionPlan = ({
             <h2 className="text-xl font-medium text-slate-800">Action Plan</h2>
           </div>
           <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
+            {/* <div className="flex items-center space-x-2">
               <Users className="h-4 w-4 text-slate-400" />
               <select
                 value={activePersona}
@@ -97,24 +96,24 @@ const ActionPlan = ({
 
         <div className="flex items-center justify-between">
           <div className="flex flex-wrap gap-4">
-            <div className="flex items-center bg-indigo-50 text-indigo-700 rounded-full px-3 py-1 text-sm">
+            <div className="flex items-center bg-indigo-50 text-indigo-700 rounded-full px-3 py-1 text-sm cursor-pointer">
               <span className="font-medium">All Actions</span>
             </div>
-            <div className="flex items-center bg-slate-100 text-slate-600 rounded-full px-3 py-1 text-sm">
+            <div className="flex items-center bg-slate-100 text-slate-600 rounded-full px-3 py-1 text-sm cursor-pointer">
               <Clock className="h-3.5 w-3.5 mr-1.5" />
               <span>Pending</span>
               <span className="ml-1.5 bg-slate-200 text-slate-800 h-5 w-5 rounded-full flex items-center justify-center text-xs">
                 {pendingActions?.length}
               </span>
             </div>
-            <div className="flex items-center bg-slate-100 text-slate-600 rounded-full px-3 py-1 text-sm">
+            <div className="flex items-center bg-slate-100 text-slate-600 rounded-full px-3 py-1 text-sm cursor-pointer">
               <AlertCircle className="h-3.5 w-3.5 mr-1.5" />
               <span>In Progress</span>
               <span className="ml-1.5 bg-blue-500 text-white h-5 w-5 rounded-full flex items-center justify-center text-xs">
                 {inProgressActions?.length}
               </span>
             </div>
-            <div className="flex items-center bg-slate-100 text-slate-600 rounded-full px-3 py-1 text-sm">
+            <div className="flex items-center bg-slate-100 text-slate-600 rounded-full px-3 py-1 text-sm cursor-pointer">
               <CheckCircle2 className="h-3.5 w-3.5 mr-1.5" />
               <span>Completed</span>
               <span className="ml-1.5 bg-green-500 text-white h-5 w-5 rounded-full flex items-center justify-center text-xs">
@@ -126,58 +125,55 @@ const ActionPlan = ({
           <button className="flex items-center text-slate-600 hover:text-slate-800">
             <Filter className="h-4 w-4 mr-1.5" />
             <span className="text-sm">Filter</span>
-          </button>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-4 gap-6">
-        <div className="col-span-3">
-          <div className="mb-6">
-            <h3 className="font-medium text-slate-800 mb-4">In Progress</h3>
-            {inProgressActions?.map((action) => (
-              <ActionItem key={action.id} action={action} />
-            ))}
+          </button> */}
           </div>
+        </div>
 
-          <div className="mb-6">
-            <h3 className="font-medium text-slate-800 mb-4">Pending</h3>
-            {pendingActions?.map((action) => (
-              <ActionItem key={action.id} action={action} />
-            ))}
+        <div className="grid grid-cols-4 gap-6">
+          <div className="col-span-3">
+            <div className="mb-6">
+              <h3 className="font-medium text-slate-800 mb-4">In Progress</h3>
+              {inProgressActions?.map((action) => (
+                <ActionItem key={action.id} action={action} />
+              ))}
+            </div>
+
+            <div className="mb-6">
+              <h3 className="font-medium text-slate-800 mb-4">Pending</h3>
+              {pendingActions?.map((action) => (
+                <ActionItem key={action.id} action={action} />
+              ))}
+            </div>
+
+            <div>
+              <h3 className="font-medium text-slate-800 mb-4">Completed</h3>
+              {completedActions?.map((action) => (
+                <ActionItem key={action.id} action={action} />
+              ))}
+            </div>
           </div>
 
           <div>
-            <h3 className="font-medium text-slate-800 mb-4">Completed</h3>
-            {completedActions?.map((action) => (
-              <ActionItem key={action.id} action={action} />
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <div className="border-b p-4 flex items-center gap-2 font-semibold text-gray-800">
-            <TrendingUp color="#F59E0B" size={20} />
-            AI Recommendations
-          </div>
-          {actionAI.isLoading &&
-            Array.from({ length: 3 }).map((_, i) => (
-              <SkeletonRecommendationCard key={i} />
-            ))}
-          {departmentRecommendations?.map((recommendation,index) => (
-            <div key={index}>
-              <RecommendationCard
-                key={index}
-                data={recommendation}
-              />
-
+            <div className="border-b p-4 flex items-center gap-2 font-semibold text-gray-800">
+              <TrendingUp color="#F59E0B" size={20} />
+              AI Recommendations
             </div>
+            {actionAI.isLoading &&
+              Array.from({ length: 3 }).map((_, i) => (
+                <SkeletonRecommendationCard key={i} />
+              ))}
+            {departmentRecommendations?.map((recommendation, index) => (
+              <div key={index}>
+                <RecommendationCard key={index} data={recommendation} />
+              </div>
             ))}
+          </div>
         </div>
-      </div>
 
-      {showNewActionModal && (
-        <CreateActionCard setShowNewActionModal={setShowNewActionModal} />
-      )}
+        {showNewActionModal && (
+          <CreateActionCard setShowNewActionModal={setShowNewActionModal} />
+        )}
+      </div>
     </div>
   );
 };

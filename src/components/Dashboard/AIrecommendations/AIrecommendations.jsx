@@ -15,21 +15,10 @@ import RecommendationCard from "../../ActionPlan/RecommendationCard";
 
 // Main Wrapper Component
 function AIrecommendations({ selected }) {
-  const [enabled,setEnabled]=useState(false)
 
   const data = useGetFetchQueryState(['graphAnalysis', selected]);
   
-  useEffect(()=>{
-    console.log(Array.isArray(data.data))
-    if(Array.isArray(data.data) && data.data.length>0){
-      setEnabled(data.data.length>0)
-    }
-
-  },[data?.data])
-
-  console.log("Enabled ",enabled)
-
-  const mutatePerformaceData = usePostAIRecommendation("give me AIRecommendations ", selected,enabled,data?.data)
+  const mutatePerformaceData = usePostAIRecommendation("give me AIRecommendations ", selected)
   return (
     <>
       <div className="border-b p-4 flex items-center gap-2 font-semibold text-gray-800">

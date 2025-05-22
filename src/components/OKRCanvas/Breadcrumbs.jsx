@@ -14,15 +14,15 @@ const Breadcrumbs = ({ items }) => {
   return (
     <nav className="flex items-center space-x-2 text-sm">
       <Link to="/" className="text-slate-500 hover:text-slate-700">
-        <Home className="h-4 w-4" />
+        <Home className="h-4 w-4 cursor-pointer" />
       </Link>
       {items.map((item, index) => (
         <React.Fragment key={index}>
-          <ChevronRight className="h-4 w-4 text-slate-400" />
+          <ChevronRight className="h-4 w-4 text-slate-400 cursor-pointer" />
           {item.href ? (
             <button
               onClick={() => handleClick(item.href)}
-              className="text-slate-500 hover:text-slate-700"
+              className="text-slate-500 hover:text-slate-700 cursor-pointer"
             >
               {item.label}
             </button>
