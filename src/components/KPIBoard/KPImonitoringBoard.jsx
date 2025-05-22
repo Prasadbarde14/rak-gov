@@ -16,52 +16,7 @@ const filters = [
   { label: 'Needs Attention', color: 'bg-slate-100 text-slate-600', count: 1, badge: 'bg-yellow-500' },
 ];
 
-const kpis = [
-  {
-    id: 'pw-1',
-    name: 'Average project delay',
-    value: 12.3,
-    target: 9,
-    unit: 'days',
-    trend: 'down',
-    isGood: true,
-    attention: true,
-    color: 'bg-green-500',
-  },
-  {
-    id: 'pw-2',
-    name: 'Milestones met on time',
-    value: 78,
-    target: 90,
-    unit: '%',
-    trend: 'up',
-    isGood: true,
-    attention: false,
-    color: 'bg-yellow-500',
-  },
-  {
-    id: 'pw-3',
-    name: 'Contractor response time',
-    value: 8.5,
-    target: 6,
-    unit: 'hours',
-    trend: 'down',
-    isGood: true,
-    attention: true,
-    color: 'bg-green-500',
-  },
-  {
-    id: 'pw-4',
-    name: 'High-risk defects identified',
-    value: 24,
-    target: 30,
-    unit: 'count',
-    trend: 'up',
-    isGood: true,
-    attention: false,
-    color: 'bg-yellow-500',
-  },
-];
+import { kpis } from '../../API/APICalls/mockCallApi';
 
 const KPImonitoringBoard = () => {
   const [persona, setPersona] = useState(personaOptions[0]);
@@ -176,8 +131,7 @@ const KPImonitoringBoard = () => {
 
                 <div className="flex justify-between text-sm text-slate-500">
                   <span>
-                    Target: {kpi.target}
-                    {kpi.unit}
+                    Target: {kpi.target+" "+kpi.unit}
                   </span>
                   <span>Updated: 20/05/2025</span>
                 </div>

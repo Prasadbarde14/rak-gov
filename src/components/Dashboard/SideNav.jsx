@@ -8,11 +8,11 @@ import {
   ChevronRight,
   Settings2,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SideNav() {
-  const [selected, setSelected] = useState("0-0");
+  const [selected, setSelected] = useState(localStorage.getItem("location")?localStorage.getItem("location"):"0-0");
   const [openIndex, setOpenIndex] = useState(0);
   const navigate = useNavigate();
 
@@ -111,7 +111,7 @@ function SideNav() {
                     onClick={() =>{
                        setSelected(`${index}-${idx}`)
                        navigate(child.link)
-
+                       localStorage.setItem("location",`${index}-${idx}`);
                     }
                     }
                   >
