@@ -46,7 +46,6 @@ const ActionPlan = ({
   );
 
   const departmentRecommendations = actionAI?.data;
-  console.log("apiData:", actionAI?.data);
 
   const pendingActions = data?.filter((a) => a.status === "pending");
   const inProgressActions = data?.filter((a) => a.status === "in-progress");

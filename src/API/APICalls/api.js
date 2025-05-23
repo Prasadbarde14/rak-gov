@@ -45,8 +45,6 @@ agentInstance.interceptors.response.use(response => {
   const successRate=parsePercentage(JSON.parse(response.data.text)?.data?.["success rate"])
   const errorRate=parsePercentage(JSON.parse(response.data.text)?.data?.["error rate"])
 
-  console.log(successRate,errorRate)
-
   useNetworkStore.getState().addRequestLog({
     method: response.config.method.toUpperCase(),
     url: response.config.url,

@@ -10,7 +10,6 @@ const useNetworkStore = create((set, get) => ({
 
   addRequestLog: (log) => {
     const state = get();
-    console.log(log)
     const {
       executionTime,
       successRate,

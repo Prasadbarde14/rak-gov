@@ -131,6 +131,40 @@ const ttlText = `
     :waterConsumptionReduction "20.0"^^xsd:float .
 `;
 
+// utils/applyRadialStarLayout.js
+export const applyRadialStarLayout = (nodes, edges, centralNodeId) => {
+  const radius = 1600;
+  const centerX = 800;  // Adjust based on your canvas size
+  const centerY = 400;
+
+  const centralNode = nodes.find((node) => node.id === centralNodeId);
+  if (!centralNode) return nodes;
+
+  // Set central node at the center
+  centralNode.position = { x: centerX, y: centerY };
+
+  const connectedNodes = edges
+    .filter((edge) => edge.source === centralNodeId || edge.target === centralNodeId)
+    .map((edge) => (edge.source === centralNodeId ? edge.target : edge.source))
+    .filter((id, index, self) => self.indexOf(id) === index);
+
+  const angleStep = (2 * Math.PI) / connectedNodes.length;
+
+  connectedNodes.forEach((nodeId, index) => {
+    const node = nodes.find((n) => n.id === nodeId);
+    if (!node) return;
+
+    const angle = index * angleStep;
+    node.position = {
+      x: centerX + radius * Math.cos(angle),
+      y: centerY + radius * Math.sin(angle),
+    };
+  });
+
+  return nodes;
+};
+
+
 const CircularNode = ({ data }) => {
     const colorArray = ["#faedcb", "#c9e3df", "#c5def2", "#dbcdf0", "#f2c6df","#f8d9c4"]
     return (
@@ -161,108 +195,112 @@ const nodeTypes = {
     circle: CircularNode,
 };
 
+
 const Ontology = () => {
-    const [nodes, setNodes] = useState([]);
-    const [edges, setEdges] = useState([]);
+  const [nodes, setNodes] = useState([]);
+  const [edges, setEdges] = useState([]);
 
-    useEffect(() => {
-        const parser = new Parser();
-        const triples = [];
-        const nodesMap = new Map();
-        const tempEdges = [];
+  useEffect(() => {
+    const parser = new Parser();
+    const nodesMap = new Map();
+    const tempEdges = [];
 
-        parser.parse(ttlText, (error, triple) => {
-            if (error) return console.error(error);
-            if (!triple) {
-                // parsing complete
-                setNodes(Array.from(nodesMap.values()));
-                setEdges(tempEdges);
-                return;
-            }
+    parser.parse(ttlText, (error, triple) => {
+      if (error) return console.error(error);
+      if (!triple) {
 
-            const subject = triple.subject.value || triple.subject.id;
-            const predicate = triple.predicate.value || triple.predicate.id;
-            const object = triple.object.value || triple.object.id;
+        // Parsing complete
+        const parsedNodes = Array.from(nodesMap.values());
+        const centralNodeId = 'http://www.rak.gov.ae/Maintenance_Schedule'; // <-- adjust as needed
+        const finalNodes = applyRadialStarLayout(parsedNodes, tempEdges, centralNodeId);
 
-            if (!nodesMap.has(subject)) {
-                nodesMap.set(subject, {
-                    id: subject,
-                    type: 'circle',
-                    data: { label: subject.split('#').pop() },
-                    position: { x: Math.random() * 1600, y: Math.random() * 1600 },
-                });
-            }
+        setNodes(finalNodes);
+        setEdges(tempEdges);
+        return;
+      }
 
-            const isLiteral = triple.object.termType === 'Literal';
-            if (!isLiteral && !nodesMap.has(object)) {
-                nodesMap.set(object, {
-                    id: object,
-                    data: { label: object.split('#').pop() },
-                    position: { x: Math.random() * 1600, y: Math.random() * 1600 },
-                });
-            }
+              console.log(triple)
 
-            if (!isLiteral) {
-                tempEdges.push({
-                    id: uuidv4(),
-                    source: subject,
-                    target: object,
-                    label: predicate.split('#').pop(),
-                    animated: true,
-                    style: { stroke: '#444' },
-                });
-            }
+
+      const subject = triple.subject.value || triple.subject.id;
+      const predicate = triple.predicate.value || triple.predicate.id;
+      const object = triple.object.value || triple.object.id;
+      const isLiteral = triple.object.termType === 'Literal';
+
+      // Add subject node
+      if (!nodesMap.has(subject)) {
+        nodesMap.set(subject, {
+          id: subject,
+          type: 'circle',
+          data: { label: subject.split('#').pop() || subject.split('/').pop() },
+          position: { x: Math.random() * 1600, y: Math.random() * 1600 },
         });
-    }, []);
+      }
 
-    const onNodeDragStop = (event, node) => {
-        setNodes((nds) =>
-            nds.map((n) =>
-                n.id === node.id ? { ...n, position: node.position } : n
-            )
-        );
-    };
+      // Add object node (only if not literal)
+      if (!isLiteral && !nodesMap.has(object)) {
+        nodesMap.set(object, {
+          id: object,
+          data: { label: object.split('#').pop() || object.split('/').pop() },
+          position: { x: Math.random() * 1600, y: Math.random() * 1600 },
+        });
+      }
 
-    const onNodeDragStart = (event, node) => {
-        setNodes((nds) =>
-            nds.map((n) =>
-                n.id === node.id
-                    ? {
-                        ...n,
-                        style: {
-                            ...n.style,
-                        },
-                    }
-                    : n
-            )
-        );
-    };
+      // Add edge
+      if (!isLiteral) {
+        tempEdges.push({
+          id: uuidv4(),
+          source: subject,
+          target: object,
+          label: predicate.split('#').pop() || predicate.split('/').pop(),
+          animated: true,
+          style: { stroke: '#444' },
+        });
+      }
+    });
+  }, []);
 
-    const onNodesChange = useCallback(
-  (changes) => {
-    setNodes((nds) => applyNodeChanges(changes, nds));
-  },
-  [setNodes]
-);
-
-
-    return (
-        <div style={{ width: '100vw', height: '100vh' }}>
-            <ReactFlow
-                nodes={nodes}
-                edges={edges}
-                nodeTypes={nodeTypes}
-                onNodeDragStart={onNodeDragStart}
-                onNodesChange={onNodesChange}
-                onNodeDragStop={onNodeDragStop}
-                fitView
-            >
-                <Background />
-                <Controls />
-            </ReactFlow>
-        </div>
+  const onNodeDragStart = (event, node) => {
+    setNodes((nds) =>
+      nds.map((n) =>
+        n.id === node.id
+          ? {
+              ...n,
+              style: {
+                ...n.style,
+              },
+            }
+          : n
+      )
     );
-};
+  };
 
+  const onNodeDragStop = (event, node) => {
+    setNodes((nds) =>
+      nds.map((n) => (n.id === node.id ? { ...n, position: node.position } : n))
+    );
+  };
+
+  const onNodesChange = useCallback((changes) => {
+    setNodes((nds) => applyNodeChanges(changes, nds));
+  }, []);
+
+  return (
+    <div style={{ width: '100vw', height: '100vh' }}>
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        nodeTypes={nodeTypes}
+        onNodeDragStart={onNodeDragStart}
+        onNodesChange={onNodesChange}
+        onNodeDragStop={onNodeDragStop}
+        fitView
+      >
+        <Background />
+        <Controls />
+      </ReactFlow>
+    </div>
+  );
+};
 
 export default Ontology;

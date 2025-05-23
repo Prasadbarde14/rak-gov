@@ -24,6 +24,14 @@ const AgentCard = ({
   const getMetrics = useNetworkStore(state => state.getMetrics);
   const metrics = getMetrics();
 
+  // const successRateMock = name != "Marco Agent" ? metrics.successRate != 0 ? parseInt(metrics.successRate) + parseInt((Math.random() - 0.5) * 10).toFixed(2) : "0.00" : metrics.successRate
+  // const errorRateMock = name != "Marco Agent" ? metrics.successRate != 0 ? 100 - parseInt(successRate) : "0.00" : metrics.errorRate
+  // const avgLatencyMock = name != "Marco Agent" ? metrics.successRate != 0 ? 123 : "0.00" : metrics.avgLatency
+const successRateMock=metrics.successRate
+const errorRateMock=metrics.errorRate
+const avgLatencyMock=metrics.avgLatency
+
+
   return (
     <div className="border rounded-lg bg-white px-6 py-5 space-y-5 shadow-sm w-full">
       {/* Top Row */}
@@ -49,7 +57,7 @@ const AgentCard = ({
             <CheckCircle className="w-4 h-4" />
             Success Rate
           </div>
-          <div className="text-lg font-semibold text-black">{metrics.successRate}</div>
+          <div className="text-lg font-semibold text-black">{successRateMock}</div>
         </div>
 
         <div className="bg-gray-50 rounded-md border px-4 py-3 w-full md:w-52">
@@ -57,7 +65,7 @@ const AgentCard = ({
             <Timer className="w-4 h-4" />
             Execution Time
           </div>
-          <div className="text-lg font-semibold text-black">{metrics.avgLatency}</div>
+          <div className="text-lg font-semibold text-black">{avgLatencyMock}</div>
         </div>
 
         <div className="bg-gray-50 rounded-md border px-4 py-3 w-full md:w-52">
@@ -65,7 +73,7 @@ const AgentCard = ({
             <AlertTriangle className="w-4 h-4" />
             Error Rate
           </div>
-          <div className="text-lg font-semibold text-black">{metrics.errorRate}</div>
+          <div className="text-lg font-semibold text-black">{errorRateMock}</div>
         </div>
       </div>
 
@@ -108,15 +116,15 @@ const AgentOverview = () => {
       errorRate: 0.0,
       capabilityKey: "anomaly-detection",
       capabilityDesc: "Transferring data through the Open API to the PI artifacts.",
-    },  {
-        name: "PI Agent",
-        description: "Analyzes performance data and create PI artifacts",
-        successRate: 0.0,
-        executionTime: "0ms",
-        errorRate: 0.0,
-        capabilityKey: "objective-generation",
-        capabilityDesc: "Generates all possible schemas, BQ, adhoc, etc. (PI artifacts)",
-      }
+    }, {
+      name: "PI Agent",
+      description: "Analyzes performance data and create PI artifacts",
+      successRate: 0.0,
+      executionTime: "0ms",
+      errorRate: 0.0,
+      capabilityKey: "objective-generation",
+      capabilityDesc: "Generates all possible schemas, BQ, adhoc, etc. (PI artifacts)",
+    }
   ];
 
   return (

@@ -10,7 +10,6 @@ const MaintenanceMetrics = ({ selected, index, parentData }) => {
     index,
     parentData,
   );
-  console.log(graphData)
 
   const option = {
     tooltip: {
