@@ -13,7 +13,7 @@ import {
 import { kpi } from '../../API/APICalls/mockCallApi';
 
 const KPImonitoringBoard = ({selectedPersona}) => {
-const selectedDashboard = selectedPersona?selectedPersona: "Director of Infrastructure";
+const selectedDashboard = selectedPersona ? selectedPersona: "Director of Infrastructure";
   const filters = [
   { label: 'All KPIs'},
   { label: 'At Risk', count: kpi[selectedDashboard]?.filter((item)=>item.status==="At Risk").length,badge: 'bg-red-500' },
@@ -29,7 +29,7 @@ const selectedDashboard = selectedPersona?selectedPersona: "Director of Infrastr
   });
 
 
-  const [selected, setSelected] = useState(kpis[0]);
+  const [selected, setSelected] = useState(kpis?.[0]);
   
 
   const getTrendIcon = (trend, isGood) => {
@@ -49,20 +49,6 @@ const selectedDashboard = selectedPersona?selectedPersona: "Director of Infrastr
           </div>
 
           <div className="flex items-center gap-4">
-            {/* <div className="flex items-center text-slate-600 text-sm gap-2">
-              <Users className="w-4 h-4" />
-              <select
-                className="bg-transparent border-none focus:ring-0 cursor-pointer"
-                value={persona}
-                onChange={(e) => setPersona(e.target.value)}
-              >
-                {personaOptions.map((p) => (
-                  <option key={p} value={p}>
-                    {p}
-                  </option>
-                ))}
-              </select>
-            </div> */}
 
             <div className="bg-slate-100 text-slate-600 rounded-md px-3 py-1.5 text-sm flex items-center">
               <RefreshCw className="w-4 h-4 mr-1" />
@@ -77,7 +63,7 @@ const selectedDashboard = selectedPersona?selectedPersona: "Director of Infrastr
 
         {/* Filters */}
         <div className="flex gap-4">
-          {filters.map((item) => (
+          {filters?.map((item) => (
             <div
               key={item.label}
               className={`flex items-center rounded-full px-2 py-1 text-sm font-medium ${filter===item.label?"bg-green-50 text-green-700":"bg-slate-100 text-slate-600"} cursor-pointer`}
@@ -96,15 +82,15 @@ const selectedDashboard = selectedPersona?selectedPersona: "Director of Infrastr
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 gap-6">
-        {kpis.length==0 && (<h1>There is no kpi to show here.</h1>)}
-        {kpis.map((kpi) => {
+        {kpis?.length==0 && (<h1>There is no kpi to show here.</h1>)}
+        {kpis?.map((kpi) => {
           const progress = Math.round((kpi.value / kpi.target) * 100);
           return (
             <div
-              key={kpi.id}
+              key={kpi?.id}
               onClick={() => setSelected(kpi)}
               className={`rounded-lg border bg-white transition-all duration-200 ${
-                selected.id === kpi.id ? 'border-indigo-500 shadow-md' : 'border-slate-200 shadow-sm'
+                selected?.id === kpi?.id ? 'border-indigo-500 shadow-md' : 'border-slate-200 shadow-sm'
               }`}
             >
               <div className="p-4 border-b flex justify-between items-center">
