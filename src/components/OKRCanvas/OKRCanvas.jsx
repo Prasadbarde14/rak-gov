@@ -3,331 +3,391 @@ import {
   PlusCircle,
   Edit3,
   Trash2,
-  EqualIcon as GoalIcon,
-  Users,
+  Target as GoalIcon,
 } from "lucide-react";
 import Breadcrumbs from "./Breadcrumbs";
 
-const objectives = {
-  maintenance_dept: [
-    {
-      id: 'obj-1',
-      title: 'Improve Maintenance Turnaround Time',
-      description: 'Reduce average turnaround time for scheduled maintenance by 20%.',
-      progress: 45,
-      keyResults: [
-        {
-          id: 'kr-1',
-          title: 'Reduce maintenance backlog by 30%',
-          current: 70,
-          target: 100,
-          unit: '%',
-          progress: 50
-        },
-        {
-          id: 'kr-2',
-          title: 'Improve technician response time',
-          current: 2,
-          target: 1,
-          unit: 'hrs',
-          progress: 40
-        }
-      ]
-    },
-    {
-      id: 'obj-2',
-      title: 'Increase Equipment Uptime',
-      description: 'Ensure key assets have uptime above 95% through preventive actions.',
-      progress: 60,
-      keyResults: [
-        {
-          id: 'kr-3',
-          title: 'Conduct 100% of planned preventive maintenance',
-          current: 80,
-          target: 100,
-          unit: '%',
-          progress: 80
-        }
-      ]
-    }
-  ]
+// Initial data
+const quarters = ["Q3 2025", "Q4 2025", "Q1 2026"];
+
+const initialObjectives = {
+  Director_of_Infrastructure: {
+    "Q3 2025": [
+      {
+        id: "obj-1",
+        title: "Improve Infrastructure Turnaround Time",
+        description:
+          "Reduce average turnaround time for scheduled maintenance by 20%.",
+        keyResults: [
+          {
+            id: "kr-1",
+            title: "Reduce maintenance backlog by 30%",
+            current: 70,
+            target: 100,
+            unit: "%",
+          },
+        ],
+      },
+    ],
+    "Q4 2025": [],
+    "Q1 2026": [],
+  },
+  Planning_Analyst: {
+    "Q3 2025": [],
+    "Q4 2025": [],
+    "Q1 2026": [],
+  },
+  Maintenance_Head: {
+    "Q3 2025": [],
+    "Q4 2025": [],
+    "Q1 2026": [],
+  },
 };
 
+const OKRCanvas = ({ selected, department }) => {
+  const departmentId = selected.replace(/\s+/g, "_");
+  const [objectives, setObjectives] = useState(initialObjectives);
+  const [activeQuarter, setActiveQuarter] = useState(quarters[0]);
 
-const OKRCanvas = ({selected,department}) => {
-  const departmentId = "maintenance_dept";
-  
+  const [showKRModal, setShowKRModal] = useState(false);
+  const [showObjModal, setShowObjModal] = useState(false);
 
-  const [activePersona, setActivePersona] = useState(department.personas[0]);
-  const [showNewKRModal, setShowNewKRModal] = useState(false);
   const [selectedObjectiveId, setSelectedObjectiveId] = useState(null);
-  const departmentObjectives = objectives[departmentId];
+  const [editKR, setEditKR] = useState(null);
 
-  const handleAddKeyResult = (objectiveId) => {
-    setSelectedObjectiveId(objectiveId);
-    setShowNewKRModal(true);
+  const [newObjective, setNewObjective] = useState({ title: "", description: "" });
+  const [newKR, setNewKR] = useState({ title: "", current: "", target: "", unit: "" });
+
+  const getProgress = (keyResults) => {
+    if (!keyResults.length) return 0;
+    const total = keyResults.reduce((acc, kr) => {
+      const progress = Math.min(100, Math.round((kr.current / kr.target) * 100));
+      return acc + progress;
+    }, 0);
+    return Math.round(total / keyResults.length);
   };
 
-  const filteredObjectives = departmentObjectives.filter((obj) => {
-    if (activePersona === "Planning Analyst") {
-      return (
-        obj.title.toLowerCase().includes("project") ||
-        obj.title.toLowerCase().includes("milestone")
-      );
-    } else if (activePersona === "Maintenance Head") {
-      return (
-        obj.title.toLowerCase().includes("maintenance") ||
-        obj.title.toLowerCase().includes("repair")
-      );
-    }
-    return true;
-  });
+  const updateObjectives = (updater) => {
+    setObjectives((prev) => ({
+      ...prev,
+      [departmentId]: {
+        ...prev[departmentId],
+        [activeQuarter]: updater(prev[departmentId][activeQuarter]),
+      },
+    }));
+  };
 
-  useEffect(()=>{
-    setActivePersona(selected);
-  },[selected])
+  const handleAddObjective = () => {
+    const newObj = {
+      id: `obj-${Date.now()}`,
+      title: newObjective.title,
+      description: newObjective.description,
+      keyResults: [],
+    };
+    updateObjectives((objs) => [...objs, newObj]);
+    setNewObjective({ title: "", description: "" });
+    setShowObjModal(false);
+  };
+
+  const handleDeleteObjective = (id) => {
+    updateObjectives((objs) => objs.filter((obj) => obj.id !== id));
+  };
+
+  const handleAddOrEditKR = (e) => {
+    e.preventDefault();
+    const kr = {
+      id: editKR?.id || `kr-${Date.now()}`,
+      title: newKR.title,
+      current: Number(newKR.current),
+      target: Number(newKR.target),
+      unit: newKR.unit,
+    };
+
+    updateObjectives((objs) =>
+      objs.map((obj) => {
+        if (obj.id === selectedObjectiveId) {
+          const updatedKeyResults = editKR
+            ? obj.keyResults.map((k) => (k.id === editKR.id ? kr : k))
+            : [...obj.keyResults, kr];
+          return { ...obj, keyResults: updatedKeyResults };
+        }
+        return obj;
+      })
+    );
+
+    setShowKRModal(false);
+    setNewKR({ title: "", current: "", target: "", unit: "" });
+    setEditKR(null);
+  };
+
+  const handleDeleteKR = (objId, krId) => {
+    updateObjectives((objs) =>
+      objs.map((obj) =>
+        obj.id === objId
+          ? {
+              ...obj,
+              keyResults: obj.keyResults.filter((kr) => kr.id !== krId),
+            }
+          : obj
+      )
+    );
+  };
 
   return (
-    <div className="h-full">
-      <div className="pt-2 pb-4">
-        <Breadcrumbs
-          items={[
-            { label: "Departments", href: "/" },
-            { label: department.name, href: `/` },
-            { label: "OKR Canvas" },
-          ]}
-        />
+    <div className="h-full p-4">
+      <div className="pb-5">
+      <Breadcrumbs
+        items={[
+          { label: "Departments", href: "/" },
+          { label: department.name, href: "/" },
+          { label: "OKR Canvas" },
+        ]}
+      />
       </div>
+     
 
-      <div className="mb-6 bg-white rounded-lg border border-slate-200 shadow-sm p-6">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center">
-            <GoalIcon className="h-6 w-6 text-blue-600 mr-2" />
-            <h2 className="text-xl font-medium text-slate-800">OKR Canvas</h2>
+      {/* Header */}
+      <div className="bg-white p-6 rounded-md border shadow-sm mb-6">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-2 text-slate-800 font-semibold text-xl">
+            <GoalIcon className="text-blue-600" />
+            OKR Canvas
           </div>
-          <div className="flex items-center space-x-4">
-            {/* <div className="flex items-center space-x-2">
-              <Users className="h-4 w-4 text-slate-400" />
-              <select
-                value={activePersona}
-                onChange={(e) => setActivePersona(e.target.value)}
-                className="text-sm text-slate-600 bg-transparent border-none focus:ring-0 cursor-pointer"
-              >
-                {department.personas.map((persona) => (
-                  <option key={persona} value={persona}>
-                    {persona}
-                  </option>
-                ))}
-              </select>
-            </div> */}
-            <button className="flex items-center bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors">
-              <PlusCircle className="h-4 w-4 mr-2" />
-              New Objective
-            </button>
-          </div>
-        </div>
-
-        <p className="text-slate-600 mb-4">
-          Track and manage your department's objectives and key results. Create
-          new objectives or modify existing ones to align with strategic
-          priorities.
-        </p>
-
-        <div className="flex flex-wrap gap-4">
-          <div className="flex items-center bg-blue-50 text-blue-700 rounded-full px-3 py-1 text-sm">
-            <span className="font-medium">Q3 2025</span>
-          </div>
-          <div className="flex items-center bg-slate-100 text-slate-600 rounded-full px-3 py-1 text-sm">
-            <span>Q4 2025</span>
-          </div>
-          <div className="flex items-center bg-slate-100 text-slate-600 rounded-full px-3 py-1 text-sm">
-            <span>Q1 2026</span>
-          </div>
-          <div className="flex items-center bg-slate-100 text-slate-600 rounded-full px-3 py-1 text-sm">
-            <span>+ Add Quarter</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex flex-col space-y-6">
-        {filteredObjectives.map((objective, index) => (
-          <div
-            key={objective.id}
-            className="bg-white rounded-lg border border-slate-200 shadow-sm p-6"
+          <button
+            onClick={() => setShowObjModal(true)}
+            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm"
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center">
-                <div
-                  className="h-8 w-8 rounded-full flex items-center justify-center text-white font-bold mr-3 bg-blue-500"
-                >
-                  {index + 1}
-                </div>
-                <h3 className="text-lg font-medium text-slate-800">
-                  {objective.title}
-                </h3>
-              </div>
-              <div className="flex items-center space-x-2">
-                <button className="p-1 text-slate-400 hover:text-blue-600 rounded-full hover:bg-slate-100">
-                  <Edit3 className="h-5 w-5" />
-                </button>
-                <button className="p-1 text-slate-400 hover:text-red-600 rounded-full hover:bg-slate-100">
-                  <Trash2 className="h-5 w-5" />
-                </button>
-              </div>
-            </div>
-
-            <p className="text-slate-600 mb-4 ml-11">{objective.description}</p>
-
-            <div className="ml-11">
-              <div className="mb-4">
-                <div className="flex items-center justify-between">
-                  <h4 className="text-sm font-medium text-slate-700">
-                    Progress
-                  </h4>
-                  <div className="text-sm text-slate-500">
-                    {Math.round(objective.progress)}% Complete
-                  </div>
-                </div>
-                <div className="mt-1 h-2 relative max-w-xl rounded-full overflow-hidden">
-                  <div className="w-full h-full bg-slate-200 absolute"></div>
-                  <div
-                    className={`h-full ${
-                      objective.progress >= 66
-                        ? "bg-green-500"
-                        : objective.progress >= 33
-                        ? "bg-yellow-500"
-                        : "bg-red-500"
-                    } absolute transition-all duration-500 ease-in-out`}
-                    style={{ width: `${objective.progress}%` }}
-                  ></div>
-                </div>
-              </div>
-
-              <h4 className="text-sm font-medium text-slate-700 mb-3">
-                Key Results
-              </h4>
-              <div className="space-y-4">
-                {objective.keyResults.map((kr, krIndex) => (
-                  <div
-                    key={kr.id}
-                    className="bg-slate-50 rounded-lg p-4 border border-slate-200"
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center">
-                        <div className="h-6 w-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-medium mr-2">
-                          {krIndex + 1}
-                        </div>
-                        <h5 className="font-medium text-slate-800">
-                          {kr.title}
-                        </h5>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <button className="p-1 text-slate-400 hover:text-blue-600 rounded-full hover:bg-white">
-                          <Edit3 className="h-4 w-4" />
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between text-sm mb-2">
-                      <div className="text-slate-600">
-                        Current: {kr.current}
-                        {kr.unit}
-                      </div>
-                      <div className="text-slate-600">
-                        Target: {kr.target}
-                        {kr.unit}
-                      </div>
-                    </div>
-
-                    <div className="h-2 relative rounded-full overflow-hidden">
-                      <div className="w-full h-full bg-slate-200 absolute"></div>
-                      <div
-                        className={`h-full ${
-                          kr.progress >= 66
-                            ? "bg-green-500"
-                            : kr.progress >= 33
-                            ? "bg-yellow-500"
-                            : "bg-red-500"
-                        } absolute transition-all duration-500 ease-in-out`}
-                        style={{ width: `${kr.progress}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-
-                <button
-                  onClick={() => handleAddKeyResult(objective.id)}
-                  className="flex items-center justify-center w-full py-3 border border-dashed border-slate-300 rounded-lg text-blue-600 hover:bg-blue-50 transition-colors"
-                >
-                  <PlusCircle className="h-4 w-4 mr-2" />
-                  <span className="text-sm font-medium">Add Key Result</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
-
-        <button className="flex items-center justify-center py-6 border-2 border-dashed border-slate-300 rounded-lg text-slate-600 hover:bg-slate-50 hover:border-slate-400 transition-colors">
-          <PlusCircle className="h-5 w-5 mr-2" />
-          <span className="text-base font-medium">Add New Objective</span>
-        </button>
+            <PlusCircle className="h-4 w-4" />
+            New Objective
+          </button>
+        </div>
+        <p className="text-slate-600 text-sm mt-2 mb-4">
+          Track and manage your department's objectives and key results.
+        </p>
+        <div className="flex gap-3">
+          {quarters.map((q) => (
+            <button
+              key={q}
+              onClick={() => setActiveQuarter(q)}
+              className={`px-4 py-1.5 text-sm rounded-full ${
+                activeQuarter === q
+                  ? "bg-blue-100 text-blue-700"
+                  : "bg-slate-100 text-slate-600"
+              }`}
+            >
+              {q}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {showNewKRModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-[600px]">
-            <h3 className="text-lg font-medium text-slate-900 mb-4">
-              Add Key Result
-            </h3>
-            <form className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
-                  Title
-                </label>
-                <input
-                  type="text"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-md"
-                  placeholder="Enter key result title"
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
-                    Target Value
-                  </label>
-                  <input
-                    type="number"
-                    className="w-full px-3 py-2 border border-slate-300 rounded-md"
-                    placeholder="Enter target value"
-                  />
+      {/* Objectives */}
+      <div className="space-y-6">
+        {(objectives[departmentId]?.[activeQuarter] || []).map((obj, index) => {
+          const objProgress = getProgress(obj.keyResults);
+          return (
+            <div
+              key={obj.id}
+              className="bg-white rounded-lg border border-slate-200 shadow-sm p-6"
+            >
+              <div className="flex justify-between items-start mb-2">
+                <div className="flex items-center gap-3">
+                  <div className="h-8 w-8 bg-blue-600 rounded-full text-white flex items-center justify-center font-bold">
+                    {index + 1}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium text-slate-800">
+                      {obj.title}
+                    </h3>
+                    <p className="text-sm text-slate-600">{obj.description}</p>
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
-                    Unit
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full px-3 py-2 border border-slate-300 rounded-md"
-                    placeholder="e.g., %, days, count"
-                  />
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleDeleteObjective(obj.id)}
+                    className="text-slate-400 hover:text-red-600"
+                  >
+                    <Trash2 className="w-5 h-5" />
+                  </button>
                 </div>
               </div>
-              <div className="flex space-x-4">
+
+              {/* Progress */}
+              <div className="mt-3 mb-5">
+                <div className="flex justify-between text-sm text-slate-600 font-medium">
+                  <span>Progress</span>
+                  <span>{objProgress}% Complete</span>
+                </div>
+                <div className="w-full h-2 rounded-full bg-slate-200 mt-1 overflow-hidden">
+                  <div
+                    className="h-full bg-yellow-400"
+                    style={{ width: `${objProgress}%` }}
+                  />
+                </div>
+              </div>
+
+              {/* Key Results */}
+              <div className="space-y-4">
+                {obj.keyResults.map((kr, idx) => {
+                  const progress = Math.min(
+                    100,
+                    Math.round((kr.current / kr.target) * 100)
+                  );
+                  return (
+                    <div key={kr.id} className="bg-slate-50 p-4 rounded-md border">
+                      <div className="flex justify-between items-center mb-1">
+                        <div className="flex gap-2 items-center">
+                          <div className="h-6 w-6 bg-slate-200 rounded-full text-xs flex justify-center items-center">
+                            {idx + 1}
+                          </div>
+                          <span className="font-medium text-slate-800">{kr.title}</span>
+                        </div>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => {
+                              setSelectedObjectiveId(obj.id);
+                              setEditKR(kr);
+                              setNewKR(kr);
+                              setShowKRModal(true);
+                            }}
+                            className="text-slate-400 hover:text-blue-600"
+                          >
+                            <Edit3 className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteKR(obj.id, kr.id)}
+                            className="text-slate-400 hover:text-red-600"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                      <div className="flex justify-between text-sm text-slate-500 mb-1">
+                        <span>
+                          Current: {kr.current}
+                          {kr.unit}
+                        </span>
+                        <span>
+                          Target: {kr.target}
+                          {kr.unit}
+                        </span>
+                      </div>
+                      <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-yellow-400"
+                          style={{ width: `${progress}%` }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+
                 <button
-                  type="button"
-                  onClick={() => setShowNewKRModal(false)}
-                  className="px-4 py-2 text-slate-600 hover:text-slate-800"
+                  onClick={() => {
+                    setSelectedObjectiveId(obj.id);
+                    setEditKR(null);
+                    setNewKR({ title: "", current: "", target: "", unit: "" });
+                    setShowKRModal(true);
+                  }}
+                  className="flex items-center justify-center w-full py-3 border border-dashed border-slate-300 rounded-lg text-blue-600 hover:bg-blue-50"
                 >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
-                >
+                  <PlusCircle className="w-4 h-4 mr-1" />
                   Add Key Result
                 </button>
               </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* KR Modal */}
+      {showKRModal && (
+       <div className="fixed inset-0 bg-black/10 backdrop-blur-sm flex items-center justify-center z-50 border">
+          <div className="bg-white p-8 rounded-md w-[600px] border-black-200 shadow-sm">
+            <h3 className="text-lg font-semibold text-slate-800 mb-4">
+              {editKR ? "Edit" : "Add"} Key Result
+            </h3>
+            <form onSubmit={handleAddOrEditKR} className="space-y-4">
+              <input
+                placeholder="Title"
+                value={newKR.title}
+                onChange={(e) => setNewKR((p) => ({ ...p, title: e.target.value }))}
+                required
+                className="w-full border border-slate-300 px-3 py-2 rounded-md"
+              />
+              <div className="grid grid-cols-3 gap-4">
+                <input
+                  type="number"
+                  placeholder="Current"
+                  value={newKR.current}
+                  onChange={(e) => setNewKR((p) => ({ ...p, current: e.target.value }))}
+                  required
+                  className="border border-slate-300 px-3 py-2 rounded-md"
+                />
+                <input
+                  type="number"
+                  placeholder="Target"
+                  value={newKR.target}
+                  onChange={(e) => setNewKR((p) => ({ ...p, target: e.target.value }))}
+                  required
+                  className="border border-slate-300 px-3 py-2 rounded-md"
+                />
+                <input
+                  placeholder="Unit"
+                  value={newKR.unit}
+                  onChange={(e) => setNewKR((p) => ({ ...p, unit: e.target.value }))}
+                  className="border border-slate-300 px-3 py-2 rounded-md"
+                />
+              </div>
+              <div className="flex justify-end gap-2">
+                <button
+                  onClick={() => setShowKRModal(false)}
+                  className="text-slate-600 cursor-pointer bg-gray-300 px-4 py-2 rounded-md"
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-md cursor-pointer">
+                  Save
+                </button>
+              </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Objective Modal */}
+      {showObjModal && (
+        <div className="fixed inset-0 bg-black/10 backdrop-blur-sm flex items-center justify-center z-50 ">
+          <div className="bg-white p-6 rounded-md w-[650px]  border-black-200 shadow-sm">
+            <h3 className="text-lg font-semibold text-slate-800 mb-4">Add New Objective</h3>
+            <input
+              placeholder="Title"
+              value={newObjective.title}
+              onChange={(e) => setNewObjective((p) => ({ ...p, title: e.target.value }))}
+              className="w-full border border-slate-300 px-3 py-2 rounded-md mb-3"
+            />
+            <textarea
+              rows={3}
+              placeholder="Description"
+              value={newObjective.description}
+              onChange={(e) => setNewObjective((p) => ({ ...p, description: e.target.value }))}
+              className="w-full border border-slate-300 px-3 py-2 rounded-md"
+            />
+            <div className="flex justify-end gap-2 mt-4">
+              <button
+                onClick={() => setShowObjModal(false)}
+                className="text-slate-600 cursor-pointer bg-gray-300 px-4 py-2 rounded-md"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleAddObjective}
+                className="bg-blue-600 text-white px-4 py-2 rounded-md cursor-pointer"
+              >
+                Save
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -336,3 +396,4 @@ const OKRCanvas = ({selected,department}) => {
 };
 
 export default OKRCanvas;
+
