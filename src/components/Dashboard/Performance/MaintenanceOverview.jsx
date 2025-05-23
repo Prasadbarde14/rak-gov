@@ -21,8 +21,8 @@ const MaintenanceOverview = ({selected,index,parentData}) => {
           </button>
         </div>
 
-        {data?.isLoading ||
-          data?.isFetching && (
+        {(data?.isLoading ||
+          data?.isFetching) && (
             <div className="grid grid-cols-2 gap-4 mb-6 animate-pulse">
               <div className="bg-gray-200 h-20 rounded-lg"></div>
               <div className="bg-gray-200 h-20 rounded-lg"></div>
@@ -48,7 +48,8 @@ const MaintenanceOverview = ({selected,index,parentData}) => {
           </div>
         )}
 
-        {!data.isLoading && !data.isError && !data.isRefetching && <div className="space-y-4">
+        {!data.isLoading && !data.isError && !data.isFetching && 
+        <div className="space-y-4">
           {data?.data?.defects?.map((defect) => (
             <div
               key={defect?.id}
