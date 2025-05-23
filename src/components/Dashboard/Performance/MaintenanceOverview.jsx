@@ -22,7 +22,7 @@ const MaintenanceOverview = ({selected,index,parentData}) => {
         </div>
 
         {data?.isLoading ||
-          data.isFetching && (
+          data?.isFetching && (
             <div className="grid grid-cols-2 gap-4 mb-6 animate-pulse">
               <div className="bg-gray-200 h-20 rounded-lg"></div>
               <div className="bg-gray-200 h-20 rounded-lg"></div>

@@ -9,18 +9,20 @@ const useNetworkStore = create((set, get) => ({
   requestCount: 0,
 
   addRequestLog: (log) => {
+    const state = get();
+    console.log(log)
     const {
       executionTime,
-      success,
+      successRate,
+      errorRate,
       time
     } = log;
 
-    const state = get();
 
     set({
       history: [...state.history, log],
-      successCount: state.successCount + (success ? 1 : 0),
-      errorCount: state.errorCount + (success ? 0 : 1),
+      successCount: state.successCount + ((successRate)),
+      errorCount: state.errorCount + ((errorRate)),
       totalExecutionTime: state.totalExecutionTime + executionTime,
       requestCount: state.requestCount + 1
     });
