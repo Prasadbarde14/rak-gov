@@ -9,8 +9,8 @@ export const graphData = {
       "status": "Needs attention",
       "total": 200,
       "trendData": {
-        "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
-        "values": [15.0, 14.2, 13.8, 13.4, 13.0, 12.8, 12.7, 12.6, 12.4, 12.3]
+      "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
+      "values": [15.0, 14.2, 13.8, 13.4, 13.0, 12.8, 12.7, 12.6, 12.4, 12.3]
       },
       "data":[
   {
@@ -22,7 +22,7 @@ export const graphData = {
     "AverageTaskDelay": 2.3,
     "ScheduleAdherenceRate": 78.5
   },
-      {
+  {
         "milestoneCompletionRate": 86.25,
         "numberOfOverdueTasks": 13,
         "criticalPathImpact": 2.49,
@@ -45,10 +45,7 @@ export const graphData = {
   "aiDelayPredictionScore": 0.72,
   "lastUpdated": "2025-06-18"
 },
-
-]
-
-    },
+]},
     {
       "name": "Milestones Met On Time",
       "Project Title" : "Director of Infrastructure",
@@ -62,115 +59,131 @@ export const graphData = {
         "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
         "values": [85, 84, 82, 81, 80, 79, 78, 78, 77, 78]
       },
-      "data":[
+  "data": [
+    {
+      "ProjectID": "INFRA012",
+      "ProjectTitle": "Al Marjan Bridge Expansion",
+      "TotalMilestones": 16,
+      "MilestonesMetOnTime": 13,
+      "OnTimeRate": 81.25,
+      "LastMajorDelayReason": "Permit Clearance",
+      "UpdatedBy": "Project Scheduler A"
+    },
+    {
+      "projectAverages": {
+        "averageOnTimeRate": 78.4,
+        "totalDelayedMilestones": 43,
+        "criticalPathAdherence": 89.6,
+        "milestoneApprovalRate": 94.5,
+        "lastUpdated": "2025-05-15"
+      }
+    },
+    {
+      "performanceFactors": {
+        "contractorResponsiveness": 8.4,
+        "materialsAvailabilityRate": 92.7,
+        "teamCoordinationScore": 8.9,
+        "technicalDisruptionIndex": 3.1,
+        "changeOrderFrequency": 1.2,
+        "lastUpdated": "2025-05-20"
+      }
+    },
+    {
+      "aiInsights": {
+        "forecastedOnTimeRateNextQuarter": 82.6,
+        "bottleneckRiskScore": 0.58,
+        "resourceRealignmentRecommendation": "Add 2 full-time planners to Projects 5, 7",
+        "alertTriggered": true,
+        "lastUpdated": "2025-05-21"
+      }
+    }
+  ]
+    },
 {
-  "milestoneCompletionMetrics": {
-    "totalMilestones": 120,
-    "milestonesCompleted": 85,
-    "milestonesOnTime": 67,
-    "onTimeCompletionRate": 55.83
+  "name": "Contractor Response Time",
+  "value": 8.5,
+  "unit": "hours",
+  "progress": 142,
+  "total": 200,
+  "target": 6,
+  "status": "Needs attention",
+  "trendData": {
+    "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
+    "values": [10.5, 9.8, 9.0, 8.7, 8.5, 8.3, 8.4, 8.6, 8.5, 8.5]
   },
-  "scheduleAdherenceMetrics": {
-    "scheduledMilestonesDue": 90,
-    "scheduledVsActualDeviation": 3.4
-  },
-  "progressTracking": {
-    "progressToTarget": 43.5,
-    "predictedOnTimeRate": 78.32
-  },
-  "aiRecommendationInputs": {
-    "processInefficiencyScore": 62.4,
-    "techAdoptionLevel": "medium"
-  },
-  "alertStatusIndicators": {
-    "statusLabel": "Needs Attention",
-    "performanceTrend": "Decreasing"
-  },
-  "lastUpdated": "2025-06-18"
-}
-]
-    },
+  "data": [
     {
-      "name": "Contractor Response Time",
-      "value": 8.5,
-      "unit": "hours",
-      "progress": 142,
-      "total": 200,
-      "target": 6,
-      "status": "Needs attention",
-      "trendData": {
-        "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
-        "values": [10.5, 9.8, 9.0, 8.7, 8.5, 8.3, 8.4, 8.6, 8.5, 8.5]
+      "contractorResponseTimeMetrics": {
+        "averageResponseTimeHours": 8.5,
+        "targetResponseTimeHours": 6.0,
+        "predictedResponseTime": 8.54,
+        "responseRateProgressPercent": 71.0,
+        "responseTrend": "Decreasing"
       },
-      data:[
-        {
-  "contractorResponseTimeMetrics": {
-    "averageResponseTimeHours": 8.5,
-    "targetResponseTimeHours": 8.5,
-    "predictedResponseTime": 8.54,
-    "responseRateProgressPercent": 71.0,
-    "responseTrend": "Decreasing"
+      "impactAnalysis": {
+        "performanceImprovementPercent": 0.4,
+        "resourceUtilizationStatus": "Optimized"
+      },
+      "contractorBehavior": {
+        "numberOfIssuesAssigned": 128,
+        "issuesRespondedWithinSLA": 91,
+        "slaAdherenceRate": 71.0
+      },
+      "delayBreakdown": {
+        "avgInitialAcknowledgmentTime": 2.1,
+        "avgAssignmentTime": 3.0,
+        "avgResolutionTime": 3.4
+      },
+      "alertStatus": {
+        "statusLabel": "Needs Attention",
+        "alertTriggered": true,
+        "deviationFromTargetPercent": 41.7
+      }
+    }
+  ]
+},
+    {
+  "name": "High-Risk Defects Identified",
+  "value": 24,
+  "unit": "count",
+  "progress": 80,
+  "total": 200,
+  "target": 30,
+  "status": "OK",
+  "trendData": {
+    "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
+    "values": [28, 27, 26, 25, 25, 24, 24, 23, 22, 24]
   },
-  "impactAnalysis": {
-    "performanceImprovementPercent": 0.4,
-    "resourceUtilizationStatus": "Optimized"
-  },
-  "contractorBehavior": {
-    "numberOfIssuesAssigned": 128,
-    "issuesRespondedWithinSLA": 91,
-    "slaAdherenceRate": 71.0
-  },
-  "delayBreakdown": {
-    "avgInitialAcknowledgmentTime": 2.1,
-    "avgAssignmentTime": 3.0,
-    "avgResolutionTime": 3.4
-  },
-  "alertStatus": {
-    "statusLabel": "Needs Attention",
-    "alertTriggered": true,
-    "deviationFromTargetPercent": -0.5
-  }
-}
-      ]
+  "data": [
+    {
+      "parameter": "totalInspectionsConducted",
+      "value": 60,
+      "description": "Total number of inspections or QA checks conducted for infrastructure projects."
     },
     {
-      "name": "High-Risk Defects Identified",
+      "parameter": "highRiskDefectCount",
       "value": 24,
-      "unit": "count",
-      "progress": 80,
-      "total": 200,
-      "target": 30,
-      "status": "OK",
-      "trendData": {
-        "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
-        "values": [28, 27, 26, 25, 25, 24, 24, 23, 22, 24]
-      },
-      "data":[{
-    "parameter": "totalInspectionsConducted",
-    "value": 60,
-    "description": "Total number of inspections or QA checks conducted for infrastructure projects."
-  },
-  {
-    "parameter": "highRiskDefectCount",
-    "value": 24,
-    "description": "Number of defects flagged as critical or high-risk requiring immediate remediation."
-  },
-  {
-    "parameter": "defectSeverityScore",
-    "value": 8.4,
-    "description": "Average severity rating (on scale of 1 to 10) for all high-risk defects logged."
-  },
-  {
-    "parameter": "recurrenceRate",
-    "value": "12%",
-    "description": "Percentage of defects that have reoccurred in the same zones, indicating systemic issues."
-  },
-  {
-    "parameter": "predictiveDefectRate",
-    "value": "24.1",
-    "description": "AI-predicted defect count based on historical trends and material usage patterns."
-  }]
+      "description": "Number of defects flagged as critical or high-risk requiring immediate remediation."
     },
+    {
+      "parameter": "defectSeverityScore",
+      "value": 8.4,
+      "description": "Average severity rating (on a scale of 1 to 10) for all high-risk defects logged."
+    },
+    {
+      "parameter": "recurrenceRate",
+      "value": 12,
+      "unit": "percent",
+      "description": "Percentage of defects that have reoccurred in the same zones, indicating systemic issues."
+    },
+    {
+      "parameter": "predictiveDefectRate",
+      "value": 24.1,
+      "description": "AI-predicted defect count based on historical trends and material usage patterns."
+    }
+  ]
+}
+,
   ],
   "Planning Analyst": [
     {
@@ -192,7 +205,6 @@ export const graphData = {
       "value": 78,
       "unit": "%",
       "total": 200,
-
       "progress": 87,
       "target": 90,
       "status": "Needs attention",
@@ -541,6 +553,58 @@ export const projectData = {
     },
   ],
 };
+
+export let kpi = [
+  {
+    id: 'pw-1',
+    name: 'Average project delay',
+    value: 12.3,
+    target: 9,
+    unit: 'days',
+    trend: 'down',
+    isGood: false,
+    attention: true,
+    color: 'bg-red-500',
+    status: 'Needs Attention'
+  },
+  {
+    id: 'pw-2',
+    name: 'Milestones met on time',
+    value: 78,
+    target: 90,
+    unit: '%',
+    trend: 'up',
+    isGood: false,
+    attention: true,
+    color: 'bg-yellow-500',
+    status: 'Needs Attention'
+  },
+  {
+    id: 'pw-3',
+    name: 'Contractor response time',
+    value: 8.5,
+    target: 6,
+    unit: 'hours',
+    trend: 'down',
+    isGood: false,
+    attention: true,
+    color: 'bg-yellow-500',
+    status: 'Needs Attention'
+  },
+  {
+    id: 'pw-4',
+    name: 'High-risk defects identified',
+    value: 24,
+    target: 30,
+    unit: 'count',
+    trend: 'down',
+    isGood: true,
+    attention: false,
+    color: 'bg-green-500',
+    status: 'On Track'
+  }
+];
+
 
 
 

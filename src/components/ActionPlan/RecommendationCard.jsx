@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   CheckCircle,
   CircleAlert,
@@ -11,7 +11,7 @@ import { v4 as uuid } from "uuid";
 import { toast } from "react-toastify";
 import { useActionPlanStore } from "../../store/actionPlanStore";
 
-const RecommendationCard = ({ data, index,selected }) => {
+const RecommendationCard = ({ data, index, selected }) => {
   // Card style definitions
   const cardStyles = {
     objective: {
@@ -27,7 +27,8 @@ const RecommendationCard = ({ data, index,selected }) => {
       icon: <Zap className="w-4 h-4 text-yellow-500" />,
     },
   };
-  const { addActionPlan,  actionPlans } = useActionPlanStore();
+  const { addActionPlan, actionPlans } = useActionPlanStore();
+  const [isPlanAdded, setIsPlanAdded] = useState(false);
 
   const { type, title, description, confidence, assignee } = data;
   const style = cardStyles[type];
@@ -35,30 +36,29 @@ const RecommendationCard = ({ data, index,selected }) => {
   const handleOnClickFn = () => {
     try {
       const getRandomFutureDate = (minDays = 1, maxDays = 60) => {
-      const today = new Date();
-      const randomDays =
-        Math.floor(Math.random() * (maxDays - minDays + 1)) + minDays;
-      today.setDate(today.getDate() + randomDays);
-      return today.toISOString().split("T")[0]; // returns 'YYYY-MM-DD'
-    };
-    const recommendation = {
-      id: `act-pw-${uuid()}`,
-      title,
-      description,
-      status: "pending",
-      assignee,
-      dueDate: getRandomFutureDate(),
-      kpiId: `pw-${uuid()}`,
-      impact: "medium",
-    };
-    addActionPlan(selected, recommendation);
-    toast.success("Plan Added successfully!");
+        const today = new Date();
+        const randomDays =
+          Math.floor(Math.random() * (maxDays - minDays + 1)) + minDays;
+        today.setDate(today.getDate() + randomDays);
+        return today.toISOString().split("T")[0]; // returns 'YYYY-MM-DD'
+      };
+      const recommendation = {
+        id: `act-pw-${uuid()}`,
+        title,
+        description,
+        status: "pending",
+        assignee,
+        dueDate: getRandomFutureDate(),
+        kpiId: `pw-${uuid()}`,
+        impact: "medium",
+      };
+      addActionPlan(selected, recommendation);
+      toast.success("Plan Added successfully!");
+      setIsPlanAdded(true);
     } catch (error) {
       toast.error("Task cannot be empty!");
       console.log(error.message);
     }
-    
-    // console.log("recommandation: ", actionPlans);
   };
   return (
     <div
@@ -83,9 +83,15 @@ const RecommendationCard = ({ data, index,selected }) => {
       </div>
       <button
         onClick={handleOnClickFn}
-        className={`w-full mt-1 text-sm cursor-pointer font-semilight rounded-md py-1 hover:bg-slate-200 hover:text-black flex text-slate-600 items-center justify-center gap-2 bg-slate-100`}
+        disabled={isPlanAdded}
+        className={`w-full mt-1 text-sm cursor-pointer font-semilight rounded-md py-1 flex items-center justify-center gap-2 ${
+          isPlanAdded
+            ? "bg-blue-100 text-blue-600 cursor-not-allowed"
+            : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-black"
+        }`}
       >
-        <Plus size={18} /> Add to plan
+        <Plus size={18} />
+        {isPlanAdded ? "Added to plan" : "Add to plan"}
       </button>
     </div>
   );
