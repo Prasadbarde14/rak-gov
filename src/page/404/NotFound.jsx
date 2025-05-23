@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import rakLogo from '../../../public/rak-logo.png';
+import rakLogo from '../../assets/rak-logo.png';
 
 const NotFound = () => {
   return (
