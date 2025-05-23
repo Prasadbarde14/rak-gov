@@ -8,14 +8,11 @@ import {
   ChevronRight,
   Settings2,
 } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 function SideNav() {
-  const [selected, setSelected] = useState(localStorage.getItem("location")?localStorage.getItem("location"):"0-0");
   const [openIndex, setOpenIndex] = useState(0);
-  const navigate = useNavigate();
-
   const handleItemClick = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
@@ -74,7 +71,9 @@ function SideNav() {
     {
       icon: <Settings2 color="#94A3B8" size={20} />,
       text: "Settings",
-      children: [{ title: "Agent Interaction", link: "/agent" }],
+      children: [{ title: "Agent Interaction", link: "/agent" },
+        { title: "Ontology", link: "/onto" }
+      ],
     },
   ];
 

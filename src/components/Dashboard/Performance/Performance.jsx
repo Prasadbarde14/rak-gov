@@ -106,7 +106,7 @@ const Performance = ({ selected }) => {
           </button>
         </div>
       </div>
-      {manual && <SimulationSliders parameters={parameters} setParameters={setParameters} />}
+      {manual && <SimulationSliders parameters={parameters} setParameters={setParameters} colors={["#22c55e","#e5e7eb"]}/>}
 
       <hr className="border border-gray-100" />
       <h3 className=" font-semibold">Simulation Results</h3>
