@@ -97,7 +97,7 @@ const CrossDepartmentAnalysis = () => {
     if (kpiAnalysis.isSuccess) {
       setEnabled(false); // stop further fetching
       setAnalytics(kpiAnalysis?.data?.analysis);
-      setOptions((kpiAnalysis?.data?.option)?(kpiAnalysis?.data?.option):fixchat);
+      setOptions((kpiAnalysis?.data?.option));
       setGraph(true);
       setShowSimulate(false);
      
@@ -105,8 +105,7 @@ const CrossDepartmentAnalysis = () => {
   }, [kpiAnalysis.isSuccess]);
 
 const handleAnalysis = () => {
-  setAnalytics("");
-      setOptions("");
+
   const newQuery =
     "Help me analyse this data and give me suggestive measures: " +
     JSON.stringify(kpi) +
@@ -114,7 +113,6 @@ const handleAnalysis = () => {
     JSON.stringify(parameters);
 
   setQuery(newQuery);
-  console.log("newQuery",newQuery)
   setEnabled(false);     // Reset it first
    
   setTimeout(() => {
