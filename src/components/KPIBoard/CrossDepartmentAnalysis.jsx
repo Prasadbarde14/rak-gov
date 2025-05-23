@@ -17,6 +17,74 @@ const CrossDepartmentAnalysis = () => {
   const [graph, setGraph] = useState(false);
   const [enabled, setEnabled] = useState(false);
   const [query, setQuery] = useState("");
+  const fixchat={
+  title: {
+    text: 'KPI Target vs Current Comparison',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: { type: 'shadow' }
+  },
+  legend: {
+    data: ['Current Value', 'Target Value'],
+    top: 30
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '5%',
+    containLabel: true
+  },
+  xAxis: {
+    type: 'category',
+    data: [
+      'DirInfra: Avg Delay',
+      'DirInfra: Milestones',
+      'DirInfra: Response Time',
+      'DirInfra: High-risk Defects',
+      'PlanAnalyst: Avg Delay',
+      'PlanAnalyst: Milestones',
+      'PlanAnalyst: Budget Util.',
+      'PlanAnalyst: Task Rate',
+      'MaintHead: Response Time',
+      'MaintHead: High-risk Defects'
+    ],
+    axisLabel: {
+      rotate: 30
+    }
+  },
+  yAxis: {
+    type: 'value',
+    name: 'Value'
+  },
+  series: [
+    {
+      name: 'Current Value',
+      type: 'bar',
+      data: [
+        12.3, 78, 8.5, 24, // Director
+        12.3, 78, 92, 75,  // Planning Analyst
+        8.5, 24            // Maintenance Head
+      ],
+      itemStyle: {
+        color: '#5470C6'
+      }
+    },
+    {
+      name: 'Target Value',
+      type: 'bar',
+      data: [
+        9, 90, 6, 30,   // Director
+        9, 90, 90, 80,  // Planning Analyst
+        6, 30          // Maintenance Head
+      ],
+      itemStyle: {
+        color: '#91CC75'
+      }
+    }
+  ]
+};
 
   const selected = "1";
 
@@ -28,13 +96,17 @@ const CrossDepartmentAnalysis = () => {
   useEffect(() => {
     if (kpiAnalysis.isSuccess) {
       setEnabled(false); // stop further fetching
-      setAnalytics(kpiAnalysis.data?.analysis);
-      setOptions(kpiAnalysis.data?.option);
+      setAnalytics(kpiAnalysis?.data?.analysis);
+      setOptions((kpiAnalysis?.data?.option)?(kpiAnalysis?.data?.option):fixchat);
       setGraph(true);
+      setShowSimulate(false);
+     
     }
   }, [kpiAnalysis.isSuccess]);
 
 const handleAnalysis = () => {
+  setAnalytics("");
+      setOptions("");
   const newQuery =
     "Help me analyse this data and give me suggestive measures: " +
     JSON.stringify(kpi) +
@@ -42,7 +114,9 @@ const handleAnalysis = () => {
     JSON.stringify(parameters);
 
   setQuery(newQuery);
+  console.log("newQuery",newQuery)
   setEnabled(false);     // Reset it first
+   
   setTimeout(() => {
     setEnabled(true);    // Then re-enable after React registers state change
   }, 10);
@@ -116,9 +190,9 @@ const handleAnalysis = () => {
           <p className="text-sm text-slate-500">
             AI-driven recommendations for performance improvement
           </p>
-          <p className="text-md text-slate-800 mt-2 flex flex-wrap justify-around">
+          <p className="text-md text-slate-800 mt-6 justify-around">
             {analytics.length>0 && analytics?.map((item)=>{
-              return<div className="p-2 mb-4 bg-slate-50 shadow-sm rounded-md w-[36vw]">
+              return<div className="p-2 mb-4 bg-slate-50 shadow-sm rounded-md  text-slate-800">
                 <div className="flex justify-between items-center">
                 <p className="font-semibold text-md text-black mb-2">{item.title}</p>
                 <p className={`${item.priority=="High"?"text-red-400 bg-red-100":item.priority=="Low"?"text-yellow-500 bg-yellow-100":"text-orange-400 bg-orange-100"} font-semibold p-1 rounded-sm text-sm`}>{item.priority}</p>

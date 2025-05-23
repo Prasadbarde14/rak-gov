@@ -148,11 +148,11 @@ export async function postGetSimmulationResult({query,body}){
   
 }
 
-export async function postGetKpiAnalysis({query,body}){
+export async function postGetKpiAnalysis(query){
   return await agentInstance.post('/interact',{
     
         "agentId": "63d1c4c5-856e-4e3b-aa41-be191628dbd9",
-        "query": JSON.stringify(query+" ")+JSON.stringify(body)
+        "query": query
     
   })
   
@@ -161,7 +161,7 @@ export async function postGetKpiAnalysis({query,body}){
 export async function getAutoSimulation(query){
 
   return await agentInstance.post('/interact',{
-      "agentId": "63d1c4c5-856e-4e3b-aa41-be191628dbd9",
+      "agentId": "3d166420-9517-4057-b5f0-2603077246ae",
       "query": JSON.stringify(query)
   })
 }

@@ -47,6 +47,7 @@ const ProjectPlanningOverview = ({ selected, index, parentData }) => {
     parentData,
     
   );
+  console.log(data);
   return (
     <div className="w-full mx-auto bg-white rounded-md shadow-sm border mt-5">
       <div className="flex justify-between items-center border-b px-4 py-5">

@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query"
-import { getGraphData, getAIrecommendationsData, getPerformanceMatrics, getMaintainceData, getGraphsData, getProjectData, getChatBotResponse, getAutoSimulation, getActionPlans } from "../APICalls/api"
+import { getGraphData, getAIrecommendationsData, getPerformanceMatrics, getMaintainceData, getGraphsData, getProjectData, getChatBotResponse, getAutoSimulation, getActionPlans, postGetKpiAnalysis } from "../APICalls/api"
 import { postGetSimmulationResult } from '../APICalls/api';
 import { actionPlans } from "../APICalls/mockCallApi";
 import { graphData } from "../APICalls/mockCallApi";
@@ -258,7 +258,7 @@ export const usePostGetKpiAnalysis = (query, selected, enabled) => {
   return useQuery({
     queryKey: ["kpi", selected, query], // Include `query` here
     queryFn: async () => {
-      const responses = await getAutoSimulation(query);
+      const responses = await postGetKpiAnalysis(query);
       return responses;
     },
     select: (res) => {
