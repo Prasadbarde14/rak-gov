@@ -90,8 +90,8 @@ const MaintenanceMetrics = ({ selected, index, parentData }) => {
         <ClipboardList className="text-purple-600 mr-2" size={20} />
         <h2 className="text-lg font-semibold text-gray-800">Metrics</h2>
       </div>
-      {graphData.isLoading ||
-        graphData.isFetching && (
+      {(graphData.isLoading ||
+        graphData.isFetching) && (
           <div className="animate-pulse bg-gray-200 h-80 rounded w-full"></div>
         )}
 

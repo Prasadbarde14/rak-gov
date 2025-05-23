@@ -1,7 +1,9 @@
-import React from "react";
 import { MessageSquare } from "lucide-react";
 
 const AgentInteractionSection = () => {
+
+  
+
   return (
     <div className="w-full max-w-6xl mx-auto px-4 py-6 space-y-4">
       {/* Section Header */}

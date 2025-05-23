@@ -85,7 +85,7 @@ const Performance = ({ selected }) => {
               Manual
             </button>
           </div>
-          <button disabled={mutatePerformaceData.isLoading} className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-1.5 rounded flex gap-1 items-center cursor-pointer" onClick={() => {
+          <button disabled={mutatePerformaceData.isLoading || AutoSimulation.isPending}  className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-1.5 rounded flex gap-1 items-center cursor-pointer" onClick={() => {
             setEnabled(true);
             setManual(false)
             queryClient.setQueryData(['Simmulation', selected], () => []);
