@@ -27,7 +27,7 @@ const RecommendationCard = ({ data, index, selected }) => {
       icon: <Zap className="w-4 h-4 text-yellow-500" />,
     },
   };
-  const { addActionPlan, actionPlans } = useActionPlanStore();
+  const { addActionPlan } = useActionPlanStore();
   const [isPlanAdded, setIsPlanAdded] = useState(false);
 
   const { type, title, description, confidence, assignee } = data;

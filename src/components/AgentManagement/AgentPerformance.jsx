@@ -2,17 +2,39 @@ import React from 'react';
 import ReactECharts from 'echarts-for-react';
 import { Activity, TrendingUp, Clock, AlertTriangle } from 'lucide-react';
 import { defaultAgents } from './Agents';
+import useNetworkStore from '../../store/store';
 
 const generateChartData = () => {
-  return Array.from({ length: 24 }, (_, i) => ({
-    time: `${i}:00`,
-    accuracy: 85 + Math.random() * 10,
-    latency: 100 + Math.random() * 50,
-    errors: Math.random() * 5
-  }));
+
+  const getMetrics = useNetworkStore(state => state.getMetrics);
+  const metrics = getMetrics();
+ 
+  function formatTo24Hour(timeString) {
+  const date = new Date(timeString);
+  
+  const pad = (n) => n.toString().padStart(2, '0');
+
+  const day = pad(date.getDate());
+  const month = pad(date.getMonth() + 1); // months are 0-indexed
+  const year = date.getFullYear();
+  const hours = pad(date.getHours());
+  const minutes = pad(date.getMinutes());
+  const seconds = pad(date.getSeconds());
+
+  return `${hours}:${minutes}:${seconds}`;
+}
+
+  return metrics.history.map(i=>({
+    time:formatTo24Hour(i.time),
+    accuracy:i.successRate,
+    latency:i.executionTime,
+    errors:i.errorRate,
+  }))
+
 };
 
 const getEChartOption = (data) => ({
+
   tooltip: { trigger: 'axis' },
   legend: { data: ['Accuracy (%)', 'Latency (ms)', 'Errors'] },
   xAxis: { type: 'category', data: data.map((d) => d.time) },
@@ -49,6 +71,8 @@ const getEChartOption = (data) => ({
 });
 
 const AgentPerformance = () => {
+  const getMetrics = useNetworkStore(state => state.getMetrics);
+  const metrics = getMetrics();
   return (
     <div className="p-6">
       <div className="mb-6">
@@ -77,10 +101,10 @@ const AgentPerformance = () => {
 
               {/* KPI Cards */}
               <div className="grid grid-cols-4 gap-4 mb-6">
-                <MetricCard icon={<Activity className="h-4 w-4 mr-1" />} label="Accuracy" value={`${(agent.status.metrics.successRate * 100).toFixed(1)}%`} />
-                <MetricCard icon={<Clock className="h-4 w-4 mr-1" />} label="Avg. Latency" value={`${agent.status.metrics.executionTime}ms`} />
-                <MetricCard icon={<TrendingUp className="h-4 w-4 mr-1" />} label="Throughput" value="450/s" />
-                <MetricCard icon={<AlertTriangle className="h-4 w-4 mr-1" />} label="Error Rate" value={`${(agent.status.metrics.errorRate * 100).toFixed(1)}%`} />
+                <MetricCard icon={<Activity className="h-4 w-4 mr-1" />} label="Accuracy" value={`${(metrics.successRate)}%`} />
+                <MetricCard icon={<Clock className="h-4 w-4 mr-1" />} label="Avg. Latency" value={`${metrics.avgLatency}ms`} />
+                <MetricCard icon={<TrendingUp className="h-4 w-4 mr-1" />} label="Throughput" value={`${metrics.throughput}/s`} />
+                <MetricCard icon={<AlertTriangle className="h-4 w-4 mr-1" />} label="Error Rate" value={`${metrics.errorRate}%`} />
               </div>
 
               {/* Line Chart */}

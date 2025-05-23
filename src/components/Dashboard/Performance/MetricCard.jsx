@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Brain,
   TriangleAlert,
@@ -6,6 +6,9 @@ import {
   Square,
   ChevronRight,
   Filter,
+  NotebookPen,
+  SquareChartGantt,
+  ChartLine,
 } from "lucide-react"; // or your icon library
 import ProjectPlanningOverview from "../ProjectPlanningOverview.jsx/ProjectPlanningOverview";
 import MaintenanceOverview from "./MaintenanceOverview";
@@ -16,12 +19,47 @@ const MetricCard = ({ data, index, selected }) => {
   const { title, current, predicted, delta, recommendations, impactAnalysis } =
     data || {};
 
+  const divRef = useRef(null)
   const [selectedFields, setSelectedFields] = useState([]);
 
+  useEffect(()=>{
+    if(divRef.current){
+      divRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  },[selectedFields])
+
+
   const options = [
-    { label: "Project Planning", value: "project" },
-    { label: "Maintenance Overview", value: "maintenanceOverview" },
-    { label: "Maintenance Metric", value: "maintenanceMetric" },
+    {
+      label:
+        <div className="flex justify-between items-center gap-2 py-1.5">
+          <NotebookPen color="#9810fa" size={20} />
+          <p className="text-sm">
+            Planning
+          </p>
+        </div>
+      , value: "project"
+    },
+    {
+      label:
+        <div className="flex justify-between items-center gap-2 py-1.5">
+          <SquareChartGantt color="#9810fa" size={20} />
+          <p>
+            Overview
+          </p>
+        </div>
+      , value: "maintenanceOverview"
+    },
+    {
+      label:
+        <div className="flex justify-between items-center gap-2 py-1.5">
+          <ChartLine color="#9810fa" size={20} />
+          <p>
+            Metric
+          </p>
+        </div>
+      , value: "maintenanceMetric"
+    },
   ];
   const [isOpen, setIsOpen] = useState(false);
 
@@ -37,35 +75,42 @@ const MetricCard = ({ data, index, selected }) => {
     switch (field) {
       case "project":
         return (
-          <ProjectPlanningOverview
-            key="project"
-            index={index}
-            selected={selected}
-            parentData={data}
-          />
+          <div ref={divRef}>
+            <ProjectPlanningOverview
+              key="project"
+              index={index}
+              selected={selected}
+              parentData={data}
+            />
+          </div>
         );
       case "maintenanceOverview":
         return (
-          <MaintenanceOverview
-            key="maintenanceOverview"
-            index={index}
-            selected={selected}
-            parentData={data}
-          />
+          <div ref={divRef}>
+            <MaintenanceOverview
+              key="maintenanceOverview"
+              index={index}
+              selected={selected}
+              parentData={data}
+            />
+          </div>
         );
       case "maintenanceMetric":
         return (
-          <MaintenanceMetric
-            key="maintenanceMetric"
-            index={index}
-            selected={selected}
-            parentData={data}
-          />
+          <div ref={divRef}>
+            <MaintenanceMetric
+              key="maintenanceMetric"
+              index={index}
+              selected={selected}
+              parentData={data}
+            />
+          </div>
         );
       default:
         return null;
     }
   };
+
   return (
     <div className="p-4 rounded-xl shadow-sm bg-[#f8fafc] space-y-2">
       {/* Header Section - Always Visible */}
@@ -153,8 +198,8 @@ const MetricCard = ({ data, index, selected }) => {
                         <label
                           key={option.value}
                           className={`cursor-pointer px-4 py-1 rounded-md border text-sm font-medium transition 
-          ${isChecked
-                              ? "bg-slate-600 text-white border-slate-600 shadow"
+                              ${isChecked
+                              ? "bg-purple-200 text-purple-500  shadow"
                               : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
                             }`}
                         >

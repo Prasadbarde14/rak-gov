@@ -14,22 +14,22 @@ const MetricCardSkeleton = () => {
       </div>
 
       {/* Divider */}
-      <hr className="border border-gray-100" />
+      {/* <hr className="border border-gray-100" /> */}
 
       {/* Impact Analysis section */}
-      <div className="space-y-2 mt-2">
+      {/* <div className="space-y-2 mt-2">
         <div className="h-4 bg-gray-300 rounded w-1/3"></div>
         <div className="h-3 bg-gray-200 rounded w-2/3"></div>
         <div className="h-3 bg-gray-200 rounded w-1/2"></div>
-      </div>
+      </div> */}
 
       {/* Recommendations section */}
-      <div className="space-y-2 mt-4">
+      {/* <div className="space-y-2 mt-4">
         <div className="h-4 bg-gray-300 rounded w-1/2"></div>
         <div className="h-3 bg-gray-200 rounded w-full"></div>
         <div className="h-3 bg-gray-200 rounded w-5/6"></div>
         <div className="h-3 bg-gray-200 rounded w-full"></div>
-      </div>
+      </div> */}
     </div>
   );
 };
