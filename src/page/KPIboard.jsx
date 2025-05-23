@@ -2,8 +2,10 @@ import React from 'react'
 import KPImonitoringBoard from '../components/KPIBoard/KPImonitoringBoard'
 import CrossDepartmentAnalysis from '../components/KPIBoard/CrossDepartmentAnalysis'
 import Breadcrumbs from '../components/OKRCanvas/Breadcrumbs'
+import { useOutletContext } from 'react-router-dom'
 
 function KPIboard() {
+  const [selected] = useOutletContext();
   return (
     <div>
        <div className="pt-5 px-4">
@@ -15,7 +17,7 @@ function KPIboard() {
           ]}
         />
       </div>
-      <KPImonitoringBoard/>
+      <KPImonitoringBoard selectedPersona={selected}/>
       <CrossDepartmentAnalysis/>
     </div>
   )

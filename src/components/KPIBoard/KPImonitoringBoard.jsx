@@ -8,26 +8,27 @@ import {
   Users,
 } from 'lucide-react';
 
-const personaOptions = ['Director of Infrastructure'];
 
 
 import { kpi } from '../../API/APICalls/mockCallApi';
 
-const KPImonitoringBoard = () => {
-  // const [persona, setPersona] = useState(personaOptions[0]);
+const KPImonitoringBoard = ({selectedPersona}) => {
+const selectedDashboard = selectedPersona?selectedPersona: "Director of Infrastructure";
   const filters = [
   { label: 'All KPIs'},
-  { label: 'At Risk', count: kpi.filter((item)=>item.status==="At Risk").length,badge: 'bg-red-500' },
-  { label: 'On Track', count: kpi.filter((item)=>item.status==="On Track").length, badge: 'bg-green-500' },
-  { label: 'Needs Attention', count: kpi.filter((item)=>item.status==="Needs Attention").length, badge: 'bg-yellow-500' },
+  { label: 'At Risk', count: kpi[selectedDashboard]?.filter((item)=>item.status==="At Risk").length,badge: 'bg-red-500' },
+  { label: 'On Track', count: kpi[selectedDashboard]?.filter((item)=>item.status==="On Track").length, badge: 'bg-green-500' },
+  { label: 'Needs Attention', count: kpi[selectedDashboard]?.filter((item)=>item.status==="Needs Attention").length, badge: 'bg-yellow-500' },
 ];
-
   const [filter,setFilter] = useState("All KPIs");
-  let kpis = kpi.filter((item)=>{
+
+    let kpis = kpi[selectedDashboard]?.filter((item)=>{
     if(filter=="All KPIs")
       return item;
     return item.status==filter
   });
+
+
   const [selected, setSelected] = useState(kpis[0]);
   
 
@@ -109,7 +110,7 @@ const KPImonitoringBoard = () => {
               <div className="p-4 border-b flex justify-between items-center">
                 <div className="text-slate-800 font-semibold">{kpi.name}</div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">{kpi.id}</span>
+                  
                   {kpi.attention && (
                     <div className="flex items-center text-yellow-600 text-xs font-medium animate-pulse duration-75">
                       <AlertTriangle className="w-4 h-4 mr-1" />
