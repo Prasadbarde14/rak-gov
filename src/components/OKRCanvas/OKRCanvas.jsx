@@ -6,6 +6,8 @@ import {
   Target as GoalIcon,
 } from "lucide-react";
 import Breadcrumbs from "./Breadcrumbs";
+import useKRStore from "../../store/okrStore"; // adjust path
+
 
 // Initial data
 const quarters = ["Q3 2025", "Q4 2025", "Q1 2026"];
@@ -45,18 +47,26 @@ const initialObjectives = {
 };
 
 const OKRCanvas = ({ selected, department }) => {
+  const {
+  showKRModal,
+  selectedObjectiveId,
+  editKR,
+  newKR,
+  openKRModal,
+  closeKRModal,
+  setNewKRField,
+} = useKRStore();
+
+
+
   const departmentId = selected.replace(/\s+/g, "_");
   const [objectives, setObjectives] = useState(initialObjectives);
   const [activeQuarter, setActiveQuarter] = useState(quarters[0]);
 
-  const [showKRModal, setShowKRModal] = useState(false);
   const [showObjModal, setShowObjModal] = useState(false);
 
-  const [selectedObjectiveId, setSelectedObjectiveId] = useState(null);
-  const [editKR, setEditKR] = useState(null);
 
   const [newObjective, setNewObjective] = useState({ title: "", description: "" });
-  const [newKR, setNewKR] = useState({ title: "", current: "", target: "", unit: "" });
 
   const getProgress = (keyResults) => {
     if (!keyResults.length) return 0;
@@ -115,9 +125,8 @@ const OKRCanvas = ({ selected, department }) => {
       })
     );
 
-    setShowKRModal(false);
-    setNewKR({ title: "", current: "", target: "", unit: "" });
-    setEditKR(null);
+    closeKRModal();
+    setNewKRField("title", "");
   };
 
   const handleDeleteKR = (objId, krId) => {
@@ -169,7 +178,7 @@ const OKRCanvas = ({ selected, department }) => {
             <button
               key={q}
               onClick={() => setActiveQuarter(q)}
-              className={`px-4 py-1.5 text-sm rounded-full ${
+              className={`px-4 py-1.5 text-sm rounded-full cursor-pointer ${
                 activeQuarter === q
                   ? "bg-blue-100 text-blue-700"
                   : "bg-slate-100 text-slate-600"
@@ -245,10 +254,7 @@ const OKRCanvas = ({ selected, department }) => {
                         <div className="flex gap-2">
                           <button
                             onClick={() => {
-                              setSelectedObjectiveId(obj.id);
-                              setEditKR(kr);
-                              setNewKR(kr);
-                              setShowKRModal(true);
+                              openKRModal(obj.id, kr); // for editing
                             }}
                             className="text-slate-400 hover:text-blue-600"
                           >
@@ -284,10 +290,7 @@ const OKRCanvas = ({ selected, department }) => {
 
                 <button
                   onClick={() => {
-                    setSelectedObjectiveId(obj.id);
-                    setEditKR(null);
-                    setNewKR({ title: "", current: "", target: "", unit: "" });
-                    setShowKRModal(true);
+                    openKRModal(obj.id); // for new KR
                   }}
                   className="flex items-center justify-center w-full py-3 border border-dashed border-slate-300 rounded-lg text-blue-600 hover:bg-blue-50"
                 >
@@ -311,7 +314,7 @@ const OKRCanvas = ({ selected, department }) => {
               <input
                 placeholder="Title"
                 value={newKR.title}
-                onChange={(e) => setNewKR((p) => ({ ...p, title: e.target.value }))}
+                onChange={(e) => setNewKRField("title", e.target.value)}
                 required
                 className="w-full border border-slate-300 px-3 py-2 rounded-md"
               />
@@ -320,7 +323,7 @@ const OKRCanvas = ({ selected, department }) => {
                   type="number"
                   placeholder="Current"
                   value={newKR.current}
-                  onChange={(e) => setNewKR((p) => ({ ...p, current: e.target.value }))}
+                  onChange={(e) => setNewKRField("current", e.target.value)}
                   required
                   className="border border-slate-300 px-3 py-2 rounded-md"
                 />
@@ -328,20 +331,20 @@ const OKRCanvas = ({ selected, department }) => {
                   type="number"
                   placeholder="Target"
                   value={newKR.target}
-                  onChange={(e) => setNewKR((p) => ({ ...p, target: e.target.value }))}
+                  onChange={(e) => setNewKRField("target", e.target.value)}
                   required
                   className="border border-slate-300 px-3 py-2 rounded-md"
                 />
                 <input
                   placeholder="Unit"
                   value={newKR.unit}
-                  onChange={(e) => setNewKR((p) => ({ ...p, unit: e.target.value }))}
+                  onChange={(e) => setNewKRField("unit", e.target.value)}
                   className="border border-slate-300 px-3 py-2 rounded-md"
                 />
               </div>
               <div className="flex justify-end gap-2">
                 <button
-                  onClick={() => setShowKRModal(false)}
+                  onClick={() => closeKRModal()}
                   className="text-slate-600 cursor-pointer bg-gray-300 px-4 py-2 rounded-md"
                   type="button"
                 >
