@@ -32,9 +32,8 @@ const Performance = ({ selected }) => {
   const mutatePerformaceData = usePostGetSimmulationResult("Here are some simulation parameters" + JSON.stringify(parameters) + "Now give performance matrix for ", selected, enabled)
 
   useEffect(() => {
-    if (!mutatePerformaceData.isLoading)
-      setEnabled(false)
-  }, [mutatePerformaceData])
+    if (!mutatePerformaceData.isLoading) setEnabled(false);
+  }, [mutatePerformaceData]);
 
   useEffect(() => {
     if (AutoSimulation.isSuccess) {
@@ -112,19 +111,23 @@ const Performance = ({ selected }) => {
       <hr className="border border-gray-100" />
       <h3 className=" font-semibold">Simulation Results</h3>
       <div className="grid md:grid-cols-2 lg:grid-cols-1 gap-4">
-        {(mutatePerformaceData.isLoading || mutatePerformaceData.fetchStatus == "fetching") && <>
-          <MetricCardSkeleton />
-          <MetricCardSkeleton />
-          <MetricCardSkeleton />
-          <MetricCardSkeleton />
+        {(mutatePerformaceData.isLoading ||
+          mutatePerformaceData.fetchStatus == "fetching") && (
+          <>
+            <MetricCardSkeleton />
+            <MetricCardSkeleton />
+            <MetricCardSkeleton />
+            <MetricCardSkeleton />
+          </>
+        )}
 
-        </>}
-
-        {mutatePerformaceData.fetchStatus == "idle"
-          && mutatePerformaceData?.data
-          && mutatePerformaceData.data.map((i, indx) => <MetricCard key={indx} data={i} index={indx} selected={selected} />)}
+        {mutatePerformaceData.fetchStatus == "idle" &&
+          mutatePerformaceData?.data &&
+          mutatePerformaceData.data.map((i, indx) => (
+            <MetricCard key={indx} data={i} index={indx} selected={selected} />
+          ))}
       </div>
-    </div >
+    </div>
   );
 };
 

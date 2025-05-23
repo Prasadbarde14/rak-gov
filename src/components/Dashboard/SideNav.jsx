@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 
 function SideNav() {
-  const [selected, setSelected] = useState("0-0");
+  const [selected, setSelected] = useState(localStorage.getItem("location")?localStorage.getItem("location"):"0-0");
   const [openIndex, setOpenIndex] = useState(0);
   const navigate = useNavigate();
 
