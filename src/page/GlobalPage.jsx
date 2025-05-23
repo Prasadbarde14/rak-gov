@@ -72,7 +72,7 @@ function GlobalPage() {
           variants={fadeInZoom}
           className="w-full"
         >
-          <TopNav selected={selected} setSelected={setSelected} tabs={tabs} />
+          {location.pathname!="/onto" && <TopNav selected={selected} setSelected={setSelected} tabs={tabs} />}
         </motion.div>
 
         <div className="w-full flex-1 min-h-0 overflow-auto">
