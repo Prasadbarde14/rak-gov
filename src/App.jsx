@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import KPIBoard from "./page/KPIboard";
 import NotFound from "./page/404/NotFound";
+import Ontology from "./page/Ontology";
 
 function App() {
   const router = createBrowserRouter([
@@ -35,6 +36,10 @@ function App() {
         {
           path: "/public-works/action-plan",
           element: <ActionPlanDashboard />,
+        },
+        {
+          path:"/onto",
+          element:<Ontology/>
         },
       ],
     },
