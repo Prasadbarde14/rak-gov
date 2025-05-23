@@ -1,217 +1,289 @@
 export const graphData = {
   "Director of Infrastructure": [
     {
-      "name": "Average Project Delay",
-      "value": 12.3,
-      "unit": "days",
-      "progress": 137,
-      "target": 9,
-      "status": "Needs attention",
-      "total": 200,
-      "trendData": {
-      "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
-      "values": [15.0, 14.2, 13.8, 13.4, 13.0, 12.8, 12.7, 12.6, 12.4, 12.3]
+      name: "Average Project Delay",
+      value: 12.3,
+      unit: "days",
+      progress: 137,
+      target: 9,
+      status: "Needs attention",
+      total: 200,
+      trendData: {
+        labels: [
+          "Week 1",
+          "Week 2",
+          "Week 3",
+          "Week 4",
+          "Week 5",
+          "Week 6",
+          "Week 7",
+          "Week 8",
+          "Week 9",
+          "Week 10",
+        ],
+        values: [15.0, 14.2, 13.8, 13.4, 13.0, 12.8, 12.7, 12.6, 12.4, 12.3],
       },
-      "data":[
-  {
-    "ProjectID": "INFRA001",
-    "Project Title" : "Director of Infrastructure",
-    "PlannedCompletionDate": "2024-06-15",
-    "ActualCompletionDate": "2024-07-02",
-    "TotalDaysDelayed": 17,
-    "AverageTaskDelay": 2.3,
-    "ScheduleAdherenceRate": 78.5
-  },
-  {
-        "milestoneCompletionRate": 86.25,
-        "numberOfOverdueTasks": 13,
-        "criticalPathImpact": 2.49,
-        "changeRequestsCount": 0,
-        "reworkInstances": 3,
-        "lastUpdated": "2025-05-02"
+      data: [
+        {
+          ProjectID: "INFRA001",
+          "Project Title": "Director of Infrastructure",
+          PlannedCompletionDate: "2024-06-15",
+          ActualCompletionDate: "2024-07-02",
+          TotalDaysDelayed: 17,
+          AverageTaskDelay: 2.3,
+          ScheduleAdherenceRate: 78.5,
+        },
+        {
+          milestoneCompletionRate: 86.25,
+          numberOfOverdueTasks: 13,
+          criticalPathImpact: 2.49,
+          changeRequestsCount: 0,
+          reworkInstances: 3,
+          lastUpdated: "2025-05-02",
+        },
+        {
+          averageContractorResponseTime: 6.2,
+          laborAvailability: 91.4,
+          contractorEfficiencyScore: 8.7,
+          equipmentDowntimeHours: 12,
+          lastUpdated: "2025-06-18",
+        },
+        {
+          weatherImpactScore: 7.5,
+          regulatoryApprovalPendingPercent: 12.8,
+          bottleneckProbability: 0.64,
+          resourceAvailabilityIndex: 83.2,
+          aiDelayPredictionScore: 0.72,
+          lastUpdated: "2025-06-18",
+        },
+      ],
     },
-      {
-    "averageContractorResponseTime": 6.2,
-    "laborAvailability": 91.4,
-    "contractorEfficiencyScore": 8.7,
-    "equipmentDowntimeHours": 12,
-    "lastUpdated": "2025-06-18"
-  },
-  {
-  "weatherImpactScore": 7.5,
-  "regulatoryApprovalPendingPercent": 12.8,
-  "bottleneckProbability": 0.64,
-  "resourceAvailabilityIndex": 83.2,
-  "aiDelayPredictionScore": 0.72,
-  "lastUpdated": "2025-06-18"
-},
-]},
     {
-      "name": "Milestones Met On Time",
-      "Project Title" : "Director of Infrastructure",
-      "value": 78,
-      "unit": "%",
-      "progress": 87,
-      "total": 200,
-      "target": 90,
-      "status": "Needs attention",
-      "trendData": {
-        "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
-        "values": [85, 84, 82, 81, 80, 79, 78, 78, 77, 78]
+      name: "Milestones Met On Time",
+      "Project Title": "Director of Infrastructure",
+      value: 78,
+      unit: "%",
+      progress: 87,
+      total: 200,
+      target: 90,
+      status: "Needs attention",
+      trendData: {
+        labels: [
+          "Week 1",
+          "Week 2",
+          "Week 3",
+          "Week 4",
+          "Week 5",
+          "Week 6",
+          "Week 7",
+          "Week 8",
+          "Week 9",
+          "Week 10",
+        ],
+        values: [85, 84, 82, 81, 80, 79, 78, 78, 77, 78],
       },
-  "data": [
-    {
-      "ProjectID": "INFRA012",
-      "ProjectTitle": "Al Marjan Bridge Expansion",
-      "TotalMilestones": 16,
-      "MilestonesMetOnTime": 13,
-      "OnTimeRate": 81.25,
-      "LastMajorDelayReason": "Permit Clearance",
-      "UpdatedBy": "Project Scheduler A"
+      data: [
+        {
+          ProjectID: "INFRA012",
+          ProjectTitle: "Al Marjan Bridge Expansion",
+          TotalMilestones: 16,
+          MilestonesMetOnTime: 13,
+          OnTimeRate: 81.25,
+          LastMajorDelayReason: "Permit Clearance",
+          UpdatedBy: "Project Scheduler A",
+        },
+        {
+          projectAverages: {
+            averageOnTimeRate: 78.4,
+            totalDelayedMilestones: 43,
+            criticalPathAdherence: 89.6,
+            milestoneApprovalRate: 94.5,
+            lastUpdated: "2025-05-15",
+          },
+        },
+        {
+          performanceFactors: {
+            contractorResponsiveness: 8.4,
+            materialsAvailabilityRate: 92.7,
+            teamCoordinationScore: 8.9,
+            technicalDisruptionIndex: 3.1,
+            changeOrderFrequency: 1.2,
+            lastUpdated: "2025-05-20",
+          },
+        },
+        {
+          aiInsights: {
+            forecastedOnTimeRateNextQuarter: 82.6,
+            bottleneckRiskScore: 0.58,
+            resourceRealignmentRecommendation:
+              "Add 2 full-time planners to Projects 5, 7",
+            alertTriggered: true,
+            lastUpdated: "2025-05-21",
+          },
+        },
+      ],
     },
     {
-      "projectAverages": {
-        "averageOnTimeRate": 78.4,
-        "totalDelayedMilestones": 43,
-        "criticalPathAdherence": 89.6,
-        "milestoneApprovalRate": 94.5,
-        "lastUpdated": "2025-05-15"
-      }
-    },
-    {
-      "performanceFactors": {
-        "contractorResponsiveness": 8.4,
-        "materialsAvailabilityRate": 92.7,
-        "teamCoordinationScore": 8.9,
-        "technicalDisruptionIndex": 3.1,
-        "changeOrderFrequency": 1.2,
-        "lastUpdated": "2025-05-20"
-      }
-    },
-    {
-      "aiInsights": {
-        "forecastedOnTimeRateNextQuarter": 82.6,
-        "bottleneckRiskScore": 0.58,
-        "resourceRealignmentRecommendation": "Add 2 full-time planners to Projects 5, 7",
-        "alertTriggered": true,
-        "lastUpdated": "2025-05-21"
-      }
-    }
-  ]
-    },
-{
-  "name": "Contractor Response Time",
-  "value": 8.5,
-  "unit": "hours",
-  "progress": 142,
-  "total": 200,
-  "target": 6,
-  "status": "Needs attention",
-  "trendData": {
-    "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
-    "values": [10.5, 9.8, 9.0, 8.7, 8.5, 8.3, 8.4, 8.6, 8.5, 8.5]
-  },
-  "data": [
-    {
-      "contractorResponseTimeMetrics": {
-        "averageResponseTimeHours": 8.5,
-        "targetResponseTimeHours": 6.0,
-        "predictedResponseTime": 8.54,
-        "responseRateProgressPercent": 71.0,
-        "responseTrend": "Decreasing"
+      name: "Contractor Response Time",
+      value: 8.5,
+      unit: "hours",
+      progress: 142,
+      total: 200,
+      target: 6,
+      status: "Needs attention",
+      trendData: {
+        labels: [
+          "Week 1",
+          "Week 2",
+          "Week 3",
+          "Week 4",
+          "Week 5",
+          "Week 6",
+          "Week 7",
+          "Week 8",
+          "Week 9",
+          "Week 10",
+        ],
+        values: [10.5, 9.8, 9.0, 8.7, 8.5, 8.3, 8.4, 8.6, 8.5, 8.5],
       },
-      "impactAnalysis": {
-        "performanceImprovementPercent": 0.4,
-        "resourceUtilizationStatus": "Optimized"
+      data: [
+        {
+          contractorResponseTimeMetrics: {
+            averageResponseTimeHours: 8.5,
+            targetResponseTimeHours: 6.0,
+            predictedResponseTime: 8.54,
+            responseRateProgressPercent: 71.0,
+            responseTrend: "Decreasing",
+          },
+          impactAnalysis: {
+            performanceImprovementPercent: 0.4,
+            resourceUtilizationStatus: "Optimized",
+          },
+          contractorBehavior: {
+            numberOfIssuesAssigned: 128,
+            issuesRespondedWithinSLA: 91,
+            slaAdherenceRate: 71.0,
+          },
+          delayBreakdown: {
+            avgInitialAcknowledgmentTime: 2.1,
+            avgAssignmentTime: 3.0,
+            avgResolutionTime: 3.4,
+          },
+          alertStatus: {
+            statusLabel: "Needs Attention",
+            alertTriggered: true,
+            deviationFromTargetPercent: 41.7,
+          },
+        },
+      ],
+    },
+    {
+      name: "High-Risk Defects Identified",
+      value: 24,
+      unit: "count",
+      progress: 80,
+      total: 200,
+      target: 30,
+      status: "OK",
+      trendData: {
+        labels: [
+          "Week 1",
+          "Week 2",
+          "Week 3",
+          "Week 4",
+          "Week 5",
+          "Week 6",
+          "Week 7",
+          "Week 8",
+          "Week 9",
+          "Week 10",
+        ],
+        values: [28, 27, 26, 25, 25, 24, 24, 23, 22, 24],
       },
-      "contractorBehavior": {
-        "numberOfIssuesAssigned": 128,
-        "issuesRespondedWithinSLA": 91,
-        "slaAdherenceRate": 71.0
-      },
-      "delayBreakdown": {
-        "avgInitialAcknowledgmentTime": 2.1,
-        "avgAssignmentTime": 3.0,
-        "avgResolutionTime": 3.4
-      },
-      "alertStatus": {
-        "statusLabel": "Needs Attention",
-        "alertTriggered": true,
-        "deviationFromTargetPercent": 41.7
-      }
-    }
-  ]
-},
-    {
-  "name": "High-Risk Defects Identified",
-  "value": 24,
-  "unit": "count",
-  "progress": 80,
-  "total": 200,
-  "target": 30,
-  "status": "OK",
-  "trendData": {
-    "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
-    "values": [28, 27, 26, 25, 25, 24, 24, 23, 22, 24]
-  },
-  "data": [
-    {
-      "parameter": "totalInspectionsConducted",
-      "value": 60,
-      "description": "Total number of inspections or QA checks conducted for infrastructure projects."
+      data: [
+        {
+          parameter: "totalInspectionsConducted",
+          value: 60,
+          description:
+            "Total number of inspections or QA checks conducted for infrastructure projects.",
+        },
+        {
+          parameter: "highRiskDefectCount",
+          value: 24,
+          description:
+            "Number of defects flagged as critical or high-risk requiring immediate remediation.",
+        },
+        {
+          parameter: "defectSeverityScore",
+          value: 8.4,
+          description:
+            "Average severity rating (on a scale of 1 to 10) for all high-risk defects logged.",
+        },
+        {
+          parameter: "recurrenceRate",
+          value: 12,
+          unit: "percent",
+          description:
+            "Percentage of defects that have reoccurred in the same zones, indicating systemic issues.",
+        },
+        {
+          parameter: "predictiveDefectRate",
+          value: 24.1,
+          description:
+            "AI-predicted defect count based on historical trends and material usage patterns.",
+        },
+      ],
     },
-    {
-      "parameter": "highRiskDefectCount",
-      "value": 24,
-      "description": "Number of defects flagged as critical or high-risk requiring immediate remediation."
-    },
-    {
-      "parameter": "defectSeverityScore",
-      "value": 8.4,
-      "description": "Average severity rating (on a scale of 1 to 10) for all high-risk defects logged."
-    },
-    {
-      "parameter": "recurrenceRate",
-      "value": 12,
-      "unit": "percent",
-      "description": "Percentage of defects that have reoccurred in the same zones, indicating systemic issues."
-    },
-    {
-      "parameter": "predictiveDefectRate",
-      "value": 24.1,
-      "description": "AI-predicted defect count based on historical trends and material usage patterns."
-    }
-  ]
-}
-,
   ],
   "Planning Analyst": [
     {
-      "name": "Average Project Delay",
-      "value": 12.3,
-      "unit": "days",
-      "progress": 137,
-      "total": 200,
+      name: "Average Project Delay",
+      value: 12.3,
+      unit: "days",
+      progress: 137,
+      total: 200,
 
-      "target": 9,
-      "status": "Needs attention",
-      "trendData": {
-        "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
-        "values": [13.5, 12.8, 12.4, 12.1, 12.0, 11.8, 11.7, 12.0, 12.2, 12.3]
-      }
+      target: 9,
+      status: "Needs attention",
+      trendData: {
+        labels: [
+          "Week 1",
+          "Week 2",
+          "Week 3",
+          "Week 4",
+          "Week 5",
+          "Week 6",
+          "Week 7",
+          "Week 8",
+          "Week 9",
+          "Week 10",
+        ],
+        values: [13.5, 12.8, 12.4, 12.1, 12.0, 11.8, 11.7, 12.0, 12.2, 12.3],
+      },
     },
     {
-      "name": "Milestones Met On Time",
-      "value": 78,
-      "unit": "%",
-      "total": 200,
-      "progress": 87,
-      "target": 90,
-      "status": "Needs attention",
-      "trendData": {
-        "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
-        "values": [80, 82, 84, 85, 87, 86, 85, 83, 80, 78]
-      }
+      name: "Milestones Met On Time",
+      value: 78,
+      unit: "%",
+      total: 200,
+      progress: 87,
+      target: 90,
+      status: "Needs attention",
+      trendData: {
+        labels: [
+          "Week 1",
+          "Week 2",
+          "Week 3",
+          "Week 4",
+          "Week 5",
+          "Week 6",
+          "Week 7",
+          "Week 8",
+          "Week 9",
+          "Week 10",
+        ],
+        values: [80, 82, 84, 85, 87, 86, 85, 83, 80, 78],
+      },
     },
     // {
     //   "name": "Contractor Response Time",
@@ -264,35 +336,56 @@ export const graphData = {
   ],
   "Maintenance Head": [
     {
-      "name": "Contractor Response Time",
-      "value": 8.5,
-      "unit": "hours",
-      "progress": 142,
-      "target": 6,
-      "total": 200,
-      "status": "Needs attention",
-      "trendData": {
-        "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
-        "values": [9.5, 9.0, 8.7, 8.4, 8.3, 8.2, 8.4, 8.5, 8.5, 8.5]
-      }
+      name: "Contractor Response Time",
+      value: 8.5,
+      unit: "hours",
+      progress: 142,
+      target: 6,
+      total: 200,
+      status: "Needs attention",
+      trendData: {
+        labels: [
+          "Week 1",
+          "Week 2",
+          "Week 3",
+          "Week 4",
+          "Week 5",
+          "Week 6",
+          "Week 7",
+          "Week 8",
+          "Week 9",
+          "Week 10",
+        ],
+        values: [9.5, 9.0, 8.7, 8.4, 8.3, 8.2, 8.4, 8.5, 8.5, 8.5],
+      },
     },
     {
-      "name": "High-Risk Defects Identified",
-      "value": 24,
-      "unit": "count",
-      "total": 200,
+      name: "High-Risk Defects Identified",
+      value: 24,
+      unit: "count",
+      total: 200,
 
-      "progress": 80,
-      "target": 30,
-      "status": "Needs attention",
-      "trendData": {
-        "labels": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10"],
-        "values": [28, 27, 26, 25, 25, 24, 24, 23, 22, 24]
-      }
-    }
-  ]
-}
-
+      progress: 80,
+      target: 30,
+      status: "Needs attention",
+      trendData: {
+        labels: [
+          "Week 1",
+          "Week 2",
+          "Week 3",
+          "Week 4",
+          "Week 5",
+          "Week 6",
+          "Week 7",
+          "Week 8",
+          "Week 9",
+          "Week 10",
+        ],
+        values: [28, 27, 26, 25, 25, 24, 24, 23, 22, 24],
+      },
+    },
+  ],
+};
 
 export const performanceMatrics = [
   {
@@ -301,11 +394,10 @@ export const performanceMatrics = [
     predicted: "12.35",
     delta: "-0.4%",
     recommendations: [],
-    impactAnalysis:
-    {
+    impactAnalysis: {
       performance: "0.4% improvement in performance",
       utilization: "Resource utilization optimized",
-    }
+    },
   },
   {
     title: "Milestones met on time",
@@ -322,11 +414,10 @@ export const performanceMatrics = [
         desc: "Increased automation and digital tools could improve performance",
       },
     ],
-    impactAnalysis:
-    {
+    impactAnalysis: {
       performance: "0.4% improvement in performance",
       utilization: "Resource utilization optimized",
-    }
+    },
   },
   {
     title: "Contractor response time",
@@ -334,11 +425,10 @@ export const performanceMatrics = [
     predicted: "8.54",
     delta: "-0.5%",
     recommendations: [],
-    impactAnalysis:
-    {
+    impactAnalysis: {
       performance: "0.4% improvement in performance",
       utilization: "Resource utilization optimized",
-    }
+    },
   },
   {
     title: "High-risk defects identified",
@@ -359,7 +449,7 @@ export const performanceMatrics = [
     impactAnalysis: {
       performance: "0.4% improvement in performance",
       utilization: "Resource utilization optimized",
-    }
+    },
   },
 ];
 
@@ -367,7 +457,8 @@ export const AIrecommendations = {
   "Director of Infrastructure": [
     {
       type: "objective",
-      title: "Implement predictive maintenance system for critical infrastructure",
+      title:
+        "Implement predictive maintenance system for critical infrastructure",
       description:
         "Based on your increasing maintenance costs and emergency repair frequency",
       confidence: 92,
@@ -383,105 +474,121 @@ export const AIrecommendations = {
       type: "action",
       title:
         "Create cross-functional rapid response teams for high-priority projects",
-      description: "To address the 15% increase in critical path delays this quarter",
+      description:
+        "To address the 15% increase in critical path delays this quarter",
       confidence: 88,
     },
   ],
   "Planning Analyst": [
     {
-      "type": "action",
-      "title": "Create cross-functional rapid response teams for high-priority projects",
-      "description": "To address the 15% increase in critical path delays this quarter",
-      "confidence": 88
+      type: "action",
+      title:
+        "Create cross-functional rapid response teams for high-priority projects",
+      description:
+        "To address the 15% increase in critical path delays this quarter",
+      confidence: 88,
     },
     {
-      "type": "objective",
-      "title": "Increase project timeline accuracy by implementing risk assessment tools",
-      "description": "Address discrepancies between projected and actual completion times",
-      "confidence": 90
+      type: "objective",
+      title:
+        "Increase project timeline accuracy by implementing risk assessment tools",
+      description:
+        "Address discrepancies between projected and actual completion times",
+      confidence: 90,
     },
     {
-      "type": "key Result",
-      "title": "Achieve a 20% reduction in average project delays",
-      "description": "Leverage AI-driven predictive models to forecast potential delays",
-      "confidence": 87
+      type: "key Result",
+      title: "Achieve a 20% reduction in average project delays",
+      description:
+        "Leverage AI-driven predictive models to forecast potential delays",
+      confidence: 87,
     },
     {
-      "type": "action",
-      "title": "Conduct weekly project performance reviews",
-      "description": "Identify areas of improvement and address issues proactively",
-      "confidence": 85
+      type: "action",
+      title: "Conduct weekly project performance reviews",
+      description:
+        "Identify areas of improvement and address issues proactively",
+      confidence: 85,
     },
     {
-      "type": "objective",
-      "title": "Enhance contractor collaboration for faster issue resolution",
-      "description": "Reduce the response time for high-priority issues by 30%",
-      "confidence": 91
+      type: "objective",
+      title: "Enhance contractor collaboration for faster issue resolution",
+      description: "Reduce the response time for high-priority issues by 30%",
+      confidence: 91,
     },
     {
-      "type": "key Result",
-      "title": "Increase milestone adherence by 10%",
-      "description": "Implement a tracking system with real-time progress updates",
-      "confidence": 89
+      type: "key Result",
+      title: "Increase milestone adherence by 10%",
+      description:
+        "Implement a tracking system with real-time progress updates",
+      confidence: 89,
     },
     {
-      "type": "action",
-      "title": "Develop automated risk monitoring dashboards",
-      "description": "Proactively detect potential risks before they impact timelines",
-      "confidence": 86
+      type: "action",
+      title: "Develop automated risk monitoring dashboards",
+      description:
+        "Proactively detect potential risks before they impact timelines",
+      confidence: 86,
     },
     {
-      "type": "objective",
-      "title": "Optimize resource allocation during peak periods",
-      "description": "Reduce workload imbalances across teams by 20%",
-      "confidence": 93
+      type: "objective",
+      title: "Optimize resource allocation during peak periods",
+      description: "Reduce workload imbalances across teams by 20%",
+      confidence: 93,
     },
     {
-      "type": "key Result",
-      "title": "Improve client satisfaction score to 90%",
-      "description": "Address feedback related to delayed project milestones",
-      "confidence": 88
-    }
+      type: "key Result",
+      title: "Improve client satisfaction score to 90%",
+      description: "Address feedback related to delayed project milestones",
+      confidence: 88,
+    },
   ],
   "Maintenance Head": [
     {
-      "type": "objective",
-      "title": "Implement predictive maintenance system for critical infrastructure",
-      "description": "Based on your increasing maintenance costs and emergency repair frequency",
-      "confidence": 92
+      type: "objective",
+      title:
+        "Implement predictive maintenance system for critical infrastructure",
+      description:
+        "Based on your increasing maintenance costs and emergency repair frequency",
+      confidence: 92,
     },
     {
-      "type": "objective",
-      "title": "Enhance data-driven decision-making in project management",
-      "description": "Utilize AI analytics to predict project bottlenecks and optimize resource allocation",
-      "confidence": 91
+      type: "objective",
+      title: "Enhance data-driven decision-making in project management",
+      description:
+        "Utilize AI analytics to predict project bottlenecks and optimize resource allocation",
+      confidence: 91,
     },
     {
-      "type": "objective",
-      "title": "Reduce maintenance downtime by 20% through proactive monitoring",
-      "description": "Leverage predictive analytics to identify equipment at risk of failure",
-      "confidence": 90
+      type: "objective",
+      title: "Reduce maintenance downtime by 20% through proactive monitoring",
+      description:
+        "Leverage predictive analytics to identify equipment at risk of failure",
+      confidence: 90,
     },
     {
-      "type": "objective",
-      "title": "Achieve a 15% decrease in emergency repair incidents",
-      "description": "Implement automated maintenance alerts based on historical data trends",
-      "confidence": 88
+      type: "objective",
+      title: "Achieve a 15% decrease in emergency repair incidents",
+      description:
+        "Implement automated maintenance alerts based on historical data trends",
+      confidence: 88,
     },
     {
-      "type": "objective",
-      "title": "Improve cost efficiency by implementing resource usage tracking",
-      "description": "Identify areas with excessive resource consumption and optimize processes",
-      "confidence": 89
+      type: "objective",
+      title: "Improve cost efficiency by implementing resource usage tracking",
+      description:
+        "Identify areas with excessive resource consumption and optimize processes",
+      confidence: 89,
     },
     {
-      "type": "objective",
-      "title": "Increase system reliability by implementing automated fault detection",
-      "description": "Proactively address issues before they escalate into major disruptions",
-      "confidence": 93
-    }
-  ]
-
+      type: "objective",
+      title:
+        "Increase system reliability by implementing automated fault detection",
+      description:
+        "Proactively address issues before they escalate into major disruptions",
+      confidence: 93,
+    },
+  ],
 };
 
 export const maintenanceData = {
@@ -493,27 +600,27 @@ export const maintenanceData = {
       title: "Infrastructure Defect #1",
       description: "Structural integrity issue detected in Bridge Section A-1",
       reportedAgo: "2 hours ago",
-      priority:"High Priority"
+      priority: "High Priority",
     },
     {
       id: 2,
       title: "Infrastructure Defect #2",
       description: "Structural integrity issue detected in Bridge Section A-2",
       reportedAgo: "2 hours ago",
-      priority:"High Priority"
+      priority: "High Priority",
     },
     {
       id: 3,
       title: "Infrastructure Defect #3",
       description: "Structural integrity issue detected in Bridge Section A-3",
       reportedAgo: "2 hours ago",
-      priority:"High Priority"
+      priority: "High Priority",
     },
   ],
 };
 
-export const graphsData={
-    data :[
+export const graphsData = {
+  data: [
     { date: "Jul 13, 2024", value: 24 },
     { date: "Aug 13, 2024", value: 22 },
     { date: "Sep 13, 2024", value: 20 },
@@ -526,14 +633,14 @@ export const graphsData={
     { date: "Apr 13, 2025", value: 20 },
     { date: "May 13, 2025", value: 14 },
   ],
-  
-   contractorResponseData : [28, 27, 25, 22, 20, 21, 19, 23, 29, 25, 21] 
-}
 
+  contractorResponseData: [28, 27, 25, 22, 20, 21, 19, 23, 29, 25, 21],
+};
 
 export const projectData = {
   objectiveTitle: "Reduce average project delay by 25% in Q3",
-  description: "Focus on improving project timelines through better monitoring and management",
+  description:
+    "Focus on improving project timelines through better monitoring and management",
   quarter: "Q3 2025",
   completionPercent: 65,
   keyResults: [
@@ -554,155 +661,237 @@ export const projectData = {
   ],
 };
 
-export let kpi = [
-  {
-    id: 'pw-1',
-    name: 'Average project delay',
-    value: 12.3,
-    target: 9,
-    unit: 'days',
-    trend: 'down',
-    isGood: false,
-    attention: true,
-    color: 'bg-red-500',
-    status: 'Needs Attention'
-  },
-  {
-    id: 'pw-2',
-    name: 'Milestones met on time',
-    value: 78,
-    target: 90,
-    unit: '%',
-    trend: 'up',
-    isGood: false,
-    attention: true,
-    color: 'bg-yellow-500',
-    status: 'Needs Attention'
-  },
-  {
-    id: 'pw-3',
-    name: 'Contractor response time',
-    value: 8.5,
-    target: 6,
-    unit: 'hours',
-    trend: 'down',
-    isGood: false,
-    attention: true,
-    color: 'bg-yellow-500',
-    status: 'Needs Attention'
-  },
-  {
-    id: 'pw-4',
-    name: 'High-risk defects identified',
-    value: 24,
-    target: 30,
-    unit: 'count',
-    trend: 'down',
-    isGood: true,
-    attention: false,
-    color: 'bg-green-500',
-    status: 'On Track'
-  }
-];
-
-
-
+export let kpi = {
+  "Director of Infrastructure": [
+    {
+      id: "pw-1",
+      name: "Average project delay",
+      value: 12.3,
+      target: 9,
+      unit: "days",
+      trend: "down",
+      isGood: false,
+      attention: true,
+      color: "bg-red-500",
+      status: "Needs Attention",
+    },
+    {
+      id: "pw-2",
+      name: "Milestones met on time",
+      value: 78,
+      target: 90,
+      unit: "%",
+      trend: "up",
+      isGood: false,
+      attention: true,
+      color: "bg-yellow-500",
+      status: "Needs Attention",
+    },
+    {
+      id: "pw-3",
+      name: "Contractor response time",
+      value: 8.5,
+      target: 6,
+      unit: "hours",
+      trend: "down",
+      isGood: false,
+      attention: true,
+      color: "bg-yellow-500",
+      status: "Needs Attention",
+    },
+    {
+      id: "pw-4",
+      name: "High-risk defects identified",
+      value: 24,
+      target: 30,
+      unit: "count",
+      trend: "down",
+      isGood: true,
+      attention: false,
+      color: "bg-green-500",
+      status: "On Track",
+    },
+  ],"Planning Analyst": [
+    {
+      id: "pa-1",
+      name: "Average project delay",
+      value: 12.3,
+      target: 9,
+      unit: "days",
+      trend: "up", 
+      isGood: false,
+      attention: true,
+      color: "bg-red-500",
+      status: "Needs Attention",
+    },
+    {
+      id: "pa-2",
+      name: "Milestones met on time",
+      value: 78,
+      target: 90,
+      unit: "%",
+      trend: "down",
+      isGood: false,
+      attention: true,
+      color: "bg-yellow-500",
+      status: "Needs Attention",
+    },
+    // {
+    //   id: "pa-3",
+    //   name: "Budget utilization",
+    //   value: 92,
+    //   target: 90,
+    //   unit: "%",
+    //   trend: "stable", // Maintains around 91–92%
+    //   isGood: true,
+    //   attention: false,
+    //   color: "bg-green-500",
+    //   status: "On Track",
+    // },
+    // {
+    //   id: "pa-4",
+    //   name: "Task completion rate",
+    //   value: 75,
+    //   target: 80,
+    //   unit: "%",
+    //   trend: "up",
+    //   isGood: false,
+    //   attention: true,
+    //   color: "bg-yellow-500",
+    //   status: "Needs Attention",
+    // }
+  ], "Maintenance Head": [
+    {
+      id: "mh-1",
+      name: "Contractor response time",
+      value: 8.5,
+      target: 6,
+      unit: "hours",
+      trend: "flat",
+      isGood: false,
+      attention: true,
+      color: "bg-orange-500",
+      status: "Needs Attention",
+    },
+    {
+      id: "mh-2",
+      name: "High-risk defects identified",
+      value: 24,
+      target: 30,
+      unit: "count",
+      trend: "down",
+      isGood: true,
+      attention: false,
+      color: "bg-green-500",
+      status: "On Track",
+    }
+  ]
+};
 
 export const actionPlans = {
-  'Director of Infrastructure': [
-      {
-        id: 'act-pw-2',
-        title: 'Revise contractor SLA agreements',
-        description: 'Update service level agreements with contractors to include stricter response time requirements',
-        status: 'pending',
-        assignee: 'Fatima Al-Zaabi',
-        dueDate: '2025-08-30',
-        kpiId: 'pw-3',
-        impact: 'medium'
-      },
-      {
-        id: 'act-pw-4',
-        title: 'Develop strategic infrastructure roadmap',
-        description: 'Create a 5-year roadmap outlining major infrastructure development plans and investments',
-        status: 'in-progress',
-        assignee: 'Salem Al-Nuaimi',
-        dueDate: '2025-12-01',
-        kpiId: 'pw-5',
-        impact: 'high'
-      },
-      {
-        id: 'act-pw-5',
-        title: 'Oversee compliance audits for ongoing projects',
-        description: 'Conduct regular audits to ensure contractor and department compliance with regulations and quality standards',
-        status: 'pending',
-        assignee: 'Reem Al-Hosani',
-        dueDate: '2025-11-10',
-        kpiId: 'pw-6',
-        impact: 'medium'
-      }
-    ],
-    'Planning Analyst': [
-      {
-        id: 'act-pw-1',
-        title: 'Implement daily milestone tracking system',
-        description: 'Deploy automated tracking system to monitor project milestones with daily alerts for potential delays',
-        status: 'in-progress',
-        assignee: 'Ahmed Al-Mansouri',
-        dueDate: '2025-09-15',
-        kpiId: 'pw-1',
-        impact: 'high'
-      },
-      {
-        id: 'act-pw-6',
-        title: 'Create data visualization dashboards',
-        description: 'Build interactive dashboards to analyze and report project progress metrics',
-        status: 'pending',
-        assignee: 'Layla Al-Ketbi',
-        dueDate: '2025-08-20',
-        kpiId: 'pw-7',
-        impact: 'medium'
-      },
-      {
-        id: 'act-pw-7',
-        title: 'Optimize resource allocation models',
-        description: 'Analyze historical project data to improve efficiency in labor and material planning',
-        status: 'in-progress',
-        assignee: 'Zayed Al-Amiri',
-        dueDate: '2025-10-05',
-        kpiId: 'pw-8',
-        impact: 'medium'
-      }
-    ],
-    'Maintenance Head': [
-      {
-        id: 'act-pw-3',
-        title: 'Deploy IoT sensors at high-risk infrastructure sites',
-        description: 'Install sensors to monitor structural health and provide early warning of potential defects',
-        status: 'pending',
-        assignee: 'Mohammed Al-Hashimi',
-        dueDate: '2025-10-10',
-        kpiId: 'pw-4',
-        impact: 'high'
-      },
-      {
-        id: 'act-pw-8',
-        title: 'Implement preventive maintenance scheduling',
-        description: 'Introduce system-generated maintenance plans based on equipment usage and condition data',
-        status: 'completed',
-        assignee: 'Huda Al-Marzouqi',
-        dueDate: '2025-09-01',
-        kpiId: 'pw-9',
-        impact: 'high'
-      },
-      {
-        id: 'act-pw-9',
-        title: 'Upgrade emergency response systems',
-        description: 'Modernize maintenance team response protocols and equipment for faster issue resolution',
-        status: 'pending',
-        assignee: 'Khalid Al-Suwaidi',
-        dueDate: '2025-12-15',
-        kpiId: 'pw-10',
-        impact: 'medium'
-      }
-    ]
-}
+  "Director of Infrastructure": [
+    {
+      id: "act-pw-2",
+      title: "Revise contractor SLA agreements",
+      description:
+        "Update service level agreements with contractors to include stricter response time requirements",
+      status: "pending",
+      assignee: "Fatima Al-Zaabi",
+      dueDate: "2025-08-30",
+      kpiId: "pw-3",
+      impact: "medium",
+    },
+    {
+      id: "act-pw-4",
+      title: "Develop strategic infrastructure roadmap",
+      description:
+        "Create a 5-year roadmap outlining major infrastructure development plans and investments",
+      status: "in-progress",
+      assignee: "Salem Al-Nuaimi",
+      dueDate: "2025-12-01",
+      kpiId: "pw-5",
+      impact: "high",
+    },
+    {
+      id: "act-pw-5",
+      title: "Oversee compliance audits for ongoing projects",
+      description:
+        "Conduct regular audits to ensure contractor and department compliance with regulations and quality standards",
+      status: "pending",
+      assignee: "Reem Al-Hosani",
+      dueDate: "2025-11-10",
+      kpiId: "pw-6",
+      impact: "medium",
+    },
+  ],
+  "Planning Analyst": [
+    {
+      id: "act-pw-1",
+      title: "Implement daily milestone tracking system",
+      description:
+        "Deploy automated tracking system to monitor project milestones with daily alerts for potential delays",
+      status: "in-progress",
+      assignee: "Ahmed Al-Mansouri",
+      dueDate: "2025-09-15",
+      kpiId: "pw-1",
+      impact: "high",
+    },
+    {
+      id: "act-pw-6",
+      title: "Create data visualization dashboards",
+      description:
+        "Build interactive dashboards to analyze and report project progress metrics",
+      status: "pending",
+      assignee: "Layla Al-Ketbi",
+      dueDate: "2025-08-20",
+      kpiId: "pw-7",
+      impact: "medium",
+    },
+    {
+      id: "act-pw-7",
+      title: "Optimize resource allocation models",
+      description:
+        "Analyze historical project data to improve efficiency in labor and material planning",
+      status: "in-progress",
+      assignee: "Zayed Al-Amiri",
+      dueDate: "2025-10-05",
+      kpiId: "pw-8",
+      impact: "medium",
+    },
+  ],
+  "Maintenance Head": [
+    {
+      id: "act-pw-3",
+      title: "Deploy IoT sensors at high-risk infrastructure sites",
+      description:
+        "Install sensors to monitor structural health and provide early warning of potential defects",
+      status: "pending",
+      assignee: "Mohammed Al-Hashimi",
+      dueDate: "2025-10-10",
+      kpiId: "pw-4",
+      impact: "high",
+    },
+    {
+      id: "act-pw-8",
+      title: "Implement preventive maintenance scheduling",
+      description:
+        "Introduce system-generated maintenance plans based on equipment usage and condition data",
+      status: "completed",
+      assignee: "Huda Al-Marzouqi",
+      dueDate: "2025-09-01",
+      kpiId: "pw-9",
+      impact: "high",
+    },
+    {
+      id: "act-pw-9",
+      title: "Upgrade emergency response systems",
+      description:
+        "Modernize maintenance team response protocols and equipment for faster issue resolution",
+      status: "pending",
+      assignee: "Khalid Al-Suwaidi",
+      dueDate: "2025-12-15",
+      kpiId: "pw-10",
+      impact: "medium",
+    },
+  ],
+};
