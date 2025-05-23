@@ -604,3 +604,105 @@ export let kpi = [
     status: 'On Track'
   }
 ];
+
+
+
+
+export const actionPlans = {
+  'Director of Infrastructure': [
+      {
+        id: 'act-pw-2',
+        title: 'Revise contractor SLA agreements',
+        description: 'Update service level agreements with contractors to include stricter response time requirements',
+        status: 'pending',
+        assignee: 'Fatima Al-Zaabi',
+        dueDate: '2025-08-30',
+        kpiId: 'pw-3',
+        impact: 'medium'
+      },
+      {
+        id: 'act-pw-4',
+        title: 'Develop strategic infrastructure roadmap',
+        description: 'Create a 5-year roadmap outlining major infrastructure development plans and investments',
+        status: 'in-progress',
+        assignee: 'Salem Al-Nuaimi',
+        dueDate: '2025-12-01',
+        kpiId: 'pw-5',
+        impact: 'high'
+      },
+      {
+        id: 'act-pw-5',
+        title: 'Oversee compliance audits for ongoing projects',
+        description: 'Conduct regular audits to ensure contractor and department compliance with regulations and quality standards',
+        status: 'pending',
+        assignee: 'Reem Al-Hosani',
+        dueDate: '2025-11-10',
+        kpiId: 'pw-6',
+        impact: 'medium'
+      }
+    ],
+    'Planning Analyst': [
+      {
+        id: 'act-pw-1',
+        title: 'Implement daily milestone tracking system',
+        description: 'Deploy automated tracking system to monitor project milestones with daily alerts for potential delays',
+        status: 'in-progress',
+        assignee: 'Ahmed Al-Mansouri',
+        dueDate: '2025-09-15',
+        kpiId: 'pw-1',
+        impact: 'high'
+      },
+      {
+        id: 'act-pw-6',
+        title: 'Create data visualization dashboards',
+        description: 'Build interactive dashboards to analyze and report project progress metrics',
+        status: 'pending',
+        assignee: 'Layla Al-Ketbi',
+        dueDate: '2025-08-20',
+        kpiId: 'pw-7',
+        impact: 'medium'
+      },
+      {
+        id: 'act-pw-7',
+        title: 'Optimize resource allocation models',
+        description: 'Analyze historical project data to improve efficiency in labor and material planning',
+        status: 'in-progress',
+        assignee: 'Zayed Al-Amiri',
+        dueDate: '2025-10-05',
+        kpiId: 'pw-8',
+        impact: 'medium'
+      }
+    ],
+    'Maintenance Head': [
+      {
+        id: 'act-pw-3',
+        title: 'Deploy IoT sensors at high-risk infrastructure sites',
+        description: 'Install sensors to monitor structural health and provide early warning of potential defects',
+        status: 'pending',
+        assignee: 'Mohammed Al-Hashimi',
+        dueDate: '2025-10-10',
+        kpiId: 'pw-4',
+        impact: 'high'
+      },
+      {
+        id: 'act-pw-8',
+        title: 'Implement preventive maintenance scheduling',
+        description: 'Introduce system-generated maintenance plans based on equipment usage and condition data',
+        status: 'completed',
+        assignee: 'Huda Al-Marzouqi',
+        dueDate: '2025-09-01',
+        kpiId: 'pw-9',
+        impact: 'high'
+      },
+      {
+        id: 'act-pw-9',
+        title: 'Upgrade emergency response systems',
+        description: 'Modernize maintenance team response protocols and equipment for faster issue resolution',
+        status: 'pending',
+        assignee: 'Khalid Al-Suwaidi',
+        dueDate: '2025-12-15',
+        kpiId: 'pw-10',
+        impact: 'medium'
+      }
+    ]
+}
