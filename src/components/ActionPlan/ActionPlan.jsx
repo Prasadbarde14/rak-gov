@@ -193,7 +193,7 @@ const ActionPlan = ({
       </div>
 
       {showNewActionModal && (
-        <CreateActionCard setShowNewActionModal={setShowNewActionModal} />
+        <CreateActionCard setShowNewActionModal={setShowNewActionModal} selected={selected}/>
       )}
     </div>
   );
