@@ -1,6 +1,6 @@
 // components/OntologyGraph.jsx
-import React, { useEffect, useState } from 'react';
-import ReactFlow, { Background, Controls } from 'reactflow';
+import React, { useCallback, useEffect, useState } from 'react';
+import ReactFlow, { applyNodeChanges, Background, Controls, Handle } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { Parser } from 'n3';
 import { v4 as uuidv4 } from 'uuid';
@@ -130,71 +130,138 @@ const ttlText = `
     :waterReuseRate "50.0"^^xsd:float ;
     :waterConsumptionReduction "20.0"^^xsd:float .
 `;
+
+const CircularNode = ({ data }) => {
+    const colorArray = ["#faedcb", "#c9e3df", "#c5def2", "#dbcdf0", "#f2c6df","#f8d9c4"]
+    return (
+        <div
+            style={{
+                // background: `${colorArray[parseInt(Math.random()*colorArray.length)]}`,
+                background: `#90cdf4`,
+                border: '2px solid #2b6cb0',
+                borderRadius: '50%',
+                width: 100,
+                height: 100,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: 12,
+                color: '#1a202c',
+                cursor: 'move',
+            }}
+        >
+            {data.label}
+            <Handle type="target" position="top" />
+            <Handle type="source" position="bottom" />
+        </div>
+    );
+};
+
+const nodeTypes = {
+    circle: CircularNode,
+};
+
 const Ontology = () => {
-  const [nodes, setNodes] = useState([]);
-  const [edges, setEdges] = useState([]);
+    const [nodes, setNodes] = useState([]);
+    const [edges, setEdges] = useState([]);
 
-  useEffect(() => {
-    const parser = new Parser();
-    const triples = [];
-    const nodesMap = new Map();
-    const tempEdges = [];
+    useEffect(() => {
+        const parser = new Parser();
+        const triples = [];
+        const nodesMap = new Map();
+        const tempEdges = [];
 
-    parser.parse(ttlText, (error, triple) => {
-      if (error) return console.error(error);
-      if (!triple) {
-        // parsing complete
-        setNodes(Array.from(nodesMap.values()));
-        setEdges(tempEdges);
-        return;
-      }
+        parser.parse(ttlText, (error, triple) => {
+            if (error) return console.error(error);
+            if (!triple) {
+                // parsing complete
+                setNodes(Array.from(nodesMap.values()));
+                setEdges(tempEdges);
+                return;
+            }
 
-      const subject = triple.subject.value || triple.subject.id;
-      const predicate = triple.predicate.value || triple.predicate.id;
-      const object = triple.object.value || triple.object.id;
+            const subject = triple.subject.value || triple.subject.id;
+            const predicate = triple.predicate.value || triple.predicate.id;
+            const object = triple.object.value || triple.object.id;
 
-      if (!nodesMap.has(subject)) {
-        nodesMap.set(subject, {
-          id: subject,
-          data: { label: subject.split('#').pop() },
-          position: { x: Math.random() * 1600, y: Math.random() * 1600 },
+            if (!nodesMap.has(subject)) {
+                nodesMap.set(subject, {
+                    id: subject,
+                    type: 'circle',
+                    data: { label: subject.split('#').pop() },
+                    position: { x: Math.random() * 1600, y: Math.random() * 1600 },
+                });
+            }
+
+            const isLiteral = triple.object.termType === 'Literal';
+            if (!isLiteral && !nodesMap.has(object)) {
+                nodesMap.set(object, {
+                    id: object,
+                    data: { label: object.split('#').pop() },
+                    position: { x: Math.random() * 1600, y: Math.random() * 1600 },
+                });
+            }
+
+            if (!isLiteral) {
+                tempEdges.push({
+                    id: uuidv4(),
+                    source: subject,
+                    target: object,
+                    label: predicate.split('#').pop(),
+                    animated: true,
+                    style: { stroke: '#444' },
+                });
+            }
         });
-      }
+    }, []);
 
-      const isLiteral = triple.object.termType === 'Literal';
-      if (!isLiteral && !nodesMap.has(object)) {
-        nodesMap.set(object, {
-          id: object,
-          data: { label: object.split('#').pop() },
-          position: { x: Math.random() * 1600, y: Math.random() * 1600 },
-        });
-      }
+    const onNodeDragStop = (event, node) => {
+        setNodes((nds) =>
+            nds.map((n) =>
+                n.id === node.id ? { ...n, position: node.position } : n
+            )
+        );
+    };
 
-      if (!isLiteral) {
-        tempEdges.push({
-          id: uuidv4(),
-          source: subject,
-          target: object,
-          label: predicate.split('#').pop(),
-          animated: true,
-          style: { stroke: '#444' },
-        });
-      }
-    });
-  }, []);
+    const onNodeDragStart = (event, node) => {
+        setNodes((nds) =>
+            nds.map((n) =>
+                n.id === node.id
+                    ? {
+                        ...n,
+                        style: {
+                            ...n.style,
+                        },
+                    }
+                    : n
+            )
+        );
+    };
 
-  return (
-    <div style={{ width: '100vw', height: '100vh' }}>
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        fitView
-      >
-        <Background />
-        <Controls />
-      </ReactFlow>
-    </div>
-  );
+    const onNodesChange = useCallback(
+  (changes) => {
+    setNodes((nds) => applyNodeChanges(changes, nds));
+  },
+  [setNodes]
+);
+
+
+    return (
+        <div style={{ width: '100vw', height: '100vh' }}>
+            <ReactFlow
+                nodes={nodes}
+                edges={edges}
+                nodeTypes={nodeTypes}
+                onNodeDragStart={onNodeDragStart}
+                onNodesChange={onNodesChange}
+                onNodeDragStop={onNodeDragStop}
+                fitView
+            >
+                <Background />
+                <Controls />
+            </ReactFlow>
+        </div>
+    );
 };
 
 
