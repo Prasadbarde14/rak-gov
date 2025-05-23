@@ -31,15 +31,28 @@ agentInstance.interceptors.request.use(config => {
 
 
 agentInstance.interceptors.response.use(response => {
+
+  const parsePercentage = (value) => {
+  if (typeof value === 'string' && value.includes('%')) {
+    return Number(value.replace('%', '')) || 0;
+  }
+  return Number(value) || 0;
+};
+
   const endTime = new Date().getTime();
   const startTime = response.config.meta.startTime;
   const executionTime = endTime - startTime;
+  const successRate=parsePercentage(JSON.parse(response.data.text)?.data?.["success rate"])
+  const errorRate=parsePercentage(JSON.parse(response.data.text)?.data?.["error rate"])
+
+  console.log(successRate,errorRate)
 
   useNetworkStore.getState().addRequestLog({
     method: response.config.method.toUpperCase(),
     url: response.config.url,
     status: response.status,
-    success: true,
+    successRate: successRate,
+    errorRate: errorRate,
     executionTime,
     time: new Date().toISOString()
   });
