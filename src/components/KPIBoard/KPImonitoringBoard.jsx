@@ -9,18 +9,27 @@ import {
 } from 'lucide-react';
 
 const personaOptions = ['Director of Infrastructure'];
-const filters = [
-  { label: 'All KPIs', color: 'bg-green-50 text-green-700' },
-  { label: 'At Risk', color: 'bg-slate-100 text-slate-600', count: 2, badge: 'bg-red-500' },
-  { label: 'On Track', color: 'bg-slate-100 text-slate-600', count: 1, badge: 'bg-green-500' },
-  { label: 'Needs Attention', color: 'bg-slate-100 text-slate-600', count: 1, badge: 'bg-yellow-500' },
-];
 
-import { kpis } from '../../API/APICalls/mockCallApi';
+
+import { kpi } from '../../API/APICalls/mockCallApi';
 
 const KPImonitoringBoard = () => {
-  const [persona, setPersona] = useState(personaOptions[0]);
+  // const [persona, setPersona] = useState(personaOptions[0]);
+  const filters = [
+  { label: 'All KPIs'},
+  { label: 'At Risk', count: kpi.filter((item)=>item.status==="At Risk").length,badge: 'bg-red-500' },
+  { label: 'On Track', count: kpi.filter((item)=>item.status==="On Track").length, badge: 'bg-green-500' },
+  { label: 'Needs Attention', count: kpi.filter((item)=>item.status==="Needs Attention").length, badge: 'bg-yellow-500' },
+];
+
+  const [filter,setFilter] = useState("All KPIs");
+  let kpis = kpi.filter((item)=>{
+    if(filter=="All KPIs")
+      return item;
+    return item.status==filter
+  });
   const [selected, setSelected] = useState(kpis[0]);
+  
 
   const getTrendIcon = (trend, isGood) => {
     if (trend === 'up') return <ArrowUpRight className={`h-4 w-4 ${isGood ? 'text-green-500' : 'text-red-500'}`} />;
@@ -67,15 +76,16 @@ const KPImonitoringBoard = () => {
 
         {/* Filters */}
         <div className="flex gap-4">
-          {filters.map((filter) => (
+          {filters.map((item) => (
             <div
-              key={filter.label}
-              className={`flex items-center rounded-full px-3 py-1 text-sm font-medium ${filter.color}`}
+              key={item.label}
+              className={`flex items-center rounded-full px-2 py-1 text-sm font-medium ${filter===item.label?"bg-green-50 text-green-700":"bg-slate-100 text-slate-600"} cursor-pointer`}
+              onClick={()=>setFilter(item.label)}
             >
-              {filter.label}
-              {filter.count && (
-                <span className={`ml-2 ${filter.badge} text-white w-5 h-5 text-xs rounded-full flex items-center justify-center`}>
-                  {filter.count}
+              {item.label}
+              {item.count && (
+                <span className={`ml-2 ${item.badge} text-white w-5 h-5 text-xs rounded-full flex items-center justify-center`}>
+                  {item.count}
                 </span>
               )}
             </div>
@@ -85,15 +95,15 @@ const KPImonitoringBoard = () => {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 gap-6">
+        {kpis.length==0 && (<h1>There is no kpi to show here.</h1>)}
         {kpis.map((kpi) => {
           const progress = Math.round((kpi.value / kpi.target) * 100);
-
           return (
             <div
               key={kpi.id}
               onClick={() => setSelected(kpi)}
               className={`rounded-lg border bg-white transition-all duration-200 ${
-                selected.id === kpi.id ? 'border-indigo-500 shadow-md' : 'border-slate-200 shadow-sm hover:border-indigo-300'
+                selected.id === kpi.id ? 'border-indigo-500 shadow-md' : 'border-slate-200 shadow-sm'
               }`}
             >
               <div className="p-4 border-b flex justify-between items-center">
@@ -101,7 +111,7 @@ const KPImonitoringBoard = () => {
                 <div className="flex items-center gap-2">
                   <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">{kpi.id}</span>
                   {kpi.attention && (
-                    <div className="flex items-center text-orange-500 text-xs font-medium">
+                    <div className="flex items-center text-yellow-600 text-xs font-medium animate-pulse duration-75">
                       <AlertTriangle className="w-4 h-4 mr-1" />
                       Needs attention
                     </div>

@@ -554,7 +554,7 @@ export const projectData = {
   ],
 };
 
-export const kpis = [
+export let kpi = [
   {
     id: 'pw-1',
     name: 'Average project delay',
@@ -562,9 +562,10 @@ export const kpis = [
     target: 9,
     unit: 'days',
     trend: 'down',
-    isGood: true,
+    isGood: false,
     attention: true,
-    color: 'bg-green-500',
+    color: 'bg-red-500',
+    status: 'Needs Attention'
   },
   {
     id: 'pw-2',
@@ -573,9 +574,10 @@ export const kpis = [
     target: 90,
     unit: '%',
     trend: 'up',
-    isGood: true,
-    attention: false,
+    isGood: false,
+    attention: true,
     color: 'bg-yellow-500',
+    status: 'Needs Attention'
   },
   {
     id: 'pw-3',
@@ -584,9 +586,10 @@ export const kpis = [
     target: 6,
     unit: 'hours',
     trend: 'down',
-    isGood: true,
+    isGood: false,
     attention: true,
-    color: 'bg-green-500',
+    color: 'bg-yellow-500',
+    status: 'Needs Attention'
   },
   {
     id: 'pw-4',
@@ -594,9 +597,10 @@ export const kpis = [
     value: 24,
     target: 30,
     unit: 'count',
-    trend: 'up',
+    trend: 'down',
     isGood: true,
     attention: false,
-    color: 'bg-yellow-500',
-  },
+    color: 'bg-green-500',
+    status: 'On Track'
+  }
 ];
