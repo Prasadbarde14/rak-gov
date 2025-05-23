@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactECharts from "echarts-for-react";
 import SimulationSliders from "../Dashboard/Performance/SimulationSliders";
+import { usePostGetKpiAnalysis } from "../../API/Query/query";
+import { kpi } from "../../API/APICalls/mockCallApi";
 
 const CrossDepartmentAnalysis = () => {
   const [parameters, setParameters] = useState({
@@ -10,60 +12,43 @@ const CrossDepartmentAnalysis = () => {
     technologyAdoption: 0,
     marketConditions: 0,
   });
+
   const [showSimulate, setShowSimulate] = useState(false);
-  const departments = [
-    "Director of Infrastructure",
-    "Planning Analyst",
-    "Maintenance Head",
-  ];
-  const currentValues = [13, 10, 10];
-  const targetValues = [9, 6, 11];
-  const options = {
-    tooltip: {
-      trigger: "axis",
-      axisPointer: { type: "shadow" },
-    },
-    legend: {
-      data: ["Current Value", "Target"],
-      bottom: 0,
-    },
-    grid: {
-      top: 30,
-      left: "3%",
-      right: "4%",
-      bottom: 50,
-      containLabel: true,
-    },
-    xAxis: {
-      type: "category",
-      data: departments,
-      axisLabel: {
-        interval: 0,
-        rotate: 40,
-        fontSize: 12,
-        color: "#6B7280",
-      },
-    },
-    yAxis: {
-      type: "value",
-    },
-    series: [
-      {
-        name: "Current Value",
-        type: "bar",
-        data: currentValues,
-        itemStyle: { color: "#6366f1" }, // indigo-500
-        barWidth: "30%",
-      },
-      {
-        name: "Target",
-        type: "bar",
-        data: targetValues,
-        itemStyle: { color: "#d1d5db" }, // slate-300
-        barWidth: "30%",
-      },
-    ],
-  };
+  const [graph, setGraph] = useState(false);
+  const [enabled, setEnabled] = useState(false);
+  const [query, setQuery] = useState("");
+
+  const selected = "1";
+
+  const kpiAnalysis = usePostGetKpiAnalysis(query, selected, enabled);
+
+  const [analytics, setAnalytics] = useState("");
+  const [options, setOptions] = useState("");
+
+  useEffect(() => {
+    if (kpiAnalysis.isSuccess) {
+      setEnabled(false); // stop further fetching
+      setAnalytics(kpiAnalysis.data?.analysis);
+      setOptions(kpiAnalysis.data?.option);
+      setGraph(true);
+    }
+  }, [kpiAnalysis.isSuccess]);
+
+const handleAnalysis = () => {
+  const newQuery =
+    "Help me analyse this data and give me suggestive measures: " +
+    JSON.stringify(kpi) +
+    " Also keep the following parameters in mind: " +
+    JSON.stringify(parameters);
+
+  setQuery(newQuery);
+  setEnabled(false);     // Reset it first
+  setTimeout(() => {
+    setEnabled(true);    // Then re-enable after React registers state change
+  }, 10);
+
+  
+};
 
   return (
     <div className=" px-4 relative">
@@ -94,43 +79,57 @@ const CrossDepartmentAnalysis = () => {
             >
               {!showSimulate ? "Show Simulation" : "Hide Simulate"}
             </button>
-            <button className="text-white text-sm bg-indigo-600 hover:bg-indigo-700 px-3 py-1.5 rounded-md cursor-pointer">
+            <button className="text-white text-sm bg-indigo-600 hover:bg-indigo-700 px-3 py-1.5 rounded-md cursor-pointer" onClick={handleAnalysis}>
               Run Analysis
             </button>
           </div>
         </div>
-
+        
         {/* Subheading */}
-        <div>
+        {kpiAnalysis.isLoading && <div><div className="h-4 w-60 bg-slate-200 rounded animate-pulse"></div>
+          <div className="h-3 w-80 bg-slate-100 rounded animate-pulse"></div></div>}
+        { graph && <div>
           <p className="text-sm text-slate-600 font-medium">
             Performance Comparison
           </p>
           <p className="text-sm text-slate-500">
             Comparing Average project delay across all departments
           </p>
-        </div>
-
+        </div>}
+        {kpiAnalysis.isLoading && <div className="w-full h-[400px] mt-2 overflow-x-auto">
+          <div className="w-full h-full bg-slate-100 rounded-lg animate-pulse"></div>
+        </div>}
         {/* Chart */}
-        <div className="w-full h-[400px] overflow-x-auto">
+       { graph && <div className="w-full h-[400px] overflow-x-auto">
           <ReactECharts
             option={options}
             style={{ height: "100%", width: "100%" }}
             className="mt-2"
           />
-        </div>
+        </div>}
 
         {/* Footer */}
-        <div>
+       { graph && <div>
           <p className="text-sm text-slate-600 font-medium mb-1">
             AI Analysis & Insights
           </p>
           <p className="text-sm text-slate-500">
             AI-driven recommendations for performance improvement
           </p>
-          <p className="text-xs text-slate-400 mt-2">
-            Run analysis to get AI-powered recommendations
+          <p className="text-md text-slate-800 mt-2 flex flex-wrap justify-around">
+            {analytics.length>0 && analytics?.map((item)=>{
+              return<div className="p-2 mb-4 bg-slate-50 shadow-sm rounded-md w-[36vw]">
+                <div className="flex justify-between items-center">
+                <p className="font-semibold text-md text-black mb-2">{item.title}</p>
+                <p className={`${item.priority=="High"?"text-red-400 bg-red-100":item.priority=="Low"?"text-yellow-500 bg-yellow-100":"text-orange-400 bg-orange-100"} font-semibold p-1 rounded-sm text-sm`}>{item.priority}</p>
+                </div>
+                <p><strong>Description: </strong>{item.desc}</p>
+                <p className=" py-2"><strong>Suggestions: </strong>{item.suggestions}</p>
+              </div>
+            })}
           </p>
-        </div>
+        </div>}
+        {!graph && <div className="h-2 w-full"></div>}
       </div>
     </div>
   );

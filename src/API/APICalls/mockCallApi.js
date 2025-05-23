@@ -736,30 +736,30 @@ export let kpi = {
       color: "bg-yellow-500",
       status: "Needs Attention",
     },
-    // {
-    //   id: "pa-3",
-    //   name: "Budget utilization",
-    //   value: 92,
-    //   target: 90,
-    //   unit: "%",
-    //   trend: "stable", // Maintains around 91–92%
-    //   isGood: true,
-    //   attention: false,
-    //   color: "bg-green-500",
-    //   status: "On Track",
-    // },
-    // {
-    //   id: "pa-4",
-    //   name: "Task completion rate",
-    //   value: 75,
-    //   target: 80,
-    //   unit: "%",
-    //   trend: "up",
-    //   isGood: false,
-    //   attention: true,
-    //   color: "bg-yellow-500",
-    //   status: "Needs Attention",
-    // }
+    {
+      id: "pa-3",
+      name: "Budget utilization",
+      value: 92,
+      target: 90,
+      unit: "%",
+      trend: "up", // Maintains around 91–92%
+      isGood: true,
+      attention: false,
+      color: "bg-green-500",
+      status: "On Track",
+    },
+    {
+      id: "pa-4",
+      name: "Task completion rate",
+      value: 75,
+      target: 80,
+      unit: "%",
+      trend: "up",
+      isGood: false,
+      attention: true,
+      color: "bg-yellow-500",
+      status: "Needs Attention",
+    }
   ], "Maintenance Head": [
     {
       id: "mh-1",

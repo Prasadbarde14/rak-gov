@@ -1,5 +1,5 @@
 import axios from "axios"
-import { graphData,performanceMatrics,AIrecommendations, maintenanceData ,graphsData, projectData, actionPlans} from "./mockCallApi";
+import { graphData,performanceMatrics,AIrecommendations, maintenanceData ,graphsData, projectData, actionPlans, kpi} from "./mockCallApi";
 import useNetworkStore from "../../store/store";
 import { ArrowsUpFromLine } from "lucide-react";
 
@@ -148,11 +148,21 @@ export async function postGetSimmulationResult({query,body}){
   
 }
 
-export async function getAutoSimulation({selected,body}){
+export async function postGetKpiAnalysis({query,body}){
+  return await agentInstance.post('/interact',{
+    
+        "agentId": "63d1c4c5-856e-4e3b-aa41-be191628dbd9",
+        "query": JSON.stringify(query+" ")+JSON.stringify(body)
+    
+  })
+  
+}
+
+export async function getAutoSimulation(query){
 
   return await agentInstance.post('/interact',{
-      "agentId": "3d166420-9517-4057-b5f0-2603077246ae",
-      "query": JSON.stringify(body)
+      "agentId": "63d1c4c5-856e-4e3b-aa41-be191628dbd9",
+      "query": JSON.stringify(query)
   })
 }
 

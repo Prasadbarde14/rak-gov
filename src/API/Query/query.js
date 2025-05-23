@@ -245,7 +245,6 @@ export const usePostAIActionPlan = (query, selected, enabled,data) => {
                     }
                     return parsed;
                 } catch (e) {
-
                     console.error("Failed to parse response", e, i.data.text);
                     return null;
                 }
@@ -254,3 +253,26 @@ export const usePostAIActionPlan = (query, selected, enabled,data) => {
         enabled: enabled
     });
 }
+
+export const usePostGetKpiAnalysis = (query, selected, enabled) => {
+  return useQuery({
+    queryKey: ["kpi", selected, query], // Include `query` here
+    queryFn: async () => {
+      const responses = await getAutoSimulation(query);
+      return responses;
+    },
+    select: (res) => {
+      try {
+        const parsed = JSON.parse(res.data.text);
+        if (parsed["data"]) {
+          return parsed["data"];
+        }
+        return parsed;
+      } catch (e) {
+        console.error("failed to parse response", e, res.data.text);
+        return null;
+      }
+    },
+    enabled: enabled && !!query, // only trigger when query is non-empty
+  });
+};
