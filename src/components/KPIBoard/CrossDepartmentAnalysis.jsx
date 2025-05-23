@@ -72,6 +72,7 @@ const CrossDepartmentAnalysis = () => {
           <SimulationSliders
             parameters={parameters}
             setParameters={setParameters}
+            colors={["#4F45E4","#E4E7EB"]}
           />
       </div>}
       <div className="bg-white w-full border shadow-sm rounded-lg p-6 space-y-6">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const SimulationSliders = ({ parameters, setParameters }) => {
+const SimulationSliders = ({ parameters, setParameters,colors }) => {
   const [animatedValues, setAnimatedValues] = useState({});
 
   useEffect(() => {
@@ -59,10 +59,10 @@ const SimulationSliders = ({ parameters, setParameters }) => {
               step="5"
               value={actualValue}
               onChange={(e) => handleChange(key, parseInt(e.target.value))}
-              className="w-full h-2 rounded-lg appearance-none cursor-pointer transition-all duration-200"
+              className="w-full h-1 rounded-lg appearance-none cursor-pointer transition-all duration-200"
               style={{
-                background: `linear-gradient(to right, #22c55e 0%, #22c55e ${percentage}%, #e5e7eb ${percentage}%, #e5e7eb 100%)`,
-                accentColor: '#22c55e',
+                background: `linear-gradient(to right, ${colors[0]} 0%, ${colors[0]} ${percentage}%, ${colors[1]} ${percentage}%, ${colors[1]} 100%)`,
+                accentColor: `${colors[0]}`,
               }}
             />
           </div>

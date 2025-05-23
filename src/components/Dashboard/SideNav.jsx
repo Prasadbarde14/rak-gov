@@ -74,7 +74,9 @@ function SideNav() {
     {
       icon: <Settings2 color="#94A3B8" size={20} />,
       text: "Settings",
-      children: [{ title: "Agent Interaction", link: "/agent" }],
+      children: [{ title: "Agent Interaction", link: "/agent" },
+        { title: "Ontology", link: "/onto" }
+      ],
     },
   ];
 
