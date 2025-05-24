@@ -711,14 +711,15 @@ export let kpi = {
       color: "bg-green-500",
       status: "On Track",
     },
-  ],"Planning Analyst": [
+  ],
+  "Planning Analyst": [
     {
       id: "pa-1",
       name: "Average project delay",
       value: 12.3,
       target: 9,
       unit: "days",
-      trend: "up", 
+      trend: "up",
       isGood: false,
       attention: true,
       color: "bg-red-500",
@@ -759,8 +760,9 @@ export let kpi = {
       attention: true,
       color: "bg-yellow-500",
       status: "Needs Attention",
-    }
-  ], "Maintenance Head": [
+    },
+  ],
+  "Maintenance Head": [
     {
       id: "mh-1",
       name: "Contractor response time",
@@ -784,8 +786,8 @@ export let kpi = {
       attention: false,
       color: "bg-green-500",
       status: "On Track",
-    }
-  ]
+    },
+  ],
 };
 
 export const actionPlans = {
@@ -895,3 +897,38 @@ export const actionPlans = {
     },
   ],
 };
+
+export const initialObjectives = {
+  "Director of Infrastructure": {
+    "Q3 2025": [
+      {
+        id: "obj-1",
+        title: "Improve Infrastructure Turnaround Time",
+        description:
+          "Reduce average turnaround time for scheduled maintenance by 20%.",
+        keyResults: [
+          {
+            id: "kr-1",
+            title: "Reduce maintenance backlog by 30%",
+            current: 70,
+            target: 100,
+            unit: "%",
+          },
+        ],
+      },
+    ],
+    "Q4 2025": [],
+    "Q1 2026": [],
+  },
+  "Planning Analyst": {
+    "Q3 2025": [],
+    "Q4 2025": [],
+    "Q1 2026": [],
+  },
+  "Maintenance Head": {
+    "Q3 2025": [],
+    "Q4 2025": [],
+    "Q1 2026": [],
+  },
+};
+
