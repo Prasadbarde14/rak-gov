@@ -75,9 +75,9 @@ const MetricCard = ({ data, index, selected }) => {
     switch (field) {
       case "project":
         return (
-          <div ref={divRef}>
+          <div key={index} ref={divRef}>
             <ProjectPlanningOverview
-              key="project"
+              key={"project"}
               index={index}
               selected={selected}
               parentData={data}

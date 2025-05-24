@@ -2,14 +2,16 @@ import { useQueryClient } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { MoreHorizontal, PlusCircle } from "lucide-react";
 import { usePostGetProjectPlanning } from "../../../API/Query/query";
-
+import { v4 as uuid } from "uuid";
+import { useOKRStore } from "../../../store/okrStore";
+import { toast } from "react-toastify";
 // Key Result Card
 const KeyResult = ({ title, current, target, percentage, color }) => (
   <motion.div
-  className="space-y-1"
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.4 }}
+    className="space-y-1"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.4 }}
   >
     <div className="flex flex-col items-start gap-2">
       <div className="flex gap-2">
@@ -22,8 +24,7 @@ const KeyResult = ({ title, current, target, percentage, color }) => (
         </div>
         <div className="relative w-[85%] h-2 mt-1 bg-gray-200 rounded-full overflow-hidden">
           <motion.div
-            style={{ width: `${(percentage)}`,background:color }}
-
+            style={{ width: `${percentage}`, background: color }}
             className={`absolute top-0 left-0 h-full ${color} rounded-full`}
             initial={{ width: 0 }}
             animate={{ width: `${percentage}` }}
@@ -39,14 +40,35 @@ const KeyResult = ({ title, current, target, percentage, color }) => (
 // Main Overview Component
 const ProjectPlanningOverview = ({ selected, index, parentData }) => {
   const queryClient = useQueryClient();
+  const { addObjective, okrs } = useOKRStore();
 
-  const data = usePostGetProjectPlanning(
+  const { data, isError, isFetching, isLoading } = usePostGetProjectPlanning(
     "Give me Project Data",
     selected,
     index,
-    parentData,
-    
+    parentData
   );
+
+  const handleAddNewOKR = async () => {
+    const quarters = ["Q3 2025", "Q4 2025", "Q1 2026"];
+    const randomQuarter = quarters[Math.floor(Math.random() * quarters.length)];
+
+    const newKR = {
+      id: `obj-${uuid()}}`,
+      title: data?.objectiveTitle,
+      description: data?.description,
+      keyResults: data?.keyResults?.map((result) => ({
+        id: `kr-${uuid()}`,
+        title: result.title,
+        current: result.current,
+        target: result.target,
+        unit: "%",
+      })),
+    };
+    console.log("quarter: ", randomQuarter);
+    addObjective(selected, randomQuarter, newKR);
+    toast.success("OKR Added Successfully!")
+  };
   return (
     <div className="w-full mx-auto bg-white rounded-md shadow-sm border mt-5">
       <div className="flex justify-between items-center border-b px-4 py-5">
@@ -58,7 +80,7 @@ const ProjectPlanningOverview = ({ selected, index, parentData }) => {
         </button> */}
       </div>
 
-      {(data.isLoading || data.isFetching) && (
+      {(isLoading || isFetching) && (
         <div className="p-5 space-y-4 animate-pulse">
           <div className="h-6 bg-gray-200 rounded w-1/3 mb-3"></div>
           <div className="h-4 bg-gray-200 rounded w-2/3 mb-2"></div>
@@ -68,19 +90,19 @@ const ProjectPlanningOverview = ({ selected, index, parentData }) => {
           <div className="h-3 bg-gray-200 rounded w-3/4"></div>
         </div>
       )}
-      {!data.isError && !data.isLoading && !data.isFetching && (
-        <div className="p-5">
+      {!isError && !isLoading && !isFetching && (
+        <div className="p-4">
           <div className="space-y-2 border rounded-md">
             <div className="flex justify-between items-start flex-wrap gap-2 border-b p-4">
               <div className="space-y-1">
                 <h3 className="text-base font-semibold text-gray-900">
-                  {data.data.objectiveTitle}
+                  {data.objectiveTitle}
                 </h3>
-                <p className="text-sm text-gray-500">{data.data.description}</p>
+                <p className="text-sm text-gray-500">{data.description}</p>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-xs px-2 py-1 rounded bg-blue-100 text-blue-700 font-medium">
-                  {data.data.quarter}
+                  {data.quarter}
                 </span>
                 {/* <MoreHorizontal className="w-5 h-5 text-gray-500" /> */}
               </div>
@@ -91,7 +113,7 @@ const ProjectPlanningOverview = ({ selected, index, parentData }) => {
                   Key Results
                 </div>
                 <div className="text-right text-xs text-gray-500 font-medium mt-1">
-                  {data.data.completionPercent} Complete
+                  {data.completionPercent} Complete
                 </div>
               </div>
               <div className="w-full h-2 bg-gray-200 rounded-full mb-5">
@@ -99,12 +121,12 @@ const ProjectPlanningOverview = ({ selected, index, parentData }) => {
                   className="h-full bg-yellow-400 rounded-full"
                   initial={{ width: 0 }}
                   transition={{ duration: 0.7, ease: "easeOut" }}
-                  animate={{ width: `${data.data.completionPercent}` }}
-                  style={{ width: `${(data.data.completionPercent)}` }}
+                  animate={{ width: `${data.completionPercent}` }}
+                  style={{ width: `${data.completionPercent}` }}
                 ></motion.div>
               </div>
               <div className="space-y-4 mt-3">
-                {data?.data?.keyResults?.map((kr, index) => (
+                {data?.keyResults?.map((kr, index) => (
                   <KeyResult key={index} {...kr} />
                 ))}
               </div>
@@ -115,6 +137,14 @@ const ProjectPlanningOverview = ({ selected, index, parentData }) => {
           </div>
         </div>
       )}
+      <div className="p-4 pt-0 text-end">
+        <button
+          onClick={handleAddNewOKR}
+          className="bg-green-600 cursor-pointer hover:bg-green-700 text-xs text-white  px-3 py-1 rounded shadow-sm transition-all duration-200"
+        >
+          + Add OKR
+        </button>
+      </div>
     </div>
   );
 };
